@@ -11,11 +11,11 @@ import java.util.StringJoiner;
  * @see User
  */
 public class Address implements Serializable {
-    Long id;
-    String country;
-    String city;
-    String postIndex;
-    String detailAddress;
+    private Long id;
+    private String country;
+    private String city;
+    private String postIndex;
+    private String detailAddress;
 
     public static class Builder {
         private final Address address;

@@ -12,11 +12,11 @@ import java.util.StringJoiner;
  * @see Periodical
  */
 public class SubscriptionPlan implements Serializable {
-    Integer id;
-    String name;
-    Integer monthsAmount;
-    BigDecimal rate;
-    String description;
+    private Integer id;
+    private String name;
+    private Integer monthsAmount;
+    private BigDecimal rate;
+    private String description;
 
     public static class Builder {
         private final SubscriptionPlan subscriptionPlan;

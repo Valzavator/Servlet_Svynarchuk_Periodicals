@@ -11,9 +11,9 @@ import java.util.StringJoiner;
  * @see Periodical
  */
 public class PeriodicalType implements Serializable {
-    Integer id;
-    String name;
-    String description;
+    private Integer id;
+    private String name;
+    private String description;
 
     public static class Builder {
         private final PeriodicalType periodicalType;

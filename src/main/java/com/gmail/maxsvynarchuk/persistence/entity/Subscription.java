@@ -14,12 +14,12 @@ import java.util.StringJoiner;
  * @see Periodical
  */
 public class Subscription implements Serializable {
-    Long id;
-    User user;
-    Periodical periodical;
-    SubscriptionPlan subscriptionPlan;
-    Date startDate;
-    Date endDate;
+    private Long id;
+    private User user;
+    private Periodical periodical;
+    private SubscriptionPlan subscriptionPlan;
+    private Date startDate;
+    private Date endDate;
 
     public static class Builder {
         private final Subscription subscription;

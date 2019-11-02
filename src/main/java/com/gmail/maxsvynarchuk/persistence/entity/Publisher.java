@@ -11,8 +11,8 @@ import java.util.StringJoiner;
  * @see Periodical
  */
 public class Publisher implements Serializable {
-    Long id;
-    String name;
+    private Long id;
+    private String name;
 
     public Publisher() {
     }

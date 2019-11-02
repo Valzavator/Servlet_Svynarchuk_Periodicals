@@ -14,10 +14,10 @@ import java.util.StringJoiner;
  * @see Periodical
  */
 public class Payment implements Serializable {
-    Long id;
-    User user;
-    Date paymentDate;
-    BigDecimal totalPrice;
+    private Long id;
+    private User user;
+    private Date paymentDate;
+    private BigDecimal totalPrice;
 
     public static class Builder {
         private final Payment payment;
