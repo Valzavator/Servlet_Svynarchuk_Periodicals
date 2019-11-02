@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS periodicals;
 
 DROP TABLE IF EXISTS periodical_types;
 
-DROP TABLE IF EXISTS frequency;
+DROP TABLE IF EXISTS frequencies;
 
 DROP TABLE IF EXISTS publishers;
 
@@ -41,7 +41,7 @@ CREATE TABLE roles
 /*==============================================================*/
 CREATE TABLE addresses
 (
-    address_id     INT          NOT NULL AUTO_INCREMENT,
+    address_id     BIGINT       NOT NULL AUTO_INCREMENT,
     country        VARCHAR(255) NOT NULL,
     city           VARCHAR(255) NOT NULL,
     post_index     VARCHAR(255) NOT NULL,
@@ -54,15 +54,15 @@ CREATE TABLE addresses
 /*==============================================================*/
 CREATE TABLE users
 (
-    user_id       INT                     NOT NULL AUTO_INCREMENT,
+    user_id       BIGINT                  NOT NULL AUTO_INCREMENT,
     role_id       INT                     NOT NULL,
-    address_id    INT,
+    address_id    BIGINT,
     first_name    VARCHAR(255)            NOT NULL,
     last_name     VARCHAR(255)            NOT NULL,
     email         VARCHAR(255)            NOT NULL UNIQUE,
     password      VARCHAR(255)            NOT NULL,
     date_of_birth DATE                    NOT NULL,
-    sex           ENUM ('male', 'female') NOT NULL,
+    gender        ENUM ('male', 'female') NOT NULL,
     PRIMARY KEY (user_id),
     CONSTRAINT fk_user_role
         FOREIGN KEY (role_id) REFERENCES roles (role_id)
@@ -79,8 +79,8 @@ CREATE TABLE users
 /*==============================================================*/
 CREATE TABLE payments
 (
-    payment_id   INT                                 NOT NULL AUTO_INCREMENT,
-    user_id      INT                                 NOT NULL,
+    payment_id   BIGINT                              NOT NULL AUTO_INCREMENT,
+    user_id      BIGINT                              NOT NULL,
     payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     total_price  DECIMAL(10, 2)                      NOT NULL,
     PRIMARY KEY (payment_id),
@@ -106,9 +106,9 @@ CREATE TABLE subscription_plans
 );
 
 /*==============================================================*/
-/* Table: frequency                                             */
+/* Table: frequencies                                             */
 /*==============================================================*/
-CREATE TABLE frequency
+CREATE TABLE frequencies
 (
     frequency_id   INT          NOT NULL AUTO_INCREMENT,
     frequency_name VARCHAR(255) NOT NULL UNIQUE,
@@ -132,7 +132,7 @@ CREATE TABLE periodical_types
 /*==============================================================*/
 CREATE TABLE publishers
 (
-    publisher_id   INT          NOT NULL AUTO_INCREMENT,
+    publisher_id   BIGINT       NOT NULL AUTO_INCREMENT,
     publisher_name VARCHAR(255) NOT NULL UNIQUE,
     PRIMARY KEY (publisher_id)
 );
@@ -142,8 +142,8 @@ CREATE TABLE publishers
 /*==============================================================*/
 CREATE TABLE periodicals
 (
-    periodical_id          INT            NOT NULL AUTO_INCREMENT,
-    publisher_id           INT            NOT NULL,
+    periodical_id          BIGINT         NOT NULL AUTO_INCREMENT,
+    publisher_id           BIGINT         NOT NULL,
     frequency_id           INT            NOT NULL,
     periodical_type_id     INT            NOT NULL,
     name                   VARCHAR(255)   NOT NULL,
@@ -155,7 +155,7 @@ CREATE TABLE periodicals
             ON UPDATE CASCADE
             ON DELETE RESTRICT,
     CONSTRAINT fk_periodical_frequency
-        FOREIGN KEY (frequency_id) REFERENCES frequency (frequency_id)
+        FOREIGN KEY (frequency_id) REFERENCES frequencies (frequency_id)
             ON UPDATE CASCADE
             ON DELETE RESTRICT,
     CONSTRAINT fk_periodical_publisher
@@ -170,11 +170,11 @@ CREATE TABLE periodicals
 /*==============================================================*/
 CREATE TABLE periodical_issues
 (
-    periodical_issues_id INT          NOT NULL AUTO_INCREMENT,
-    periodical_id        INT          NOT NULL,
-    issues_name          VARCHAR(255) NOT NULL,
-    issue_no             INT UNSIGNED NOT NULL UNIQUE,
-    publication_date     DATE         NOT NULL,
+    periodical_issues_id BIGINT          NOT NULL AUTO_INCREMENT,
+    periodical_id        BIGINT          NOT NULL,
+    issues_name          VARCHAR(255)    NOT NULL,
+    issue_no             BIGINT UNSIGNED NOT NULL UNIQUE,
+    publication_date     DATE            NOT NULL,
     issues_description   VARCHAR(1000),
     PRIMARY KEY (periodical_issues_id),
     CONSTRAINT fk_periodical_issue
@@ -188,12 +188,12 @@ CREATE TABLE periodical_issues
 /*==============================================================*/
 CREATE TABLE subscriptions
 (
-    subscription_id      INT  NOT NULL AUTO_INCREMENT,
-    user_id              INT  NOT NULL,
-    periodical_id        INT  NOT NULL,
-    subscription_plan_id INT  NOT NULL,
-    start_date           DATE NOT NULL,
-    end_date             DATE NOT NULL,
+    subscription_id      BIGINT NOT NULL AUTO_INCREMENT,
+    user_id              BIGINT NOT NULL,
+    periodical_id        BIGINT NOT NULL,
+    subscription_plan_id INT    NOT NULL,
+    start_date           DATE   NOT NULL,
+    end_date             DATE   NOT NULL,
     PRIMARY KEY (subscription_id),
     CONSTRAINT fk_subscription_plan
         FOREIGN KEY (subscription_plan_id) REFERENCES subscription_plans (subscription_plan_id)
@@ -215,8 +215,8 @@ CREATE TABLE subscriptions
 /*==============================================================*/
 CREATE TABLE payments_subscriptions
 (
-    subscription_id INT NOT NULL,
-    payment_id      INT NOT NULL,
+    subscription_id BIGINT NOT NULL,
+    payment_id      BIGINT NOT NULL,
     PRIMARY KEY (subscription_id, payment_id),
     CONSTRAINT fk_payments_subscriptions FOREIGN KEY (payment_id)
         REFERENCES payments (payment_id) ON UPDATE CASCADE
@@ -248,7 +248,7 @@ VALUES ('Comics', ''),
        ('Manga', ''),
        ('Others', '');
 
-INSERT INTO frequency(frequency_name, meaning)
+INSERT INTO frequencies(frequency_name, meaning)
 VALUES ('Daily', 'Once per business day'),
        ('Semi-weekly', 'Twice per week'),
        ('Weekly', 'Every week'),

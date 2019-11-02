@@ -4,7 +4,7 @@ USE periodicals;
 /* Added data: values for presentation                          */
 /*==============================================================*/
 
-INSERT INTO users(role_id, first_name, last_name, email, password, date_of_birth, sex)
+INSERT INTO users(role_id, first_name, last_name, email, password, date_of_birth, gender)
 VALUES (1, 'Maksym', 'Svynarhcuk', 'admin@gmail.com', 'admin', '1998-11-27', 'male'),
        (2, 'Ada', 'Lovelace', 'user@gmail.com', 'user', '2000-11-13', 'female');
 
