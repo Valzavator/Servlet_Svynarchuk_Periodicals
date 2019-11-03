@@ -2,11 +2,9 @@ CREATE SCHEMA IF NOT EXISTS periodicals DEFAULT CHARACTER SET utf8;
 
 USE periodicals;
 
-DROP TABLE IF EXISTS payments_subscriptions;
+DROP TABLE IF EXISTS subscriptions;
 
 DROP TABLE IF EXISTS payments;
-
-DROP TABLE IF EXISTS subscriptions;
 
 DROP TABLE IF EXISTS subscription_plans;
 
@@ -66,12 +64,12 @@ CREATE TABLE users
     PRIMARY KEY (user_id),
     CONSTRAINT fk_user_role
         FOREIGN KEY (role_id) REFERENCES roles (role_id)
-            ON UPDATE CASCADE
+            ON UPDATE RESTRICT
             ON DELETE RESTRICT,
     CONSTRAINT fk_user_address
         FOREIGN KEY (address_id) REFERENCES addresses (address_id)
-            ON UPDATE CASCADE
-            ON DELETE CASCADE
+            ON UPDATE RESTRICT
+            ON DELETE RESTRICT
 );
 
 /*==============================================================*/
@@ -86,7 +84,7 @@ CREATE TABLE payments
     PRIMARY KEY (payment_id),
     CONSTRAINT fk_user_payment
         FOREIGN KEY (user_id) REFERENCES users (user_id)
-            ON UPDATE CASCADE
+            ON UPDATE RESTRICT
             ON DELETE RESTRICT,
     CONSTRAINT chk_total_price CHECK ( total_price >= 0 )
 );
@@ -146,23 +144,23 @@ CREATE TABLE periodicals
     publisher_id           BIGINT         NOT NULL,
     frequency_id           INT            NOT NULL,
     periodical_type_id     INT            NOT NULL,
-    name                   VARCHAR(255)   NOT NULL,
-    price                  DECIMAL(10, 2) NOT NULL,
+    periodical_name        VARCHAR(255)   NOT NULL,
+    periodical_price       DECIMAL(10, 2) NOT NULL,
     periodical_description VARCHAR(1000)  NOT NULL,
     PRIMARY KEY (periodical_id),
     CONSTRAINT fk_periodical_type
         FOREIGN KEY (periodical_type_id) REFERENCES periodical_types (periodical_type_id)
-            ON UPDATE CASCADE
+            ON UPDATE RESTRICT
             ON DELETE RESTRICT,
     CONSTRAINT fk_periodical_frequency
         FOREIGN KEY (frequency_id) REFERENCES frequencies (frequency_id)
-            ON UPDATE CASCADE
+            ON UPDATE RESTRICT
             ON DELETE RESTRICT,
     CONSTRAINT fk_periodical_publisher
         FOREIGN KEY (publisher_id) REFERENCES publishers (publisher_id)
-            ON UPDATE CASCADE
+            ON UPDATE RESTRICT
             ON DELETE RESTRICT,
-    CONSTRAINT chk_price CHECK ( price > 0 )
+    CONSTRAINT chk_price CHECK ( periodical_price > 0 )
 );
 
 /*==============================================================*/
@@ -179,7 +177,7 @@ CREATE TABLE periodical_issues
     PRIMARY KEY (periodical_issues_id),
     CONSTRAINT fk_periodical_issue
         FOREIGN KEY (periodical_id) REFERENCES periodicals (periodical_id)
-            ON UPDATE CASCADE
+            ON UPDATE RESTRICT
             ON DELETE RESTRICT
 );
 
@@ -189,42 +187,30 @@ CREATE TABLE periodical_issues
 CREATE TABLE subscriptions
 (
     subscription_id      BIGINT NOT NULL AUTO_INCREMENT,
+    payment_id           BIGINT NOT NULL,
     user_id              BIGINT NOT NULL,
     periodical_id        BIGINT NOT NULL,
     subscription_plan_id INT    NOT NULL,
     start_date           DATE   NOT NULL,
     end_date             DATE   NOT NULL,
     PRIMARY KEY (subscription_id),
+    CONSTRAINT fk_payment
+        FOREIGN KEY (payment_id) REFERENCES payments (payment_id)
+            ON UPDATE RESTRICT
+            ON DELETE RESTRICT,
     CONSTRAINT fk_subscription_plan
         FOREIGN KEY (subscription_plan_id) REFERENCES subscription_plans (subscription_plan_id)
-            ON UPDATE CASCADE
+            ON UPDATE RESTRICT
             ON DELETE RESTRICT,
     CONSTRAINT fk_subscription_periodical
         FOREIGN KEY (periodical_id) REFERENCES periodicals (periodical_id)
-            ON UPDATE CASCADE
+            ON UPDATE RESTRICT
             ON DELETE RESTRICT,
     CONSTRAINT fk_user_subscription
         FOREIGN KEY (user_id) REFERENCES users (user_id)
-            ON UPDATE CASCADE
+            ON UPDATE RESTRICT
             ON DELETE RESTRICT,
     CONSTRAINT chk_start_end_time CHECK ( end_date > start_date )
-);
-
-/*==============================================================*/
-/* Table: payments_subscriptions                                */
-/*==============================================================*/
-CREATE TABLE payments_subscriptions
-(
-    subscription_id BIGINT NOT NULL,
-    payment_id      BIGINT NOT NULL,
-    PRIMARY KEY (subscription_id, payment_id),
-    CONSTRAINT fk_payments_subscriptions FOREIGN KEY (payment_id)
-        REFERENCES payments (payment_id) ON UPDATE CASCADE
-        ON DELETE RESTRICT,
-    CONSTRAINT fk_subscriptions_payments
-        FOREIGN KEY (subscription_id) REFERENCES subscriptions (subscription_id)
-            ON UPDATE CASCADE
-            ON DELETE RESTRICT
 );
 
 /*==============================================================*/

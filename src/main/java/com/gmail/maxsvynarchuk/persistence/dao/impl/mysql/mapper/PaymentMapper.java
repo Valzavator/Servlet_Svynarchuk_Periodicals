@@ -1,31 +1,40 @@
 package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper;
 
-import com.gmail.maxsvynarchuk.persistence.entity.Address;
 import com.gmail.maxsvynarchuk.persistence.entity.Payment;
+import com.gmail.maxsvynarchuk.persistence.entity.User;
+import com.gmail.maxsvynarchuk.persistence.util.time.TimeConverter;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PaymentMapper implements EntityMapper<Payment> {
-    private static final String ID_FIELD = "address_id";
-    private static final String COUNTRY_FIELD = "country";
-    private static final String CITY_FIELD = "city";
-    private static final String POST_INDEX_FIELD = "post_index";
-    private static final String DETAIL_ADDRESS_FIELD = "detail_address";
+    private static final String ID_FIELD = "payment_id";
+    private static final String PAYMENT_DATE_FIELD = "payment_date";
+    private static final String TOTAL_PRICE_FIELD = "total_price";
+
+    private final EntityMapper<User> userMapper;
+
+    public PaymentMapper() {
+        this(new UserMapper());
+    }
+
+    public PaymentMapper(EntityMapper<User> userMapper) {
+        this.userMapper = userMapper;
+    }
 
     @Override
-    public Address mapToObject(ResultSet resultSet, String tablePrefix) throws SQLException {
-        return Address.newBuilder()
+    public Payment mapToObject(ResultSet resultSet, String tablePrefix) throws SQLException {
+        User tempUser = userMapper.mapToObject(resultSet);
+
+        return Payment.newBuilder()
                 .setId(resultSet.getLong(
                         tablePrefix + ID_FIELD))
-                .setCountry(resultSet.getString(
-                        tablePrefix + COUNTRY_FIELD))
-                .setCity(resultSet.getString(
-                        tablePrefix + CITY_FIELD))
-                .setPostIndex(resultSet.getString(
-                        tablePrefix + POST_INDEX_FIELD))
-                .setDetailAddress(resultSet.getString(
-                        tablePrefix + DETAIL_ADDRESS_FIELD))
+                .setUser(tempUser)
+                .setPaymentDate(TimeConverter.toDate(
+                        resultSet.getTimestamp(
+                                tablePrefix + PAYMENT_DATE_FIELD)))
+                .setTotalPrice(resultSet.getBigDecimal(
+                        tablePrefix + TOTAL_PRICE_FIELD))
                 .build();
     }
 }

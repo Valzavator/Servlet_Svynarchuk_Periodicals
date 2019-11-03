@@ -1,10 +1,9 @@
 package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 
 import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalTypeDao;
-import com.gmail.maxsvynarchuk.persistence.dao.RoleDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
-import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.RoleMapper;
-import com.gmail.maxsvynarchuk.persistence.entity.Role;
+import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.PeriodicalTypeMapper;
+import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalType;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,69 +11,71 @@ import java.util.Optional;
 
 public class PeriodicalTypeMySqlDao implements PeriodicalTypeDao {
     private final static String SELECT_ALL =
-            "SELECT * FROM roles ";
+            "SELECT * FROM periodical_types ";
 
     private final static String INSERT =
-            "INSERT INTO roles (role_name) VALUES(?);";
+            "INSERT INTO periodical_types (type_name, type_description) VALUES(?, ?) ";
 
     private final static String UPDATE =
-            "UPDATE roles SET role_name = ? ";
+            "UPDATE periodical_types SET type_name = ?, type_description = ? ";
 
     private final static String DELETE =
-            "DELETE FROM roles ";
+            "DELETE FROM periodical_types ";
 
     private final static String WHERE_ID =
-            "WHERE role_id = ? ";
+            "WHERE periodical_type_id = ? ";
 
 
-    private final UtilMySqlDao<Role> utilMySqlDao;
+    private final UtilMySqlDao<PeriodicalType> utilMySqlDao;
 
     public PeriodicalTypeMySqlDao() {
-        this(new RoleMapper());
+        this(new PeriodicalTypeMapper());
     }
 
-    public PeriodicalTypeMySqlDao(EntityMapper<Role> mapper) {
+    public PeriodicalTypeMySqlDao(EntityMapper<PeriodicalType> mapper) {
         this(new UtilMySqlDao<>(mapper));
     }
 
-    public PeriodicalTypeMySqlDao(UtilMySqlDao<Role> utilMySqlDao) {
+    public PeriodicalTypeMySqlDao(UtilMySqlDao<PeriodicalType> utilMySqlDao) {
         this.utilMySqlDao = utilMySqlDao;
     }
 
     @Override
-    public Optional<Role> findOne(Integer id) {
+    public Optional<PeriodicalType> findOne(Integer id) {
         return utilMySqlDao.findOne(SELECT_ALL + WHERE_ID, id);
     }
 
     @Override
-    public List<Role> findAll() {
+    public List<PeriodicalType> findAll() {
         return utilMySqlDao.findAll(SELECT_ALL);
     }
 
-    public List<Role> findAll(int skip, int limit) {
+    public List<PeriodicalType> findAll(int skip, int limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override
-    public Role insert(Role obj) {
+    public PeriodicalType insert(PeriodicalType obj) {
         Objects.requireNonNull(obj);
 
         Integer id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
                 Integer.class,
-                obj.getName());
+                obj.getName(),
+                obj.getDescription());
         obj.setId(id);
 
         return obj;
     }
 
     @Override
-    public void update(Role obj) {
+    public void update(PeriodicalType obj) {
         Objects.requireNonNull(obj);
 
         utilMySqlDao.executeUpdate(
                 UPDATE + WHERE_ID,
                 obj.getName(),
+                obj.getDescription(),
                 obj.getId());
     }
 

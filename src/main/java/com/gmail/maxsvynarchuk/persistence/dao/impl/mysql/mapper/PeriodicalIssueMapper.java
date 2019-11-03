@@ -1,31 +1,44 @@
 package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper;
 
-import com.gmail.maxsvynarchuk.persistence.entity.Address;
+import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PeriodicalIssueMapper implements EntityMapper<PeriodicalIssue> {
-    private static final String ID_FIELD = "address_id";
-    private static final String COUNTRY_FIELD = "country";
-    private static final String CITY_FIELD = "city";
-    private static final String POST_INDEX_FIELD = "post_index";
-    private static final String DETAIL_ADDRESS_FIELD = "detail_address";
+    private static final String ID_FIELD = "periodical_issues_id";
+    private static final String ISSUE_NAME_FIELD = "issues_name";
+    private static final String ISSUE_NO_FIELD = "issue_no";
+    private static final String PUBLICATION_DATE_FIELD = "publication_date";
+    private static final String ISSUE_DESCRIPTION_FIELD = "issues_description";
+
+    private final EntityMapper<Periodical> periodicalMapper;
+
+    public PeriodicalIssueMapper() {
+        this(new PeriodicalMapper());
+    }
+
+    public PeriodicalIssueMapper(EntityMapper<Periodical> periodicalMapper) {
+        this.periodicalMapper = periodicalMapper;
+    }
 
     @Override
-    public Address mapToObject(ResultSet resultSet, String tablePrefix) throws SQLException {
-        return Address.newBuilder()
+    public PeriodicalIssue mapToObject(ResultSet resultSet, String tablePrefix) throws SQLException {
+        Periodical tempPeriodical = periodicalMapper.mapToObject(resultSet);
+
+        return PeriodicalIssue.newBuilder()
                 .setId(resultSet.getLong(
                         tablePrefix + ID_FIELD))
-                .setCountry(resultSet.getString(
-                        tablePrefix + COUNTRY_FIELD))
-                .setCity(resultSet.getString(
-                        tablePrefix + CITY_FIELD))
-                .setPostIndex(resultSet.getString(
-                        tablePrefix + POST_INDEX_FIELD))
-                .setDetailAddress(resultSet.getString(
-                        tablePrefix + DETAIL_ADDRESS_FIELD))
+                .setPeriodical(tempPeriodical)
+                .setName(resultSet.getString(
+                        tablePrefix + ISSUE_NAME_FIELD))
+                .setIssueNumber(resultSet.getLong(
+                        tablePrefix + ISSUE_NO_FIELD))
+                .setPublicationDate(resultSet.getDate(
+                        tablePrefix + PUBLICATION_DATE_FIELD))
+                .setDescription(resultSet.getString(
+                        tablePrefix + ISSUE_DESCRIPTION_FIELD))
                 .build();
     }
 }

@@ -1,10 +1,9 @@
 package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 
 import com.gmail.maxsvynarchuk.persistence.dao.PublisherDao;
-import com.gmail.maxsvynarchuk.persistence.dao.RoleDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
-import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.RoleMapper;
-import com.gmail.maxsvynarchuk.persistence.entity.Role;
+import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.PublisherMapper;
+import com.gmail.maxsvynarchuk.persistence.entity.Publisher;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,56 +11,55 @@ import java.util.Optional;
 
 public class PublisherMySqlDao implements PublisherDao {
     private final static String SELECT_ALL =
-            "SELECT * FROM roles ";
+            "SELECT * FROM publishers ";
 
     private final static String INSERT =
-            "INSERT INTO roles (role_name) VALUES(?);";
+            "INSERT INTO publishers (publisher_name) VALUES(?) ";
 
     private final static String UPDATE =
-            "UPDATE roles SET role_name = ? ";
+            "UPDATE publishers SET publisher_name = ? ";
 
     private final static String DELETE =
-            "DELETE FROM roles ";
+            "DELETE FROM publishers ";
 
     private final static String WHERE_ID =
-            "WHERE role_id = ? ";
+            "WHERE publisher_id = ? ";
 
 
-    private final UtilMySqlDao<Role> utilMySqlDao;
+    private final UtilMySqlDao<Publisher> utilMySqlDao;
 
     public PublisherMySqlDao() {
-        this(new RoleMapper());
+        this(new PublisherMapper());
     }
 
-    public PublisherMySqlDao(EntityMapper<Role> mapper) {
+    public PublisherMySqlDao(EntityMapper<Publisher> mapper) {
         this(new UtilMySqlDao<>(mapper));
     }
 
-    public PublisherMySqlDao(UtilMySqlDao<Role> utilMySqlDao) {
+    public PublisherMySqlDao(UtilMySqlDao<Publisher> utilMySqlDao) {
         this.utilMySqlDao = utilMySqlDao;
     }
 
     @Override
-    public Optional<Role> findOne(Integer id) {
+    public Optional<Publisher> findOne(Long id) {
         return utilMySqlDao.findOne(SELECT_ALL + WHERE_ID, id);
     }
 
     @Override
-    public List<Role> findAll() {
+    public List<Publisher> findAll() {
         return utilMySqlDao.findAll(SELECT_ALL);
     }
 
-    public List<Role> findAll(int skip, int limit) {
+    public List<Publisher> findAll(int skip, int limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override
-    public Role insert(Role obj) {
+    public Publisher insert(Publisher obj) {
         Objects.requireNonNull(obj);
 
-        Integer id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
+        Long id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
-                Integer.class,
                 obj.getName());
         obj.setId(id);
 
@@ -69,7 +67,7 @@ public class PublisherMySqlDao implements PublisherDao {
     }
 
     @Override
-    public void update(Role obj) {
+    public void update(Publisher obj) {
         Objects.requireNonNull(obj);
 
         utilMySqlDao.executeUpdate(
@@ -79,7 +77,7 @@ public class PublisherMySqlDao implements PublisherDao {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Long id) {
         utilMySqlDao.executeUpdate(
                 DELETE + WHERE_ID,
                 id);

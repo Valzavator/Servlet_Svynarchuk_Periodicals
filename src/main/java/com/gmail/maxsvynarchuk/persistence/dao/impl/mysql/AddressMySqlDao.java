@@ -16,12 +16,12 @@ public class AddressMySqlDao implements AddressDao {
     private final static String INSERT =
             "INSERT INTO addresses " +
                     "(country, city, post_index, detail_address) " +
-                    "VALUES(?, ?, ?, ?);";
+                    "VALUES(?, ?, ?, ?) ";
 
     private final static String UPDATE =
             "UPDATE addresses SET " +
                     "country = ?, city = ?, " +
-                    "post_index = ?, detail_address = ?";
+                    "post_index = ?, detail_address = ? ";
 
     private final static String DELETE =
             "DELETE FROM addresses ";

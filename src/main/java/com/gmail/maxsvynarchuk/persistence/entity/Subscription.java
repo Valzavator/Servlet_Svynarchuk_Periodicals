@@ -18,6 +18,7 @@ public class Subscription implements Serializable {
 
     private Long id;
     private User user;
+    private Payment payment;
     private Periodical periodical;
     private SubscriptionPlan subscriptionPlan;
     private Date startDate;
@@ -37,6 +38,11 @@ public class Subscription implements Serializable {
 
         public Builder setUser(User user) {
             subscription.setUser(user);
+            return this;
+        }
+
+        public Builder setPayment(Payment payment) {
+            subscription.payment = payment;
             return this;
         }
 
@@ -86,6 +92,14 @@ public class Subscription implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public Periodical getPeriodical() {
@@ -138,6 +152,7 @@ public class Subscription implements Serializable {
         return new StringJoiner(", ", Subscription.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("user=" + user)
+                .add("payment=" + payment)
                 .add("periodical=" + periodical)
                 .add("subscriptionPlan=" + subscriptionPlan)
                 .add("startDate=" + startDate)

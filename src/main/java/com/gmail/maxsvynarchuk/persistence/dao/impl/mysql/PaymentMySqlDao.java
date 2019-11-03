@@ -1,9 +1,9 @@
 package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 
 import com.gmail.maxsvynarchuk.persistence.dao.PaymentDao;
-import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.AddressMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
-import com.gmail.maxsvynarchuk.persistence.entity.Address;
+import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.PaymentMapper;
+import com.gmail.maxsvynarchuk.persistence.entity.Payment;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,79 +11,80 @@ import java.util.Optional;
 
 public class PaymentMySqlDao implements PaymentDao {
     private final static String SELECT_ALL =
-            "SELECT * FROM addresses ";
+            "SELECT * FROM payments " +
+                    "JOIN users " +
+                    "ON payments.user_id = users.user_id " +
+                    "JOIN roles " +
+                    "ON users.role_id = roles.role_id " +
+                    "LEFT JOIN addresses " +
+                    "ON users.address_id = addresses.address_id ";
 
     private final static String INSERT =
-            "INSERT INTO addresses " +
-                    "(country, city, post_index, detail_address) " +
-                    "VALUES(?, ?, ?, ?);";
+            "INSERT INTO payments " +
+                    "(user_id, total_price) " +
+                    "VALUES(?, ?) ";
 
     private final static String UPDATE =
-            "UPDATE addresses SET " +
-                    "country = ?, city = ?, " +
-                    "post_index = ?, detail_address = ?";
+            "UPDATE payments SET " +
+                    "user_id = ?, total_price = ? ";
 
     private final static String DELETE =
-            "DELETE FROM addresses ";
+            "DELETE FROM payments ";
 
     private final static String WHERE_ID =
-            "WHERE address_id = ? ";
+            "WHERE payment_id = ? ";
 
 
-    private final UtilMySqlDao<Address> utilMySqlDao;
+    private final UtilMySqlDao<Payment> utilMySqlDao;
 
     public PaymentMySqlDao() {
-        this(new AddressMapper());
+        this(new PaymentMapper());
     }
 
-    public PaymentMySqlDao(EntityMapper<Address> mapper) {
+    public PaymentMySqlDao(EntityMapper<Payment> mapper) {
         this(new UtilMySqlDao<>(mapper));
     }
 
-    public PaymentMySqlDao(UtilMySqlDao<Address> utilMySqlDao) {
+    public PaymentMySqlDao(UtilMySqlDao<Payment> utilMySqlDao) {
         this.utilMySqlDao = utilMySqlDao;
     }
 
     @Override
-    public Optional<Address> findOne(Long id) {
+    public Optional<Payment> findOne(Long id) {
         return utilMySqlDao.findOne(SELECT_ALL + WHERE_ID, id);
     }
 
     @Override
-    public List<Address> findAll() {
+    public List<Payment> findAll() {
         return utilMySqlDao.findAll(SELECT_ALL);
     }
 
     @Override
-    public List<Address> findAll(int skip, int limit) {
+    public List<Payment> findAll(int skip, int limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override
-    public Address insert(Address obj) {
+    public Payment insert(Payment obj) {
         Objects.requireNonNull(obj);
 
         Long id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
-                obj.getCountry(),
-                obj.getCity(),
-                obj.getPostIndex(),
-                obj.getDetailAddress());
+                obj.getUser().getId(),
+                obj.getTotalPrice());
         obj.setId(id);
 
         return obj;
     }
 
     @Override
-    public void update(Address obj) {
+    public void update(Payment obj) {
         Objects.requireNonNull(obj);
 
         utilMySqlDao.executeUpdate(
                 UPDATE + WHERE_ID,
-                obj.getCountry(),
-                obj.getCity(),
-                obj.getPostIndex(),
-                obj.getDetailAddress(),
+                obj.getUser().getId(),
+                obj.getTotalPrice(),
                 obj.getId());
     }
 

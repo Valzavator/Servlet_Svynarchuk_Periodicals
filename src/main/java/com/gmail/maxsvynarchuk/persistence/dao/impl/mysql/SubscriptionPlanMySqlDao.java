@@ -1,10 +1,8 @@
 package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 
-import com.gmail.maxsvynarchuk.persistence.dao.RoleDao;
 import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
-import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.RoleMapper;
-import com.gmail.maxsvynarchuk.persistence.entity.Role;
+import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.SubscriptionPlanMapper;
 import com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan;
 
 import java.util.List;
@@ -13,69 +11,79 @@ import java.util.Optional;
 
 public class SubscriptionPlanMySqlDao implements SubscriptionPlanDao {
     private final static String SELECT_ALL =
-            "SELECT * FROM roles ";
+            "SELECT * FROM subscription_plans ";
 
     private final static String INSERT =
-            "INSERT INTO roles (role_name) VALUES(?);";
+            "INSERT INTO subscription_plans " +
+                    "(plan_name, months_amount, rate, plan_description) " +
+                    "VALUES(?, ?, ?, ?) ";
 
     private final static String UPDATE =
-            "UPDATE roles SET role_name = ? ";
+            "UPDATE subscription_plans SET " +
+                    "plan_name = ?, months_amount = ?, " +
+                    "rate = ?, plan_description = ? ";
 
     private final static String DELETE =
-            "DELETE FROM roles ";
+            "DELETE FROM subscription_plans ";
 
     private final static String WHERE_ID =
-            "WHERE role_id = ? ";
+            "WHERE subscription_plan_id = ? ";
 
 
-    private final UtilMySqlDao<Role> utilMySqlDao;
+    private final UtilMySqlDao<SubscriptionPlan> utilMySqlDao;
 
     public SubscriptionPlanMySqlDao() {
-        this(new RoleMapper());
+        this(new SubscriptionPlanMapper());
     }
 
-    public SubscriptionPlanMySqlDao(EntityMapper<Role> mapper) {
+    public SubscriptionPlanMySqlDao(EntityMapper<SubscriptionPlan> mapper) {
         this(new UtilMySqlDao<>(mapper));
     }
 
-    public SubscriptionPlanMySqlDao(UtilMySqlDao<Role> utilMySqlDao) {
+    public SubscriptionPlanMySqlDao(UtilMySqlDao<SubscriptionPlan> utilMySqlDao) {
         this.utilMySqlDao = utilMySqlDao;
     }
 
     @Override
-    public Optional<Role> findOne(Integer id) {
+    public Optional<SubscriptionPlan> findOne(Integer id) {
         return utilMySqlDao.findOne(SELECT_ALL + WHERE_ID, id);
     }
 
     @Override
-    public List<Role> findAll() {
+    public List<SubscriptionPlan> findAll() {
         return utilMySqlDao.findAll(SELECT_ALL);
     }
 
-    public List<Role> findAll(int skip, int limit) {
+    public List<SubscriptionPlan> findAll(int skip, int limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override
-    public Role insert(Role obj) {
+    public SubscriptionPlan insert(SubscriptionPlan obj) {
         Objects.requireNonNull(obj);
 
         Integer id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
                 Integer.class,
-                obj.getName());
+                obj.getName(),
+                obj.getMonthsAmount(),
+                obj.getRate(),
+                obj.getDescription());
         obj.setId(id);
 
         return obj;
     }
 
     @Override
-    public void update(Role obj) {
+    public void update(SubscriptionPlan obj) {
         Objects.requireNonNull(obj);
 
         utilMySqlDao.executeUpdate(
                 UPDATE + WHERE_ID,
                 obj.getName(),
+                obj.getMonthsAmount(),
+                obj.getRate(),
+                obj.getDescription(),
                 obj.getId());
     }
 

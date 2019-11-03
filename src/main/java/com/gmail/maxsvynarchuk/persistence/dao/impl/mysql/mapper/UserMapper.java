@@ -31,7 +31,6 @@ public class UserMapper implements EntityMapper<User> {
     @Override
     public User mapToObject(ResultSet resultSet, String tablePrefix)
             throws SQLException {
-
         Role tempRole = roleMapper.mapToObject(resultSet);
         Address tempAddress = addressMapper.mapToObject(resultSet);
 

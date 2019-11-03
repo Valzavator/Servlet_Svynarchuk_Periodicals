@@ -1,31 +1,55 @@
 package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper;
 
-import com.gmail.maxsvynarchuk.persistence.entity.Address;
-import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
+import com.gmail.maxsvynarchuk.persistence.entity.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SubscriptionMapper implements EntityMapper<Subscription> {
-    private static final String ID_FIELD = "address_id";
-    private static final String COUNTRY_FIELD = "country";
-    private static final String CITY_FIELD = "city";
-    private static final String POST_INDEX_FIELD = "post_index";
-    private static final String DETAIL_ADDRESS_FIELD = "detail_address";
+    private static final String ID_FIELD = "subscription_id";
+    private static final String START_DATE_FIELD = "start_date";
+    private static final String END_DATE_FIELD = "end_date";
+
+    private final EntityMapper<User> userMapper;
+    private final EntityMapper<Payment> paymentMapper;
+    private final EntityMapper<Periodical> periodicalMapper;
+    private final EntityMapper<SubscriptionPlan> subscriptionPlanMapper;
+
+    public SubscriptionMapper() {
+        this(new UserMapper(),
+                new PaymentMapper(),
+                new PeriodicalMapper(),
+                new SubscriptionPlanMapper());
+    }
+
+    public SubscriptionMapper(EntityMapper<User> userMapper,
+                              EntityMapper<Payment> paymentMapper,
+                              EntityMapper<Periodical> periodicalMapper,
+                              EntityMapper<SubscriptionPlan> subscriptionPlanMapper) {
+        this.userMapper = userMapper;
+        this.paymentMapper = paymentMapper;
+        this.periodicalMapper = periodicalMapper;
+        this.subscriptionPlanMapper = subscriptionPlanMapper;
+    }
 
     @Override
-    public Address mapToObject(ResultSet resultSet, String tablePrefix) throws SQLException {
-        return Address.newBuilder()
+    public Subscription mapToObject(ResultSet resultSet, String tablePrefix) throws SQLException {
+        User tempUser = userMapper.mapToObject(resultSet);
+        Payment tempPayment = paymentMapper.mapToObject(resultSet);
+        Periodical tempPeriodical = periodicalMapper.mapToObject(resultSet);
+        SubscriptionPlan tempSubscriptionPlan = subscriptionPlanMapper.mapToObject(resultSet);
+
+        return Subscription.newBuilder()
                 .setId(resultSet.getLong(
                         tablePrefix + ID_FIELD))
-                .setCountry(resultSet.getString(
-                        tablePrefix + COUNTRY_FIELD))
-                .setCity(resultSet.getString(
-                        tablePrefix + CITY_FIELD))
-                .setPostIndex(resultSet.getString(
-                        tablePrefix + POST_INDEX_FIELD))
-                .setDetailAddress(resultSet.getString(
-                        tablePrefix + DETAIL_ADDRESS_FIELD))
+                .setUser(tempUser)
+                .setPayment(tempPayment)
+                .setPeriodical(tempPeriodical)
+                .setSubscriptionPlan(tempSubscriptionPlan)
+                .setStartDate(resultSet.getDate(
+                        tablePrefix + START_DATE_FIELD))
+                .setEndDate(resultSet.getDate(
+                        tablePrefix + END_DATE_FIELD))
                 .build();
     }
 }
