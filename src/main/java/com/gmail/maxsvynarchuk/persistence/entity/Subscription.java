@@ -6,14 +6,16 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
- * @author Maksym Svynarchuk
- * <p>
  * Class that represents user subscription of some plan for periodicals
+ *
+ * @author Maksym Svynarchuk
  * @see User
  * @see SubscriptionPlan
  * @see Periodical
  */
 public class Subscription implements Serializable {
+    private static final long serialVersionUID = 8540619478891337776L;
+
     private Long id;
     private User user;
     private Periodical periodical;

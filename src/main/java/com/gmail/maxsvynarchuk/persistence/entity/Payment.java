@@ -7,13 +7,15 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
- * @author Maksym Svynarchuk
- * <p>
  * Class that represents payment made by some user purchasing some periodicals
+ *
+ * @author Maksym Svynarchuk
  * @see User
  * @see Periodical
  */
 public class Payment implements Serializable {
+    private static final long serialVersionUID = -22759703204341490L;
+
     private Long id;
     private User user;
     private Date paymentDate;

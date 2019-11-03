@@ -5,12 +5,14 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
- * @author Maksym Svynarchuk
- * <p>
  * Class that represents address of user
+ *
+ * @author Maksym Svynarchuk
  * @see User
  */
 public class Address implements Serializable {
+    private static final long serialVersionUID = 4860525714942767638L;
+
     private Long id;
     private String country;
     private String city;

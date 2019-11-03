@@ -6,12 +6,14 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
- * @author Maksym Svynarchuk
- * <p>
  * Class that represents periodical issue
+ *
+ * @author Maksym Svynarchuk
  * @see Periodical
  */
-public class PeriodicalIssues implements Serializable {
+public class PeriodicalIssue implements Serializable {
+    private static final long serialVersionUID = 6582640959890366280L;
+
     private Long id;
     private String name;
     private Long issueNumber;
@@ -20,44 +22,44 @@ public class PeriodicalIssues implements Serializable {
     private Periodical periodical;
 
     public static class Builder {
-        private final PeriodicalIssues periodicalIssues;
+        private final PeriodicalIssue periodicalIssue;
 
         public Builder() {
-            periodicalIssues = new PeriodicalIssues();
+            periodicalIssue = new PeriodicalIssue();
         }
 
         public Builder setId(Long id) {
-            periodicalIssues.setId(id);
+            periodicalIssue.setId(id);
             return this;
         }
 
         public Builder setName(String name) {
-            periodicalIssues.setName(name);
+            periodicalIssue.setName(name);
             return this;
         }
 
         public Builder setIssueNumber(Long issueNumber) {
-            periodicalIssues.setIssueNumber(issueNumber);
+            periodicalIssue.setIssueNumber(issueNumber);
             return this;
         }
 
         public Builder setPublicationDate(Date publicationDate) {
-            periodicalIssues.setPublicationDate(publicationDate);
+            periodicalIssue.setPublicationDate(publicationDate);
             return this;
         }
 
         public Builder setDescription(String description) {
-            periodicalIssues.setDescription(description);
+            periodicalIssue.setDescription(description);
             return this;
         }
 
         public Builder setPeriodical(Periodical periodical) {
-            periodicalIssues.setPeriodical(periodical);
+            periodicalIssue.setPeriodical(periodical);
             return this;
         }
 
-        public PeriodicalIssues build() {
-            return periodicalIssues;
+        public PeriodicalIssue build() {
+            return periodicalIssue;
         }
     }
 
@@ -65,7 +67,7 @@ public class PeriodicalIssues implements Serializable {
         return new Builder();
     }
 
-    public PeriodicalIssues() {
+    public PeriodicalIssue() {
     }
 
     public Long getId() {
@@ -120,7 +122,7 @@ public class PeriodicalIssues implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PeriodicalIssues that = (PeriodicalIssues) o;
+        PeriodicalIssue that = (PeriodicalIssue) o;
         return Objects.equals(getId(), that.getId());
     }
 
@@ -131,7 +133,7 @@ public class PeriodicalIssues implements Serializable {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", PeriodicalIssues.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", PeriodicalIssue.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("name='" + name + "'")
                 .add("issueNumber=" + issueNumber)

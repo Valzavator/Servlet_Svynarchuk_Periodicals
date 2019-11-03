@@ -5,12 +5,14 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
- * @author Maksym Svynarchuk
- * <p>
  * Class that represents type of periodicals
+ *
+ * @author Maksym Svynarchuk
  * @see Periodical
  */
 public class PeriodicalType implements Serializable {
+    private static final long serialVersionUID = 8627358865975742191L;
+
     private Integer id;
     private String name;
     private String description;
@@ -40,7 +42,6 @@ public class PeriodicalType implements Serializable {
         public PeriodicalType build() {
             return periodicalType;
         }
-
     }
 
     public static Builder newBuilder() {

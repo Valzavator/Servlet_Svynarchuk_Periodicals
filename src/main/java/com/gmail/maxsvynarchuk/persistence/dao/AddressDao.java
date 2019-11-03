@@ -1,4 +1,6 @@
 package com.gmail.maxsvynarchuk.persistence.dao;
 
-public interface AddressDao {
+import com.gmail.maxsvynarchuk.persistence.entity.Address;
+
+public interface AddressDao extends GenericDao<Address, Long> {
 }

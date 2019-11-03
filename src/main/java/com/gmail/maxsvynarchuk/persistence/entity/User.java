@@ -6,15 +6,17 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
- * @author Maksym Svynarchuk
- * <p>
  * Class that represents user of system;
  * Each user must have one and only one role.
  * Each user may have at most one address.
+ *
+ * @author Maksym Svynarchuk
  * @see Role
  * @see Address
  */
 public class User implements Serializable {
+    private static final long serialVersionUID = -1864654776101421526L;
+
     public enum Gender {
         MALE, FEMALE
     }

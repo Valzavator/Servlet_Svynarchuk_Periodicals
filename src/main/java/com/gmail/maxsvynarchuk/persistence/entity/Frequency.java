@@ -5,21 +5,50 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
- * @author Maksym Svynarchuk
- * <p>
  * Class that represents frequency of periodical
+ *
+ * @author Maksym Svynarchuk
  * @see Periodical
  */
 public class Frequency implements Serializable {
+    private static final long serialVersionUID = -7403178438448003318L;
+
     private Integer id;
     private String name;
+    private String meaning;
 
-    public Frequency() {
+    public static class Builder {
+        private final Frequency frequency;
+
+        public Builder() {
+            frequency = new Frequency();
+        }
+
+        public Builder setId(Integer id) {
+            frequency.setId(id);
+            return this;
+        }
+
+        public Builder setName(String name) {
+            frequency.setName(name);
+            return this;
+        }
+
+        public Builder setMeaning(String meaning) {
+            frequency.setMeaning(meaning);
+            return this;
+        }
+
+        public Frequency build() {
+            return frequency;
+        }
     }
 
-    public Frequency(Integer id, String name) {
-        setId(id);
-        setName(name);
+    public static Builder newBuilder() {
+        return new Builder();
+    }
+
+    public Frequency() {
     }
 
     public Integer getId() {
@@ -36,6 +65,14 @@ public class Frequency implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getMeaning() {
+        return meaning;
+    }
+
+    public void setMeaning(String meaning) {
+        this.meaning = meaning;
     }
 
     @Override
@@ -56,6 +93,7 @@ public class Frequency implements Serializable {
         return new StringJoiner(", ", Frequency.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("name='" + name + "'")
+                .add("meaning='" + meaning + "'")
                 .toString();
     }
 }

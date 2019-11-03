@@ -5,12 +5,14 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
- * @author Maksym Svynarchuk
- * <p>
  * Class that represents publisher of periodicals
+ *
+ * @author Maksym Svynarchuk
  * @see Periodical
  */
 public class Publisher implements Serializable {
+    private static final long serialVersionUID = -8782091490451523912L;
+
     private Long id;
     private String name;
 

@@ -5,11 +5,13 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
- * @author Maksym Svynarchuk
- * <p>
  * Class that represents user role in system
+ *
+ * @author Maksym Svynarchuk
  */
 public class Role implements Serializable {
+    private static final long serialVersionUID = 6723275210074728598L;
+
     private Integer id;
     private String name;
 

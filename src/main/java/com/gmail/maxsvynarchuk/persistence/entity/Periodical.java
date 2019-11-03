@@ -6,14 +6,16 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
- * @author Maksym Svynarchuk
- * <p>
  * Class that represents periodical of some type published by some publisher
+ *
+ * @author Maksym Svynarchuk
  * @see PeriodicalType
  * @see Frequency
  * @see Publisher
  */
 public class Periodical implements Serializable {
+    private static final long serialVersionUID = -8852341448368620250L;
+
     private Long id;
     private String name;
     private BigDecimal price;

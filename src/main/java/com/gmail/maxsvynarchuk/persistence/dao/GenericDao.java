@@ -26,6 +26,13 @@ public interface GenericDao<T, ID>{
     List<T> findAll();
 
     /**
+     * Retrieves all object data from database.
+     *
+     * @return List of objects which represent one row in database.
+     */
+    List<T> findAll(int skip, int limit);
+
+    /**
      * Insert object to a database.
      *
      * @param obj object to insert
