@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.SubscriptionPlanMapper;
 import com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan;
+import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,24 +12,15 @@ import java.util.Optional;
 
 public class SubscriptionPlanMySqlDao implements SubscriptionPlanDao {
     private final static String SELECT_ALL =
-            "SELECT * FROM subscription_plans ";
-
+            ResourceManager.QUERIES.getProperty("subscription.plan.select.all");
     private final static String INSERT =
-            "INSERT INTO subscription_plans " +
-                    "(plan_name, months_amount, rate, plan_description) " +
-                    "VALUES(?, ?, ?, ?) ";
-
+            ResourceManager.QUERIES.getProperty("subscription.plan.insert");
     private final static String UPDATE =
-            "UPDATE subscription_plans SET " +
-                    "plan_name = ?, months_amount = ?, " +
-                    "rate = ?, plan_description = ? ";
-
+            ResourceManager.QUERIES.getProperty("subscription.plan.update");
     private final static String DELETE =
-            "DELETE FROM subscription_plans ";
-
+            ResourceManager.QUERIES.getProperty("subscription.plan.delete");
     private final static String WHERE_ID =
-            "WHERE subscription_plan_id = ? ";
-
+            ResourceManager.QUERIES.getProperty("subscription.plan.where.id");
 
     private final UtilMySqlDao<SubscriptionPlan> utilMySqlDao;
 

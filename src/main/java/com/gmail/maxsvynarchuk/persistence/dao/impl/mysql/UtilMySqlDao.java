@@ -5,6 +5,7 @@ import com.gmail.maxsvynarchuk.persistence.connection.PooledConnection;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.exception.DaoException;
 
+import com.gmail.maxsvynarchuk.util.ResourceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,8 +26,8 @@ public class UtilMySqlDao<T> {
     private static final String ERROR_EXECUTE_QUERY = "Failed to execute query";
     private static final String INVALID_PAGINATION_PARAMETERS = "Pagination parameters can`t be negative values";
 
-    static final String SQL_LIMIT_ONE = " LIMIT 1";
-    static final String LIMIT = "LIMIT ?,?";
+    static final String LIMIT_ONE = ResourceManager.QUERIES.getProperty("limit.one");
+    static final String LIMIT = ResourceManager.QUERIES.getProperty("limit");
 
     /**
      * Connection pool
@@ -55,7 +56,7 @@ public class UtilMySqlDao<T> {
      * @return Optional object, which contains retrieved object or null
      */
     public Optional<T> findOne(String query, Object... params) {
-        List<T> results = findAll(query + SQL_LIMIT_ONE, params);
+        List<T> results = findAll(query + LIMIT_ONE, params);
         return Optional.ofNullable(results.isEmpty() ? null : results.get(0));
     }
 
@@ -81,28 +82,6 @@ public class UtilMySqlDao<T> {
             throw new DaoException(ERROR_EXECUTE_QUERY, e);
         }
     }
-
-//    /**
-//     * Retrieve all objects from database which match given query
-//     * in sub-range from {@code fromIndex} (inclusive) to
-//     * {@code fromIndex + size} (exclusive) is within
-//     * the bounds of range from 0 (inclusive) to  length (exclusive).
-//     *
-//     * @param query     raw sql syntax for objects selecting. Can contains ? wildcard.
-//     * @param fromIndex the lower-bound (inclusive) of the sub-range
-//     * @param size      the size of the sub-range
-//     * @param params    parameters to substitute wildcards in query
-//     * @return list of retrieved objects
-//     */
-//    public List<T> findAllWithPagination(String query, int fromIndex, int size, Object... params) {
-//        if (fromIndex < 0 || size < 0) {
-//            LOGGER.error(INVALID_PAGINATION_PARAMETERS);
-//            throw new DaoException(INVALID_PAGINATION_PARAMETERS);
-//        }
-//
-//        final String SQL_PAGINATION_LIMIT = String.format(" LIMIT %d, %d", fromIndex, size);
-//        return findAll(query + SQL_PAGINATION_LIMIT, params);
-//    }
 
     /**
      * Perform update of some table in database

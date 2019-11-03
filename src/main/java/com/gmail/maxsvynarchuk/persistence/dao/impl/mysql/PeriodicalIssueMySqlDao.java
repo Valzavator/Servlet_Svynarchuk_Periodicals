@@ -5,6 +5,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.PeriodicalIssueMapper;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
 import com.gmail.maxsvynarchuk.persistence.util.time.TimeConverter;
+import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,33 +13,15 @@ import java.util.Optional;
 
 public class PeriodicalIssueMySqlDao implements PeriodicalIssueDao {
     private final static String SELECT_ALL =
-            "SELECT * FROM periodical_issues " +
-                    "JOIN periodicals " +
-                    "ON periodical_issues.periodical_id = periodicals.periodical_id " +
-                    "JOIN publishers " +
-                    "ON periodicals.publisher_id = publishers.publisher_id " +
-                    "JOIN frequencies " +
-                    "ON periodicals.frequency_id = frequencies.frequency_id " +
-                    "JOIN periodical_types " +
-                    "ON periodicals.periodical_type_id = periodical_types.periodical_type_id ";
-
+            ResourceManager.QUERIES.getProperty("periodical.issue.select.all");
     private final static String INSERT =
-            "INSERT INTO periodical_issues " +
-                    "(periodical_id, issues_name, issue_no, " +
-                    "publication_date, issues_description) " +
-                    "VALUES(?, ?, ?, ?, ?) ";
-
+            ResourceManager.QUERIES.getProperty("periodical.issue.insert");
     private final static String UPDATE =
-            "UPDATE periodical_issues SET " +
-                    "periodical_id = ?, issues_name = ?, issue_no = ?, " +
-                    "publication_date = ?, issues_description = ? ";
-
+            ResourceManager.QUERIES.getProperty("periodical.issue.update");
     private final static String DELETE =
-            "DELETE FROM periodical_issues ";
-
+            ResourceManager.QUERIES.getProperty("periodical.issue.delete");
     private final static String WHERE_ID =
-            "WHERE periodical_issues_id = ? ";
-
+            ResourceManager.QUERIES.getProperty("periodical.issue.where.id");
 
     private final UtilMySqlDao<PeriodicalIssue> utilMySqlDao;
 

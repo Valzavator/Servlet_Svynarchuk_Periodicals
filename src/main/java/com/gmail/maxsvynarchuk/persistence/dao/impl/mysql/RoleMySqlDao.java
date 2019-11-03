@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.RoleDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.RoleMapper;
 import com.gmail.maxsvynarchuk.persistence.entity.Role;
+import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,20 +12,15 @@ import java.util.Optional;
 
 public class RoleMySqlDao implements RoleDao {
     private final static String SELECT_ALL =
-            "SELECT * FROM roles ";
-
+            ResourceManager.QUERIES.getProperty("role.select.all");
     private final static String INSERT =
-            "INSERT INTO roles (role_name) VALUES(?);";
-
+            ResourceManager.QUERIES.getProperty("role.insert");
     private final static String UPDATE =
-            "UPDATE roles SET role_name = ? ";
-
+            ResourceManager.QUERIES.getProperty("role.update");
     private final static String DELETE =
-            "DELETE FROM roles ";
-
+            ResourceManager.QUERIES.getProperty("role.delete");
     private final static String WHERE_ID =
-            "WHERE role_id = ? ";
-
+            ResourceManager.QUERIES.getProperty("role.where.id");
 
     private final UtilMySqlDao<Role> utilMySqlDao;
 

@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.FrequencyDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.FrequencyMapper;
 import com.gmail.maxsvynarchuk.persistence.entity.Frequency;
+import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,23 +12,15 @@ import java.util.Optional;
 
 public class FrequencyMySqlDao implements FrequencyDao {
     private final static String SELECT_ALL =
-            "SELECT * FROM frequencies ";
-
+            ResourceManager.QUERIES.getProperty("frequency.select.all");
     private final static String INSERT =
-            "INSERT INTO frequencies " +
-                    "(frequency_name, meaning) " +
-                    "VALUES(?, ?) ";
-
+            ResourceManager.QUERIES.getProperty("frequency.insert");
     private final static String UPDATE =
-            "UPDATE frequencies SET " +
-                    "frequency_name = ?, meaning = ? ";
-
+            ResourceManager.QUERIES.getProperty("frequency.update");
     private final static String DELETE =
-            "DELETE FROM frequencies ";
-
+            ResourceManager.QUERIES.getProperty("frequency.delete");
     private final static String WHERE_ID =
-            "WHERE frequency_id = ? ";
-
+            ResourceManager.QUERIES.getProperty("frequency.where.id");
 
     private final UtilMySqlDao<Frequency> utilMySqlDao;
 

@@ -5,6 +5,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.SubscriptionMapper;
 import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.persistence.util.time.TimeConverter;
+import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,44 +13,15 @@ import java.util.Optional;
 
 public class SubscriptionMySqlDao implements SubscriptionDao {
     private final static String SELECT_ALL =
-            "SELECT * FROM subscriptions " +
-                    "JOIN subscription_plans " +
-                    "ON subscriptions.subscription_plan_id = subscription_plans.subscription_plan_id " +
-                    "JOIN payments " +
-                    "ON subscriptions.payment_id = payments.payment_id " +
-                    "JOIN users " +
-                    "ON subscriptions.user_id = users.user_id " +
-                    "JOIN roles " +
-                    "ON users.role_id = roles.role_id " +
-                    "LEFT JOIN addresses " +
-                    "ON users.address_id = addresses.address_id " +
-                    "JOIN periodicals " +
-                    "ON subscriptions.periodical_id = periodicals.periodical_id " +
-                    "JOIN publishers " +
-                    "ON periodicals.publisher_id = publishers.publisher_id " +
-                    "JOIN frequencies " +
-                    "ON periodicals.frequency_id = frequencies.frequency_id " +
-                    "JOIN periodical_types " +
-                    "ON periodicals.periodical_type_id = periodical_types.periodical_type_id ";
-
+            ResourceManager.QUERIES.getProperty("subscription.select.all");
     private final static String INSERT =
-            "INSERT INTO subscriptions " +
-                    "(payment_id, user_id, periodical_id, " +
-                    "subscription_plan_id, start_date, end_date) " +
-                    "VALUES(?, ?, ?, ?, ?, ?) ";
-
+            ResourceManager.QUERIES.getProperty("subscription.insert");
     private final static String UPDATE =
-            "UPDATE subscriptions SET " +
-                    "payment_id = ?, user_id = ?, " +
-                    "periodical_id = ?, subscription_plan_id = ?, " +
-                    "start_date = ?, end_date = ? ";
-
+            ResourceManager.QUERIES.getProperty("subscription.update");
     private final static String DELETE =
-            "DELETE FROM subscriptions ";
-
+            ResourceManager.QUERIES.getProperty("subscription.delete");
     private final static String WHERE_ID =
-            "WHERE subscription_id = ? ";
-
+            ResourceManager.QUERIES.getProperty("subscription.where.id");
 
     private final UtilMySqlDao<Subscription> utilMySqlDao;
 

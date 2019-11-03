@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.PublisherDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.PublisherMapper;
 import com.gmail.maxsvynarchuk.persistence.entity.Publisher;
+import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,20 +12,15 @@ import java.util.Optional;
 
 public class PublisherMySqlDao implements PublisherDao {
     private final static String SELECT_ALL =
-            "SELECT * FROM publishers ";
-
+            ResourceManager.QUERIES.getProperty("publisher.select.all");
     private final static String INSERT =
-            "INSERT INTO publishers (publisher_name) VALUES(?) ";
-
+            ResourceManager.QUERIES.getProperty("publisher.insert");
     private final static String UPDATE =
-            "UPDATE publishers SET publisher_name = ? ";
-
+            ResourceManager.QUERIES.getProperty("publisher.update");
     private final static String DELETE =
-            "DELETE FROM publishers ";
-
+            ResourceManager.QUERIES.getProperty("publisher.delete");
     private final static String WHERE_ID =
-            "WHERE publisher_id = ? ";
-
+            ResourceManager.QUERIES.getProperty("publisher.where.id");
 
     private final UtilMySqlDao<Publisher> utilMySqlDao;
 

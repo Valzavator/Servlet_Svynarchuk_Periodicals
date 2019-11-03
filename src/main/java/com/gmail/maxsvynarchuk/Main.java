@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.*;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.*;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.*;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
+import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -91,7 +92,7 @@ public class Main {
 //                .setName("TEST")
 //                .setMeaning("UKRAINE")
 //                .build();
-
+//
 //        PaymentDao dao = new PaymentMySqlDao(new UtilMySqlDao<>(() -> {
 //            try {
 //                return DriverManager.getConnection(url, prop);
@@ -139,7 +140,7 @@ public class Main {
 //                .setPayment(Payment.newBuilder().setId(1L).build())
 //                .setSubscriptionPlan(SubscriptionPlan.newBuilder().setId(1).build())
 //                .build();
-
+//
 //        PublisherDao dao = new PublisherMySqlDao(new UtilMySqlDao<>(() -> {
 //            try {
 //                return DriverManager.getConnection(url, prop);
@@ -168,7 +169,7 @@ public class Main {
 //                .setPrice(new BigDecimal(12))
 //                .setDescription("setDescription")
 //                .build();
-//
+
 
 //        PeriodicalTypeDao dao = new PeriodicalTypeMySqlDao(new UtilMySqlDao<>(() -> {
 //            try {
@@ -184,34 +185,34 @@ public class Main {
 //                .setDescription("setDescription")
 //                .build();
 
-        PeriodicalIssueDao dao = new PeriodicalIssueMySqlDao(new UtilMySqlDao<>(() -> {
-            try {
-                return DriverManager.getConnection(url, prop);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new RuntimeException();
-            }
-        }, new PeriodicalIssueMapper()));
+//        PeriodicalIssueDao dao = new PeriodicalIssueMySqlDao(new UtilMySqlDao<>(() -> {
+//            try {
+//                return DriverManager.getConnection(url, prop);
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//                throw new RuntimeException();
+//            }
+//        }, new PeriodicalIssueMapper()));
+//
+//        PeriodicalIssue obj = PeriodicalIssue.newBuilder()
+//                .setPeriodical(Periodical.newBuilder().setId(1L).build())
+//                .setName("setName")
+//                .setIssueNumber(3L)
+//                .setPublicationDate(new Date(100000000))
+//                .setDescription("setDescription")
+//                .build();
 
-        PeriodicalIssue obj = PeriodicalIssue.newBuilder()
-                .setPeriodical(Periodical.newBuilder().setId(1L).build())
-                .setName("setName")
-                .setIssueNumber(3L)
-                .setPublicationDate(new Date(100000000))
-                .setDescription("setDescription")
-                .build();
-
-        System.out.println(dao.findAll(1, 3) + "\n");
-
-        System.out.println(dao.findAll() + "\n");
-        System.out.println(dao.insert(obj) + "\n");
-        System.out.println(dao.findOne(obj.getId()) + "\n");
-        obj.setName("NEW NAME");
-        dao.update(obj);
-        System.out.println(dao.findOne(obj.getId()) + "\n");
-        dao.delete(obj.getId());
-        System.out.println(dao.findOne(obj.getId()) + "\n");
-        System.out.println(dao.findAll());
+//        System.out.println(dao.findAll(1, 3) + "\n");
+//
+//        System.out.println(dao.findAll() + "\n");
+//        System.out.println(dao.insert(obj) + "\n");
+//        System.out.println(dao.findOne(obj.getId()) + "\n");
+//        obj.setDescription("NEW NAME");
+//        dao.update(obj);
+//        System.out.println(dao.findOne(obj.getId()) + "\n");
+//        dao.delete(obj.getId());
+//        System.out.println(dao.findOne(obj.getId()) + "\n");
+//        System.out.println(dao.findAll());
     }
 }
 

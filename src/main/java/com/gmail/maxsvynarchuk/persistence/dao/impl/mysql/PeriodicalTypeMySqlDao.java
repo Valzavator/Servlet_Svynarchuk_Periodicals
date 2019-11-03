@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalTypeDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.PeriodicalTypeMapper;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalType;
+import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,20 +12,15 @@ import java.util.Optional;
 
 public class PeriodicalTypeMySqlDao implements PeriodicalTypeDao {
     private final static String SELECT_ALL =
-            "SELECT * FROM periodical_types ";
-
+            ResourceManager.QUERIES.getProperty("periodical.type.select.all");
     private final static String INSERT =
-            "INSERT INTO periodical_types (type_name, type_description) VALUES(?, ?) ";
-
+            ResourceManager.QUERIES.getProperty("periodical.type.insert");
     private final static String UPDATE =
-            "UPDATE periodical_types SET type_name = ?, type_description = ? ";
-
+            ResourceManager.QUERIES.getProperty("periodical.type.update");
     private final static String DELETE =
-            "DELETE FROM periodical_types ";
-
+            ResourceManager.QUERIES.getProperty("periodical.type.delete");
     private final static String WHERE_ID =
-            "WHERE periodical_type_id = ? ";
-
+            ResourceManager.QUERIES.getProperty("periodical.type.where.id");
 
     private final UtilMySqlDao<PeriodicalType> utilMySqlDao;
 

@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.AddressDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.AddressMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.entity.Address;
+import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,24 +12,15 @@ import java.util.Optional;
 
 public class AddressMySqlDao implements AddressDao {
     private final static String SELECT_ALL =
-            "SELECT * FROM addresses ";
-
+            ResourceManager.QUERIES.getProperty("address.select.all");
     private final static String INSERT =
-            "INSERT INTO addresses " +
-                    "(country, city, post_index, detail_address) " +
-                    "VALUES(?, ?, ?, ?) ";
-
+            ResourceManager.QUERIES.getProperty("address.insert");
     private final static String UPDATE =
-            "UPDATE addresses SET " +
-                    "country = ?, city = ?, " +
-                    "post_index = ?, detail_address = ? ";
-
+            ResourceManager.QUERIES.getProperty("address.update");
     private final static String DELETE =
-            "DELETE FROM addresses ";
-
+            ResourceManager.QUERIES.getProperty("address.delete");
     private final static String WHERE_ID =
-            "WHERE address_id = ? ";
-
+            ResourceManager.QUERIES.getProperty("address.where.id");
 
     private final UtilMySqlDao<Address> utilMySqlDao;
 

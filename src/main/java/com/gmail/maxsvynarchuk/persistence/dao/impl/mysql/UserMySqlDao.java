@@ -5,6 +5,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.UserMapper;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.persistence.util.time.TimeConverter;
+import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
 import java.util.Objects;
@@ -12,34 +13,17 @@ import java.util.Optional;
 
 public class UserMySqlDao implements UserDao {
     private final static String SELECT_ALL =
-            "SELECT * " +
-                    "FROM users " +
-                    "JOIN roles " +
-                    "ON users.role_id = roles.role_id " +
-                    "LEFT JOIN addresses " +
-                    "ON users.address_id = addresses.address_id ";
-
+            ResourceManager.QUERIES.getProperty("user.select.all");
     private final static String INSERT =
-            "INSERT INTO users" +
-                    "(role_id, address_id, first_name, last_name, " +
-                    "email, password, date_of_birth, gender) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";
-
+            ResourceManager.QUERIES.getProperty("user.insert");
     private final static String UPDATE =
-            "UPDATE users SET " +
-                    "role_id = ?, address_id = ?, " +
-                    "first_name = ?, last_name = ?, " +
-                    "email = ?, password = ?, " +
-                    "date_of_birth = ?, gender = ? ";
-
+            ResourceManager.QUERIES.getProperty("user.update");
     private final static String DELETE =
-            "DELETE FROM users ";
-
+            ResourceManager.QUERIES.getProperty("user.delete");
     private final static String WHERE_ID =
-            "WHERE users.user_id = ? ";
-
-//    private final static String WHERE_EMAIL =
-//            "WHERE users.email = ? ";
+            ResourceManager.QUERIES.getProperty("user.where.id");
+    private final static String WHERE_EMAIL =
+            ResourceManager.QUERIES.getProperty("user.where.email");
 
     private final UtilMySqlDao<User> utilMySqlDao;
 

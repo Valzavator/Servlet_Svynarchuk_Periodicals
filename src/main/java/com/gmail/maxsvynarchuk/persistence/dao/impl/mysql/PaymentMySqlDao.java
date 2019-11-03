@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.PaymentDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.PaymentMapper;
 import com.gmail.maxsvynarchuk.persistence.entity.Payment;
+import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,29 +12,15 @@ import java.util.Optional;
 
 public class PaymentMySqlDao implements PaymentDao {
     private final static String SELECT_ALL =
-            "SELECT * FROM payments " +
-                    "JOIN users " +
-                    "ON payments.user_id = users.user_id " +
-                    "JOIN roles " +
-                    "ON users.role_id = roles.role_id " +
-                    "LEFT JOIN addresses " +
-                    "ON users.address_id = addresses.address_id ";
-
+            ResourceManager.QUERIES.getProperty("payment.select.all");
     private final static String INSERT =
-            "INSERT INTO payments " +
-                    "(user_id, total_price) " +
-                    "VALUES(?, ?) ";
-
+            ResourceManager.QUERIES.getProperty("payment.insert");
     private final static String UPDATE =
-            "UPDATE payments SET " +
-                    "user_id = ?, total_price = ? ";
-
+            ResourceManager.QUERIES.getProperty("payment.update");
     private final static String DELETE =
-            "DELETE FROM payments ";
-
+            ResourceManager.QUERIES.getProperty("payment.delete");
     private final static String WHERE_ID =
-            "WHERE payment_id = ? ";
-
+            ResourceManager.QUERIES.getProperty("payment.where.id");
 
     private final UtilMySqlDao<Payment> utilMySqlDao;
 

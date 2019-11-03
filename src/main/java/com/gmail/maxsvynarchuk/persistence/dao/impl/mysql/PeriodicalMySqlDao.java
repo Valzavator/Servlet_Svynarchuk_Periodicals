@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.PeriodicalMapper;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
+import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,32 +12,15 @@ import java.util.Optional;
 
 public class PeriodicalMySqlDao implements PeriodicalDao {
     private final static String SELECT_ALL =
-            "SELECT * FROM periodicals " +
-                    "JOIN publishers " +
-                    "ON periodicals.publisher_id = publishers.publisher_id " +
-                    "JOIN frequencies " +
-                    "ON periodicals.frequency_id = frequencies.frequency_id " +
-                    "JOIN periodical_types " +
-                    "ON periodicals.periodical_type_id = periodical_types.periodical_type_id ";
-
+            ResourceManager.QUERIES.getProperty("periodical.select.all");
     private final static String INSERT =
-            "INSERT INTO periodicals " +
-                    "(publisher_id, frequency_id, periodical_type_id, " +
-                    "periodical_name, periodical_price, periodical_description) " +
-                    "VALUES(?, ?, ?, ?, ?, ?) ";
-
+            ResourceManager.QUERIES.getProperty("periodical.insert");
     private final static String UPDATE =
-            "UPDATE periodicals SET " +
-                    "publisher_id = ?, frequency_id = ?, " +
-                    "periodical_type_id = ?, periodical_name = ?, " +
-                    "periodical_price = ?, periodical_description = ? ";
-
+            ResourceManager.QUERIES.getProperty("periodical.update");
     private final static String DELETE =
-            "DELETE FROM periodicals ";
-
+            ResourceManager.QUERIES.getProperty("periodical.delete");
     private final static String WHERE_ID =
-            "WHERE periodical_id = ? ";
-
+            ResourceManager.QUERIES.getProperty("periodical.where.id");
 
     private final UtilMySqlDao<Periodical> utilMySqlDao;
 
