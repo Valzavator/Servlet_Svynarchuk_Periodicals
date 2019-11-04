@@ -4,10 +4,10 @@ import java.util.ResourceBundle;
 
 public enum ResourceManager {
     DATABASE(ResourceBundle.getBundle("properties.database")),
-    QUERIES(ResourceBundle.getBundle("properties.mysql_queries"));
-    //    PATH(ResourceBundle.getBundle("properties.path")),
-//    VIEW(ResourceBundle.getBundle("properties.view")),
-//    ATTRIBUTE(ResourceBundle.getBundle("properties.attribute"));
+    QUERIES(ResourceBundle.getBundle("properties.mysql_queries")),
+    PATH(ResourceBundle.getBundle("properties.path")),
+    VIEW(ResourceBundle.getBundle("properties.view")),
+    ATTRIBUTE(ResourceBundle.getBundle("properties.attribute"));
 
     private ResourceBundle resourceBundle;
 

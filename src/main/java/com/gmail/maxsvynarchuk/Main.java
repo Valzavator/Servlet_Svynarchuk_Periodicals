@@ -4,7 +4,10 @@ import com.gmail.maxsvynarchuk.persistence.dao.*;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.*;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.*;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
+import com.gmail.maxsvynarchuk.presentation.FrontController;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -14,18 +17,21 @@ import java.util.Date;
 import java.util.Properties;
 
 public class Main {
+    private static final Logger LOGGER = LoggerFactory.getLogger(FrontController.class);
+
     public static void main(String[] args) throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/periodicals";
-        Properties prop = new Properties();
-        prop.put("user", "root");
-        prop.put("password", "admin");
-        prop.put("autoReconnect", "true");
-        prop.put("characterEncoding", "UTF-8");
-        prop.put("useUnicode", "true");
-        prop.put("useTimezone", "true");
-        prop.put("serverTimezone", "Europe/Kiev");
-        prop.put("useLegacyDatetimeCode", "false");
-        Connection cn = DriverManager.getConnection(url, prop);
+        LOGGER.debug("!!!!");
+//        String url = "jdbc:mysql://localhost:3306/periodicals";
+//        Properties prop = new Properties();
+//        prop.put("user", "root");
+//        prop.put("password", "admin");
+//        prop.put("autoReconnect", "true");
+//        prop.put("characterEncoding", "UTF-8");
+//        prop.put("useUnicode", "true");
+//        prop.put("useTimezone", "true");
+//        prop.put("serverTimezone", "Europe/Kiev");
+//        prop.put("useLegacyDatetimeCode", "false");
+//        Connection cn = DriverManager.getConnection(url, prop);
 
 //        RoleDao dao = new RoleMySqlDao(new UtilMySqlDao<>(() -> {
 //            try {

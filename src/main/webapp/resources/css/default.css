@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css?family=Kaushan+Script");
+
+.navbar-brand {
+    color: #FFFFFF;
+    font: 100 30px 'Kaushan Script', cursive;
+    user-select: none;
+    position: relative;
+    margin-top: -15px;
+}
+
+.social-media {
+    margin-top: -10px;
+    text-decoration: none;
+}

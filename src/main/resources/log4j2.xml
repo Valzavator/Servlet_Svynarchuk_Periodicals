@@ -23,11 +23,11 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Root level="debug">
-            <AppenderRef ref="STDOUT"/>
-        </Root>
 <!--        <Logger name="com.gmail.maxsvynarchuk" level="info" additivity="false">-->
 <!--            <AppenderRef ref="SERVER_LOGS_FILE"/>-->
 <!--        </Logger>-->
+        <Root level="debug">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
     </Loggers>
 </Configuration>
