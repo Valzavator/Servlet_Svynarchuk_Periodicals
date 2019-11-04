@@ -5,7 +5,7 @@
         <a href="https://github.com/Valzavator" target="_blank">
             <span class="fa fa-github fa-2x social-media"></span>
         </a>
-        <span class="text-muted"> © 2019 Maksim Svynarchuk All Rights Reserved</span>
+        <span class="text-muted"> © 2019 Maksym Svynarchuk All Rights Reserved</span>
     </div>
 </footer>
 

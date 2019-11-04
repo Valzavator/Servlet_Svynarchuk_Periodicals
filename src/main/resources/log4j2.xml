@@ -8,7 +8,7 @@
 <!--        <RollingFile-->
 <!--                name="SERVER_LOGS_FILE"-->
 <!--                fileName="${serverLogsFilepath}/periodicals.log"-->
-<!--                filePattern="${serverLogsFilepath}/periodicals.%d{dd-MMM}-%i.log.gz"-->
+<!--                filePattern="${serverLogsFilepath}/periodicals.%d{yyyy-MM-dd}-%i.log.gz"-->
 <!--                ignoreExceptions="false">-->
 <!--            <PatternLayout pattern="${pattern}"/>-->
 <!--            <Policies>-->

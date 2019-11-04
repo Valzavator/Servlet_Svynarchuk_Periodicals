@@ -105,7 +105,7 @@
                                 </span>
                                 </div>
                                 <input type="date" class="form-control form-control-lg"
-                                       max="3000-12-31" min="1900-01-01" id="inputDateOfBirth">
+                                       max="3000-12-31" min="1900-01-01" id="inputDateOfBirth" value="1990-01-01">
                             </div>
                         </div>
 
