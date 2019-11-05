@@ -24,7 +24,6 @@ public class UtilMySqlDao<T> {
 
     private static final String ERROR_GENERATE_KEY = "Can't retrieve generated key";
     private static final String ERROR_EXECUTE_QUERY = "Failed to execute query";
-    private static final String INVALID_PAGINATION_PARAMETERS = "Pagination parameters can`t be negative values";
 
     static final String LIMIT_ONE = ResourceManager.QUERIES.getProperty("limit.one");
     static final String LIMIT = ResourceManager.QUERIES.getProperty("limit");

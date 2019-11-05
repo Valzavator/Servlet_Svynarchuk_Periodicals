@@ -29,12 +29,11 @@ public abstract class DaoFactory {
         if (instance == null) {
             synchronized (DaoFactory.class) {
                 if (instance == null) {
-                    ResourceBundle bundle = ResourceBundle.getBundle(ResourceManager.DATABASE.getProperty(DB_CLASS));
-                    String className = bundle.getString(DB_CLASS);
                     try {
+                        String className = ResourceManager.DATABASE.getProperty(DB_CLASS);
                         instance = (DaoFactory) Class.forName(className).getDeclaredConstructor().newInstance();
                     } catch (Exception e) {
-                        LOGGER.error("Failed to initialize DaoFactory - {}", className, e);
+                        LOGGER.error("Failed to initialize DaoFactory", e);
                         throw new DaoException(e);
                     }
                 }

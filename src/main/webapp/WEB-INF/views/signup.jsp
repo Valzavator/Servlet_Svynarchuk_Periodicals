@@ -1,20 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
-<fmt:setLocale value="${sessionScope.locale}"/>
-<fmt:setBundle basename="i18n.lang"/>
-
 <html>
 <head>
-
-    <jsp:include page="/WEB-INF/views/snippets/header.jsp"/>
-
 </head>
 <body class="d-flex flex-column min-vh-100">
-
-<jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>
-
 <main role="main" class="container min-vh-100 mb-5">
     <div class="row min-vh-100 justify-content-md-center align-items-center">
         <div class="card w-75 mx-auto">
@@ -47,7 +34,8 @@
                                     </span>
                                 </div>
                                 <input type="text" class="form-control form-control-lg" id="validationFirstName"
-                                       placeholder="<fmt:message key="firstname.placeholder"/>" aria-describedby="inputGroupPrepend" required>
+                                       placeholder="<fmt:message key="firstname.placeholder"/>"
+                                       aria-describedby="inputGroupPrepend" required>
                             </div>
                         </div>
 
@@ -111,21 +99,6 @@
 
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputRole"><fmt:message key="role"/></label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend6">
-                                    <i class="fa fa-users fa-lg" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                            <select id="inputRole" class="form-control form-control-lg">
-                                <option selected><fmt:message key="role.driver"/></option>
-                                <option><fmt:message key="role.moderator"/></option>
-                            </select>
-                        </div>
-                    </div>
-
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-primary btn-lg"><fmt:message key="signup"/></button>
                     </div>
@@ -135,8 +108,5 @@
         </div>
     </div>
 </main>
-
-<jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
-
 </body>
 </html>

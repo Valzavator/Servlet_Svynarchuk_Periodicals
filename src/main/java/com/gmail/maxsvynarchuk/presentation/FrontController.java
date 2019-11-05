@@ -3,7 +3,6 @@ package com.gmail.maxsvynarchuk.presentation;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandFactory;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
-import com.gmail.maxsvynarchuk.presentation.i18n.SupportedLocale;
 import com.gmail.maxsvynarchuk.presentation.util.RedirectType;
 import com.gmail.maxsvynarchuk.presentation.util.RequestMethod;
 import com.gmail.maxsvynarchuk.presentation.util.Util;
@@ -11,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -75,11 +73,6 @@ public class FrontController extends HttpServlet {
     }
 
     private String getPath(HttpServletRequest request) {
-        //TODO
         return request.getPathInfo();
-//        return request.getRequestURI()
-//                .replaceFirst(request.getContextPath(), "")
-//                .replaceFirst(request.getServletPath(), "");
     }
-
 }
