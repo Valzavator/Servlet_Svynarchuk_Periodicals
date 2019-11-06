@@ -19,6 +19,8 @@ public class AddressMySqlDao implements AddressDao {
             ResourceManager.QUERIES.getProperty("address.update");
     private final static String DELETE =
             ResourceManager.QUERIES.getProperty("address.delete");
+    private final static String COUNT =
+            ResourceManager.QUERIES.getProperty("address.count");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("address.where.id");
 
@@ -84,5 +86,10 @@ public class AddressMySqlDao implements AddressDao {
         utilMySqlDao.executeUpdate(
                 DELETE + WHERE_ID,
                 id);
+    }
+
+    @Override
+    public long getCount() {
+        return utilMySqlDao.getRowsCount(COUNT);
     }
 }

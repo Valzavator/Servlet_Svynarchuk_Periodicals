@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.presentation.command.impl.DefaultCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.HomeCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.GetLoginCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.GetSignUpCommand;
+import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostLogInCommand;
 import com.gmail.maxsvynarchuk.presentation.util.RequestMethod;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 
@@ -23,10 +24,12 @@ public class CommandFactory {
     private void init() {
         commands.put(buildKey(PagesPaths.HOME_PATH, RequestMethod.GET),
                 new HomeCommand());
-        commands.put(buildKey(PagesPaths.LOGIN_PATH, RequestMethod.GET),
+        commands.put(buildKey(PagesPaths.LOG_IN_PATH, RequestMethod.GET),
                 new GetLoginCommand());
         commands.put(buildKey(PagesPaths.SIGN_UP_PATH, RequestMethod.GET),
                 new GetSignUpCommand());
+        commands.put(buildKey(PagesPaths.LOG_IN_PATH, RequestMethod.POST),
+                new PostLogInCommand());
     }
 
     public Command getCommand(String path, RequestMethod method) {

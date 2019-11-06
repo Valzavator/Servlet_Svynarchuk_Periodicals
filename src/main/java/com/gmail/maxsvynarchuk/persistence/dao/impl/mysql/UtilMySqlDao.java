@@ -22,8 +22,11 @@ import java.util.Optional;
 public class UtilMySqlDao<T> {
     private static final Logger LOGGER = LoggerFactory.getLogger(UtilMySqlDao.class);
 
-    private static final String ERROR_GENERATE_KEY = "Can't retrieve generated key";
     private static final String ERROR_EXECUTE_QUERY = "Failed to execute query";
+    private static final String ERROR_COUNT_QUERY = "Can't retrieve count of objects";
+    private static final String ERROR_NULL_PK = "Primary key type is null";
+    private static final String ERROR_UNSUPPORTED_PK = "Unsupported key type";
+    private static final String ERROR_GENERATE_KEY = "Can't retrieve generated key";
 
     static final String LIMIT_ONE = ResourceManager.QUERIES.getProperty("limit.one");
     static final String LIMIT = ResourceManager.QUERIES.getProperty("limit");
@@ -48,7 +51,7 @@ public class UtilMySqlDao<T> {
     }
 
     /**
-     * Retrieve one object from database which matches given query.
+     * Retrieves one object from database which matches given query.
      *
      * @param query  raw sql syntax to select object. Can contains ? wildcard.
      * @param params parameters to substitute wildcards in query
@@ -60,7 +63,7 @@ public class UtilMySqlDao<T> {
     }
 
     /**
-     * Retrieve all objects from database which match given query.
+     * Retrieves all objects from database which match given query.
      *
      * @param query  raw sql syntax for objects selecting. Can contains ? wildcard.
      * @param params parameters to substitute wildcards in query
@@ -83,7 +86,7 @@ public class UtilMySqlDao<T> {
     }
 
     /**
-     * Perform update of some table in database
+     * Performs update of some table in database
      * based on given query and parameters.
      *
      * @param query  sql-based string, which specify update behavior
@@ -135,6 +138,28 @@ public class UtilMySqlDao<T> {
     }
 
     /**
+     * Retrieves count of objects from database which match given query.
+     *
+     * @param query sql-based string, which specify details of counting operation
+     * @return count of rows for query
+     */
+    public long getRowsCount(String query) {
+        try (Connection connection = pool.getConnection();
+             Statement s = connection.createStatement()) {
+            ResultSet rs = s.executeQuery(query);
+            if (rs.next()) {
+                return rs.getLong(1);
+            } else {
+                LOGGER.error(ERROR_COUNT_QUERY);
+                throw new DaoException(ERROR_COUNT_QUERY);
+            }
+        } catch (SQLException e) {
+            LOGGER.error(ERROR_EXECUTE_QUERY, e);
+            throw new DaoException(ERROR_EXECUTE_QUERY, e);
+        }
+    }
+
+    /**
      * Sets all parameters to statement.
      *
      * @param statement PreparedStatement
@@ -167,7 +192,8 @@ public class UtilMySqlDao<T> {
     private <PK> PK getGeneratedPrimaryKey(PreparedStatement statement, Class<PK> pkType)
             throws SQLException {
         if (Objects.isNull(pkType)) {
-            throw new DaoException("Primary key type is null");
+            LOGGER.error(ERROR_NULL_PK);
+            throw new DaoException(ERROR_NULL_PK);
         }
 
         ResultSet rs = statement.getGeneratedKeys();
@@ -179,7 +205,8 @@ public class UtilMySqlDao<T> {
                 Long key = rs.getLong(1);
                 return pkType.cast(key);
             } else {
-                throw new DaoException("Unsupported key type");
+                LOGGER.error(ERROR_UNSUPPORTED_PK);
+                throw new DaoException(ERROR_UNSUPPORTED_PK);
             }
         } else {
             LOGGER.error(ERROR_GENERATE_KEY);

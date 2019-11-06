@@ -19,8 +19,8 @@
                                     <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <input type="password" class="form-control form-control-lg" id="inputEmail"
-                                   placeholder="<fmt:message key="email.placeholder"/>">
+                            <input type="email" class="form-control form-control-lg" id="inputEmail"
+                                   placeholder="<fmt:message key="email.placeholder"/>" required>
                         </div>
                     </div>
 
@@ -63,7 +63,7 @@
                                 </span>
                             </div>
                             <input type="password" class="form-control form-control-lg" id="inputPassword"
-                                   placeholder="<fmt:message key="password.placeholder"/>">
+                                   placeholder="<fmt:message key="password.placeholder"/>" required>
                         </div>
                     </div>
 
@@ -93,7 +93,7 @@
                                 </span>
                                 </div>
                                 <input type="date" class="form-control form-control-lg"
-                                       max="3000-12-31" min="1900-01-01" id="inputDateOfBirth" value="1990-01-01">
+                                       max="3000-12-31" min="1900-01-01" id="inputDateOfBirth" required>
                             </div>
                         </div>
 
@@ -104,6 +104,27 @@
                     </div>
 
                 </form>
+            </div>
+
+            <div class="card-footer text-muted">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

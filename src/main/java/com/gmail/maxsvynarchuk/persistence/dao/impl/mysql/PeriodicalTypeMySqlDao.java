@@ -19,6 +19,8 @@ public class PeriodicalTypeMySqlDao implements PeriodicalTypeDao {
             ResourceManager.QUERIES.getProperty("periodical.type.update");
     private final static String DELETE =
             ResourceManager.QUERIES.getProperty("periodical.type.delete");
+    private final static String COUNT =
+            ResourceManager.QUERIES.getProperty("periodical.type.count");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("periodical.type.where.id");
 
@@ -80,5 +82,10 @@ public class PeriodicalTypeMySqlDao implements PeriodicalTypeDao {
         utilMySqlDao.executeUpdate(
                 DELETE + WHERE_ID,
                 id);
+    }
+
+    @Override
+    public long getCount() {
+        return utilMySqlDao.getRowsCount(COUNT);
     }
 }

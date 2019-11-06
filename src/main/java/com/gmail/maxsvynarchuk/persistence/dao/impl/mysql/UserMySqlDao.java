@@ -20,6 +20,8 @@ public class UserMySqlDao implements UserDao {
             ResourceManager.QUERIES.getProperty("user.update");
     private final static String DELETE =
             ResourceManager.QUERIES.getProperty("user.delete");
+    private final static String COUNT =
+            ResourceManager.QUERIES.getProperty("user.count");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("user.where.id");
     private final static String WHERE_EMAIL =
@@ -44,10 +46,10 @@ public class UserMySqlDao implements UserDao {
         return utilMySqlDao.findOne(SELECT_ALL + WHERE_ID, id);
     }
 
-//    @Override
-//    public Optional<User> findOneByEmail(String email) {
-//        return defaultDao.findOne(SELECT_ALL + WHERE_EMAIL, email);
-//    }
+    @Override
+    public Optional<User> findOneByEmail(String email) {
+        return utilMySqlDao.findOne(SELECT_ALL + WHERE_EMAIL, email);
+    }
 
     @Override
     public List<User> findAll() {
@@ -101,8 +103,13 @@ public class UserMySqlDao implements UserDao {
                 id);
     }
 
-//    @Override
-//    public boolean existByEmail(String email) {
-//        return findOneByEmail(email).isPresent();
-//    }
+    @Override
+    public long getCount() {
+        return utilMySqlDao.getRowsCount(COUNT);
+    }
+
+    @Override
+    public boolean existByEmail(String email) {
+        return findOneByEmail(email).isPresent();
+    }
 }

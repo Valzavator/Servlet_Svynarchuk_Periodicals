@@ -7,7 +7,8 @@ public enum ResourceManager {
     QUERIES(ResourceBundle.getBundle("properties.mysql_queries")),
     PATH(ResourceBundle.getBundle("properties.path")),
     VIEW(ResourceBundle.getBundle("properties.view")),
-    ATTRIBUTE(ResourceBundle.getBundle("properties.attribute"));
+    ATTRIBUTE(ResourceBundle.getBundle("properties.attribute")),
+    PARAMETER(ResourceBundle.getBundle("properties.parameter"));
 
     private ResourceBundle resourceBundle;
 

@@ -20,27 +20,28 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(FrontController.class);
 
     public static void main(String[] args) throws SQLException {
-        LOGGER.debug("!!!!");
-//        String url = "jdbc:mysql://localhost:3306/periodicals";
-//        Properties prop = new Properties();
-//        prop.put("user", "root");
-//        prop.put("password", "admin");
-//        prop.put("autoReconnect", "true");
-//        prop.put("characterEncoding", "UTF-8");
-//        prop.put("useUnicode", "true");
-//        prop.put("useTimezone", "true");
-//        prop.put("serverTimezone", "Europe/Kiev");
-//        prop.put("useLegacyDatetimeCode", "false");
-//        Connection cn = DriverManager.getConnection(url, prop);
+        String url = "jdbc:mysql://localhost:3306/periodicals";
+        Properties prop = new Properties();
+        prop.put("user", "root");
+        prop.put("password", "admin");
+        prop.put("autoReconnect", "true");
+        prop.put("characterEncoding", "UTF-8");
+        prop.put("useUnicode", "true");
+        prop.put("useTimezone", "true");
+        prop.put("serverTimezone", "Europe/Kiev");
+        prop.put("useLegacyDatetimeCode", "false");
+        Connection cn = DriverManager.getConnection(url, prop);
 
-//        RoleDao dao = new RoleMySqlDao(new UtilMySqlDao<>(() -> {
-//            try {
-//                return DriverManager.getConnection(url, prop);
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//                throw new RuntimeException();
-//            }
-//        }, new RoleMapper()));
+        RoleDao dao = new RoleMySqlDao(new UtilMySqlDao<>(() -> {
+            try {
+                return DriverManager.getConnection(url, prop);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw new RuntimeException();
+            }
+        }, new RoleMapper()));
+
+        System.out.println(dao.getCount());
 //
 //        Role obj = new Role(2, "TEST");
 

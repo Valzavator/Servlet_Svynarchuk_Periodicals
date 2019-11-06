@@ -6,15 +6,15 @@ import java.util.Optional;
 /**
  * Common interface for all dao.
  *
- * @param <T>   represents type of domain object
- * @param <ID>  represents type of identifier
+ * @param <T>  represents type of domain object
+ * @param <ID> represents type of identifier
  */
-public interface GenericDao<T, ID>{
+public interface GenericDao<T, ID> {
     /**
      * Retrieves object from database identified by id.
      *
-     * @param id    identifier of domain object.
-     * @return      optional, which contains retrieved object or null
+     * @param id identifier of domain object.
+     * @return optional, which contains retrieved object or null
      */
     Optional<T> findOne(ID id);
 
@@ -64,4 +64,10 @@ public interface GenericDao<T, ID>{
         return findOne(id).isPresent();
     }
 
+    /**
+     * Retrieves count of objects from database.
+     *
+     * @return count of objects.
+     */
+    long getCount();
 }

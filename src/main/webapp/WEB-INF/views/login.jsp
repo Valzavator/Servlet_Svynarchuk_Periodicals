@@ -9,7 +9,7 @@
                 <fmt:message key="login"/>
             </div>
             <div class="card-body mx-auto w-100">
-                <form>
+                <form accept-charset="UTF-8" role="form" method="post">
                     <div class="form-group">
                         <label for="inputEmail"><fmt:message key="email"/></label>
                         <div class="input-group">
@@ -18,9 +18,13 @@
                             <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>
                         </span>
                             </div>
-                            <input type="email" class="form-control form-control-lg" id="inputEmail"
+                            <input type="email" class="form-control form-control-lg is-valid" id="inputEmail"
+                                   name="email"
                                    aria-describedby="emailHelp"
-                                   placeholder="<fmt:message key="email.placeholder"/>">
+                                   placeholder="<fmt:message key="email.placeholder"/>" required>
+                            <div class="valid-feedback">
+                                Please choose a username.
+                            </div>
                         </div>
                     </div>
 
@@ -28,12 +32,16 @@
                         <label for="inputPassword"><fmt:message key="password"/></label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend2">
-                            <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
-                        </span>
+                                <span class="input-group-text" id="inputGroupPrepend2">
+                                    <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
+                                </span>
                             </div>
-                            <input type="password" class="form-control form-control-lg" id="inputPassword"
-                                   placeholder="<fmt:message key="password.placeholder"/>">
+                            <input type="password" class="form-control form-control-lg is-invalid" id="inputPassword"
+                                   name="password"
+                                   placeholder="<fmt:message key="password.placeholder"/>" required>
+                            <div class="invalid-tooltip">
+                                Please choose a username.
+                            </div>
                         </div>
 
                     </div>

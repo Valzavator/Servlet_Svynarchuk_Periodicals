@@ -19,6 +19,8 @@ public class FrequencyMySqlDao implements FrequencyDao {
             ResourceManager.QUERIES.getProperty("frequency.update");
     private final static String DELETE =
             ResourceManager.QUERIES.getProperty("frequency.delete");
+    private final static String COUNT =
+            ResourceManager.QUERIES.getProperty("frequency.count");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("frequency.where.id");
 
@@ -81,5 +83,10 @@ public class FrequencyMySqlDao implements FrequencyDao {
         utilMySqlDao.executeUpdate(
                 DELETE + WHERE_ID,
                 id);
+    }
+
+    @Override
+    public long getCount() {
+        return utilMySqlDao.getRowsCount(COUNT);
     }
 }

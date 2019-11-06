@@ -20,6 +20,8 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
             ResourceManager.QUERIES.getProperty("subscription.update");
     private final static String DELETE =
             ResourceManager.QUERIES.getProperty("subscription.delete");
+    private final static String COUNT =
+            ResourceManager.QUERIES.getProperty("subscription.count");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("subscription.where.id");
 
@@ -89,5 +91,10 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
         utilMySqlDao.executeUpdate(
                 DELETE + WHERE_ID,
                 id);
+    }
+
+    @Override
+    public long getCount() {
+        return utilMySqlDao.getRowsCount(COUNT);
     }
 }

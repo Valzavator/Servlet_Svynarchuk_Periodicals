@@ -19,6 +19,8 @@ public class PublisherMySqlDao implements PublisherDao {
             ResourceManager.QUERIES.getProperty("publisher.update");
     private final static String DELETE =
             ResourceManager.QUERIES.getProperty("publisher.delete");
+    private final static String COUNT =
+            ResourceManager.QUERIES.getProperty("publisher.count");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("publisher.where.id");
 
@@ -77,5 +79,10 @@ public class PublisherMySqlDao implements PublisherDao {
         utilMySqlDao.executeUpdate(
                 DELETE + WHERE_ID,
                 id);
+    }
+
+    @Override
+    public long getCount() {
+        return utilMySqlDao.getRowsCount(COUNT);
     }
 }

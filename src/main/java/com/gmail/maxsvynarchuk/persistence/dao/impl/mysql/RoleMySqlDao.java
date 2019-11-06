@@ -19,6 +19,8 @@ public class RoleMySqlDao implements RoleDao {
             ResourceManager.QUERIES.getProperty("role.update");
     private final static String DELETE =
             ResourceManager.QUERIES.getProperty("role.delete");
+    private final static String COUNT =
+            ResourceManager.QUERIES.getProperty("role.count");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("role.where.id");
 
@@ -78,5 +80,10 @@ public class RoleMySqlDao implements RoleDao {
         utilMySqlDao.executeUpdate(
                 DELETE + WHERE_ID,
                 id);
+    }
+
+    @Override
+    public long getCount() {
+        return utilMySqlDao.getRowsCount(COUNT);
     }
 }

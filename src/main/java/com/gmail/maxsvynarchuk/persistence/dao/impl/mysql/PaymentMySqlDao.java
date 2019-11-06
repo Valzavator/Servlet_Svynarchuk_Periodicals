@@ -19,6 +19,8 @@ public class PaymentMySqlDao implements PaymentDao {
             ResourceManager.QUERIES.getProperty("payment.update");
     private final static String DELETE =
             ResourceManager.QUERIES.getProperty("payment.delete");
+    private final static String COUNT =
+            ResourceManager.QUERIES.getProperty("payment.count");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("payment.where.id");
 
@@ -80,5 +82,10 @@ public class PaymentMySqlDao implements PaymentDao {
         utilMySqlDao.executeUpdate(
                 DELETE + WHERE_ID,
                 id);
+    }
+
+    @Override
+    public long getCount() {
+        return utilMySqlDao.getRowsCount(COUNT);
     }
 }
