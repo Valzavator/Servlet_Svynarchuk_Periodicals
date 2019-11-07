@@ -4,7 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.SubscriptionMapper;
 import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
-import com.gmail.maxsvynarchuk.persistence.util.time.TimeConverter;
+import com.gmail.maxsvynarchuk.util.TimeConverter;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;

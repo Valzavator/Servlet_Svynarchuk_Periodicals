@@ -12,9 +12,9 @@ public class ServiceFactory {
         return UserService.getInstance();
     }
 
-//    public static AccountService getAccountService() {
-//        return AccountService.getInstance();
-//    }
+    public static AuthenticationService getAuthenticationService() {
+        return AuthenticationService.getInstance();
+    }
 //
 //    public static CardService getCardService() {
 //        return CardService.getInstance();

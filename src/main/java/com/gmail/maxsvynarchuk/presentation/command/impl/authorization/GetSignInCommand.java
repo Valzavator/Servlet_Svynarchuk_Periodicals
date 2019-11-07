@@ -9,13 +9,13 @@ import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class GetLoginCommand implements Command {
+public class GetSignInCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         if(Util.isAlreadyLoggedIn(request.getSession())) {
             return CommandResult.redirect(PagesPaths.HOME_PATH);
         }
 
-        return CommandResult.forward(Views.LOGIN_VIEW);
+        return CommandResult.forward(Views.SIGN_IN_VIEW);
     }
 }

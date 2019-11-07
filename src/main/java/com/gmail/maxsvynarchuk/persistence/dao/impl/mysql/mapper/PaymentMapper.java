@@ -2,7 +2,7 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper;
 
 import com.gmail.maxsvynarchuk.persistence.entity.Payment;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
-import com.gmail.maxsvynarchuk.persistence.util.time.TimeConverter;
+import com.gmail.maxsvynarchuk.util.TimeConverter;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -58,17 +58,22 @@ public class FrontController extends HttpServlet {
 //        System.out.println(request.getRequestURL());
 //        System.out.println(request.getRequestURI());
 //        System.out.println("PATH: " + getPath(request));
+        //TODO delete try-catch
+        try {
+            Command command = commandFactory.getCommand(
+                    getPath(request), method);
 
-        Command command = commandFactory.getCommand(
-                getPath(request), method);
-
-        CommandResult commandResult = command.execute(request, response);
-        LOGGER.debug("Path of response: {}", commandResult.getPagePath());
-        if (commandResult.getRedirectType() == RedirectType.REDIRECT) {
-            Util.redirectTo(request, response, commandResult.getPagePath());
-        } else {
-            request.getRequestDispatcher(commandResult.getPagePath())
-                    .forward(request, response);
+            CommandResult commandResult = command.execute(request, response);
+            LOGGER.debug("Path of response: {}", commandResult.getPagePath());
+            if (commandResult.getRedirectType() == RedirectType.REDIRECT) {
+                Util.redirectTo(request, response, commandResult.getPagePath());
+            } else {
+                request.getRequestDispatcher(commandResult.getPagePath())
+                        .forward(request, response);
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 

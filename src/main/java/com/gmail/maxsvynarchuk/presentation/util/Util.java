@@ -32,23 +32,8 @@ public class Util {
     public static boolean isAlreadyLoggedIn(HttpSession session) {
         return session.getAttribute(Attributes.USER) != null;
     }
-//
-//    /**
-//     * Performs validation of given field with provided validator.
-//     * If error occurs add error message to list of errors.
-//     *
-//     * @param validator
-//     * @param field
-//     * @param errors
-//     * @param <T> type of field for validation
-//     */
-//    public static <T> void validateField(Validator<T> validator,
-//                                         T field,
-//                                         List<String> errors) {
-//        if(!validator.isValid(field)) {
-//            errors.add(validator.getErrorKey());
-//        }
-//    }
+
+
 
 
 }

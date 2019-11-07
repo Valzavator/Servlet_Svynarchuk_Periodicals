@@ -5,6 +5,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.*;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.*;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.presentation.FrontController;
+import com.gmail.maxsvynarchuk.util.PasswordManager;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,28 +21,32 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(FrontController.class);
 
     public static void main(String[] args) throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/periodicals";
-        Properties prop = new Properties();
-        prop.put("user", "root");
-        prop.put("password", "admin");
-        prop.put("autoReconnect", "true");
-        prop.put("characterEncoding", "UTF-8");
-        prop.put("useUnicode", "true");
-        prop.put("useTimezone", "true");
-        prop.put("serverTimezone", "Europe/Kiev");
-        prop.put("useLegacyDatetimeCode", "false");
-        Connection cn = DriverManager.getConnection(url, prop);
+        System.out.println(PasswordManager.hashPassword("admin"));
+        System.out.println(PasswordManager.hashPassword("user1"));
+        System.out.println(PasswordManager.hashPassword("user2"));
 
-        RoleDao dao = new RoleMySqlDao(new UtilMySqlDao<>(() -> {
-            try {
-                return DriverManager.getConnection(url, prop);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new RuntimeException();
-            }
-        }, new RoleMapper()));
-
-        System.out.println(dao.getCount());
+//        String url = "jdbc:mysql://localhost:3306/periodicals";
+//        Properties prop = new Properties();
+//        prop.put("user", "root");
+//        prop.put("password", "admin");
+//        prop.put("autoReconnect", "true");
+//        prop.put("characterEncoding", "UTF-8");
+//        prop.put("useUnicode", "true");
+//        prop.put("useTimezone", "true");
+//        prop.put("serverTimezone", "Europe/Kiev");
+//        prop.put("useLegacyDatetimeCode", "false");
+//        Connection cn = DriverManager.getConnection(url, prop);
+//
+//        RoleDao dao = new RoleMySqlDao(new UtilMySqlDao<>(() -> {
+//            try {
+//                return DriverManager.getConnection(url, prop);
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//                throw new RuntimeException();
+//            }
+//        }, new RoleMapper()));
+//
+//        System.out.println(dao.getCount());
 //
 //        Role obj = new Role(2, "TEST");
 

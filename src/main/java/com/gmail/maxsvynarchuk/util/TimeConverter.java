@@ -1,7 +1,8 @@
-package com.gmail.maxsvynarchuk.persistence.util.time;
+package com.gmail.maxsvynarchuk.util;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,5 +24,17 @@ public class TimeConverter {
     public static String formatDate(Date date, String pattern) {
         DateFormat dateFormat = new SimpleDateFormat(pattern);
         return dateFormat.format(date);
+    }
+
+    public static Date toDate(String dataString) {
+        return toDate(dataString, DEFAULT_DATE_PATTERN);
+    }
+
+    public static Date toDate(String dataString, String pattern) {
+        try {
+            return new SimpleDateFormat(pattern).parse(dataString);
+        } catch (ParseException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 }
