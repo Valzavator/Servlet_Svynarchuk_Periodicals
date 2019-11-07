@@ -1,5 +1,7 @@
 package com.gmail.maxsvynarchuk.persistence.entity;
 
+import com.gmail.maxsvynarchuk.util.Gender;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -16,10 +18,6 @@ import java.util.StringJoiner;
  */
 public class User implements Serializable {
     private static final long serialVersionUID = -1864654776101421526L;
-
-    public enum Gender {
-        MALE, FEMALE
-    }
 
     private Long id;
     private Role role;

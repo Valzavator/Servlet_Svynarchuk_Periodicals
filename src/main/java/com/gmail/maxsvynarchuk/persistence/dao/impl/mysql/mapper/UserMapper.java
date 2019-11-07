@@ -3,6 +3,7 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper;
 import com.gmail.maxsvynarchuk.persistence.entity.Address;
 import com.gmail.maxsvynarchuk.persistence.entity.Role;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
+import com.gmail.maxsvynarchuk.util.Gender;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -49,7 +50,7 @@ public class UserMapper implements EntityMapper<User> {
                         tablePrefix + PASSWORD_FIELD))
                 .setDateOfBirth(resultSet.getDate(
                         tablePrefix + DATE_OF_BIRTH_FIELD))
-                .setGender(User.Gender.valueOf(
+                .setGender(Gender.valueOf(
                         resultSet.getString(tablePrefix + GENDER_FIELD).toUpperCase()))
                 .build();
     }

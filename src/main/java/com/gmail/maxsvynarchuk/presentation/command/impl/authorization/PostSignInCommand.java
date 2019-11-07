@@ -6,22 +6,20 @@ import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
 import com.gmail.maxsvynarchuk.presentation.util.Util;
 import com.gmail.maxsvynarchuk.presentation.util.constants.*;
 import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManager;
-import com.gmail.maxsvynarchuk.service.AuthenticationService;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
+import com.gmail.maxsvynarchuk.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 
 public class PostSignInCommand implements Command {
-    private static Logger LOGGER = LoggerFactory.getLogger(Command.class);
-
-    private final AuthenticationService authenticationService = ServiceFactory.getAuthenticationService();
+    private static Logger LOGGER = LoggerFactory.getLogger(PostSignInCommand.class);
+    private final UserService userService = ServiceFactory.getUserService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
@@ -36,10 +34,11 @@ public class PostSignInCommand implements Command {
                 .build();
 
         Map<String, Boolean> errors = ValidatorManager
-                .validateSignInParameters(userDTO.getEmail(), userDTO.getPassword());
+                .validateSignInParameters(userDTO);
 
         if (errors.isEmpty()) {
-            Optional<User> userOpt = authenticationService.signIn(userDTO.getEmail(), userDTO.getPassword());
+            LOGGER.info("Try to sign in");
+            Optional<User> userOpt = userService.signIn(userDTO.getEmail(), userDTO.getPassword());
             if (userOpt.isPresent()) {
                 User user = userOpt.get();
                 user.setPassword(null);
@@ -54,10 +53,10 @@ public class PostSignInCommand implements Command {
                 return CommandResult.redirect(PagesPaths.HOME_PATH);
             } else {
                 LOGGER.info("Email and password don't matches");
-                request.setAttribute(Attributes.ERROR_AUTHENTICATION, true);
+                errors.put(Attributes.ERROR_AUTHENTICATION, true);
             }
         } else {
-            LOGGER.info("Invalid parameters");
+            LOGGER.info("Invalid authentication parameters");
             request.setAttribute(Attributes.ERRORS, errors);
             request.setAttribute(Attributes.USER, userDTO);
         }

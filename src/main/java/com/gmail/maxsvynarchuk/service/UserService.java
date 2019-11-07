@@ -1,9 +1,15 @@
 package com.gmail.maxsvynarchuk.service;
 
+import com.gmail.maxsvynarchuk.persistence.dao.UserDao;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
+import com.gmail.maxsvynarchuk.persistence.entity.Address;
+import com.gmail.maxsvynarchuk.persistence.entity.Role;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
+import com.gmail.maxsvynarchuk.util.PasswordManager;
+import com.gmail.maxsvynarchuk.util.RoleType;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -14,7 +20,9 @@ import java.util.Optional;
  * @author Maksym Svynarchuk
  */
 public class UserService {
-    private final DaoFactory daoFactory = DaoFactory.getInstance();
+    private final UserDao userDao = DaoFactory.getInstance().getUserDao();
+    private final Role defaultRole = RoleType.USER.getValue();
+    private final Address emptyAddress = Address.newBuilder().build();
 
     private UserService() {
     }
@@ -27,51 +35,43 @@ public class UserService {
         return Singleton.INSTANCE;
     }
 
+    public Optional<User> signIn(String email, String password) {
+        Optional<User> user = findByEmail(email);
+        return user.filter(u -> PasswordManager.checkSecurePassword(
+                password, u.getPassword()));
+    }
+
     public Optional<User> findById(Long id) {
-        return daoFactory.getUserDao().findOne(id);
+        return userDao.findOne(id);
     }
 
     public Optional<User> findByEmail(String email) {
-        return daoFactory.getUserDao().findOneByEmail(email);
+        return userDao.findOneByEmail(email);
     }
 
     public List<User> findAllUsers() {
-        return daoFactory.getUserDao().findAll();
+        return userDao.findAll();
     }
 
-//    public User createUser(User user) {
-//        Objects.requireNonNull(user);
-//
-//        if (user.getRole() == null) {
-//            user.setDefaultRole();
-//        }
-//
-//        String hash = PasswordStorage.getSecurePassword(
-//                user.getPassword());
-//        user.setPassword(hash);
-//
-//
-//        try (DaoConnection connection = daoFactory.getConnection()) {
-//            UserDao userDao = daoFactory.getUserDao(connection);
-//            return userDao.insert(user);
-//        }
-//    }
-//
-//    public boolean isCredentialsValid(String email, String password) {
-//        try (DaoConnection connection = daoFactory.getConnection()) {
-//            UserDao userDao = daoFactory.getUserDao(connection);
-//            Optional<User> user = userDao.findOneByEmail(email);
-//
-//            return user
-//                    .filter(u -> PasswordStorage.checkSecurePassword(
-//                            password, u.getPassword()))
-//                    .isPresent();
-//        }
-//
-//    }
-//
-//    public boolean isUserExists(User user) {
-//
-//    }
+    public boolean registerUser(User userToRegister) {
+        Objects.requireNonNull(userToRegister);
 
+        if (userToRegister.getRole() == null) {
+            userToRegister.setRole(defaultRole);
+        }
+        if (userToRegister.getAddress() == null) {
+            userToRegister.setAddress(emptyAddress);
+        }
+
+        String hash = PasswordManager.hashPassword(
+                userToRegister.getPassword());
+        userToRegister.setPassword(hash);
+        boolean userIsPresent =
+                userDao.findOneByEmail(userToRegister.getEmail()).isPresent();
+        if (!userIsPresent) {
+            userDao.insert(userToRegister);
+            return true;
+        }
+        return false;
+    }
 }

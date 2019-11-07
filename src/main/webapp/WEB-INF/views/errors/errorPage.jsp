@@ -1,3 +1,4 @@
+<%@ page isErrorPage="true"%>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/error.css"/>">

@@ -21,21 +21,17 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(FrontController.class);
 
     public static void main(String[] args) throws SQLException {
-        System.out.println(PasswordManager.hashPassword("admin"));
-        System.out.println(PasswordManager.hashPassword("user1"));
-        System.out.println(PasswordManager.hashPassword("user2"));
-
-//        String url = "jdbc:mysql://localhost:3306/periodicals";
-//        Properties prop = new Properties();
-//        prop.put("user", "root");
-//        prop.put("password", "admin");
-//        prop.put("autoReconnect", "true");
-//        prop.put("characterEncoding", "UTF-8");
-//        prop.put("useUnicode", "true");
-//        prop.put("useTimezone", "true");
-//        prop.put("serverTimezone", "Europe/Kiev");
-//        prop.put("useLegacyDatetimeCode", "false");
-//        Connection cn = DriverManager.getConnection(url, prop);
+        String url = "jdbc:mysql://localhost:3306/periodicals";
+        Properties prop = new Properties();
+        prop.put("user", "root");
+        prop.put("password", "admin");
+        prop.put("autoReconnect", "true");
+        prop.put("characterEncoding", "UTF-8");
+        prop.put("useUnicode", "true");
+        prop.put("useTimezone", "true");
+        prop.put("serverTimezone", "Europe/Kiev");
+        prop.put("useLegacyDatetimeCode", "false");
+        Connection cn = DriverManager.getConnection(url, prop);
 //
 //        RoleDao dao = new RoleMySqlDao(new UtilMySqlDao<>(() -> {
 //            try {
@@ -66,14 +62,15 @@ public class Main {
 //                .setDetailAddress("ЫЫЫЪЪ")
 //                .build();
 
-//        UserDao dao = new UserMySqlDao(new UtilMySqlDao<>(() -> {
-//            try {
-//                return DriverManager.getConnection(url, prop);
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//                throw new RuntimeException();
-//            }
-//        }, new UserMapper()));
+        UserDao dao = new UserMySqlDao(new UtilMySqlDao<>(() -> {
+            try {
+                return DriverManager.getConnection(url, prop);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw new RuntimeException();
+            }
+        }, new UserMapper()));
+        System.out.println(dao.findAll());
 //
 //        User obj = User.newBuilder()
 //                .setRole(new Role(1, null))

@@ -217,9 +217,9 @@ CREATE TABLE subscriptions
 /* Added default values                                         */
 /*==============================================================*/
 
-INSERT INTO roles(role_name)
-VALUES ('admin'),
-       ('user');
+INSERT INTO roles(role_id, role_name)
+VALUES (1, 'admin'),
+       (2, 'user');
 
 INSERT INTO subscription_plans(plan_name, months_amount, rate)
 VALUES ('1 month', 1, 1),

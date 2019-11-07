@@ -67,7 +67,7 @@
                 </form>
             </div>
 
-            <c:if test="${errorAuthentication}">
+            <c:if test="${errors.errorAuthentication}">
                 <div class="card-footer text-muted">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <fmt:message key="error.authentication"/>

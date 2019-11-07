@@ -25,10 +25,4 @@ public class AuthenticationService {
         return AuthenticationService.Singleton.INSTANCE;
     }
 
-    public Optional<User> signIn(String email, String password) {
-        LOGGER.info("Try to sign in");
-        Optional<User> user = daoFactory.getUserDao().findOneByEmail(email);
-        return user.filter(u -> PasswordManager.checkSecurePassword(
-                password, u.getPassword()));
-    }
 }

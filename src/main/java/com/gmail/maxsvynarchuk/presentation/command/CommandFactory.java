@@ -13,7 +13,7 @@ public class CommandFactory {
     private final static String DELIMITER = ":";
 
     private final Command DEFAULT_COMMAND = new DefaultCommand();
-    private Map<String, Command> commands = new HashMap<>();
+    private final Map<String, Command> commands = new HashMap<>();
 
     private CommandFactory() {
         init();

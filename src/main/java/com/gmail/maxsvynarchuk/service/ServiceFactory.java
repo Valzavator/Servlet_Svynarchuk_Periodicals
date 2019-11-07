@@ -12,9 +12,6 @@ public class ServiceFactory {
         return UserService.getInstance();
     }
 
-    public static AuthenticationService getAuthenticationService() {
-        return AuthenticationService.getInstance();
-    }
 //
 //    public static CardService getCardService() {
 //        return CardService.getInstance();

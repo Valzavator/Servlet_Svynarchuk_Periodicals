@@ -1,8 +1,11 @@
 package com.gmail.maxsvynarchuk.presentation.util.validator;
 
+import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignInCommand;
+import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignUpCommand;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.validator.impl.EmailValidator;
+import com.gmail.maxsvynarchuk.presentation.util.validator.impl.NameValidator;
 import com.gmail.maxsvynarchuk.presentation.util.validator.impl.PasswordValidator;
 
 import java.util.ArrayList;
@@ -19,11 +22,25 @@ public class ValidatorManager {
     /**
      * Validation data in {@link PostSignInCommand#execute}
      */
-    public static Map<String, Boolean> validateSignInParameters(String email, String password) {
+    public static Map<String, Boolean> validateSignInParameters(User userDTO) {
         Map<String, Boolean> errors = new HashMap<>();
 
-        validateField(new EmailValidator(), email, Attributes.ERROR_EMAIL, errors);
-        validateField(new PasswordValidator(), password, Attributes.ERROR_PASSWORD, errors);
+        validateField(new EmailValidator(), userDTO.getEmail(), Attributes.ERROR_EMAIL, errors);
+        validateField(new PasswordValidator(), userDTO.getPassword(), Attributes.ERROR_PASSWORD, errors);
+
+        return errors;
+    }
+
+    /**
+     * Validation data in {@link PostSignUpCommand#execute}
+     */
+    public static Map<String, Boolean> validateSignUpParameters(User userDTO) {
+        Map<String, Boolean> errors = new HashMap<>();
+
+        validateField(new EmailValidator(), userDTO.getEmail(), Attributes.ERROR_EMAIL, errors);
+        validateField(new PasswordValidator(), userDTO.getPassword(), Attributes.ERROR_PASSWORD, errors);
+        validateField(new NameValidator(), userDTO.getFirstName(), Attributes.ERROR_FIRST_NAME, errors);
+        validateField(new NameValidator(), userDTO.getLastName(), Attributes.ERROR_LAST_NAME, errors);
 
         return errors;
     }

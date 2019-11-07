@@ -1,4 +1,5 @@
 <%--@elvariable id="errors" type="java.util.Map"--%>
+<%@ page import="com.gmail.maxsvynarchuk.util.Gender" %>
 <html>
 <head>
 </head>
@@ -22,6 +23,7 @@
                             </div>
                             <input type="email" id="email"
                                    name="email"
+                                   value="<c:out value="${requestScope.user.email}"/>"
                                    class="form-control form-control-lg
                                    <c:if test="${errors.errorEmail}">
                                             is-invalid
@@ -46,6 +48,7 @@
                                 </div>
                                 <input type="text" id="firstName"
                                        name="firstName"
+                                       value="<c:out value="${requestScope.user.firstName}"/>"
                                        class="form-control form-control-lg
                                        <c:if test="${errors.errorFirstName}">
                                             is-invalid
@@ -70,8 +73,9 @@
                                 </div>
                                 <input type="text" id="lastName"
                                        name="lastName"
+                                       value="<c:out value="${requestScope.user.lastName}"/>"
                                        class="form-control form-control-lg
-                                       <c:if test="${errors.errorFirstName}">
+                                       <c:if test="${errors.errorLastName}">
                                             is-invalid
                                        </c:if>"
                                        placeholder="<fmt:message key="lastname.placeholder"/>"
@@ -121,8 +125,16 @@
                                 <select id="gender"
                                         name="gender"
                                         class="form-control form-control-lg">
-                                    <option><fmt:message key="gender.male"/></option>
-                                    <option><fmt:message key="gender.female"/></option>
+                                    <option value="MALE"
+                                            <c:if test="${requestScope.user.gender eq Gender.MALE}">
+                                                selected
+                                            </c:if>
+                                    ><fmt:message key="gender.male"/></option>
+                                    <option value="FEMALE"
+                                            <c:if test="${requestScope.user.gender eq Gender.FEMALE}">
+                                                selected
+                                            </c:if>
+                                    ><fmt:message key="gender.female"/></option>
                                 </select>
                             </div>
                         </div>
@@ -138,6 +150,7 @@
                                 </div>
                                 <input type="date" id="dateOfBirth"
                                        name="dateOfBirth"
+                                       value="<fmt:formatDate type = "date" value="${requestScope.user.dateOfBirth}" pattern="yyyy-MM-dd"/>"
                                        class="form-control form-control-lg"
                                        max="3000-12-31" min="1900-01-01" required>
                             </div>
@@ -151,9 +164,14 @@
 
                 </form>
             </div>
-            <c:if test="false">
+            <c:if test="${errors.errorRegistration}">
                 <div class="card-footer text-muted">
-
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <fmt:message key="error.registration"/>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
             </c:if>
         </div>
