@@ -43,24 +43,22 @@ public class PostSignInCommand implements Command {
                 User user = userOpt.get();
                 user.setPassword(null);
                 request.getSession().setAttribute(Attributes.USER, user);
-
                 LOGGER.info("User successfully signed in");
 //                //TODO
-//                if (user.getRole().getId() == UserType.USER.getId())
-//                    return CommandResult.redirect(PagesPaths.HOME_PATH);
-//                if (user.getRole().getId() == UserType.ADMIN.getId())
-//                    return CommandResult.redirect(PagesPaths.HOME_PATH);
-                return CommandResult.redirect(PagesPaths.HOME_PATH);
+                if (user.isAdmin()) {
+                    return CommandResult.redirect(PagesPaths.HOME_PATH);
+                } else {
+                    return CommandResult.redirect(PagesPaths.CATALOG_PATH);
+                }
             } else {
                 LOGGER.info("Email and password don't matches");
                 errors.put(Attributes.ERROR_AUTHENTICATION, true);
             }
         } else {
             LOGGER.info("Invalid authentication parameters");
-            request.setAttribute(Attributes.ERRORS, errors);
-            request.setAttribute(Attributes.USER, userDTO);
         }
-
+        request.setAttribute(Attributes.ERRORS, errors);
+        request.setAttribute(Attributes.USER, userDTO);
         LOGGER.info("User fail sign in");
         return CommandResult.forward(Views.SIGN_IN_VIEW);
     }

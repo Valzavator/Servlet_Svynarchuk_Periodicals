@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalDao;
 import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
+import com.gmail.maxsvynarchuk.persistence.entity.User;
 
 import java.util.List;
 
@@ -21,7 +22,15 @@ public class PeriodicalService {
         return PeriodicalService.Singleton.INSTANCE;
     }
 
-    public List<Periodical> getAllPeriodicals() {
-        return periodicalDao.findAll();
+    public List<Periodical> getPeriodicals(int skip, int limit) {
+        return periodicalDao.findAll(skip, limit);
+    }
+//
+//    public List<Periodical> getPeriodicalsOnWhichUserIsNotSubscribed(int skip, int limit, User user) {
+//        return periodicalDao.findAllOnWhichUserIsNotSubscribed(skip, limit, user);
+//    }
+
+    public long getPeriodicalsCount() {
+        return periodicalDao.getCount();
     }
 }

@@ -44,7 +44,7 @@
                             <fmt:message key="periodical.price"/>: <c:out value="${periodical.price} $"/></li>
                     </ul>
                     <div class="card-footer d-flex justify-content-sm-center justify-content-lg-end ">
-                        <form accept-charset="UTF-8" role="form" method="get">
+                        <form accept-charset="UTF-8" role="form" method="post" action="<c:url value="/app/cart/add"/>">
                             <!-- Button trigger modal -->
                             <div class="input-group ">
                                 <input type="hidden" class="form-control" name="periodicalId" value="${periodical.id}">
@@ -71,7 +71,7 @@
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <select class="custom-select" name="subscriptionPlan" required>
-                                                    <c:forEach var="subscriptionPlan"
+                                                    <c:forEach var="subscriptionPlanId"
                                                                items="${requestScope.subscriptionPlans}">
                                                         <option value="${subscriptionPlan.id}">
                                                             <c:out value="${subscriptionPlan.name}"/>
@@ -101,26 +101,30 @@
         </div>
     </c:forEach>
 
-
-    <nav aria-label="Page navigation" class="mb-5">
-        <ul class="pagination pagination-lg justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <%@ include file="/WEB-INF/jspf/pagination.jspf" %>
 
 </main>
 
+<!-- Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -7,7 +7,7 @@ import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class LogoutCommand implements Command {
+public class SignOutCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().invalidate();

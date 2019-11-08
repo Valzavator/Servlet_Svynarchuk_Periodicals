@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.PeriodicalMapper;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
+import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
@@ -23,6 +24,8 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
             ResourceManager.QUERIES.getProperty("periodical.count");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("periodical.where.id");
+    private final static String SELECT_ALL_ON_WHICH_USER_IS_NOT_SUBSCRIBER=
+            ResourceManager.QUERIES.getProperty("periodical.users.not.subscribed");
 
     private final UtilMySqlDao<Periodical> utilMySqlDao;
 
@@ -95,5 +98,15 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
     @Override
     public long getCount() {
         return utilMySqlDao.getRowsCount(COUNT);
+    }
+
+    @Override
+    public List<Periodical> findAllOnWhichUserIsNotSubscribed(int skip, int limit, User user) {
+        Objects.requireNonNull(user);
+
+        return utilMySqlDao.findAll(SELECT_ALL_ON_WHICH_USER_IS_NOT_SUBSCRIBER + UtilMySqlDao.LIMIT,
+                user.getId(),
+                skip,
+                limit);
     }
 }

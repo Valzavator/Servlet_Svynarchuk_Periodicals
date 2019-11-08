@@ -13,5 +13,12 @@
 <script src="${pageContext.request.contextPath}/webjars/jquery/3.4.1/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/webjars/popper.js/1.15.0/umd/popper.min.js"></script>
+<c:if test="${requestScope.errorIsAlreadySubscribed}">
+    <script type="text/javascript" defer>
+        $(document).ready(function () {
+            $("#errorModal").modal("show");
+        });
+    </script>
+</c:if>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.gmail.maxsvynarchuk.presentation.util;
 
+import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,10 +31,16 @@ public class Util {
      * @return {@code true} if logged in else {@code false}
      */
     public static boolean isAlreadyLoggedIn(HttpSession session) {
-        return session.getAttribute(Attributes.USER) != null;
+        return getAuthorizedUser(session) != null;
     }
 
-
-
-
+    /**
+     * Get authorized user
+     *
+     * @param session HttpSession
+     * @return authorized user else {@code null}
+     */
+    public static User getAuthorizedUser(HttpSession session) {
+        return (User) session.getAttribute(Attributes.USER);
+    }
 }

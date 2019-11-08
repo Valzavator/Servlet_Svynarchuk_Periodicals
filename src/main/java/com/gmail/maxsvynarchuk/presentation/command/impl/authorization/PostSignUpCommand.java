@@ -49,16 +49,16 @@ public class PostSignUpCommand implements Command {
             boolean isRegistered = userService.registerUser(userDTO);
             if (isRegistered) {
                 LOGGER.info("User was successfully register");
-                return CommandResult.redirect(PagesPaths.LOGOUT_PATH);
+                return CommandResult.redirect(PagesPaths.SIGN_IN_PATH);
             } else {
                 LOGGER.info("Such user already registered");
                 errors.put(Attributes.ERROR_REGISTRATION, true);
             }
         } else {
             LOGGER.info("Invalid registration parameters");
-            request.setAttribute(Attributes.ERRORS, errors);
-            request.setAttribute(Attributes.USER, userDTO);
         }
+        request.setAttribute(Attributes.ERRORS, errors);
+        request.setAttribute(Attributes.USER, userDTO);
         LOGGER.info("User registration fail");
         return CommandResult.forward(Views.SIGN_UP_VIEW);
     }
