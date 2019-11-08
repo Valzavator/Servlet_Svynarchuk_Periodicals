@@ -12,12 +12,12 @@ public class ServiceFactory {
         return UserService.getInstance();
     }
 
-//
-//    public static CardService getCardService() {
-//        return CardService.getInstance();
-//    }
-//
-//    public static PaymentService getPaymentService() {
-//        return PaymentService.getInstance();
-//    }
+    public static PeriodicalService getPeriodicalService() {
+        return PeriodicalService.getInstance();
+    }
+
+    public static SubscriptionPlanService getSubscriptionPlanService() {
+        return SubscriptionPlanService.getInstance();
+    }
+
 }

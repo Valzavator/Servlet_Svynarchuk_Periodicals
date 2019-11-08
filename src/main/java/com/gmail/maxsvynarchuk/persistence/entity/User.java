@@ -1,6 +1,7 @@
 package com.gmail.maxsvynarchuk.persistence.entity;
 
 import com.gmail.maxsvynarchuk.util.Gender;
+import com.gmail.maxsvynarchuk.util.RoleType;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -163,6 +164,10 @@ public class User implements Serializable {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public boolean isAdmin() {
+        return role.equals(RoleType.ADMIN.getValue());
     }
 
     @Override

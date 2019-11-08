@@ -1,6 +1,7 @@
 package com.gmail.maxsvynarchuk.presentation.command;
 
 import com.gmail.maxsvynarchuk.presentation.command.impl.DefaultCommand;
+import com.gmail.maxsvynarchuk.presentation.command.impl.GetPeriodicalsCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.HomeCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.*;
 import com.gmail.maxsvynarchuk.presentation.util.RequestMethod;
@@ -32,6 +33,8 @@ public class CommandFactory {
                 new PostSignUpCommand());
         commands.put(buildKey(PagesPaths.LOGOUT_PATH, RequestMethod.GET),
                 new LogoutCommand());
+        commands.put(buildKey(PagesPaths.CATALOG_PATH, RequestMethod.GET),
+                new GetPeriodicalsCommand());
     }
 
     public Command getCommand(String path, RequestMethod method) {

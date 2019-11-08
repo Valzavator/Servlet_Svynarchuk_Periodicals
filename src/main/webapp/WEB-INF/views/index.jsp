@@ -22,7 +22,7 @@
             <div class="container">
                 <h1 class="display-4 text-break"><fmt:message key="title"/></h1>
                 <hr class="my-4">
-                <p class="h4 text-justify"><fmt:message key="description"/></p>
+                <p class="h4 text-justify"><fmt:message key="site.description"/></p>
             </div>
         </div>
     </div>

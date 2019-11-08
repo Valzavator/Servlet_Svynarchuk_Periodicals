@@ -13,6 +13,8 @@ public final class PagesPaths {
     public static final String SIGN_UP_PATH = ResourceManager.PATH.getProperty("path.signup");
     public static final String LOGOUT_PATH = ResourceManager.PATH.getProperty("path.logout");
 
+    public static final String CATALOG_PATH = ResourceManager.PATH.getProperty("path.catalog");
+
     private PagesPaths() {
     }
 }
