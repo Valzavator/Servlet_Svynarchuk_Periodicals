@@ -48,7 +48,7 @@ public class PeriodicalTypeMySqlDao implements PeriodicalTypeDao {
         return utilMySqlDao.findAll(SELECT_ALL);
     }
 
-    public List<PeriodicalType> findAll(int skip, int limit) {
+    public List<PeriodicalType> findAll(long skip, long limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 

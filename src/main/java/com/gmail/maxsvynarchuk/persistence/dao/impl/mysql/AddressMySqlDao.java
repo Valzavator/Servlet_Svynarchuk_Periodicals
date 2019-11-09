@@ -49,7 +49,7 @@ public class AddressMySqlDao implements AddressDao {
     }
 
     @Override
-    public List<Address> findAll(int skip, int limit) {
+    public List<Address> findAll(long skip, long limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 

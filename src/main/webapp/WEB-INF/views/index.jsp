@@ -1,20 +1,16 @@
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
-<%--<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>--%>
-<%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>--%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%--<fmt:setLocale value="${sessionScope.locale}"/>--%>
-<%--<fmt:setBundle basename="i18n.lang"/>--%>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="i18n.lang"/>
 
 <html>
 <head>
-
-<%--    <jsp:include page="/WEB-INF/views/snippets/header.jsp"/>--%>
-
+    <jsp:include page="/WEB-INF/views/snippets/head.jsp"/>
 </head>
 <body class="d-flex flex-column min-vh-100">
-
-<%--<jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>--%>
-
+<jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>
 <main role="main" class="container">
     <div class="text-center">
         <img src="<c:url value="/resources/images/logo.png"/>" alt="Logo"/>
@@ -27,7 +23,6 @@
         </div>
     </div>
 </main>
-
-<%--<%@ include file="/WEB-INF/views/snippets/footer.jsp" %>--%>
+<jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
 </body>
 </html>

@@ -50,7 +50,7 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
     }
 
     @Override
-    public List<Subscription> findAll(int skip, int limit) {
+    public List<Subscription> findAll(long skip, long limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 

@@ -48,7 +48,7 @@ public class RoleMySqlDao implements RoleDao {
         return utilMySqlDao.findAll(SELECT_ALL);
     }
 
-    public List<Role> findAll(int skip, int limit) {
+    public List<Role> findAll(long skip, long limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 

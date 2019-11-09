@@ -1,8 +1,16 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="i18n.lang"/>
+
 <html>
 <head>
+    <jsp:include page="/WEB-INF/views/snippets/head.jsp"/>
 </head>
 <body class="d-flex flex-column min-vh-100">
-
+<jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>
 <main role="main" class="container">
 
     <c:forEach var="periodical" items="${requestScope.periodicals}">
@@ -70,8 +78,8 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <select class="custom-select" name="subscriptionPlan" required>
-                                                    <c:forEach var="subscriptionPlanId"
+                                                <select class="custom-select" name="subscriptionPlanId" required>
+                                                    <c:forEach var="subscriptionPlan"
                                                                items="${requestScope.subscriptionPlans}">
                                                         <option value="${subscriptionPlan.id}">
                                                             <c:out value="${subscriptionPlan.name}"/>
@@ -100,10 +108,10 @@
             </div>
         </div>
     </c:forEach>
-
-    <%@ include file="/WEB-INF/jspf/pagination.jspf" %>
-
+    <jsp:include page="/WEB-INF/views/snippets/pagination.jsp" />
 </main>
+
+<jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
 
 <!-- Modal -->
 <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -126,5 +134,12 @@
         </div>
     </div>
 </div>
+<c:if test="${requestScope.errorIsAlreadySubscribed}">
+    <script type="text/javascript" defer>
+        $(document).ready(function () {
+            $("#errorModal").modal("show");
+        });
+    </script>
+</c:if>
 </body>
 </html>

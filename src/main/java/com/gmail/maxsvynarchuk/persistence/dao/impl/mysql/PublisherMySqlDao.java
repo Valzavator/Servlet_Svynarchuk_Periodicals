@@ -48,7 +48,7 @@ public class PublisherMySqlDao implements PublisherDao {
         return utilMySqlDao.findAll(SELECT_ALL);
     }
 
-    public List<Publisher> findAll(int skip, int limit) {
+    public List<Publisher> findAll(long skip, long limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 

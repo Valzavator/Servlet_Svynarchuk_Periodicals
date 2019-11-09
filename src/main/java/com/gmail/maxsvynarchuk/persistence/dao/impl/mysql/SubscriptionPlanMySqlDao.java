@@ -48,7 +48,7 @@ public class SubscriptionPlanMySqlDao implements SubscriptionPlanDao {
         return utilMySqlDao.findAll(SELECT_ALL);
     }
 
-    public List<SubscriptionPlan> findAll(int skip, int limit) {
+    public List<SubscriptionPlan> findAll(long skip, long limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 

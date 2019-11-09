@@ -29,8 +29,10 @@ public interface GenericDao<T, ID> {
      * Retrieves all object data from database.
      *
      * @return List of objects which represent one row in database.
+     * @param skip skip
+     * @param limit limit
      */
-    List<T> findAll(int skip, int limit);
+    List<T> findAll(long skip, long limit);
 
     /**
      * Insert object to a database.

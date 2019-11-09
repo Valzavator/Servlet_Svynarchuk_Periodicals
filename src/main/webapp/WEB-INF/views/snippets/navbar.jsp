@@ -14,16 +14,6 @@
     <myLib:viewUri/>
 </c:set>
 
-<html>
-<head>
-    <link rel="stylesheet" href="<c:url value="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/darkly/bootstrap.min.css">
-    <link rel="stylesheet" href="<c:url value="/webjars/font-awesome/4.7.0/css/font-awesome.min.css"/>">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/default.css"/>">
-
-    <title>Periodicals</title>
-</head>
-<body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
     <a class="navbar-brand active" href="<c:url value="/app/"/>">Periodicals</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
@@ -56,47 +46,46 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-        <c:if test="${sessionScope.user eq null}">
-            <li
-                    <c:if test="${signUpView.equals(currView)}">
-                        class="active"
-                    </c:if>
-            >
-                <a class="nav-link" href="<c:url value="/app/signup"/>">
-                    <i class="fa fa-user-plus fa-lg" aria-hidden="true">&nbsp;</i> <fmt:message key="signup"/>
-                </a>
-            </li>
-            <li
-                    <c:if test="${signInView.equals(currView)}">
-                        class="active"
-                    </c:if>
-            >
-                <a class="nav-link" href="<c:url value="/app/signin"/>">
-                    <i class="fa fa-sign-in fa-lg" aria-hidden="true">&nbsp;</i> <fmt:message key="signin"/>
-                </a>
-            </li>
-        </c:if>
-        <c:if test="${not empty sessionScope.user}">
-            <c:if test="${!sessionScope.user.isAdmin()}">
-                <li class="active">
+            <c:if test="${sessionScope.user eq null}">
+                <li
+                        <c:if test="${signUpView.equals(currView)}">
+                            class="active"
+                        </c:if>
+                >
+                    <a class="nav-link" href="<c:url value="/app/signup"/>">
+                        <i class="fa fa-user-plus fa-lg" aria-hidden="true">&nbsp;</i> <fmt:message key="signup"/>
+                    </a>
+                </li>
+                <li
+                        <c:if test="${signInView.equals(currView)}">
+                            class="active"
+                        </c:if>
+                >
                     <a class="nav-link" href="<c:url value="/app/signin"/>">
-                        <i class="fa fa-shopping-cart fa-lg" aria-hidden="true">&nbsp;</i> <fmt:message key="cart"/>
+                        <i class="fa fa-sign-in fa-lg" aria-hidden="true">&nbsp;</i> <fmt:message key="signin"/>
                     </a>
                 </li>
             </c:if>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="profileDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-user-circle-o fa-lg" aria-hidden="true">&nbsp;</i>
-                    <c:out value="${sessionScope.user.firstName}"/>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdownMenuLink">
-                    <a class="dropdown-item" href="#"><fmt:message key="profile"/></a>
-                    <a class="dropdown-item" href="<c:url value="/app/signout"/>"><fmt:message key="signout"/></a>
-                </div>
-            </li>
-        </c:if>
+            <c:if test="${not empty sessionScope.user}">
+                <c:if test="${!sessionScope.user.isAdmin()}">
+                    <li class="active">
+                        <a class="nav-link" href="<c:url value="/app/signin"/>">
+                            <i class="fa fa-shopping-cart fa-lg" aria-hidden="true">&nbsp;</i> <fmt:message key="cart"/>
+                        </a>
+                    </li>
+                </c:if>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user-circle-o fa-lg" aria-hidden="true">&nbsp;</i>
+                        <c:out value="${sessionScope.user.firstName}"/>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdownMenuLink">
+                        <a class="dropdown-item" href="#"><fmt:message key="profile"/></a>
+                        <a class="dropdown-item" href="<c:url value="/app/signout"/>"><fmt:message key="signout"/></a>
+                    </div>
+                </li>
+            </c:if>
         </ul>
     </div>
 </nav>
-</body>
-</html>

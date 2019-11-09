@@ -52,7 +52,7 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
     }
 
     @Override
-    public List<Periodical> findAll(int skip, int limit) {
+    public List<Periodical> findAll(long skip, long limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 

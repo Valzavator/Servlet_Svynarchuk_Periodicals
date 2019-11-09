@@ -49,7 +49,7 @@ public class PaymentMySqlDao implements PaymentDao {
     }
 
     @Override
-    public List<Payment> findAll(int skip, int limit) {
+    public List<Payment> findAll(long skip, long limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 

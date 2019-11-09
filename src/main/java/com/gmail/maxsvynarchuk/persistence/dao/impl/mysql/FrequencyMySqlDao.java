@@ -49,7 +49,7 @@ public class FrequencyMySqlDao implements FrequencyDao {
     }
 
     @Override
-    public List<Frequency> findAll(int skip, int limit) {
+    public List<Frequency> findAll(long skip, long limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 

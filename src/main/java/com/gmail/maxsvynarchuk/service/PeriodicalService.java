@@ -22,7 +22,7 @@ public class PeriodicalService {
         return PeriodicalService.Singleton.INSTANCE;
     }
 
-    public List<Periodical> getPeriodicals(int skip, int limit) {
+    public List<Periodical> getPeriodicals(long skip, long limit) {
         return periodicalDao.findAll(skip, limit);
     }
 //

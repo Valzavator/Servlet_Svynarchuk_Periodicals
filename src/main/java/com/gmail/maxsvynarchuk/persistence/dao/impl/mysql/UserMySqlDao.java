@@ -56,7 +56,7 @@ public class UserMySqlDao implements UserDao {
         return utilMySqlDao.findAll(SELECT_ALL);
     }
 
-    public List<User> findAll(int skip, int limit) {
+    public List<User> findAll(long skip, long limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 

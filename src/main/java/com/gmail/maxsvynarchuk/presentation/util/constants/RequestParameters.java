@@ -15,6 +15,8 @@ public final class RequestParameters {
 
     public static final String PAGINATION_PAGE = ResourceManager.PARAMETER.getProperty("pagination.page");
 
+    public static final String ERROR_ATTRIBUTE = ResourceManager.PARAMETER.getProperty("error.attribute");
+
     private RequestParameters() {
     }
 }

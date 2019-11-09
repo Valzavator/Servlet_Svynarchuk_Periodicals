@@ -59,17 +59,4 @@
         <error-code>403</error-code>
         <location>/WEB-INF/views/errors/403.jsp</location>
     </error-page>
-
-<!--    TODO-->
-    <jsp-config>
-        <jsp-property-group>
-            <url-pattern>/WEB-INF/views/*</url-pattern>
-            <url-pattern>*.jspf</url-pattern>
-            <page-encoding>UTF-8</page-encoding>
-            <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
-            <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
-            <trim-directive-whitespaces>true</trim-directive-whitespaces>
-        </jsp-property-group>
-    </jsp-config>
-
 </web-app>
