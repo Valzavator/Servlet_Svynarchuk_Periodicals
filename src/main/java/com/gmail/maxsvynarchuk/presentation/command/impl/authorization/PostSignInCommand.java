@@ -44,7 +44,7 @@ public class PostSignInCommand implements Command {
                 user.setPassword(null);
                 request.getSession().setAttribute(Attributes.USER, user);
                 LOGGER.info("User successfully signed in");
-//                //TODO
+                //TODO
                 if (user.isAdmin()) {
                     return CommandResult.redirect(PagesPaths.HOME_PATH);
                 } else {

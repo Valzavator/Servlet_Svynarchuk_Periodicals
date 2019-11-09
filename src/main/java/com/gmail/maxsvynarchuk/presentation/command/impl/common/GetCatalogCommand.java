@@ -1,11 +1,9 @@
-package com.gmail.maxsvynarchuk.presentation.command.impl;
+package com.gmail.maxsvynarchuk.presentation.command.impl.common;
 
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan;
-import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
-import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignInCommand;
 import com.gmail.maxsvynarchuk.presentation.util.PaginationManager;
 import com.gmail.maxsvynarchuk.presentation.util.Util;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
@@ -18,9 +16,8 @@ import com.gmail.maxsvynarchuk.service.SubscriptionPlanService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Objects;
 
-public class GetPeriodicalsCommand implements Command {
+public class GetCatalogCommand implements Command {
     private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
     private final SubscriptionPlanService subscriptionPlanService = ServiceFactory.getSubscriptionPlanService();
 
@@ -29,15 +26,12 @@ public class GetPeriodicalsCommand implements Command {
         long rowsCount = periodicalService.getPeriodicalsCount();
         long skip = PaginationManager.manage(request, rowsCount);
         List<Periodical> periodicals = periodicalService.getPeriodicals(skip, PaginationManager.RECORDS_PER_PAGE);
-        request.setAttribute(Attributes.PERIODICALS, periodicals);
+        request.setAttribute(Attributes.CATALOG, periodicals);
         if (!periodicals.isEmpty()) {
             List<SubscriptionPlan> subscriptionPlans = subscriptionPlanService.getAllSubscriptionPlans();
             request.setAttribute(Attributes.SUBSCRIPTION_PLANS, subscriptionPlans);
         }
-        String error = request.getParameter(RequestParameters.ERROR_ATTRIBUTE);
-        if (Objects.nonNull(error) && !error.isEmpty()) {
-            request.setAttribute(error, true);
-        }
+        Util.checkErrorParameter(request, RequestParameters.ERROR_ATTRIBUTE);
         return CommandResult.forward(Views.CATALOG_VIEW);
     }
 }

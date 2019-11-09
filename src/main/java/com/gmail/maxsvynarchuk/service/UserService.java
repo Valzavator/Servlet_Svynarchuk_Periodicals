@@ -62,10 +62,10 @@ public class UserService {
         if (userToRegister.getAddress() == null) {
             userToRegister.setAddress(emptyAddress);
         }
-
         String hash = PasswordManager.hashPassword(
                 userToRegister.getPassword());
         userToRegister.setPassword(hash);
+
         boolean userIsPresent =
                 userDao.findOneByEmail(userToRegister.getEmail()).isPresent();
         if (!userIsPresent) {

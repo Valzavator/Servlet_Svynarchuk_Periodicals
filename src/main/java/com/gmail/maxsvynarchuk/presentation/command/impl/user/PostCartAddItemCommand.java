@@ -1,4 +1,4 @@
-package com.gmail.maxsvynarchuk.presentation.command.impl;
+package com.gmail.maxsvynarchuk.presentation.command.impl.user;
 
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.command.Command;

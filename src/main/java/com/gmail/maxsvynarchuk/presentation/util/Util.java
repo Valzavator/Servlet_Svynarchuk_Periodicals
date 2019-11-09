@@ -3,6 +3,7 @@ package com.gmail.maxsvynarchuk.presentation.util;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
+import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -73,7 +74,9 @@ public class Util {
     /**
      * add parameter to exist URI
      */
-    public static String addParameterToURI(String uri, String parameterName, String parameterValue) {
+    public static String addParameterToURI(String uri,
+                                           String parameterName,
+                                           String parameterValue) {
         Objects.requireNonNull(parameterName);
         Objects.requireNonNull(parameterValue);
 
@@ -91,6 +94,14 @@ public class Util {
             return newUri.getPath() + "?" + newUri.getQuery();
         } catch (URISyntaxException e) {
             throw new IllegalArgumentException(e);
+        }
+    }
+
+    public static void checkErrorParameter(HttpServletRequest request,
+                                          String requestAttribute) {
+        String error = request.getParameter(requestAttribute);
+        if (Objects.nonNull(error) && !error.isEmpty()) {
+            request.setAttribute(error, true);
         }
     }
 }

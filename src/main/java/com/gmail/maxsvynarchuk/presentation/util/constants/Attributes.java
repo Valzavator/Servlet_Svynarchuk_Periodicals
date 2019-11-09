@@ -17,7 +17,8 @@ public final class Attributes {
     public static final String ERROR_REGISTRATION = ResourceManager.ATTRIBUTE.getProperty("error.registration");
     public static final String ERROR_IS_ALREADY_SUBSCRIBED = ResourceManager.ATTRIBUTE.getProperty("error.is.already.subscribed");
 
-    public static final String PERIODICALS = ResourceManager.ATTRIBUTE.getProperty("periodicals");
+    public static final String PERIODICAL = ResourceManager.ATTRIBUTE.getProperty("periodical");
+    public static final String CATALOG = ResourceManager.ATTRIBUTE.getProperty("catalog");
     public static final String SUBSCRIPTION_PLANS = ResourceManager.ATTRIBUTE.getProperty("subscription.plans");
 
     public static final String PAGINATION_PAGE = ResourceManager.ATTRIBUTE.getProperty("pagination.page");

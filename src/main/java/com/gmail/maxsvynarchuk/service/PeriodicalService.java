@@ -7,6 +7,7 @@ import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public class PeriodicalService {
     private final PeriodicalDao periodicalDao = DaoFactory.getInstance().getPeriodicalDao();
@@ -20,6 +21,10 @@ public class PeriodicalService {
 
     public static PeriodicalService getInstance() {
         return PeriodicalService.Singleton.INSTANCE;
+    }
+
+    public Optional<Periodical> findById(Long id) {
+        return periodicalDao.findOne(id);
     }
 
     public List<Periodical> getPeriodicals(long skip, long limit) {

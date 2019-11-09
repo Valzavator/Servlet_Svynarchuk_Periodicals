@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="myLib" uri="/WEB-INF/tag/requestedViewTag" %>
@@ -75,7 +75,9 @@
                             </c:if>
                     >
                         <a class="nav-link" href="<c:url value="/app/cart"/>">
-                            <i class="fa fa-shopping-cart fa-lg" aria-hidden="true">&nbsp;</i> <fmt:message key="cart"/>
+                            <i class="fa fa-shopping-cart fa-lg" aria-hidden="true">&nbsp;</i>
+                            <fmt:message key="cart"/>&nbsp;
+                            <span class="badge badge-light">9</span>
                         </a>
                     </li>
                 </c:if>

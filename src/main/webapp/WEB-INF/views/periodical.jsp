@@ -1,0 +1,136 @@
+<%--@elvariable id="periodical" type="com.gmail.maxsvynarchuk.persistence.entity.Periodical"--%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="i18n.lang"/>
+
+<html>
+<head>
+    <jsp:include page="/WEB-INF/views/snippets/head.jsp"/>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>
+<main role="main" class="container">
+    <div class="card border-dark mb-5">
+        <div class="row no-gutters ">
+            <div class="col-md-4 d-flex align-content-center flex-wrap">
+                <img src="<c:url value="/resources/images/logo.png"/>" class="card-img" alt="logo">
+            </div>
+            <div class="col-md-8 text-white">
+                <div class="card-header card-title text-center">
+                    <h3><c:out value="${periodical.name}"/></h3>
+                </div>
+                <div class="card-body bg-primary">
+                    <div class="card-text text-center">
+                            <fmt:message key="periodical.description"/>&nbsp;
+                    </div>
+                    <p class="card-text"><c:out value="${periodical.description}"/></p>
+                </div>
+
+                <ul class="bg-primary text-white list-group list-group-flush">
+                    <li class="list-group-item bg-primary">
+                        <fmt:message key="periodical.type"/>: <c:out value="${periodical.periodicalType.name}"/>
+                    </li>
+                    <li class="list-group-item bg-primary">
+                        <fmt:message key="periodical.frequency"/>: <c:out value="${periodical.frequency.name}"/>
+                    </li>
+                    <li class="list-group-item bg-primary">
+                        <fmt:message key="periodical.publisher"/>: <c:out value="${periodical.publisher.name}"/>
+                    </li>
+                    <li class="list-group-item bg-primary">
+                        <fmt:message key="periodical.price"/>: <c:out value="${periodical.price} $"/></li>
+                </ul>
+                <c:if test="${!sessionScope.user.isAdmin()}">
+                    <div class="card-footer d-flex justify-content-sm-center justify-content-lg-end ">
+                        <form accept-charset="UTF-8" role="form" method="post" action="<c:url value="/app/cart/add"/>">
+                            <!-- Button trigger modal -->
+                            <div class="input-group ">
+                                <input type="hidden" class="form-control" name="periodicalId" value="${periodical.id}">
+                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+                                        data-target="#modal-${periodical.id}">
+                                    <i class="fa fa-chevron-circle-right fa-lg" aria-hidden="true">&nbsp;</i>
+                                    <fmt:message key="periodical.subscribe"/>
+                                </button>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="modal-${periodical.id}" tabindex="-1" role="dialog"
+                                 aria-labelledby="modal-${periodical.id}" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">
+                                                <fmt:message key="periodical.choose.subscription.plan"/>
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <select class="custom-select" name="subscriptionPlanId" required>
+                                                    <c:forEach var="subscriptionPlan"
+                                                               items="${requestScope.subscriptionPlans}">
+                                                        <option value="${subscriptionPlan.id}">
+                                                            <c:out value="${subscriptionPlan.name}"/>
+                                                        </option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                <i class="fa fa-chevron-circle-left fa-lg" aria-hidden="true">&nbsp;</i>
+                                                <fmt:message key="periodical.back"/>
+                                            </button>
+                                            <button type="submit" class="btn btn-info">
+                                                <i class="fa fa-shopping-cart fa-lg" aria-hidden="true">&nbsp;</i>
+                                                <fmt:message key="periodical.add.to.cart"/>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </c:if>
+            </div>
+        </div>
+    </div>
+    <jsp:include page="/WEB-INF/views/snippets/pagination.jsp"/>
+</main>
+
+<jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
+
+<!-- Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<c:if test="${requestScope.errorIsAlreadySubscribed}">
+    <script type="text/javascript" defer>
+        $(document).ready(function () {
+            $("#errorModal").modal("show");
+        });
+    </script>
+</c:if>
+</body>
+</html>
