@@ -51,6 +51,7 @@
                         <li class="list-group-item bg-primary">
                             <fmt:message key="periodical.price"/>: <c:out value="${periodical.price} $"/></li>
                     </ul>
+                    <c:if test="${!sessionScope.user.isAdmin()}">
                     <div class="card-footer d-flex justify-content-sm-center justify-content-lg-end ">
                         <form accept-charset="UTF-8" role="form" method="post" action="<c:url value="/app/cart/add"/>">
                             <!-- Button trigger modal -->
@@ -104,6 +105,7 @@
                             </div>
                         </form>
                     </div>
+                    </c:if>
                 </div>
             </div>
         </div>

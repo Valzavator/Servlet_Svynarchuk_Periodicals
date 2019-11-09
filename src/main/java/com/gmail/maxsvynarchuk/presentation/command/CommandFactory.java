@@ -1,9 +1,6 @@
 package com.gmail.maxsvynarchuk.presentation.command;
 
-import com.gmail.maxsvynarchuk.presentation.command.impl.DefaultCommand;
-import com.gmail.maxsvynarchuk.presentation.command.impl.GetPeriodicalsCommand;
-import com.gmail.maxsvynarchuk.presentation.command.impl.HomeCommand;
-import com.gmail.maxsvynarchuk.presentation.command.impl.PostCartAddItemCommand;
+import com.gmail.maxsvynarchuk.presentation.command.impl.*;
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.*;
 import com.gmail.maxsvynarchuk.presentation.util.RequestMethod;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
@@ -36,6 +33,8 @@ public class CommandFactory {
                 new SignOutCommand());
         commands.put(buildKey(PagesPaths.CATALOG_PATH, RequestMethod.GET),
                 new GetPeriodicalsCommand());
+        commands.put(buildKey(PagesPaths.CART_PATH, RequestMethod.GET),
+                new GetShoppingCart());
         commands.put(buildKey(PagesPaths.CART_ADD_ITEM_PATH, RequestMethod.POST),
                 new PostCartAddItemCommand());
     }

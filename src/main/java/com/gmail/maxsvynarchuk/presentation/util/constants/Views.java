@@ -13,6 +13,7 @@ public final class Views {
     public static final String SIGN_UP_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.signup");
 
     public static final String CATALOG_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.catalog");
+    public static final String CART_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.cart");
 
     private Views() {
     }

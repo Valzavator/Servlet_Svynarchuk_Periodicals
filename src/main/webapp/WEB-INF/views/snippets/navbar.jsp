@@ -10,6 +10,7 @@
 <c:set var="signInView" scope="page" value="/WEB-INF/views/signin.jsp"/>
 <c:set var="signUpView" scope="page" value="/WEB-INF/views/signup.jsp"/>
 <c:set var="catalogView" scope="page" value="/WEB-INF/views/catalog.jsp"/>
+<c:set var="cartView" scope="page" value="/WEB-INF/views/cart.jsp"/>
 <c:set var="currView" scope="page">
     <myLib:viewUri/>
 </c:set>
@@ -68,8 +69,12 @@
             </c:if>
             <c:if test="${not empty sessionScope.user}">
                 <c:if test="${!sessionScope.user.isAdmin()}">
-                    <li class="active">
-                        <a class="nav-link" href="<c:url value="/app/signin"/>">
+                    <li
+                            <c:if test="${cartView.equals(currView)}">
+                                class="active"
+                            </c:if>
+                    >
+                        <a class="nav-link" href="<c:url value="/app/cart"/>">
                             <i class="fa fa-shopping-cart fa-lg" aria-hidden="true">&nbsp;</i> <fmt:message key="cart"/>
                         </a>
                     </li>
