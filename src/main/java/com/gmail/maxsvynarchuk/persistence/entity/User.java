@@ -167,7 +167,7 @@ public class User implements Serializable {
     }
 
     public boolean isAdmin() {
-        return role.equals(RoleType.ADMIN.getValue());
+        return RoleType.ADMIN.getValue().equals(role);
     }
 
     @Override

@@ -29,6 +29,7 @@ public class Util {
                 request.getContextPath() + request.getServletPath() + pageToRedirect);
     }
 
+    //TODO - delete
     /**
      * Check if the user is logged in
      *

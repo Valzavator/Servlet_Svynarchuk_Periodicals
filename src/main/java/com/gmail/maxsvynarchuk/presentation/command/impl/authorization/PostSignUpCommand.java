@@ -26,10 +26,6 @@ public class PostSignUpCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        if (Util.isAlreadyLoggedIn(request.getSession())) {
-            return CommandResult.redirect(PagesPaths.HOME_PATH);
-        }
-
         LOGGER.info("Start of new user registration");
         User userDTO = User.newBuilder()
                 .setEmail(request.getParameter(RequestParameters.EMAIL))

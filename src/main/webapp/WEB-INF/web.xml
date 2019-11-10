@@ -32,6 +32,7 @@
     <filter-mapping>
         <filter-name>EncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
     <filter>
@@ -41,6 +42,25 @@
     <filter-mapping>
         <filter-name>LocaleFilter</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>com.gmail.maxsvynarchuk.presentation.filter.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/app/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AuthorizationFilter</filter-name>
+        <filter-class>com.gmail.maxsvynarchuk.presentation.filter.AuthorizationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthorizationFilter</filter-name>
+        <url-pattern>/app/*</url-pattern>
     </filter-mapping>
 
     <listener>

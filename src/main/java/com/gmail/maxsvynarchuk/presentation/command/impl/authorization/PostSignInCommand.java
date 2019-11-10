@@ -3,7 +3,6 @@ package com.gmail.maxsvynarchuk.presentation.command.impl.authorization;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
-import com.gmail.maxsvynarchuk.presentation.util.Util;
 import com.gmail.maxsvynarchuk.presentation.util.constants.*;
 import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManager;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
@@ -23,10 +22,6 @@ public class PostSignInCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        if (Util.isAlreadyLoggedIn(request.getSession())) {
-            return CommandResult.redirect(PagesPaths.HOME_PATH);
-        }
-
         LOGGER.info("Start of sign in process");
         User userDTO = User.newBuilder()
                 .setEmail(request.getParameter(RequestParameters.EMAIL))

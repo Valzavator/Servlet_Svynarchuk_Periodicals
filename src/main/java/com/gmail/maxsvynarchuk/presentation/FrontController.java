@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,12 +53,6 @@ public class FrontController extends HttpServlet {
                                 HttpServletResponse response,
                                 RequestMethod method)
             throws ServletException, IOException {
-//        System.out.println(">>>>>>>>>>");
-//        System.out.println(request.getServletPath());
-//        System.out.println(request.getContextPath());
-//        System.out.println(request.getRequestURL());
-//        System.out.println(request.getRequestURI());
-//        System.out.println("PATH: " + getPath(request));
         //TODO delete try-catch
         try {
             Command command = commandFactory.getCommand(

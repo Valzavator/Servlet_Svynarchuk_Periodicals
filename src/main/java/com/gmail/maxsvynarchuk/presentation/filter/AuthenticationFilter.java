@@ -1,12 +1,18 @@
 package com.gmail.maxsvynarchuk.presentation.filter;
 
 
+import com.gmail.maxsvynarchuk.presentation.util.Util;
+import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
+import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 /**
@@ -15,44 +21,48 @@ import java.util.Objects;
  * @author Maksym Svynarhchuk
  */
 public class AuthenticationFilter implements Filter {
+    private static final Set<String> freePaths = new HashSet<>();
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        //TODO add all free paths
+
+        freePaths.add(PagesPaths.HOME_PATH);
+        freePaths.add(PagesPaths.SIGN_IN_PATH);
+        freePaths.add(PagesPaths.SIGN_UP_PATH);
+        freePaths.add(PagesPaths.PERIODICAL_PATH);
+        freePaths.add(PagesPaths.CATALOG_PATH);
+    }
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-//        HttpServletRequest req = (HttpServletRequest) request;
-//        HttpServletResponse resp = (HttpServletResponse) response;
-//        HttpSession session = req.getSession(false);
-//        String rootURI = req.getContextPath() + "/";
-//        String assetURI = req.getContextPath() + ASSETS;
-//        String indexURI = req.getContextPath() + INDEX_PAGE;
-//        String registrationURI = req.getContextPath() + REGISTRATION_PAGE;
-//        String signInURI = req.getContextPath() + SIGN_IN_PAGE;
-//        String command = req.getParameter(RequestParameters.COMMAND);
-//
-//        boolean isLoggedIn = Objects.nonNull(session) && Objects.nonNull(session.getAttribute(AttributeNames.USER));
-//        boolean isRootRequest = req.getRequestURI().equals(rootURI);
-//        boolean isAssetRequest = req.getRequestURI().startsWith(assetURI);
-//        boolean isIndexRequest = req.getRequestURI().equals(indexURI);
-//        boolean isRegistrationRequest = req.getRequestURI().equals(registrationURI);
-//        boolean isSignInRequest = req.getRequestURI().equals(signInURI);
-//        boolean isSignInCommand = Objects.nonNull(command) && command.equals(SIGN_IN_COMMAND)
-//                && req.getMethod().equals("POST");
-//        boolean isRegistrationCommand = Objects.nonNull(command) && command.equals(REGISTRATION_COMMAND)
-//                && req.getMethod().equals("POST");
-//        boolean isLocalizationCommand = Objects.nonNull(command) && command.equals(LOCALIZATION_COMMAND);
-//
-//        if (isLoggedIn) {
-//            if (isRegistrationRequest || isSignInRequest || isRegistrationCommand || isSignInCommand) {
-//                resp.sendRedirect(indexURI);
-//            } else {
-//                chain.doFilter(req, resp);
-//            }
-//        } else {
-//            if (isIndexRequest || isLocalizationCommand || isRegistrationRequest || isRootRequest ||
-//                    isSignInRequest || isRegistrationCommand || isSignInCommand || isAssetRequest) {
-//                chain.doFilter(req, resp);
-//            } else {
-//                resp.sendRedirect(signInURI);
-//            }
-//        }
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse resp = (HttpServletResponse) response;
+        HttpSession session = req.getSession(false);
+
+        String requestPath = req.getPathInfo();
+
+        boolean isLoggedIn = Objects.nonNull(session) &&
+                Objects.nonNull(session.getAttribute(Attributes.USER));
+        boolean isSignUpRequest = PagesPaths.SIGN_UP_PATH.equals(requestPath);
+        boolean isSignInRequest = PagesPaths.SIGN_IN_PATH.equals(requestPath);
+
+        if (isLoggedIn) {
+            if (isSignUpRequest || isSignInRequest) {
+                // TODO - test referer or change on HOME_PATH
+                String referer = Util.getReferer(req);
+                Util.redirectTo(req, resp, referer);
+            } else {
+                chain.doFilter(req, resp);
+            }
+        } else {
+            if (freePaths.contains(requestPath)) {
+                chain.doFilter(req, resp);
+            } else {
+                Util.redirectTo(req, resp, PagesPaths.SIGN_IN_PATH);
+            }
+        }
     }
+
 }

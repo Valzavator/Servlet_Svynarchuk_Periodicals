@@ -13,11 +13,6 @@ public class LocaleFilter implements Filter {
     private final static String LOCALE = "locale";
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
-
-    @Override
     public void doFilter(ServletRequest request,
                          ServletResponse response,
                          FilterChain chain)
@@ -32,11 +27,6 @@ public class LocaleFilter implements Filter {
         }
 
         chain.doFilter(request, response);
-    }
-
-    @Override
-    public void destroy() {
-
     }
 
     private void replaceUserLocale(HttpServletRequest request) {

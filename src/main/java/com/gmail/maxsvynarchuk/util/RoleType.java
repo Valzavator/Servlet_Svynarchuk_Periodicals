@@ -1,6 +1,9 @@
 package com.gmail.maxsvynarchuk.util;
 
 import com.gmail.maxsvynarchuk.persistence.entity.Role;
+import com.gmail.maxsvynarchuk.persistence.entity.User;
+
+import java.util.Objects;
 
 public enum RoleType {
     ADMIN(new Role(1,"admin")),
@@ -18,5 +21,9 @@ public enum RoleType {
 
     public int getId() {
         return role.getId();
+    }
+
+    public boolean isEquals(User user) {
+        return Objects.nonNull(user) && role.equals(user.getRole());
     }
 }
