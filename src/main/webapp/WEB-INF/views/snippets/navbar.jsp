@@ -11,6 +11,8 @@
 <c:set var="signUpView" scope="page" value="/WEB-INF/views/signup.jsp"/>
 <c:set var="catalogView" scope="page" value="/WEB-INF/views/catalog.jsp"/>
 <c:set var="cartView" scope="page" value="/WEB-INF/views/cart.jsp"/>
+<c:set var="adminCatalogView" scope="page" value="/WEB-INF/views/???.jsp"/>
+<c:set var="adminCreatePeriodicalView" scope="page" value="/WEB-INF/views/createPeriodical.jsp"/>
 <c:set var="currView" scope="page">
     <myLib:viewUri/>
 </c:set>
@@ -80,6 +82,33 @@
                             <span class="badge badge-light">9</span>
                         </a>
                     </li>
+                </c:if>
+                <c:if test="${sessionScope.user.isAdmin()}">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="adminDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-cogs fa-lg" aria-hidden="true">&nbsp;</i>
+                        <fmt:message key="admin.management"/>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="adminDropdownMenuLink">
+                        <a class="dropdown-item
+                            <c:if test="${adminCatalogView.equals(currView)}">
+                                active
+                            </c:if>"
+                            href="<c:url value="/app/admin/catalog"/>">
+                            <i class="fa fa-list fa-lg" aria-hidden="true">&nbsp;</i>
+                            <fmt:message key="admin.management.catalog"/>
+                        </a>
+                        <a class="dropdown-item
+                            <c:if test="${adminCreatePeriodicalView.equals(currView)}">
+                                active
+                            </c:if>"
+                            href="<c:url value="/app/admin/catalog/create"/>">
+                            <i class="fa fa-plus-square fa-lg" aria-hidden="true">&nbsp;</i>
+                            <fmt:message key="admin.management.create.periodical"/>
+                        </a>
+                    </div>
+                </li>
                 </c:if>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="profileDropdownMenuLink" role="button"

@@ -16,10 +16,6 @@ public class ServiceFactory {
         return PeriodicalService.getInstance();
     }
 
-    public static SubscriptionPlanService getSubscriptionPlanService() {
-        return SubscriptionPlanService.getInstance();
-    }
-
     public static SubscriptionService getSubscriptionService() {
         return SubscriptionService.getInstance();
     }

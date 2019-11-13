@@ -42,25 +42,25 @@ public abstract class DaoFactory {
         return instance;
     }
 
+    public abstract UserDao getUserDao();
+
+    public abstract RoleDao getRoleDao();
+
     public abstract AddressDao getAddressDao();
-
-    public abstract FrequencyDao getFrequencyDao();
-
-    public abstract PaymentDao getPaymentDao();
 
     public abstract PeriodicalDao getPeriodicalDao();
 
-    public abstract PeriodicalIssueDao getPeriodicalIssueDao();
-
     public abstract PeriodicalTypeDao getPeriodicalTypeDao();
+
+    public abstract FrequencyDao getFrequencyDao();
 
     public abstract PublisherDao getPublisherDao();
 
-    public abstract RoleDao getRoleDao();
+    public abstract PeriodicalIssueDao getPeriodicalIssueDao();
+
+    public abstract PaymentDao getPaymentDao();
 
     public abstract SubscriptionDao getSubscriptionDao();
 
     public abstract SubscriptionPlanDao getSubscriptionPlanDao();
-
-    public abstract UserDao getUserDao();
 }

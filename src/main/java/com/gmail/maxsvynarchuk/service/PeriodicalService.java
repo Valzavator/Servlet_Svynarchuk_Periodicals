@@ -1,16 +1,17 @@
 package com.gmail.maxsvynarchuk.service;
 
-import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalDao;
-import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao;
+import com.gmail.maxsvynarchuk.persistence.dao.*;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
-import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
-import com.gmail.maxsvynarchuk.persistence.entity.User;
+import com.gmail.maxsvynarchuk.persistence.entity.*;
 
 import java.util.List;
 import java.util.Optional;
 
 public class PeriodicalService {
     private final PeriodicalDao periodicalDao = DaoFactory.getInstance().getPeriodicalDao();
+    private final PeriodicalTypeDao periodicalTypeDao = DaoFactory.getInstance().getPeriodicalTypeDao();
+    private final FrequencyDao frequencyDao = DaoFactory.getInstance().getFrequencyDao();
+    private final PublisherDao publisherDao = DaoFactory.getInstance().getPublisherDao();
 
     private PeriodicalService() {
     }
@@ -37,5 +38,17 @@ public class PeriodicalService {
 
     public long getPeriodicalsCount() {
         return periodicalDao.getCount();
+    }
+
+    public List<PeriodicalType> getAllPeriodicalTypes() {
+        return periodicalTypeDao.findAll();
+    }
+
+    public List<Frequency> getAllFrequencies() {
+        return frequencyDao.findAll();
+    }
+
+    public List<Publisher> getAllPublishers() {
+        return publisherDao.findAll();
     }
 }

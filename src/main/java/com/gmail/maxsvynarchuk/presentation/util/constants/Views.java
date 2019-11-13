@@ -16,7 +16,10 @@ public final class Views {
     public static final String CATALOG_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.catalog");
     public static final String CART_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.cart");
 
-    public static final String ERROR_403_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.error.403");
+    public static final String ADMIN_CATALOG_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.admin.catalog");
+    public static final String CREATE_PERIODICAL_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.add.periodical");
+
+       public static final String ERROR_403_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.error.403");
     public static final String ERROR_404_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.error.404");
 
     private Views() {

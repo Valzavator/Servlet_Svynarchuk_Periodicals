@@ -27,7 +27,8 @@ public class AuthorizationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         //TODO add all secure paths
-//        secureAdminPaths.add(PagesPaths.);
+        secureAdminPaths.add(PagesPaths.ADMIN_CATALOG_PATH);
+        secureAdminPaths.add(PagesPaths.CREATE_PERIODICAL_PATH);
 
         secureUserPaths.add(PagesPaths.CART_PATH);
         secureUserPaths.add(PagesPaths.CART_ADD_ITEM_PATH);

@@ -24,8 +24,8 @@ public class PostSignInCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.info("Start of sign in process");
         User userDTO = User.newBuilder()
-                .setEmail(request.getParameter(RequestParameters.EMAIL))
-                .setPassword(request.getParameter(RequestParameters.PASSWORD))
+                .setEmail(request.getParameter(RequestParameters.USER_EMAIL))
+                .setPassword(request.getParameter(RequestParameters.USER_PASSWORD))
                 .build();
 
         Map<String, Boolean> errors = ValidatorManager

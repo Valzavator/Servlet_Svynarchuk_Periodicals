@@ -4,58 +4,84 @@ import com.gmail.maxsvynarchuk.persistence.dao.*;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.*;
 
 public class MySqlDaoFactory extends DaoFactory {
-    @Override
-    public AddressDao getAddressDao() {
-        return new AddressMySqlDao();
-    }
+    private UserDao userDao;
+    private RoleDao roleDao;
+    private AddressDao addressDao;
+    private PeriodicalDao periodicalDao;
+    private PeriodicalTypeDao periodicalTypeDao;
+    private FrequencyDao frequencyDao;
+    private PublisherDao publisherDao;
+    private PeriodicalIssueDao periodicalIssueDao;
+    private PaymentDao paymentDao;
+    private SubscriptionDao subscriptionDao;
+    private SubscriptionPlanDao subscriptionPlanDao;
 
-    @Override
-    public FrequencyDao getFrequencyDao() {
-        return new FrequencyMySqlDao();
-    }
-
-    @Override
-    public PaymentDao getPaymentDao() {
-        return new PaymentMySqlDao();
-    }
-
-    @Override
-    public PeriodicalDao getPeriodicalDao() {
-        return new PeriodicalMySqlDao();
-    }
-
-    @Override
-    public PeriodicalIssueDao getPeriodicalIssueDao() {
-        return new PeriodicalIssueMySqlDao();
-    }
-
-    @Override
-    public PeriodicalTypeDao getPeriodicalTypeDao() {
-        return new PeriodicalTypeMySqlDao();
-    }
-
-    @Override
-    public PublisherDao getPublisherDao() {
-        return new PublisherMySqlDao();
-    }
-
-    @Override
-    public RoleDao getRoleDao() {
-        return new RoleMySqlDao();
-    }
-
-    @Override
-    public SubscriptionDao getSubscriptionDao() {
-        return new SubscriptionMySqlDao();
-    }
-
-    @Override
-    public SubscriptionPlanDao getSubscriptionPlanDao() {
-        return new SubscriptionPlanMySqlDao();
+    public MySqlDaoFactory() {
+        this.userDao = new UserMySqlDao();
+        this.roleDao = new RoleMySqlDao();
+        this.addressDao = new AddressMySqlDao();
+        this.periodicalDao = new PeriodicalMySqlDao();
+        this.periodicalTypeDao = new PeriodicalTypeMySqlDao();
+        this.frequencyDao = new FrequencyMySqlDao();
+        this.publisherDao = new PublisherMySqlDao();
+        this.periodicalIssueDao = new PeriodicalIssueMySqlDao();
+        this.paymentDao = new PaymentMySqlDao();
+        this.subscriptionDao = new SubscriptionMySqlDao();
+        this.subscriptionPlanDao = new SubscriptionPlanMySqlDao();
     }
 
     @Override
     public UserDao getUserDao() {
-        return new UserMySqlDao();
+        return userDao;
+    }
+
+    @Override
+    public RoleDao getRoleDao() {
+        return roleDao;
+    }
+
+    @Override
+    public AddressDao getAddressDao() {
+        return addressDao;
+    }
+
+    @Override
+    public PeriodicalDao getPeriodicalDao() {
+        return periodicalDao;
+    }
+
+    @Override
+    public PeriodicalTypeDao getPeriodicalTypeDao() {
+        return periodicalTypeDao;
+    }
+
+    @Override
+    public FrequencyDao getFrequencyDao() {
+        return frequencyDao;
+    }
+
+    @Override
+    public PublisherDao getPublisherDao() {
+        return publisherDao;
+    }
+
+    @Override
+    public PeriodicalIssueDao getPeriodicalIssueDao() {
+        return periodicalIssueDao;
+    }
+
+    @Override
+    public PaymentDao getPaymentDao() {
+        return paymentDao;
+    }
+
+    @Override
+    public SubscriptionDao getSubscriptionDao() {
+        return subscriptionDao;
+    }
+
+    @Override
+    public SubscriptionPlanDao getSubscriptionPlanDao() {
+        return subscriptionPlanDao;
     }
 }

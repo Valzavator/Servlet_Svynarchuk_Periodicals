@@ -1,6 +1,8 @@
 package com.gmail.maxsvynarchuk.presentation.util.validator;
 
+import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
+import com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostCreatePeriodicalCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignInCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignUpCommand;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
@@ -41,6 +43,20 @@ public class ValidatorManager {
         validateField(new PasswordValidator(), userDTO.getPassword(), Attributes.ERROR_PASSWORD, errors);
         validateField(new NameValidator(), userDTO.getFirstName(), Attributes.ERROR_FIRST_NAME, errors);
         validateField(new NameValidator(), userDTO.getLastName(), Attributes.ERROR_LAST_NAME, errors);
+
+        return errors;
+    }
+
+    /**
+     * Validation data in {@link PostCreatePeriodicalCommand#execute}
+     */
+    public static Map<String, Boolean> validatePeriodicalParameters(Periodical periodicalDTO) {
+        Map<String, Boolean> errors = new HashMap<>();
+
+        validateField(new EmailValidator(), periodicalDTO.getName(), Attributes.ERROR_PERIODICAL_NAME, errors);
+        validateField(new PasswordValidator(), periodicalDTO.getDescription(), Attributes.ERROR_PERIODICAL_DESCRIPTION, errors);
+        validateField(new NameValidator(), periodicalDTO.getDescription(), Attributes.ERROR_PERIODICAL_PRICE, errors);
+//        validateField(new NameValidator(), periodicalDTO.getPrice(), Attributes.ERROR_PERIODICAL_PRICE, errors);
 
         return errors;
     }

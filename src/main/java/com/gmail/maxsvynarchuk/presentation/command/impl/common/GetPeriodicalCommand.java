@@ -10,7 +10,7 @@ import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.service.PeriodicalService;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
-import com.gmail.maxsvynarchuk.service.SubscriptionPlanService;
+import com.gmail.maxsvynarchuk.service.SubscriptionService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,14 +19,14 @@ import java.util.Optional;
 
 public class GetPeriodicalCommand implements Command {
     private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
-    private final SubscriptionPlanService subscriptionPlanService = ServiceFactory.getSubscriptionPlanService();
+    private final SubscriptionService subscriptionService = ServiceFactory.getSubscriptionService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         Long periodicalId = Long.valueOf(request.getParameter(RequestParameters.PERIODICAL_ID));
         Optional<Periodical> periodicalOpt = periodicalService.findById(periodicalId);
         if (periodicalOpt.isPresent()) {
-            List<SubscriptionPlan> subscriptionPlans = subscriptionPlanService.getAllSubscriptionPlans();
+            List<SubscriptionPlan> subscriptionPlans = subscriptionService.getAllSubscriptionPlans();
             request.setAttribute(Attributes.SUBSCRIPTION_PLANS, subscriptionPlans);
             request.setAttribute(Attributes.PERIODICAL, periodicalOpt.get());
             Util.checkErrorParameter(request, RequestParameters.ERROR_ATTRIBUTE);

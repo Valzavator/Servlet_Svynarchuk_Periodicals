@@ -32,7 +32,7 @@
                             </div>
                             <input type="email" id="email"
                                    name="email"
-                                   value="<c:out value="${requestScope.user.email}"/>"
+                                   value="<c:out value="${requestScope.userDTO.email}"/>"
                                    class="form-control form-control-lg
                                    <c:if test="${errors.errorEmail}">
                                             is-invalid
@@ -57,7 +57,7 @@
                                 </div>
                                 <input type="text" id="firstName"
                                        name="firstName"
-                                       value="<c:out value="${requestScope.user.firstName}"/>"
+                                       value="<c:out value="${requestScope.userDTO.firstName}"/>"
                                        class="form-control form-control-lg
                                        <c:if test="${errors.errorFirstName}">
                                             is-invalid
@@ -82,7 +82,7 @@
                                 </div>
                                 <input type="text" id="lastName"
                                        name="lastName"
-                                       value="<c:out value="${requestScope.user.lastName}"/>"
+                                       value="<c:out value="${requestScope.userDTO.lastName}"/>"
                                        class="form-control form-control-lg
                                        <c:if test="${errors.errorLastName}">
                                             is-invalid
@@ -135,15 +135,19 @@
                                         name="gender"
                                         class="form-control form-control-lg">
                                     <option value="MALE"
-                                            <c:if test="${requestScope.user.gender eq Gender.MALE}">
+                                            <c:if test="${requestScope.userDTO.gender eq Gender.MALE}">
                                                 selected
                                             </c:if>
-                                    ><fmt:message key="gender.male"/></option>
+                                    >
+                                        <fmt:message key="gender.male"/>
+                                    </option>
                                     <option value="FEMALE"
-                                            <c:if test="${requestScope.user.gender eq Gender.FEMALE}">
+                                            <c:if test="${requestScope.userDTO.gender eq Gender.FEMALE}">
                                                 selected
                                             </c:if>
-                                    ><fmt:message key="gender.female"/></option>
+                                    >
+                                        <fmt:message key="gender.female"/>
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -159,7 +163,7 @@
                                 </div>
                                 <input type="date" id="dateOfBirth"
                                        name="dateOfBirth"
-                                       value="<fmt:formatDate type = "date" value="${requestScope.user.dateOfBirth}" pattern="yyyy-MM-dd"/>"
+                                       value="<fmt:formatDate type = "date" value="${requestScope.userDTO.dateOfBirth}" pattern="yyyy-MM-dd"/>"
                                        class="form-control form-control-lg"
                                        max="3000-12-31" min="1900-01-01" required>
                             </div>
@@ -168,7 +172,7 @@
                     </div>
 
                     <div class="form-group text-center">
-                        <button type="submit" class="btn btn-primary btn-lg"><fmt:message key="signup"/></button>
+                        <button type="submit" class="btn btn-primary btn-lg mt-3"><fmt:message key="signup"/></button>
                     </div>
 
                 </form>
