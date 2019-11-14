@@ -6,7 +6,7 @@ public class NameValidator extends RegexValidator {
     /**
      * Regex used to perform validation of name.
      */
-    private static final String NAME_REGEX = "^([A-Z][a-z]+)$";
+    private static final String NAME_REGEX = "^\\p{Lu}[\\p{L}&&[^\\p{Lu}]]+$";
 
     public NameValidator() {
         super(NAME_REGEX, MAX_LENGTH);

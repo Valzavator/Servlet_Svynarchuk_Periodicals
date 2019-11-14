@@ -12,3 +12,16 @@
     margin-top: -10px;
     text-decoration: none;
 }
+
+.table-form {
+    display: block;
+    margin-top: 0em;
+    margin-block-end: 0em;
+}
+
+.overflow-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}

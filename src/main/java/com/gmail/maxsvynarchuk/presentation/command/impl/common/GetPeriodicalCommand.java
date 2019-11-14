@@ -24,7 +24,7 @@ public class GetPeriodicalCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         Long periodicalId = Long.valueOf(request.getParameter(RequestParameters.PERIODICAL_ID));
-        Optional<Periodical> periodicalOpt = periodicalService.findById(periodicalId);
+        Optional<Periodical> periodicalOpt = periodicalService.findPeriodicalById(periodicalId);
         if (periodicalOpt.isPresent()) {
             List<SubscriptionPlan> subscriptionPlans = subscriptionService.getAllSubscriptionPlans();
             request.setAttribute(Attributes.SUBSCRIPTION_PLANS, subscriptionPlans);

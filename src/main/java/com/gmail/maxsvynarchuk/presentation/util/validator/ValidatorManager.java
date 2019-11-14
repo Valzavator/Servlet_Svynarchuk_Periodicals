@@ -6,9 +6,7 @@ import com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostCreatePeriodi
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignInCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignUpCommand;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
-import com.gmail.maxsvynarchuk.presentation.util.validator.impl.EmailValidator;
-import com.gmail.maxsvynarchuk.presentation.util.validator.impl.NameValidator;
-import com.gmail.maxsvynarchuk.presentation.util.validator.impl.PasswordValidator;
+import com.gmail.maxsvynarchuk.presentation.util.validator.impl.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,8 +25,14 @@ public class ValidatorManager {
     public static Map<String, Boolean> validateSignInParameters(User userDTO) {
         Map<String, Boolean> errors = new HashMap<>();
 
-        validateField(new EmailValidator(), userDTO.getEmail(), Attributes.ERROR_EMAIL, errors);
-        validateField(new PasswordValidator(), userDTO.getPassword(), Attributes.ERROR_PASSWORD, errors);
+        validateField(new EmailValidator(),
+                userDTO.getEmail(),
+                Attributes.ERROR_EMAIL,
+                errors);
+        validateField(new PasswordValidator(),
+                userDTO.getPassword(),
+                Attributes.ERROR_PASSWORD,
+                errors);
 
         return errors;
     }
@@ -39,10 +43,22 @@ public class ValidatorManager {
     public static Map<String, Boolean> validateSignUpParameters(User userDTO) {
         Map<String, Boolean> errors = new HashMap<>();
 
-        validateField(new EmailValidator(), userDTO.getEmail(), Attributes.ERROR_EMAIL, errors);
-        validateField(new PasswordValidator(), userDTO.getPassword(), Attributes.ERROR_PASSWORD, errors);
-        validateField(new NameValidator(), userDTO.getFirstName(), Attributes.ERROR_FIRST_NAME, errors);
-        validateField(new NameValidator(), userDTO.getLastName(), Attributes.ERROR_LAST_NAME, errors);
+        validateField(new EmailValidator(),
+                userDTO.getEmail(),
+                Attributes.ERROR_EMAIL,
+                errors);
+        validateField(new PasswordValidator(),
+                userDTO.getPassword(),
+                Attributes.ERROR_PASSWORD,
+                errors);
+        validateField(new NameValidator(),
+                userDTO.getFirstName(),
+                Attributes.ERROR_FIRST_NAME,
+                errors);
+        validateField(new NameValidator(),
+                userDTO.getLastName(),
+                Attributes.ERROR_LAST_NAME,
+                errors);
 
         return errors;
     }
@@ -53,10 +69,18 @@ public class ValidatorManager {
     public static Map<String, Boolean> validatePeriodicalParameters(Periodical periodicalDTO) {
         Map<String, Boolean> errors = new HashMap<>();
 
-        validateField(new EmailValidator(), periodicalDTO.getName(), Attributes.ERROR_PERIODICAL_NAME, errors);
-        validateField(new PasswordValidator(), periodicalDTO.getDescription(), Attributes.ERROR_PERIODICAL_DESCRIPTION, errors);
-        validateField(new NameValidator(), periodicalDTO.getDescription(), Attributes.ERROR_PERIODICAL_PRICE, errors);
-//        validateField(new NameValidator(), periodicalDTO.getPrice(), Attributes.ERROR_PERIODICAL_PRICE, errors);
+        validateField(new PeriodicalNameValidator(),
+                periodicalDTO.getName(),
+                Attributes.ERROR_PERIODICAL_NAME,
+                errors);
+        validateField(new PeriodicalDescriptionValidator(),
+                periodicalDTO.getDescription(),
+                Attributes.ERROR_PERIODICAL_DESCRIPTION,
+                errors);
+        validateField(new PeriodicalPriceValidator(),
+                periodicalDTO.getPrice(),
+                Attributes.ERROR_PERIODICAL_PRICE,
+                errors);
 
         return errors;
     }

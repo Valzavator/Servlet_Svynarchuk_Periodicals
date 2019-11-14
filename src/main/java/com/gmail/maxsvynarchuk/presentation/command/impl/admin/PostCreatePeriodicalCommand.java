@@ -27,39 +27,58 @@ public class PostCreatePeriodicalCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.info("Start of new periodical creation");
 
-        Integer periodicalTypeId = Integer.valueOf(request.getParameter(RequestParameters.PERIODICAL_TYPE_ID));
-        Integer periodicalFrequencyId = Integer.valueOf(request.getParameter(RequestParameters.PERIODICAL_FREQUENCY_ID));
-        Long periodicalPublisherId = Long.valueOf(request.getParameter(RequestParameters.PERIODICAL_PUBLISHER_ID));
+        Integer periodicalTypeId = Integer.valueOf(
+                request.getParameter(RequestParameters.PERIODICAL_TYPE_ID));
+        Integer periodicalFrequencyId = Integer.valueOf(
+                request.getParameter(RequestParameters.PERIODICAL_FREQUENCY_ID));
+        Long periodicalPublisherId = Long.valueOf(
+                request.getParameter(RequestParameters.PERIODICAL_PUBLISHER_ID));
+
+        BigDecimal price;
+        PeriodicalType periodicalType;
+        Frequency frequency;
+        Publisher publisher;
+
+        try {
+            price =new BigDecimal(
+                    request.getParameter(RequestParameters.PERIODICAL_PRICE));
+            periodicalType = periodicalService.findPeriodicalTypeById(periodicalTypeId)
+                    .orElseThrow(IllegalArgumentException::new);
+            frequency = periodicalService.findFrequencyById(periodicalFrequencyId)
+                    .orElseThrow(IllegalArgumentException::new);
+            publisher = periodicalService.findPublisherById(periodicalPublisherId)
+                    .orElseThrow(IllegalArgumentException::new);
+        } catch (IllegalArgumentException e) {
+            LOGGER.info("Invalid parameters");
+            throw e;
+        }
 
         Periodical periodicalDTO = Periodical.newBuilder()
                 .setName(request.getParameter(RequestParameters.PERIODICAL_NAME))
                 .setDescription(request.getParameter(RequestParameters.PERIODICAL_DESCRIPTION))
-                .setPrice(
-                        new BigDecimal(request.getParameter(RequestParameters.PERIODICAL_PRICE)))
-                .setPeriodicalType(
-                        PeriodicalType.newBuilder().setId(periodicalTypeId).build())
-                .setFrequency(
-                        Frequency.newBuilder().setId(periodicalFrequencyId).build())
-                .setPublisher(
-                        new Publisher(periodicalPublisherId, null))
+                .setPrice(price)
+                .setPeriodicalType(periodicalType)
+                .setFrequency(frequency)
+                .setPublisher(publisher)
                 .build();
 
         Map<String, Boolean> errors = ValidatorManager
                 .validatePeriodicalParameters(periodicalDTO);
 
         if (errors.isEmpty()) {
+            periodicalService.createPeriodical(periodicalDTO);
             LOGGER.info("Periodical was successfully create");
             return CommandResult.redirect(PagesPaths.CATALOG_PATH);
         }
 
         LOGGER.info("Invalid creation parameters");
-        request.setAttribute(Attributes.ERRORS,errors);
-        request.setAttribute(Attributes.PERIODICAL_DTO,periodicalDTO);
-        request.setAttribute(Attributes.PERIODICAL_TYPES,periodicalService.getAllPeriodicalTypes());
-        request.setAttribute(Attributes.FREQUENCIES,periodicalService.getAllFrequencies());
-        request.setAttribute(Attributes.PUBLISHERS,periodicalService.getAllPublishers());
+        request.setAttribute(Attributes.ERRORS, errors);
+        request.setAttribute(Attributes.PERIODICAL_DTO, periodicalDTO);
+        request.setAttribute(Attributes.PERIODICAL_TYPES, periodicalService.findAllPeriodicalTypes());
+        request.setAttribute(Attributes.FREQUENCIES, periodicalService.findAllFrequencies());
+        request.setAttribute(Attributes.PUBLISHERS, periodicalService.findAllPublishers());
 
         LOGGER.info("Periodical creation fail");
         return CommandResult.forward(Views.CREATE_PERIODICAL_VIEW);
-}
+    }
 }

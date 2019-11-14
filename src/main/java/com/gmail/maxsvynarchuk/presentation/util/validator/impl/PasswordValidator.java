@@ -9,7 +9,7 @@ public class PasswordValidator extends AbstractValidator<String> {
     @Override
     public boolean isValid(String password) {
         resetErrorStatus();
-        if(!Objects.nonNull(password) || password.length() < PASSWORD_MIN_LENGTH ||
+        if(Objects.isNull(password) || password.length() < PASSWORD_MIN_LENGTH ||
                 password.length() > PASSWORD_MAX_LENGTH) {
             setErrorStatus(true);
             return false;

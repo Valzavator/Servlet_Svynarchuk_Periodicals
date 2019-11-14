@@ -24,8 +24,8 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
             ResourceManager.QUERIES.getProperty("periodical.count");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("periodical.where.id");
-    private final static String SELECT_ALL_ON_WHICH_USER_IS_NOT_SUBSCRIBER=
-            ResourceManager.QUERIES.getProperty("periodical.users.not.subscribed");
+    private final static String ORDER_DESC_BY_ID =
+            ResourceManager.QUERIES.getProperty("periodical.select.order.desc");
 
     private final UtilMySqlDao<Periodical> utilMySqlDao;
 
@@ -53,7 +53,7 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
 
     @Override
     public List<Periodical> findAll(long skip, long limit) {
-        return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
+        return utilMySqlDao.findAll(SELECT_ALL + ORDER_DESC_BY_ID + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override
@@ -98,15 +98,5 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
     @Override
     public long getCount() {
         return utilMySqlDao.getRowsCount(COUNT);
-    }
-
-    @Override
-    public List<Periodical> findAllOnWhichUserIsNotSubscribed(int skip, int limit, User user) {
-        Objects.requireNonNull(user);
-
-        return utilMySqlDao.findAll(SELECT_ALL_ON_WHICH_USER_IS_NOT_SUBSCRIBER + UtilMySqlDao.LIMIT,
-                user.getId(),
-                skip,
-                limit);
     }
 }

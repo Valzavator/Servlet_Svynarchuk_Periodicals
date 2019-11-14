@@ -24,15 +24,19 @@ public class PeriodicalService {
         return PeriodicalService.Singleton.INSTANCE;
     }
 
-    public Optional<Periodical> findById(Long id) {
+    public Periodical createPeriodical(Periodical periodical) {
+        return periodicalDao.insert(periodical);
+    }
+
+    public Optional<Periodical> findPeriodicalById(Long id) {
         return periodicalDao.findOne(id);
     }
 
-    public List<Periodical> getPeriodicals(long skip, long limit) {
+    public List<Periodical> findAllPeriodicals(long skip, long limit) {
         return periodicalDao.findAll(skip, limit);
     }
 //
-//    public List<Periodical> getPeriodicalsOnWhichUserIsNotSubscribed(int skip, int limit, User user) {
+//    public List<Periodical> findPeriodicalsOnWhichUserIsNotSubscribed(int skip, int limit, User user) {
 //        return periodicalDao.findAllOnWhichUserIsNotSubscribed(skip, limit, user);
 //    }
 
@@ -40,15 +44,27 @@ public class PeriodicalService {
         return periodicalDao.getCount();
     }
 
-    public List<PeriodicalType> getAllPeriodicalTypes() {
+    public Optional<PeriodicalType> findPeriodicalTypeById(Integer id) {
+        return periodicalTypeDao.findOne(id);
+    }
+
+    public List<PeriodicalType> findAllPeriodicalTypes() {
         return periodicalTypeDao.findAll();
     }
 
-    public List<Frequency> getAllFrequencies() {
+    public Optional<Frequency> findFrequencyById(Integer id) {
+        return frequencyDao.findOne(id);
+    }
+
+    public List<Frequency> findAllFrequencies() {
         return frequencyDao.findAll();
     }
 
-    public List<Publisher> getAllPublishers() {
+    public Optional<Publisher> findPublisherById(Long id) {
+        return publisherDao.findOne(id);
+    }
+
+    public List<Publisher> findAllPublishers() {
         return publisherDao.findAll();
     }
 }

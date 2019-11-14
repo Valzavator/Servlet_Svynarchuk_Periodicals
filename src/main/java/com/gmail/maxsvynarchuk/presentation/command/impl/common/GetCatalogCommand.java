@@ -25,7 +25,7 @@ public class GetCatalogCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         long rowsCount = periodicalService.getPeriodicalsCount();
         long skip = PaginationManager.manage(request, rowsCount);
-        List<Periodical> periodicals = periodicalService.getPeriodicals(skip, PaginationManager.RECORDS_PER_PAGE);
+        List<Periodical> periodicals = periodicalService.findAllPeriodicals(skip, PaginationManager.RECORDS_PER_PAGE);
         request.setAttribute(Attributes.CATALOG, periodicals);
         if (!periodicals.isEmpty()) {
             List<SubscriptionPlan> subscriptionPlans = subscriptionService.getAllSubscriptionPlans();

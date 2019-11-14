@@ -22,6 +22,12 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(FrontController.class);
 
     public static void main(String[] args) throws SQLException {
+
+//        System.out.println("ASDASD asdas    \n\ns".matches("^[\\p{L}\\p{javaWhitespace}]+$"));
+        System.out.println(new BigDecimal(0).compareTo(new BigDecimal(-3)));
+        System.out.println(new BigDecimal(0).compareTo(new BigDecimal(3)));
+        System.out.println(new BigDecimal(0).compareTo(new BigDecimal(0)));
+
 //        String url = "jdbc:mysql://localhost:3306/periodicals";
 //        Properties prop = new Properties();
 //        prop.put("user", "root");
@@ -33,7 +39,7 @@ public class Main {
 //        prop.put("serverTimezone", "Europe/Kiev");
 //        prop.put("useLegacyDatetimeCode", "false");
 //        Connection cn = DriverManager.getConnection(url, prop);
-////
+//
 //        RoleDao dao = new RoleMySqlDao(new UtilMySqlDao<>(() -> {
 //            try {
 //                return DriverManager.getConnection(url, prop);
@@ -42,6 +48,9 @@ public class Main {
 //                throw new RuntimeException();
 //            }
 //        }, new RoleMapper()));
+//
+//        System.out.println(dao.exist(3));
+//        System.out.println(dao.findOne(3));
 //
 //        System.out.println(dao.getCount());
 //

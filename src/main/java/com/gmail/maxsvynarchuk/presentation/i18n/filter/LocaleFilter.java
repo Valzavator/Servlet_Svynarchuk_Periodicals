@@ -21,18 +21,23 @@ public class LocaleFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        //TODO delete try-catch
+        try {
+            if (req.getParameter(LANG) != null) {
+                replaceUserLocale(req);
+                String referer = Util.getReferer(req);
+                Util.redirectTo(req, res, referer);
+                return;
+            }
+            if (req.getSession().getAttribute(LOCALE) == null) {
+                setUserLocale(req);
+            }
 
-        if (req.getParameter(LANG) != null) {
-            replaceUserLocale(req);
-            String referer = Util.getReferer(req);
-            Util.redirectTo(req, res, referer);
-            return;
+            chain.doFilter(req, res);
+        } catch (Throwable e) {
+            e.printStackTrace();
+            throw e;
         }
-        if (req.getSession().getAttribute(LOCALE) == null) {
-            setUserLocale(req);
-        }
-
-        chain.doFilter(req, res);
     }
 
     private void replaceUserLocale(HttpServletRequest request) {

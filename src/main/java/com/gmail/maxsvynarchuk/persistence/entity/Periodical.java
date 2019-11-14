@@ -2,6 +2,7 @@ package com.gmail.maxsvynarchuk.persistence.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -15,6 +16,7 @@ import java.util.StringJoiner;
  */
 public class Periodical implements Serializable {
     private static final long serialVersionUID = -8852341448368620250L;
+    private static final int PRICE_SCALE = 2;
 
     private Long id;
     private String name;
@@ -99,7 +101,10 @@ public class Periodical implements Serializable {
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = price;
+        if (price.scale() != PRICE_SCALE)
+            this.price = price.setScale(PRICE_SCALE, RoundingMode.HALF_EVEN);
+        else
+            this.price = price;
     }
 
     public String getDescription() {

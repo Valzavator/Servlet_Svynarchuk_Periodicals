@@ -15,9 +15,9 @@ public class GetCreatePeriodicalCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute(Attributes.PERIODICAL_TYPES, periodicalService.getAllPeriodicalTypes());
-        request.setAttribute(Attributes.FREQUENCIES, periodicalService.getAllFrequencies());
-        request.setAttribute(Attributes.PUBLISHERS, periodicalService.getAllPublishers());
+        request.setAttribute(Attributes.PERIODICAL_TYPES, periodicalService.findAllPeriodicalTypes());
+        request.setAttribute(Attributes.FREQUENCIES, periodicalService.findAllFrequencies());
+        request.setAttribute(Attributes.PUBLISHERS, periodicalService.findAllPublishers());
 
         return CommandResult.forward(Views.CREATE_PERIODICAL_VIEW);
     }

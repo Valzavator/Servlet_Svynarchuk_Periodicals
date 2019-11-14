@@ -13,10 +13,18 @@
 <jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>
 <main role="main" class="container">
     <div class="d-flex justify-content-center align-items-center">
-        <h1 class="display-4">
+        <h1 class="display-3">
             <strong>
-                <fmt:message key="cart.empty"/>
+                <fmt:message key="cart"/>
             </strong>
+        </h1>
+    </div>
+    <div class="progress mb-5">
+        <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center mb-5">
+        <h1 class="display-4 text-info">
+            <span class="badge badge-info"><fmt:message key="cart.empty"/></span>
         </h1>
     </div>
     <div class=" table-responsive">
@@ -30,10 +38,11 @@
                 <th scope="col" class="align-middle"><fmt:message key="cart.publisher"/></th>
                 <th scope="col" class="align-middle"><fmt:message key="cart.subscription.plan"/></th>
                 <th scope="col" class="align-middle"><fmt:message key="cart.price"/></th>
-                <th scope="col">
-                    <form method="get" class="align-middle">
+                <th scope="col" class="align-middle">
+                    <form method="get" class="table-form">
                         <input  name="id" value="1" type="hidden"/>
                         <button type="submit" class="btn btn-danger btn-sm">
+                            <i class="fa fa-times-circle-o fa-lg" aria-hidden="true">&nbsp;</i>
                             <fmt:message key="cart.remove.all"/>
                         </button>
                     </form>
@@ -50,7 +59,7 @@
                 <td class="align-middle">@mdo</td>
                 <td class="align-middle">@mdo</td>
                 <td class="align-middle">
-                    <form method="get">
+                    <form method="get" class="table-form">
                         <input  name="id" value="1" type="hidden"/>
                         <button type="submit" class="btn btn-link" style="color: red;">
                             <i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i>
@@ -67,7 +76,7 @@
                 <td class="align-middle">@mdo</td>
                 <td class="align-middle">@mdo</td>
                 <td class="align-middle">
-                    <form method="get">
+                    <form method="get" class="table-form">
                         <input  name="id" value="1" type="hidden"/>
                         <button type="submit" class="btn btn-link" style="color: red;">
                             <i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i>
@@ -84,7 +93,7 @@
                 <td class="align-middle">@mdo</td>
                 <td class="align-middle">@mdo</td>
                 <td class="align-middle">
-                    <form method="get">
+                    <form method="get" class="table-form">
                         <input  name="id" value="1" type="hidden"/>
                         <button type="submit" class="btn btn-link" style="color: red;">
                             <i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i>
