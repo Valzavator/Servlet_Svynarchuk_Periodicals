@@ -62,7 +62,7 @@
                                 </a>
                             </td>
                             <td class="align-middle">
-                                <a href="edit_periodical?id=${periodical.id}">
+                                <a href="<c:url value="/app/admin/catalog/edit?periodicalId=${periodical.id}"/>">
                                     <i class="fa fa-pencil fa-lg" aria-hidden="true">&nbsp;</i>
                                     <fmt:message key="admin.management.catalog.edit"/>
                                 </a>

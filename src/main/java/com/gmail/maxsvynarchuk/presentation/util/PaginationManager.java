@@ -7,14 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 public class PaginationManager {
-    public static final int RECORDS_PER_PAGE = 5;
+    public static final int DEFAULT_RECORDS_PER_PAGE = 10;
+    public static final int CATALOG_RECORDS_PER_PAGE = 5;
+
     private static final int FIRST_PAGE = 1;
 
-    public static long manage(HttpServletRequest req, long rowsCount) {
+    public static long manage(HttpServletRequest req, long rowsCount, int recordsPerPage) {
         String pageStr = req.getParameter(RequestParameters.PAGINATION_PAGE);
 
-        long numberOfPages = rowsCount / RECORDS_PER_PAGE;
-        if (rowsCount % RECORDS_PER_PAGE > 0) {
+        long numberOfPages = rowsCount / recordsPerPage;
+        if (rowsCount % recordsPerPage > 0) {
             numberOfPages++;
         }
         long page;
@@ -26,9 +28,13 @@ public class PaginationManager {
         if (page > numberOfPages) {
             page = numberOfPages;
         }
-        long skip = (page - 1) * RECORDS_PER_PAGE;
+        long skip = (page - 1) * recordsPerPage;
         req.setAttribute(Attributes.PAGINATION_PAGE, page);
         req.setAttribute(Attributes.PAGINATION_NUMBER_OF_PAGES, numberOfPages);
         return skip;
+    }
+
+    public static long manage(HttpServletRequest req, long rowsCount) {
+        return manage(req, rowsCount, DEFAULT_RECORDS_PER_PAGE);
     }
 }

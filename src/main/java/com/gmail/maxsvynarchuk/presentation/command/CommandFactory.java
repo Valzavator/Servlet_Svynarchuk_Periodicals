@@ -1,9 +1,7 @@
 package com.gmail.maxsvynarchuk.presentation.command;
 
 import com.gmail.maxsvynarchuk.presentation.command.impl.*;
-import com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetAdminCatalogCommand;
-import com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetCreatePeriodicalCommand;
-import com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostCreatePeriodicalCommand;
+import com.gmail.maxsvynarchuk.presentation.command.impl.admin.*;
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.*;
 import com.gmail.maxsvynarchuk.presentation.command.impl.common.GetCatalogCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.common.GetPeriodicalCommand;
@@ -52,6 +50,10 @@ public class CommandFactory {
                 new GetCreatePeriodicalCommand());
         commands.put(buildKey(PagesPaths.CREATE_PERIODICAL_PATH, RequestMethod.POST),
                 new PostCreatePeriodicalCommand());
+        commands.put(buildKey(PagesPaths.EDIT_PERIODICAL_PATH, RequestMethod.GET),
+                new GetEditPeriodicalCommand());
+        commands.put(buildKey(PagesPaths.EDIT_PERIODICAL_PATH, RequestMethod.POST),
+                new PostEditPeriodicalCommand());
     }
 
     public Command getCommand(String path, RequestMethod method) {

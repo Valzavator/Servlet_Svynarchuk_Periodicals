@@ -12,7 +12,7 @@
 <c:set var="catalogView" scope="page" value="/WEB-INF/views/catalog.jsp"/>
 <c:set var="cartView" scope="page" value="/WEB-INF/views/cart.jsp"/>
 <c:set var="adminCatalogView" scope="page" value="/WEB-INF/views/adminCatalog.jsp"/>
-<c:set var="adminCreatePeriodicalView" scope="page" value="/WEB-INF/views/createPeriodical.jsp"/>
+<c:set var="adminCreatePeriodicalView" scope="page" value="/WEB-INF/views/periodicalCreate.jsp"/>
 <c:set var="currView" scope="page">
     <myLib:viewUri/>
 </c:set>

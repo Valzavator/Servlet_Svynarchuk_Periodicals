@@ -28,6 +28,10 @@ public class PeriodicalService {
         return periodicalDao.insert(periodical);
     }
 
+    public void updatePeriodical(Periodical periodical) {
+        periodicalDao.update(periodical);
+    }
+
     public Optional<Periodical> findPeriodicalById(Long id) {
         return periodicalDao.findOne(id);
     }

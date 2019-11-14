@@ -1,6 +1,9 @@
 package com.gmail.maxsvynarchuk.presentation.command.impl.admin;
 
-import com.gmail.maxsvynarchuk.persistence.entity.*;
+import com.gmail.maxsvynarchuk.persistence.entity.Frequency;
+import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
+import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalType;
+import com.gmail.maxsvynarchuk.persistence.entity.Publisher;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignInCommand;
@@ -18,15 +21,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Optional;
 
-public class PostCreatePeriodicalCommand implements Command {
-    private static Logger LOGGER = LoggerFactory.getLogger(PostCreatePeriodicalCommand.class);
+public class PostEditPeriodicalCommand implements Command {
+    private static Logger LOGGER = LoggerFactory.getLogger(PostEditPeriodicalCommand.class);
     private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        LOGGER.info("Start of new periodical creation");
+        LOGGER.info("Start editing of periodical");
 
+        Long periodicalId = Long.valueOf(
+                request.getParameter(RequestParameters.PERIODICAL_ID));
         Integer periodicalTypeId = Integer.valueOf(
                 request.getParameter(RequestParameters.PERIODICAL_TYPE_ID));
         Integer periodicalFrequencyId = Integer.valueOf(
@@ -54,6 +60,7 @@ public class PostCreatePeriodicalCommand implements Command {
         }
 
         Periodical periodicalDTO = Periodical.newBuilder()
+                .setId(periodicalId)
                 .setName(request.getParameter(RequestParameters.PERIODICAL_NAME))
                 .setDescription(request.getParameter(RequestParameters.PERIODICAL_DESCRIPTION))
                 .setPrice(price)
@@ -66,19 +73,19 @@ public class PostCreatePeriodicalCommand implements Command {
                 .validatePeriodicalParameters(periodicalDTO);
 
         if (errors.isEmpty()) {
-            periodicalService.createPeriodical(periodicalDTO);
-            LOGGER.info("Periodical was successfully create");
+            periodicalService.updatePeriodical(periodicalDTO);
+            LOGGER.info("Periodical was successfully edit");
             return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);
         }
 
         LOGGER.info("Invalid creation parameters");
-        request.setAttribute(Attributes.ERRORS, errors);
         request.setAttribute(Attributes.PERIODICAL_DTO, periodicalDTO);
+        request.setAttribute(Attributes.ERRORS, errors);
         request.setAttribute(Attributes.PERIODICAL_TYPES, periodicalService.findAllPeriodicalTypes());
         request.setAttribute(Attributes.FREQUENCIES, periodicalService.findAllFrequencies());
         request.setAttribute(Attributes.PUBLISHERS, periodicalService.findAllPublishers());
 
-        LOGGER.info("Periodical creation fail");
-        return CommandResult.forward(Views.CREATE_PERIODICAL_VIEW);
+        LOGGER.info("Periodical editing failed");
+        return CommandResult.forward(Views.EDIT_PERIODICAL_VIEW);
     }
 }

@@ -6,7 +6,7 @@ public class PeriodicalDescriptionValidator extends RegexValidator {
     /**
      * Regex used to perform validation of data.
      */
-    private static final String EMAIL_REGEX = "^[\\p{L}\\p{javaWhitespace}]+$";
+    private static final String EMAIL_REGEX = "^[\\p{L}\\p{Digit}\\p{Punct}\\p{javaWhitespace}]+$";
 
     public PeriodicalDescriptionValidator() {
         super(EMAIL_REGEX, MAX_LENGTH);

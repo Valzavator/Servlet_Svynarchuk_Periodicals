@@ -29,6 +29,7 @@ public class AuthorizationFilter implements Filter {
         //TODO add all secure paths
         secureAdminPaths.add(PagesPaths.ADMIN_CATALOG_PATH);
         secureAdminPaths.add(PagesPaths.CREATE_PERIODICAL_PATH);
+        secureAdminPaths.add(PagesPaths.EDIT_PERIODICAL_PATH);
 
         secureUserPaths.add(PagesPaths.CART_PATH);
         secureUserPaths.add(PagesPaths.CART_ADD_ITEM_PATH);

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 public class PostSignUpCommand implements Command {
-    private static Logger LOGGER = LoggerFactory.getLogger(PostSignInCommand.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(PostSignUpCommand.class);
     private final UserService userService = ServiceFactory.getUserService();
 
     @Override
