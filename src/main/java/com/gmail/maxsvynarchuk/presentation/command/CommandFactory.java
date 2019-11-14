@@ -54,6 +54,8 @@ public class CommandFactory {
                 new GetEditPeriodicalCommand());
         commands.put(buildKey(PagesPaths.EDIT_PERIODICAL_PATH, RequestMethod.POST),
                 new PostEditPeriodicalCommand());
+        commands.put(buildKey(PagesPaths.CHANGE_STATUS_PERIODICAL_PATH, RequestMethod.POST),
+                new PostChangeStatusPeriodicalCommand());
     }
 
     public Command getCommand(String path, RequestMethod method) {

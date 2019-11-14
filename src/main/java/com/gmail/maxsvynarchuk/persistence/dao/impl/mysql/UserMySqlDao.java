@@ -2,7 +2,7 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 
 import com.gmail.maxsvynarchuk.persistence.dao.UserDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
-import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.UserMapper;
+import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.util.TimeConverter;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
@@ -30,7 +30,7 @@ public class UserMySqlDao implements UserDao {
     private final UtilMySqlDao<User> utilMySqlDao;
 
     public UserMySqlDao() {
-        this(new UserMapper());
+        this(MapperFactory.getUserMapper());
     }
 
     public UserMySqlDao(EntityMapper<User> mapper) {

@@ -140,13 +140,14 @@ CREATE TABLE publishers
 /*==============================================================*/
 CREATE TABLE periodicals
 (
-    periodical_id          BIGINT         NOT NULL AUTO_INCREMENT,
-    publisher_id           BIGINT         NOT NULL,
-    frequency_id           INT            NOT NULL,
-    periodical_type_id     INT            NOT NULL,
-    periodical_name        VARCHAR(255)   NOT NULL,
-    periodical_price       DECIMAL(10, 2) NOT NULL,
-    periodical_description VARCHAR(1000)  NOT NULL,
+    periodical_id          BIGINT                                        NOT NULL AUTO_INCREMENT,
+    publisher_id           BIGINT                                        NOT NULL,
+    frequency_id           INT                                           NOT NULL,
+    periodical_type_id     INT                                           NOT NULL,
+    periodical_name        VARCHAR(255)                                  NOT NULL,
+    periodical_price       DECIMAL(10, 2)                                NOT NULL,
+    periodical_description VARCHAR(1000)                                 NOT NULL,
+    periodical_status      ENUM ('active', 'suspended') DEFAULT 'active' NOT NULL,
     PRIMARY KEY (periodical_id),
     CONSTRAINT fk_periodical_type
         FOREIGN KEY (periodical_type_id) REFERENCES periodical_types (periodical_type_id)
@@ -240,17 +241,17 @@ VALUES ('Daily', 'Once per business day'),
        ('Weekly', 'Every week'),
        ('Biweekly, Fortnightly', 'Every two weeks'),
        ('Semi-monthly', 'Twice per month'),
-       ('Monthly', 'Every month'),
-       ('Semi-quarterly', 'Twice per quarter'),
-       ('Bimonthly', 'Every 2 months'),
-       ('Quarterly', 'Every quarter'),
-       ('Triannually', 'Thrice per year'),
-       ('Semiannually, Biannually', 'Twice per year'),
-       ('Annually', 'Once per year'),
-       ('Biennially', 'Once per 2 years'),
-       ('Triennially', 'Once per 3 years'),
-       ('Quadriennially', 'Once per 4 years'),
-       ('Quinquennially', 'Once per 5 years');
+       ('Monthly', 'Every month');
+#        ('Semi-quarterly', 'Twice per quarter'),
+#        ('Bimonthly', 'Every 2 months'),
+#        ('Quarterly', 'Every quarter'),
+#        ('Triannually', 'Thrice per year'),
+#        ('Semiannually, Biannually', 'Twice per year'),
+#        ('Annually', 'Once per year'),
+#        ('Biennially', 'Once per 2 years'),
+#        ('Triennially', 'Once per 3 years'),
+#        ('Quadriennially', 'Once per 4 years'),
+#        ('Quinquennially', 'Once per 5 years');
 
 
 INSERT INTO publishers(publisher_name)

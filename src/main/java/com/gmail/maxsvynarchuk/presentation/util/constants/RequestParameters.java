@@ -11,6 +11,7 @@ public final class RequestParameters {
     public static final String USER_PASSWORD = ResourceManager.PARAMETER.getProperty("user.password");
 
     public static final String PERIODICAL_NAME = ResourceManager.PARAMETER.getProperty("periodical.name");
+    public static final String PERIODICAL_STATUS = ResourceManager.PARAMETER.getProperty("periodical.status");
     public static final String PERIODICAL_DESCRIPTION = ResourceManager.PARAMETER.getProperty("periodical.description");
     public static final String PERIODICAL_PRICE = ResourceManager.PARAMETER.getProperty("periodical.price");
     public static final String PERIODICAL_TYPE_ID = ResourceManager.PARAMETER.getProperty("periodical.type.id");

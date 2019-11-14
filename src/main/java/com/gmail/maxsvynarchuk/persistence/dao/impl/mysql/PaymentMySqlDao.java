@@ -2,7 +2,7 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 
 import com.gmail.maxsvynarchuk.persistence.dao.PaymentDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
-import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.PaymentMapper;
+import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.Payment;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
@@ -27,7 +27,7 @@ public class PaymentMySqlDao implements PaymentDao {
     private final UtilMySqlDao<Payment> utilMySqlDao;
 
     public PaymentMySqlDao() {
-        this(new PaymentMapper());
+        this(MapperFactory.getPaymentMapper());
     }
 
     public PaymentMySqlDao(EntityMapper<Payment> mapper) {

@@ -2,7 +2,7 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 
 import com.gmail.maxsvynarchuk.persistence.dao.FrequencyDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
-import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.FrequencyMapper;
+import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.Frequency;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
@@ -27,7 +27,7 @@ public class FrequencyMySqlDao implements FrequencyDao {
     private final UtilMySqlDao<Frequency> utilMySqlDao;
 
     public FrequencyMySqlDao() {
-        this(new FrequencyMapper());
+        this(MapperFactory.getFrequencyMapper());
     }
 
     public FrequencyMySqlDao(EntityMapper<Frequency> mapper) {

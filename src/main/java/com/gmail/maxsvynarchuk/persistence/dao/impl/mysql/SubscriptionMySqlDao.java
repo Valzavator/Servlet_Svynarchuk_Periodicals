@@ -2,7 +2,7 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 
 import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
-import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.SubscriptionMapper;
+import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.util.TimeConverter;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
@@ -28,7 +28,7 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
     private final UtilMySqlDao<Subscription> utilMySqlDao;
 
     public SubscriptionMySqlDao() {
-        this(new SubscriptionMapper());
+        this(MapperFactory.getSubscriptionMapper());
     }
 
     public SubscriptionMySqlDao(EntityMapper<Subscription> mapper) {

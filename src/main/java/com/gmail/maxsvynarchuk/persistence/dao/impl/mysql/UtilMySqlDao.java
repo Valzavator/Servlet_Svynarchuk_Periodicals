@@ -75,10 +75,9 @@ public class UtilMySqlDao<T> {
                      .prepareStatement(query)) {
 
             setParamsToStatement(statement, params);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                return mapper.mapToObjectList(resultSet);
-            }
+            ResultSet resultSet = statement.executeQuery();
 
+            return mapper.mapToObjectList(resultSet);
         } catch (SQLException e) {
             LOGGER.error(ERROR_EXECUTE_QUERY, e);
             throw new DaoException(ERROR_EXECUTE_QUERY, e);
@@ -125,7 +124,6 @@ public class UtilMySqlDao<T> {
             statement.executeUpdate();
 
             return getGeneratedPrimaryKey(statement, pkType);
-
         } catch (SQLException e) {
             LOGGER.error(ERROR_EXECUTE_QUERY, e);
             throw new DaoException(ERROR_EXECUTE_QUERY, e);
@@ -143,10 +141,13 @@ public class UtilMySqlDao<T> {
      * @param query sql-based string, which specify details of counting operation
      * @return count of rows for query
      */
-    public long getRowsCount(String query) {
+    public long getRowsCount(String query, Object... params) {
         try (Connection connection = pool.getConnection();
-             Statement s = connection.createStatement()) {
-            ResultSet rs = s.executeQuery(query);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            setParamsToStatement(statement, params);
+            ResultSet rs = statement.executeQuery();
+
             if (rs.next()) {
                 return rs.getLong(1);
             } else {

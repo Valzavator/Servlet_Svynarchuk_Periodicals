@@ -2,7 +2,7 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 
 import com.gmail.maxsvynarchuk.persistence.dao.RoleDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
-import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.RoleMapper;
+import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.Role;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
@@ -27,7 +27,7 @@ public class RoleMySqlDao implements RoleDao {
     private final UtilMySqlDao<Role> utilMySqlDao;
 
     public RoleMySqlDao() {
-        this(new RoleMapper());
+        this(MapperFactory.getRoleMapper());
     }
 
     public RoleMySqlDao(EntityMapper<Role> mapper) {

@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
 import com.gmail.maxsvynarchuk.presentation.util.constants.*;
+import com.gmail.maxsvynarchuk.presentation.util.mapper.RequestMapperFactory;
 import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManager;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
 import com.gmail.maxsvynarchuk.service.UserService;
@@ -23,10 +24,8 @@ public class PostSignInCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.info("Start of sign in process");
-        User userDTO = User.newBuilder()
-                .setEmail(request.getParameter(RequestParameters.USER_EMAIL))
-                .setPassword(request.getParameter(RequestParameters.USER_PASSWORD))
-                .build();
+        User userDTO = RequestMapperFactory.getSignInMapper()
+                .mapToObject(request);
 
         Map<String, Boolean> errors = ValidatorManager
                 .validateSignInParameters(userDTO);
@@ -39,9 +38,8 @@ public class PostSignInCommand implements Command {
                 user.setPassword(null);
                 request.getSession().setAttribute(Attributes.USER, user);
                 LOGGER.info("User successfully signed in");
-                //TODO
                 if (user.isAdmin()) {
-                    return CommandResult.redirect(PagesPaths.HOME_PATH);
+                    return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);
                 } else {
                     return CommandResult.redirect(PagesPaths.CATALOG_PATH);
                 }

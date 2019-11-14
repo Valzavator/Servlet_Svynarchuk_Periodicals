@@ -23,10 +23,10 @@ public class GetCatalogCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        long rowsCount = periodicalService.getPeriodicalsCount();
+        long rowsCount = periodicalService.getActivePeriodicalsCount();
         long skip = PaginationManager.manage(
                 request, rowsCount, PaginationManager.CATALOG_RECORDS_PER_PAGE);
-        List<Periodical> periodicals = periodicalService.findAllPeriodicals(
+        List<Periodical> periodicals = periodicalService.findAllActivePeriodicals(
                 skip, PaginationManager.CATALOG_RECORDS_PER_PAGE);
         request.setAttribute(Attributes.CATALOG, periodicals);
         if (!periodicals.isEmpty()) {

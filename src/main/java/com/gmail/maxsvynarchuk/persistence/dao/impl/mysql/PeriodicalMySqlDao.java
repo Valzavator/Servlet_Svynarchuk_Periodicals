@@ -2,9 +2,9 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 
 import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
-import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.PeriodicalMapper;
+import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
-import com.gmail.maxsvynarchuk.persistence.entity.User;
+import com.gmail.maxsvynarchuk.util.PeriodicalStatus;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
@@ -24,13 +24,15 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
             ResourceManager.QUERIES.getProperty("periodical.count");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("periodical.where.id");
-    private final static String ORDER_DESC_BY_ID =
-            ResourceManager.QUERIES.getProperty("periodical.select.order.desc");
+    private final static String WHERE_STATUS =
+            ResourceManager.QUERIES.getProperty("periodical.where.status");
+    private final static String ORDER_BY_STATUS_AND_ID =
+            ResourceManager.QUERIES.getProperty("periodical.select.order");
 
     private final UtilMySqlDao<Periodical> utilMySqlDao;
 
     public PeriodicalMySqlDao() {
-        this(new PeriodicalMapper());
+        this(MapperFactory.getPeriodicalMapper());
     }
 
     public PeriodicalMySqlDao(EntityMapper<Periodical> mapper) {
@@ -53,7 +55,13 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
 
     @Override
     public List<Periodical> findAll(long skip, long limit) {
-        return utilMySqlDao.findAll(SELECT_ALL + ORDER_DESC_BY_ID + UtilMySqlDao.LIMIT, skip, limit);
+        return utilMySqlDao.findAll(SELECT_ALL + ORDER_BY_STATUS_AND_ID + UtilMySqlDao.LIMIT, skip, limit);
+    }
+
+    @Override
+    public List<Periodical> findAllPeriodicalsByStatus(PeriodicalStatus status, long skip, long limit) {
+        return utilMySqlDao.findAll(SELECT_ALL + WHERE_STATUS + UtilMySqlDao.LIMIT,
+                status.toString(), skip, limit);
     }
 
     @Override
@@ -66,6 +74,7 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
                 obj.getFrequency().getId(),
                 obj.getPeriodicalType().getId(),
                 obj.getName(),
+                obj.getStatus().toString(),
                 obj.getPrice(),
                 obj.getDescription());
         obj.setId(id);
@@ -83,6 +92,7 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
                 obj.getFrequency().getId(),
                 obj.getPeriodicalType().getId(),
                 obj.getName(),
+                obj.getStatus().toString(),
                 obj.getPrice(),
                 obj.getDescription(),
                 obj.getId());
@@ -98,5 +108,10 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
     @Override
     public long getCount() {
         return utilMySqlDao.getRowsCount(COUNT);
+    }
+
+    @Override
+    public long getCountByStatus(PeriodicalStatus periodicalStatus) {
+        return utilMySqlDao.getRowsCount(COUNT + WHERE_STATUS, periodicalStatus.toString());
     }
 }

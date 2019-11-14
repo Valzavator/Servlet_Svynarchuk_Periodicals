@@ -3,11 +3,10 @@ package com.gmail.maxsvynarchuk.presentation.command.impl.admin;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
-import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignInCommand;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
-import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
+import com.gmail.maxsvynarchuk.presentation.util.mapper.RequestMapperFactory;
 import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManager;
 import com.gmail.maxsvynarchuk.service.PeriodicalService;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
@@ -16,7 +15,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.math.BigDecimal;
 import java.util.Map;
 
 public class PostCreatePeriodicalCommand implements Command {
@@ -27,40 +25,14 @@ public class PostCreatePeriodicalCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.info("Start of new periodical creation");
 
-        Integer periodicalTypeId = Integer.valueOf(
-                request.getParameter(RequestParameters.PERIODICAL_TYPE_ID));
-        Integer periodicalFrequencyId = Integer.valueOf(
-                request.getParameter(RequestParameters.PERIODICAL_FREQUENCY_ID));
-        Long periodicalPublisherId = Long.valueOf(
-                request.getParameter(RequestParameters.PERIODICAL_PUBLISHER_ID));
-
-        BigDecimal price;
-        PeriodicalType periodicalType;
-        Frequency frequency;
-        Publisher publisher;
-
+        Periodical periodicalDTO;
         try {
-            price =new BigDecimal(
-                    request.getParameter(RequestParameters.PERIODICAL_PRICE));
-            periodicalType = periodicalService.findPeriodicalTypeById(periodicalTypeId)
-                    .orElseThrow(IllegalArgumentException::new);
-            frequency = periodicalService.findFrequencyById(periodicalFrequencyId)
-                    .orElseThrow(IllegalArgumentException::new);
-            publisher = periodicalService.findPublisherById(periodicalPublisherId)
-                    .orElseThrow(IllegalArgumentException::new);
+            periodicalDTO = RequestMapperFactory.getCreatePeriodicalMapper()
+                    .mapToObject(request);
         } catch (IllegalArgumentException e) {
-            LOGGER.info("Invalid parameters");
+            LOGGER.info("Invalid parameters of request", e);
             throw e;
         }
-
-        Periodical periodicalDTO = Periodical.newBuilder()
-                .setName(request.getParameter(RequestParameters.PERIODICAL_NAME))
-                .setDescription(request.getParameter(RequestParameters.PERIODICAL_DESCRIPTION))
-                .setPrice(price)
-                .setPeriodicalType(periodicalType)
-                .setFrequency(frequency)
-                .setPublisher(publisher)
-                .build();
 
         Map<String, Boolean> errors = ValidatorManager
                 .validatePeriodicalParameters(periodicalDTO);

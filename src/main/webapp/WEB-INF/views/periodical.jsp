@@ -1,5 +1,6 @@
 <%--@elvariable id="periodical" type="com.gmail.maxsvynarchuk.persistence.entity.Periodical"--%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+         import="com.gmail.maxsvynarchuk.util.PeriodicalStatus" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -24,17 +25,31 @@
                 </div>
                 <div class="card-body bg-primary">
                     <div class="card-text text-center">
-                            <fmt:message key="periodical.description"/>&nbsp;
+                        <fmt:message key="periodical.description"/>&nbsp;
                     </div>
                     <p class="card-text"><c:out value="${periodical.description}"/></p>
                 </div>
 
                 <ul class="bg-primary text-white list-group list-group-flush">
                     <li class="list-group-item bg-primary">
+                        <fmt:message key="periodical.status"/>:
+                        <c:if test="${periodical.status eq PeriodicalStatus.ACTIVE}">
+                            <span class="badge badge-success">
+                                <fmt:message key="periodical.status.active"/>
+                            </span>
+                        </c:if>
+                        <c:if test="${periodical.status eq PeriodicalStatus.SUSPENDED}">
+                            <span class="badge badge-warning">
+                                <fmt:message key="periodical.status.suspended"/>
+                            </span>
+                        </c:if>
+                    </li>
+                    <li class="list-group-item bg-primary">
                         <fmt:message key="periodical.type"/>: <c:out value="${periodical.periodicalType.name}"/>
                     </li>
                     <li class="list-group-item bg-primary">
-                        <fmt:message key="periodical.frequency"/>: <c:out value="${periodical.frequency.name}"/>
+                        <fmt:message key="periodical.frequency"/>:
+                        <c:out value="${periodical.frequency.name}"/> - <c:out value="${periodical.frequency.meaning}"/>
                     </li>
                     <li class="list-group-item bg-primary">
                         <fmt:message key="periodical.publisher"/>: <c:out value="${periodical.publisher.name}"/>
@@ -42,7 +57,7 @@
                     <li class="list-group-item bg-primary">
                         <fmt:message key="periodical.price"/>: <c:out value="${periodical.price} $"/></li>
                 </ul>
-                <c:if test="${!sessionScope.user.isAdmin()}">
+                <c:if test="${!sessionScope.user.isAdmin() and periodical.status ne PeriodicalStatus.SUSPENDED}">
                     <div class="card-footer d-flex justify-content-sm-center justify-content-lg-end ">
                         <form accept-charset="UTF-8" role="form" method="post" action="<c:url value="/app/cart/add"/>">
                             <!-- Button trigger modal -->

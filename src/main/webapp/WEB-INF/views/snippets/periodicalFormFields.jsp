@@ -129,7 +129,7 @@
                         selected
                     </c:if>
             >
-                <c:out value="${frequency.name}"/>
+                <c:out value="${frequency.name}"/> - <c:out value="${frequency.meaning}"/>
             </option>
         </c:forEach>
         </select>

@@ -1,5 +1,7 @@
 package com.gmail.maxsvynarchuk.persistence.entity;
 
+import com.gmail.maxsvynarchuk.util.PeriodicalStatus;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -20,6 +22,7 @@ public class Periodical implements Serializable {
 
     private Long id;
     private String name;
+    private PeriodicalStatus status;
     private BigDecimal price;
     private String description;
     private Publisher publisher;
@@ -40,6 +43,11 @@ public class Periodical implements Serializable {
 
         public Builder setName(String name) {
             periodical.setName(name);
+            return this;
+        }
+
+        public Builder setStatus(PeriodicalStatus status) {
+            periodical.setStatus(status);
             return this;
         }
 
@@ -94,6 +102,14 @@ public class Periodical implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public PeriodicalStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(PeriodicalStatus status) {
+        this.status = status;
     }
 
     public BigDecimal getPrice() {
@@ -157,6 +173,7 @@ public class Periodical implements Serializable {
         return new StringJoiner(", ", Periodical.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("name='" + name + "'")
+                .add("status=" + status)
                 .add("price=" + price)
                 .add("description='" + description + "'")
                 .add("publisher=" + publisher)

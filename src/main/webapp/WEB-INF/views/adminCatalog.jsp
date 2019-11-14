@@ -1,4 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+         import="com.gmail.maxsvynarchuk.util.PeriodicalStatus" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -38,6 +39,7 @@
                     <tr class="bg-primary">
                         <th scope="col">№</th>
                         <th scope="col"><fmt:message key="periodical.name"/></th>
+                        <th scope="col"><fmt:message key="periodical.status"/></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
@@ -49,6 +51,18 @@
                         <tr>
                             <th scope="row" class="align-middle">${counter.count}</th>
                             <td class="align-middle overflow-text"><c:out value="${periodical.name}"/></td>
+                            <td class="align-middle overflow-text">
+                            <c:if test="${periodical.status eq PeriodicalStatus.ACTIVE}">
+                                <span class="badge badge-success">
+                                    <fmt:message key="periodical.status.active"/>
+                                </span>
+                            </c:if>
+                            <c:if test="${periodical.status eq PeriodicalStatus.SUSPENDED}">
+                                <span class="badge badge-warning">
+                                    <fmt:message key="periodical.status.suspended"/>
+                                </span>
+                            </c:if>
+                            </td>
                             <td class="align-middle">
                                 <a href="<c:url value="/app/periodical?periodicalId=${periodical.id}"/>">
                                     <i class="fa fa-eye fa-lg" aria-hidden="true">&nbsp;</i>
@@ -56,22 +70,46 @@
                                 </a>
                             </td>
                             <td class="align-middle">
-                                <a href="edit_periodical?id=${periodical.id}">
+                                <a href="edit_periodical?id=${periodical.id}"
+                                    <c:if test="${periodical.status eq PeriodicalStatus.SUSPENDED}">
+                                        class="btn-link disabled"
+                                    </c:if>
+                                >
                                     <i class="fa fa-plus fa-lg" aria-hidden="true">&nbsp;</i>
                                     <fmt:message key="admin.management.create.add.issue"/>
                                 </a>
                             </td>
                             <td class="align-middle">
-                                <a href="<c:url value="/app/admin/catalog/edit?periodicalId=${periodical.id}"/>">
+                                <a href="<c:url value="/app/admin/catalog/edit?periodicalId=${periodical.id}"/>"
+                                    <c:if test="${periodical.status eq PeriodicalStatus.SUSPENDED}">
+                                        class="btn-link disabled"
+                                    </c:if>
+                                >
                                     <i class="fa fa-pencil fa-lg" aria-hidden="true">&nbsp;</i>
                                     <fmt:message key="admin.management.catalog.edit"/>
                                 </a>
                             </td>
                             <td class="align-middle">
-                                <a href="edit_periodical?id=${periodical.id}">
-                                    <i class="fa fa-trash fa-lg" aria-hidden="true">&nbsp;</i>
-                                    <fmt:message key="admin.management.catalog.delete"/>
-                                </a>
+                                <form method="post" class="table-form"
+                                      action="<c:url value="/app/admin/catalog/change-status"/>">
+                                    <input type="hidden" name="periodicalId" value="${periodical.id}">
+                                    <c:choose>
+                                        <c:when test="${periodical.status eq PeriodicalStatus.SUSPENDED}">
+                                        <input type="hidden" name="periodicalStatus" value="active">
+                                        <button type="submit"  class="btn btn-link">
+                                            <i class="fa fa-check-circle-o fa-lg" aria-hidden="true">&nbsp;</i>
+                                            <fmt:message key="admin.management.catalog.activate"/>
+                                        </button>
+                                        </c:when>
+                                        <c:otherwise>
+                                        <input type="hidden" name="periodicalStatus" value="suspended">
+                                        <button type="submit"  class="btn btn-link text-warning">
+                                                <i class="fa fa-ban fa-lg" aria-hidden="true">&nbsp;</i>
+                                                <fmt:message key="admin.management.catalog.suspend"/>
+                                        </button>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </form>
                             </td>
                         </tr>
                     </c:forEach>

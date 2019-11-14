@@ -2,7 +2,7 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 
 import com.gmail.maxsvynarchuk.persistence.dao.PublisherDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
-import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.PublisherMapper;
+import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.Publisher;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
@@ -27,7 +27,7 @@ public class PublisherMySqlDao implements PublisherDao {
     private final UtilMySqlDao<Publisher> utilMySqlDao;
 
     public PublisherMySqlDao() {
-        this(new PublisherMapper());
+        this(MapperFactory.getPublisherMapper());
     }
 
     public PublisherMySqlDao(EntityMapper<Publisher> mapper) {

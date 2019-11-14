@@ -2,7 +2,7 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 
 import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalIssueDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
-import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.PeriodicalIssueMapper;
+import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
 import com.gmail.maxsvynarchuk.util.TimeConverter;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
@@ -28,7 +28,7 @@ public class PeriodicalIssueMySqlDao implements PeriodicalIssueDao {
     private final UtilMySqlDao<PeriodicalIssue> utilMySqlDao;
 
     public PeriodicalIssueMySqlDao() {
-        this(new PeriodicalIssueMapper());
+        this(MapperFactory.getPeriodicalIssueMapper());
     }
 
     public PeriodicalIssueMySqlDao(EntityMapper<PeriodicalIssue> mapper) {

@@ -3,8 +3,11 @@ package com.gmail.maxsvynarchuk.service;
 import com.gmail.maxsvynarchuk.persistence.dao.*;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
+import com.gmail.maxsvynarchuk.util.PeriodicalStatus;
+import jdk.net.SocketFlow;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class PeriodicalService {
@@ -25,11 +28,25 @@ public class PeriodicalService {
     }
 
     public Periodical createPeriodical(Periodical periodical) {
+        Objects.requireNonNull(periodical);
+
         return periodicalDao.insert(periodical);
     }
 
     public void updatePeriodical(Periodical periodical) {
+        Objects.requireNonNull(periodical);
+
         periodicalDao.update(periodical);
+    }
+
+    public void changeStatus(Periodical periodical, PeriodicalStatus newStatus) {
+        Objects.requireNonNull(periodical);
+        Objects.requireNonNull(newStatus);
+
+        if (periodical.getStatus() != newStatus) {
+            periodical.setStatus(newStatus);
+            updatePeriodical(periodical);
+        }
     }
 
     public Optional<Periodical> findPeriodicalById(Long id) {
@@ -39,10 +56,19 @@ public class PeriodicalService {
     public List<Periodical> findAllPeriodicals(long skip, long limit) {
         return periodicalDao.findAll(skip, limit);
     }
+
+    public List<Periodical> findAllActivePeriodicals(long skip, long limit) {
+        return periodicalDao.findAllPeriodicalsByStatus(PeriodicalStatus.ACTIVE, skip, limit);
+    }
+
 //
 //    public List<Periodical> findPeriodicalsOnWhichUserIsNotSubscribed(int skip, int limit, User user) {
 //        return periodicalDao.findAllOnWhichUserIsNotSubscribed(skip, limit, user);
 //    }
+
+    public long getActivePeriodicalsCount() {
+        return periodicalDao.getCountByStatus(PeriodicalStatus.ACTIVE);
+    }
 
     public long getPeriodicalsCount() {
         return periodicalDao.getCount();
