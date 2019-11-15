@@ -70,7 +70,7 @@
                                 </a>
                             </td>
                             <td class="align-middle">
-                                <a href="edit_periodical?id=${periodical.id}"
+                                <a href="<c:url value="/app/admin/catalog/issue-create?periodicalId=${periodical.id}"/>"
                                     <c:if test="${periodical.status eq PeriodicalStatus.SUSPENDED}">
                                         class="btn-link disabled"
                                     </c:if>
@@ -80,7 +80,7 @@
                                 </a>
                             </td>
                             <td class="align-middle">
-                                <a href="<c:url value="/app/admin/catalog/edit?periodicalId=${periodical.id}"/>"
+                                <a href="<c:url value="/app/admin/catalog/periodical-edit?periodicalId=${periodical.id}"/>"
                                     <c:if test="${periodical.status eq PeriodicalStatus.SUSPENDED}">
                                         class="btn-link disabled"
                                     </c:if>

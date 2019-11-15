@@ -5,6 +5,7 @@ import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalType;
 import com.gmail.maxsvynarchuk.persistence.entity.Publisher;
 import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
+import com.gmail.maxsvynarchuk.util.PeriodicalStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
@@ -23,15 +24,16 @@ public class CreatePeriodicalRequestMapper implements RequestEntityMapper<Period
         BigDecimal price = new BigDecimal(
                 request.getParameter(RequestParameters.PERIODICAL_PRICE));
         PeriodicalType periodicalType = PeriodicalType.newBuilder()
-                .setId(periodicalFrequencyId)
+                .setId(periodicalTypeId)
                 .build();
         Frequency frequency = Frequency.newBuilder()
-                .setId(periodicalTypeId)
+                .setId(periodicalFrequencyId)
                 .build();
         Publisher publisher = new Publisher(periodicalPublisherId, null);
 
         return Periodical.newBuilder()
                 .setName(request.getParameter(RequestParameters.PERIODICAL_NAME))
+                .setStatus(PeriodicalStatus.ACTIVE)
                 .setDescription(request.getParameter(RequestParameters.PERIODICAL_DESCRIPTION))
                 .setPrice(price)
                 .setPeriodicalType(periodicalType)

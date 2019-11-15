@@ -1,10 +1,12 @@
 package com.gmail.maxsvynarchuk.presentation.command.impl.admin;
 
-import com.gmail.maxsvynarchuk.persistence.entity.*;
+import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
+import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
+import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.presentation.util.mapper.RequestMapperFactory;
 import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManager;
@@ -16,17 +18,23 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
+import java.util.Optional;
 
-public class PostCreatePeriodicalCommand implements Command {
-    private static Logger LOGGER = LoggerFactory.getLogger(PostCreatePeriodicalCommand.class);
+public class PostCreateIssueCommand implements Command {
+    private static Logger LOGGER = LoggerFactory.getLogger(PostCreateIssueCommand.class);
     private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        LOGGER.info("Start of new periodical creation");
-        Periodical periodicalDTO;
+        LOGGER.info("Start of new issue creation");
+        PeriodicalIssue periodicalIssueDTO;
+        Optional<Periodical> periodicalOpt;
+        Long periodicalId;
         try {
-            periodicalDTO = RequestMapperFactory.getCreatePeriodicalMapper()
+            periodicalId = Long.valueOf(
+                    request.getParameter(RequestParameters.PERIODICAL_ID));
+            periodicalOpt = periodicalService.findPeriodicalById(periodicalId);
+            periodicalIssueDTO = RequestMapperFactory.getCreateIssueMapper()
                     .mapToObject(request);
         } catch (NumberFormatException e) {
             LOGGER.info("Invalid parameters of request", e);
@@ -34,22 +42,26 @@ public class PostCreatePeriodicalCommand implements Command {
         }
 
         Map<String, Boolean> errors = ValidatorManager
-                .validatePeriodicalParameters(periodicalDTO);
+                .validateIssueParameters(periodicalIssueDTO);
 
         if (errors.isEmpty()) {
-            periodicalService.createPeriodical(periodicalDTO);
-            LOGGER.info("Periodical was successfully create");
+            if (periodicalOpt.isPresent()) {
+                System.out.println(periodicalIssueDTO);
+                // TODO isPresent
+                boolean isPresent = periodicalService.addIssueToPeriodical(
+                        periodicalOpt.get(), periodicalIssueDTO);
+                LOGGER.info("Issue was successfully create");
+            } else {
+                LOGGER.info("Periodical with id {} doesn't exist", periodicalId);
+            }
             return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);
         }
 
         LOGGER.info("Invalid creation parameters");
         request.setAttribute(Attributes.ERRORS, errors);
-        request.setAttribute(Attributes.PERIODICAL_DTO, periodicalDTO);
-        request.setAttribute(Attributes.PERIODICAL_TYPES, periodicalService.findAllPeriodicalTypes());
-        request.setAttribute(Attributes.FREQUENCIES, periodicalService.findAllFrequencies());
-        request.setAttribute(Attributes.PUBLISHERS, periodicalService.findAllPublishers());
+        request.setAttribute(Attributes.ISSUE_DTO, periodicalIssueDTO);
 
-        LOGGER.info("Periodical creation fail");
-        return CommandResult.forward(Views.CREATE_PERIODICAL_VIEW);
+        LOGGER.info("Issue creation fail");
+        return CommandResult.forward(Views.CREATE_ISSUE_VIEW);
     }
 }

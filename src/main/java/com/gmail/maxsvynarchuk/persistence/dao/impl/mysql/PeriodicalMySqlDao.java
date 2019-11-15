@@ -60,7 +60,7 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
 
     @Override
     public List<Periodical> findAllPeriodicalsByStatus(PeriodicalStatus status, long skip, long limit) {
-        return utilMySqlDao.findAll(SELECT_ALL + WHERE_STATUS + UtilMySqlDao.LIMIT,
+        return utilMySqlDao.findAll(SELECT_ALL + WHERE_STATUS + ORDER_BY_STATUS_AND_ID + UtilMySqlDao.LIMIT,
                 status.toString(), skip, limit);
     }
 
@@ -74,7 +74,6 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
                 obj.getFrequency().getId(),
                 obj.getPeriodicalType().getId(),
                 obj.getName(),
-                obj.getStatus().toString(),
                 obj.getPrice(),
                 obj.getDescription());
         obj.setId(id);

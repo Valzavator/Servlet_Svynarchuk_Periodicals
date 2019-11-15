@@ -16,7 +16,7 @@ public class PeriodicalIssue implements Serializable {
 
     private Long id;
     private String name;
-    private Long issueNumber;
+    private String issueNumber;
     private Date publicationDate;
     private String description;
     private Periodical periodical;
@@ -38,7 +38,7 @@ public class PeriodicalIssue implements Serializable {
             return this;
         }
 
-        public Builder setIssueNumber(Long issueNumber) {
+        public Builder setIssueNumber(String issueNumber) {
             periodicalIssue.setIssueNumber(issueNumber);
             return this;
         }
@@ -86,11 +86,11 @@ public class PeriodicalIssue implements Serializable {
         this.name = name;
     }
 
-    public Long getIssueNumber() {
+    public String getIssueNumber() {
         return issueNumber;
     }
 
-    public void setIssueNumber(Long issueNumber) {
+    public void setIssueNumber(String issueNumber) {
         this.issueNumber = issueNumber;
     }
 

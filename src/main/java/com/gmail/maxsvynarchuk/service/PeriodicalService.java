@@ -12,6 +12,7 @@ import java.util.Optional;
 
 public class PeriodicalService {
     private final PeriodicalDao periodicalDao = DaoFactory.getInstance().getPeriodicalDao();
+    private final PeriodicalIssueDao periodicalIssueDao = DaoFactory.getInstance().getPeriodicalIssueDao();
     private final PeriodicalTypeDao periodicalTypeDao = DaoFactory.getInstance().getPeriodicalTypeDao();
     private final FrequencyDao frequencyDao = DaoFactory.getInstance().getFrequencyDao();
     private final PublisherDao publisherDao = DaoFactory.getInstance().getPublisherDao();
@@ -20,9 +21,9 @@ public class PeriodicalService {
     }
 
     private static class Singleton {
+
         private final static PeriodicalService INSTANCE = new PeriodicalService();
     }
-
     public static PeriodicalService getInstance() {
         return PeriodicalService.Singleton.INSTANCE;
     }
@@ -37,6 +38,16 @@ public class PeriodicalService {
         Objects.requireNonNull(periodical);
 
         periodicalDao.update(periodical);
+    }
+
+    public boolean addIssueToPeriodical(Periodical periodical, PeriodicalIssue periodicalIssu) {
+        Objects.requireNonNull(periodical);
+        Objects.requireNonNull(periodicalIssu);
+
+        periodicalIssu.setPeriodical(periodical);
+        periodicalIssueDao.insert(periodicalIssu);
+        //TODO
+        return false;
     }
 
     public void changeStatus(Periodical periodical, PeriodicalStatus newStatus) {
@@ -57,8 +68,8 @@ public class PeriodicalService {
         return periodicalDao.findAll(skip, limit);
     }
 
-    public List<Periodical> findAllActivePeriodicals(long skip, long limit) {
-        return periodicalDao.findAllPeriodicalsByStatus(PeriodicalStatus.ACTIVE, skip, limit);
+    public List<Periodical> findAllPeriodicalsByStatus(PeriodicalStatus status, long skip, long limit) {
+        return periodicalDao.findAllPeriodicalsByStatus(status, skip, limit);
     }
 
 //
@@ -66,8 +77,8 @@ public class PeriodicalService {
 //        return periodicalDao.findAllOnWhichUserIsNotSubscribed(skip, limit, user);
 //    }
 
-    public long getActivePeriodicalsCount() {
-        return periodicalDao.getCountByStatus(PeriodicalStatus.ACTIVE);
+    public long getPeriodicalsCountByStatus(PeriodicalStatus status) {
+        return periodicalDao.getCountByStatus(status);
     }
 
     public long getPeriodicalsCount() {

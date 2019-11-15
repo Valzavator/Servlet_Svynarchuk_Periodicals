@@ -1,8 +1,11 @@
 package com.gmail.maxsvynarchuk.presentation.util.validator;
 
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
+import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
+import com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostCreateIssueCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostCreatePeriodicalCommand;
+import com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostEditPeriodicalCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignInCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignUpCommand;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
@@ -64,7 +67,7 @@ public class ValidatorManager {
     }
 
     /**
-     * Validation data in {@link PostCreatePeriodicalCommand#execute}
+     * Validation data in {@link PostCreatePeriodicalCommand#execute} and {@link PostEditPeriodicalCommand#execute}
      */
     public static Map<String, Boolean> validatePeriodicalParameters(Periodical periodicalDTO) {
         Map<String, Boolean> errors = new HashMap<>();
@@ -80,6 +83,28 @@ public class ValidatorManager {
         validateField(new PeriodicalPriceValidator(),
                 periodicalDTO.getPrice(),
                 Attributes.ERROR_PERIODICAL_PRICE,
+                errors);
+
+        return errors;
+    }
+
+    /**
+     * Validation data in {@link PostCreateIssueCommand#execute}
+     */
+    public static Map<String, Boolean> validateIssueParameters(PeriodicalIssue periodicalIssueDTO) {
+        Map<String, Boolean> errors = new HashMap<>();
+
+        validateField(new PeriodicalNameValidator(),
+                periodicalIssueDTO.getName(),
+                Attributes.ERROR_ISSUE_NAME,
+                errors);
+        validateField(new PeriodicalDescriptionValidator(),
+                periodicalIssueDTO.getDescription(),
+                Attributes.ERROR_ISSUE_NUMBER,
+                errors);
+        validateField(new PeriodicalDescriptionValidator(),
+                periodicalIssueDTO.getDescription(),
+                Attributes.ERROR_ISSUE_DESCRIPTION,
                 errors);
 
         return errors;

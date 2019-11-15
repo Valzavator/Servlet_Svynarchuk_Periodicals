@@ -169,13 +169,14 @@ CREATE TABLE periodicals
 /*==============================================================*/
 CREATE TABLE periodical_issues
 (
-    periodical_issues_id BIGINT          NOT NULL AUTO_INCREMENT,
-    periodical_id        BIGINT          NOT NULL,
-    issues_name          VARCHAR(255)    NOT NULL,
-    issue_no             BIGINT UNSIGNED NOT NULL UNIQUE,
-    publication_date     DATE            NOT NULL,
+    periodical_issues_id BIGINT       NOT NULL AUTO_INCREMENT,
+    periodical_id        BIGINT       NOT NULL,
+    issues_name          VARCHAR(255) NOT NULL,
+    issue_no             VARCHAR(10)  NOT NULL,
+    publication_date     DATE         NOT NULL,
     issues_description   VARCHAR(1000),
     PRIMARY KEY (periodical_issues_id),
+    UNIQUE (periodical_id, issue_no),
     CONSTRAINT fk_periodical_issue
         FOREIGN KEY (periodical_id) REFERENCES periodicals (periodical_id)
             ON UPDATE RESTRICT

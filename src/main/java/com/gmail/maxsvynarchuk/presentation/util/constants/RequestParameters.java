@@ -18,6 +18,11 @@ public final class RequestParameters {
     public static final String PERIODICAL_FREQUENCY_ID = ResourceManager.PARAMETER.getProperty("periodical.frequency.id");
     public static final String PERIODICAL_PUBLISHER_ID = ResourceManager.PARAMETER.getProperty("periodical.publisher.id");
 
+    public static final String ISSUE_NAME = ResourceManager.PARAMETER.getProperty("issue.name");
+    public static final String ISSUE_NUMBER = ResourceManager.PARAMETER.getProperty("issue.number");
+    public static final String ISSUE_DESCRIPTION = ResourceManager.PARAMETER.getProperty("issue.description");
+    public static final String ISSUE_PUBLICATION_DATE = ResourceManager.PARAMETER.getProperty("issue.publication.date");
+
     public static final String PERIODICAL_ID = ResourceManager.PARAMETER.getProperty("periodical.id");
     public static final String SUBSCRIPTION_PLAN_ID = ResourceManager.PARAMETER.getProperty("subscription.plan.id");
 

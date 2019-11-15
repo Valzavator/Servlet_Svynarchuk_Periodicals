@@ -1,11 +1,12 @@
 <%--@elvariable id="numberOfPages" type="java.lang.Integer"--%>
 <%--@elvariable id="page" type="java.lang.Integer"--%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+         import="com.gmail.maxsvynarchuk.presentation.util.constants.Views" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="myLib" uri="/WEB-INF/tag/requestedViewTag" %>
 
-<c:set var="catalogView" scope="page" value="/WEB-INF/views/catalog.jsp"/>
-<c:set var="adminCatalogView" scope="page" value="/WEB-INF/views/adminCatalog.jsp"/>
+<c:set var="catalogView" scope="page" value="${Views.CATALOG_VIEW}"/>
+<c:set var="adminCatalogView" scope="page" value="${Views.ADMIN_CATALOG_VIEW}"/>
 <c:set var="currView" scope="page">
     <myLib:viewUri/>
 </c:set>

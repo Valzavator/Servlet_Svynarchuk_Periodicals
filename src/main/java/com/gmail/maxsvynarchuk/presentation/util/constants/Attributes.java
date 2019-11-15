@@ -11,6 +11,7 @@ public final class Attributes {
 
     public static final String USER_DTO = ResourceManager.ATTRIBUTE.getProperty("user.dto");
     public static final String PERIODICAL_DTO = ResourceManager.ATTRIBUTE.getProperty("periodical.dto");
+    public static final String ISSUE_DTO = ResourceManager.ATTRIBUTE.getProperty("issue.dto");
 
     public static final String ERRORS = ResourceManager.ATTRIBUTE.getProperty("errors");
     public static final String ERROR_EMAIL = ResourceManager.ATTRIBUTE.getProperty("error.email");
@@ -23,6 +24,9 @@ public final class Attributes {
     public static final String ERROR_PERIODICAL_NAME = ResourceManager.ATTRIBUTE.getProperty("error.periodical.name");
     public static final String ERROR_PERIODICAL_DESCRIPTION = ResourceManager.ATTRIBUTE.getProperty("error.periodical.description");
     public static final String ERROR_PERIODICAL_PRICE = ResourceManager.ATTRIBUTE.getProperty("error.periodical.price");
+    public static final String ERROR_ISSUE_NAME = ResourceManager.ATTRIBUTE.getProperty("error.issue.name");
+    public static final String ERROR_ISSUE_NUMBER = ResourceManager.ATTRIBUTE.getProperty("error.issue.number");
+    public static final String ERROR_ISSUE_DESCRIPTION = ResourceManager.ATTRIBUTE.getProperty("error.issue.description");
 
     public static final String CATALOG = ResourceManager.ATTRIBUTE.getProperty("catalog");
     public static final String SUBSCRIPTION_PLANS = ResourceManager.ATTRIBUTE.getProperty("subscription.plans");

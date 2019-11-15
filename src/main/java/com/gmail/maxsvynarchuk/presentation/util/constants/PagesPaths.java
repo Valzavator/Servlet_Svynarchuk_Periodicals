@@ -19,9 +19,10 @@ public final class PagesPaths {
     public static final String CART_ADD_ITEM_PATH = ResourceManager.PATH.getProperty("path.cart.add.item");
 
     public static final String ADMIN_CATALOG_PATH = ResourceManager.PATH.getProperty("path.admin.catalog");
-    public static final String CREATE_PERIODICAL_PATH = ResourceManager.PATH.getProperty("path.admin.catalog.create");
-    public static final String EDIT_PERIODICAL_PATH = ResourceManager.PATH.getProperty("path.admin.catalog.edit");
+    public static final String CREATE_PERIODICAL_PATH = ResourceManager.PATH.getProperty("path.admin.catalog.periodical.create");
+    public static final String EDIT_PERIODICAL_PATH = ResourceManager.PATH.getProperty("path.admin.catalog.periodical.edit");
     public static final String CHANGE_STATUS_PERIODICAL_PATH = ResourceManager.PATH.getProperty("path.admin.catalog.change.status");
+    public static final String CREATE_ISSUE_PATH = ResourceManager.PATH.getProperty("path.admin.issue.issue.create");
 
     private PagesPaths() {
     }

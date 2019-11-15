@@ -19,7 +19,7 @@ public interface RequestEntityMapper<T> {
      *
      * @param request request from client with object data in parameters
      * @return converted object
-     * @throws IllegalArgumentException if the parameters does not exist or is not valid
+     * @throws NumberFormatException if the IDs of entities does not exist or is not valid
      */
     T mapToObject(HttpServletRequest request);
 }

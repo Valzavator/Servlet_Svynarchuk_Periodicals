@@ -56,6 +56,10 @@ public class CommandFactory {
                 new PostEditPeriodicalCommand());
         commands.put(buildKey(PagesPaths.CHANGE_STATUS_PERIODICAL_PATH, RequestMethod.POST),
                 new PostChangeStatusPeriodicalCommand());
+        commands.put(buildKey(PagesPaths.CREATE_ISSUE_PATH, RequestMethod.GET),
+                new GetCreateIssueCommand());
+        commands.put(buildKey(PagesPaths.CREATE_ISSUE_PATH, RequestMethod.POST),
+                new PostCreateIssueCommand());
     }
 
     public Command getCommand(String path, RequestMethod method) {

@@ -33,7 +33,7 @@ public class PeriodicalIssueMapper implements EntityMapper<PeriodicalIssue> {
                 .setPeriodical(tempPeriodical)
                 .setName(resultSet.getString(
                         tablePrefix + ISSUE_NAME_FIELD))
-                .setIssueNumber(resultSet.getLong(
+                .setIssueNumber(resultSet.getString(
                         tablePrefix + ISSUE_NO_FIELD))
                 .setPublicationDate(resultSet.getDate(
                         tablePrefix + PUBLICATION_DATE_FIELD))

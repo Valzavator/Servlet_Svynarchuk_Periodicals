@@ -36,7 +36,7 @@ public class PostEditPeriodicalCommand implements Command {
         try {
             periodicalDTO = RequestMapperFactory.getEditPeriodicalMapper()
                     .mapToObject(request);
-        } catch (IllegalArgumentException e) {
+        } catch (NumberFormatException e) {
             LOGGER.info("Invalid parameters of request", e);
             throw e;
         }

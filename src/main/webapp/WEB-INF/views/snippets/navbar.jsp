@@ -1,4 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+         import="com.gmail.maxsvynarchuk.presentation.util.constants.Views" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="myLib" uri="/WEB-INF/tag/requestedViewTag" %>
@@ -6,13 +7,13 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="i18n.lang"/>
 
-<c:set var="homeView" scope="page" value="/WEB-INF/views/index.jsp"/>
-<c:set var="signInView" scope="page" value="/WEB-INF/views/signin.jsp"/>
-<c:set var="signUpView" scope="page" value="/WEB-INF/views/signup.jsp"/>
-<c:set var="catalogView" scope="page" value="/WEB-INF/views/catalog.jsp"/>
-<c:set var="cartView" scope="page" value="/WEB-INF/views/cart.jsp"/>
-<c:set var="adminCatalogView" scope="page" value="/WEB-INF/views/adminCatalog.jsp"/>
-<c:set var="adminCreatePeriodicalView" scope="page" value="/WEB-INF/views/periodicalCreate.jsp"/>
+<c:set var="homeView" scope="page" value="${Views.HOME_VIEW}"/>
+<c:set var="signInView" scope="page" value="${Views.SIGN_IN_VIEW}"/>
+<c:set var="signUpView" scope="page" value="${Views.SIGN_UP_VIEW}"/>
+<c:set var="catalogView" scope="page" value="${Views.CATALOG_VIEW}"/>
+<c:set var="cartView" scope="page" value="${Views.CART_VIEW}"/>
+<c:set var="adminCatalogView" scope="page" value="${Views.ADMIN_CATALOG_VIEW}"/>
+<c:set var="adminCreatePeriodicalView" scope="page" value="${Views.CREATE_PERIODICAL_VIEW}"/>
 <c:set var="currView" scope="page">
     <myLib:viewUri/>
 </c:set>
@@ -84,31 +85,31 @@
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.user.isAdmin()}">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="adminDropdownMenuLink" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-cogs fa-lg" aria-hidden="true">&nbsp;</i>
-                        <fmt:message key="admin.management"/>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="adminDropdownMenuLink">
-                        <a class="dropdown-item
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="adminDropdownMenuLink" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-cogs fa-lg" aria-hidden="true">&nbsp;</i>
+                            <fmt:message key="admin.management"/>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="adminDropdownMenuLink">
+                            <a class="dropdown-item
                             <c:if test="${adminCatalogView.equals(currView)}">
                                 active
                             </c:if>"
-                            href="<c:url value="/app/admin/catalog"/>">
-                            <i class="fa fa-list fa-lg" aria-hidden="true">&nbsp;</i>
-                            <fmt:message key="admin.management.catalog"/>
-                        </a>
-                        <a class="dropdown-item
+                               href="<c:url value="/app/admin/catalog"/>">
+                                <i class="fa fa-list fa-lg" aria-hidden="true">&nbsp;</i>
+                                <fmt:message key="admin.management.catalog"/>
+                            </a>
+                            <a class="dropdown-item
                             <c:if test="${adminCreatePeriodicalView.equals(currView)}">
                                 active
                             </c:if>"
-                            href="<c:url value="/app/admin/catalog/create"/>">
-                            <i class="fa fa-plus-square fa-lg" aria-hidden="true">&nbsp;</i>
-                            <fmt:message key="admin.management.create.periodical"/>
-                        </a>
-                    </div>
-                </li>
+                               href="<c:url value="/app/admin/catalog/periodical-create"/>">
+                                <i class="fa fa-plus-square fa-lg" aria-hidden="true">&nbsp;</i>
+                                <fmt:message key="admin.management.create.periodical"/>
+                            </a>
+                        </div>
+                    </li>
                 </c:if>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="profileDropdownMenuLink" role="button"
