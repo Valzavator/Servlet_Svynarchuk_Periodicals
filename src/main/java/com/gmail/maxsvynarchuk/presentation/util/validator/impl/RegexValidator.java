@@ -16,7 +16,7 @@ public class RegexValidator extends AbstractValidator<String> {
     public boolean isValid(String str) {
         resetErrorStatus();
 
-        if (!Objects.nonNull(str) || str.length() >= maxLength) {
+        if (Objects.isNull(str) || str.length() > maxLength) {
             setErrorStatus(true);
             return false;
         }

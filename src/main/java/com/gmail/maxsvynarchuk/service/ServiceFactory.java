@@ -19,4 +19,8 @@ public class ServiceFactory {
     public static SubscriptionService getSubscriptionService() {
         return SubscriptionService.getInstance();
     }
+
+    public static IssueService getIssueService() {
+        return IssueService.getInstance();
+    }
 }

@@ -40,7 +40,7 @@
                 <th scope="col" class="align-middle"><fmt:message key="cart.price"/></th>
                 <th scope="col" class="align-middle">
                     <form method="get" class="table-form">
-                        <input  name="id" value="1" type="hidden"/>
+                        <input name="id" value="1" type="hidden"/>
                         <button type="submit" class="btn btn-danger btn-sm">
                             <i class="fa fa-times-circle-o fa-lg" aria-hidden="true">&nbsp;</i>
                             <fmt:message key="cart.remove.all"/>
@@ -60,7 +60,7 @@
                 <td class="align-middle">@mdo</td>
                 <td class="align-middle">
                     <form method="get" class="table-form">
-                        <input  name="id" value="1" type="hidden"/>
+                        <input name="id" value="1" type="hidden"/>
                         <button type="submit" class="btn btn-link" style="color: red;">
                             <i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i>
                         </button>
@@ -77,7 +77,7 @@
                 <td class="align-middle">@mdo</td>
                 <td class="align-middle">
                     <form method="get" class="table-form">
-                        <input  name="id" value="1" type="hidden"/>
+                        <input name="id" value="1" type="hidden"/>
                         <button type="submit" class="btn btn-link" style="color: red;">
                             <i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i>
                         </button>
@@ -94,7 +94,7 @@
                 <td class="align-middle">@mdo</td>
                 <td class="align-middle">
                     <form method="get" class="table-form">
-                        <input  name="id" value="1" type="hidden"/>
+                        <input name="id" value="1" type="hidden"/>
                         <button type="submit" class="btn btn-link" style="color: red;">
                             <i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i>
                         </button>

@@ -114,6 +114,66 @@
             </div>
         </div>
     </div>
+
+    <div class="d-flex justify-content-center align-items-center">
+        <h1 class="display-3">
+            <strong>
+                <fmt:message key="issues"/>
+            </strong>
+        </h1>
+    </div>
+    <div class="progress mb-5">
+        <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <c:choose>
+        <c:when test="${empty requestScope.issues}">
+            <div class="d-flex justify-content-center align-items-center mb-5">
+                <h1 class="display-4 ">
+                    <span class="badge badge-info"><fmt:message key="issues.empty"/></span>
+                </h1>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <div class=" table-responsive">
+                <table class="table table-striped table-hover text-center align-middle">
+                    <thead>
+                    <tr class="bg-primary">
+                        <th scope="col" class="align-middle">№</th>
+                        <th scope="col" class="align-middle"><fmt:message key="issue.name"/></th>
+                        <th scope="col" class="align-middle"><fmt:message key="issue.number"/></th>
+                        <th scope="col" class="align-middle"><fmt:message key="issue.publication.date"/></th>
+                        <th scope="col" class="align-middle"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="issue" items="${requestScope.issues}" varStatus="counter">
+                        <tr>
+                            <th scope="row" class="align-middle">${counter.count}</th>
+                            <td class="align-middle"><c:out value="${issue.name}"/></td>
+                            <td class="align-middle"><c:out value="${issue.issueNumber}"/></td>
+                            <td class="align-middle">
+                                <fmt:formatDate type="date" value="${issue.publicationDate}" pattern="dd-MM-yyyy"/>
+                            </td>
+                            <td class="align-middle">
+                                <button type="button" class="btn btn-info
+                                        <c:if test="${empty issue.description}">
+                                                disabled
+                                        </c:if>"
+                                        data-container="body"
+                                        data-toggle="popover"
+                                        data-placement="left"
+                                        data-content="<c:out value="${issue.description}"/>">
+                                    <fmt:message key="issue.description"/>
+                                </button>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </c:otherwise>
+    </c:choose>
+
     <jsp:include page="/WEB-INF/views/snippets/pagination.jsp"/>
 </main>
 
@@ -147,5 +207,14 @@
         });
     </script>
 </c:if>
+
+<c:if test="${not empty requestScope.issues}">
+    <script type="text/javascript" defer>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
+</c:if>
+
 </body>
 </html>

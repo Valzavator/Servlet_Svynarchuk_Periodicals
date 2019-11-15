@@ -11,9 +11,7 @@ import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignU
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.validator.impl.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,11 +52,11 @@ public class ValidatorManager {
                 userDTO.getPassword(),
                 Attributes.ERROR_PASSWORD,
                 errors);
-        validateField(new NameValidator(),
+        validateField(new UserNameValidator(),
                 userDTO.getFirstName(),
                 Attributes.ERROR_FIRST_NAME,
                 errors);
-        validateField(new NameValidator(),
+        validateField(new UserNameValidator(),
                 userDTO.getLastName(),
                 Attributes.ERROR_LAST_NAME,
                 errors);
@@ -72,11 +70,11 @@ public class ValidatorManager {
     public static Map<String, Boolean> validatePeriodicalParameters(Periodical periodicalDTO) {
         Map<String, Boolean> errors = new HashMap<>();
 
-        validateField(new PeriodicalNameValidator(),
+        validateField(new TitleValidator(),
                 periodicalDTO.getName(),
                 Attributes.ERROR_PERIODICAL_NAME,
                 errors);
-        validateField(new PeriodicalDescriptionValidator(),
+        validateField(new DescriptionValidator(),
                 periodicalDTO.getDescription(),
                 Attributes.ERROR_PERIODICAL_DESCRIPTION,
                 errors);
@@ -94,15 +92,15 @@ public class ValidatorManager {
     public static Map<String, Boolean> validateIssueParameters(PeriodicalIssue periodicalIssueDTO) {
         Map<String, Boolean> errors = new HashMap<>();
 
-        validateField(new PeriodicalNameValidator(),
+        validateField(new TitleValidator(),
                 periodicalIssueDTO.getName(),
                 Attributes.ERROR_ISSUE_NAME,
                 errors);
-        validateField(new PeriodicalDescriptionValidator(),
-                periodicalIssueDTO.getDescription(),
+        validateField(new IssueNumberValidator(),
+                periodicalIssueDTO.getIssueNumber(),
                 Attributes.ERROR_ISSUE_NUMBER,
                 errors);
-        validateField(new PeriodicalDescriptionValidator(),
+        validateField(new DescriptionValidator(),
                 periodicalIssueDTO.getDescription(),
                 Attributes.ERROR_ISSUE_DESCRIPTION,
                 errors);

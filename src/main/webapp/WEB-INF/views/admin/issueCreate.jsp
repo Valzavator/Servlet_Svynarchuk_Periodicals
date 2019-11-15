@@ -41,14 +41,13 @@
                                    </c:if>"
                                    placeholder="<fmt:message key="create.issue.name.placeholder"/>"
                                    required>
-                        <c:if test="${errors.errorIssueName}">
-                            <div class="invalid-feedback">
-                                <fmt:message key="error.issue.name"/>
-                            </div>
-                        </c:if>
+                            <c:if test="${errors.errorIssueName}">
+                                <div class="invalid-feedback">
+                                    <fmt:message key="error.issue.name"/>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
-
 
 
                     <div class="form-group form-row">
@@ -71,6 +70,7 @@
                                             is-invalid
                                    </c:if>"
                                        placeholder="<fmt:message key="create.issue.number.placeholder"/>"
+                                       maxlength="10"
                                        required>
                                 <c:if test="${errors.errorIssueNumber}">
                                     <div class="invalid-feedback">
@@ -81,7 +81,7 @@
                         </div>
 
                         <div class="col-auto mr-auto w-50">
-                            <label for="publicationDate"><fmt:message key="dateofbirth"/></label>
+                            <label for="publicationDate"><fmt:message key="issue.publication.date"/></label>
 
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -110,7 +110,8 @@
                                             is-invalid
                                   </c:if>"
                                   placeholder="<fmt:message key="create.issue.description.placeholder"/>"
-                                  rows="5"><c:out value="${requestScope.issueDTO.description}"/></textarea>
+                                  rows="5"
+                                  required><c:out value="${requestScope.issueDTO.description}"/></textarea>
                         <c:if test="${errors.errorIssueDescription}">
                             <div class="invalid-feedback">
                                 <fmt:message key="error.issue.description"/>
@@ -127,6 +128,18 @@
                 </form>
 
             </div>
+
+            <c:if test="${errors.errorIssueExist}">
+                <div class="card-footer text-muted">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <fmt:message key="error.issue.exist"/>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </c:if>
+
         </div>
     </div>
 </main>

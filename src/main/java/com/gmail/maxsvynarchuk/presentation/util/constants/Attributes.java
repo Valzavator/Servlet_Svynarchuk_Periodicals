@@ -8,6 +8,7 @@ import com.gmail.maxsvynarchuk.util.ResourceManager;
 public final class Attributes {
     public static final String USER = ResourceManager.ATTRIBUTE.getProperty("user");
     public static final String PERIODICAL = ResourceManager.ATTRIBUTE.getProperty("periodical");
+    public static final String ISSUES = ResourceManager.ATTRIBUTE.getProperty("issues");
 
     public static final String USER_DTO = ResourceManager.ATTRIBUTE.getProperty("user.dto");
     public static final String PERIODICAL_DTO = ResourceManager.ATTRIBUTE.getProperty("periodical.dto");
@@ -27,6 +28,7 @@ public final class Attributes {
     public static final String ERROR_ISSUE_NAME = ResourceManager.ATTRIBUTE.getProperty("error.issue.name");
     public static final String ERROR_ISSUE_NUMBER = ResourceManager.ATTRIBUTE.getProperty("error.issue.number");
     public static final String ERROR_ISSUE_DESCRIPTION = ResourceManager.ATTRIBUTE.getProperty("error.issue.description");
+    public static final String ERROR_ISSUE_EXIST = ResourceManager.ATTRIBUTE.getProperty("error.issue.exist");
 
     public static final String CATALOG = ResourceManager.ATTRIBUTE.getProperty("catalog");
     public static final String SUBSCRIPTION_PLANS = ResourceManager.ATTRIBUTE.getProperty("subscription.plans");

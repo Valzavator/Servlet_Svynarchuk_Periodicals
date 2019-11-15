@@ -66,8 +66,7 @@ public class UserService {
                 userToRegister.getPassword());
         userToRegister.setPassword(hash);
 
-        boolean userIsPresent =
-                userDao.findOneByEmail(userToRegister.getEmail()).isPresent();
+        boolean userIsPresent = userDao.existByEmail(userToRegister.getEmail());
         if (!userIsPresent) {
             userDao.insert(userToRegister);
             return true;

@@ -3,6 +3,7 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalIssueDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
+import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
 import com.gmail.maxsvynarchuk.util.TimeConverter;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
@@ -24,6 +25,10 @@ public class PeriodicalIssueMySqlDao implements PeriodicalIssueDao {
             ResourceManager.QUERIES.getProperty("periodical.issue.count");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("periodical.issue.where.id");
+    private final static String WHERE_PERIODICAL_ID =
+            ResourceManager.QUERIES.getProperty("periodical.issue.where.periodical");
+    private final static String WHERE_NUMBER_AND_PERIODICAL_ID =
+            ResourceManager.QUERIES.getProperty("periodical.issue.where.number.and.periodical");
 
     private final UtilMySqlDao<PeriodicalIssue> utilMySqlDao;
 
@@ -52,6 +57,21 @@ public class PeriodicalIssueMySqlDao implements PeriodicalIssueDao {
     @Override
     public List<PeriodicalIssue> findAll(long skip, long limit) {
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
+    }
+
+    @Override
+    public List<PeriodicalIssue> findByPeriodical(Periodical periodical) {
+        Objects.requireNonNull(periodical);
+
+        return utilMySqlDao.findAll(SELECT_ALL + WHERE_PERIODICAL_ID, periodical.getId());
+    }
+
+    @Override
+    public Optional<PeriodicalIssue> findOneByNumberAndPeriodical(String issueNumber, Periodical periodical) {
+        Objects.requireNonNull(periodical);
+
+        return utilMySqlDao.findOne(SELECT_ALL + WHERE_NUMBER_AND_PERIODICAL_ID,
+                issueNumber, periodical.getId());
     }
 
     @Override
@@ -94,5 +114,10 @@ public class PeriodicalIssueMySqlDao implements PeriodicalIssueDao {
     @Override
     public long getCount() {
         return utilMySqlDao.getRowsCount(COUNT);
+    }
+
+    @Override
+    public boolean existByNumberAndPeriodical(String issueNumber, Periodical periodical) {
+        return findOneByNumberAndPeriodical(issueNumber, periodical).isPresent();
     }
 }

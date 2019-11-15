@@ -10,5 +10,5 @@
     </div>
 </footer>
 <script src="<c:url value="/webjars/jquery/3.4.1/jquery.min.js"/>"></script>
-<script src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/webjars/popper.js/1.15.0/umd/popper.min.js"/>"></script>
+<script src="<c:url value="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"/>"></script>

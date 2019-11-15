@@ -6,14 +6,19 @@ import com.gmail.maxsvynarchuk.util.PeriodicalStatus;
 
 import java.util.List;
 
-//TODO write comments
 public interface PeriodicalDao extends GenericDao<Periodical, Long> {
+    /**
+     * Retrieves all periodicals associated with certain periodical status.
+     *
+     * @param status status of periodical
+     * @return list of retrieved periodicals
+     */
     List<Periodical> findAllPeriodicalsByStatus(PeriodicalStatus status, long skip, long limit);
 
     /**
      * Retrieves count of objects from database.
      *
-     * @return count of objects.
+     * @return count of objects with same status.
      */
     long getCountByStatus(PeriodicalStatus periodicalStatus);
 }

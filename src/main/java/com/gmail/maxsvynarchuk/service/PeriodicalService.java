@@ -24,6 +24,7 @@ public class PeriodicalService {
 
         private final static PeriodicalService INSTANCE = new PeriodicalService();
     }
+
     public static PeriodicalService getInstance() {
         return PeriodicalService.Singleton.INSTANCE;
     }
@@ -38,16 +39,6 @@ public class PeriodicalService {
         Objects.requireNonNull(periodical);
 
         periodicalDao.update(periodical);
-    }
-
-    public boolean addIssueToPeriodical(Periodical periodical, PeriodicalIssue periodicalIssu) {
-        Objects.requireNonNull(periodical);
-        Objects.requireNonNull(periodicalIssu);
-
-        periodicalIssu.setPeriodical(periodical);
-        periodicalIssueDao.insert(periodicalIssu);
-        //TODO
-        return false;
     }
 
     public void changeStatus(Periodical periodical, PeriodicalStatus newStatus) {
@@ -71,11 +62,6 @@ public class PeriodicalService {
     public List<Periodical> findAllPeriodicalsByStatus(PeriodicalStatus status, long skip, long limit) {
         return periodicalDao.findAllPeriodicalsByStatus(status, skip, limit);
     }
-
-//
-//    public List<Periodical> findPeriodicalsOnWhichUserIsNotSubscribed(int skip, int limit, User user) {
-//        return periodicalDao.findAllOnWhichUserIsNotSubscribed(skip, limit, user);
-//    }
 
     public long getPeriodicalsCountByStatus(PeriodicalStatus status) {
         return periodicalDao.getCountByStatus(status);

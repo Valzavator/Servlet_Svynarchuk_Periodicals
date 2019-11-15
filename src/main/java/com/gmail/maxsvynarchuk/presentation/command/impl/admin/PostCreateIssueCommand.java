@@ -10,8 +10,10 @@ import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.presentation.util.mapper.RequestMapperFactory;
 import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManager;
+import com.gmail.maxsvynarchuk.service.IssueService;
 import com.gmail.maxsvynarchuk.service.PeriodicalService;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
+import com.gmail.maxsvynarchuk.util.PeriodicalStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +25,7 @@ import java.util.Optional;
 public class PostCreateIssueCommand implements Command {
     private static Logger LOGGER = LoggerFactory.getLogger(PostCreateIssueCommand.class);
     private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
+    private final IssueService issueService = ServiceFactory.getIssueService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
@@ -45,16 +48,20 @@ public class PostCreateIssueCommand implements Command {
                 .validateIssueParameters(periodicalIssueDTO);
 
         if (errors.isEmpty()) {
-            if (periodicalOpt.isPresent()) {
-                System.out.println(periodicalIssueDTO);
-                // TODO isPresent
-                boolean isPresent = periodicalService.addIssueToPeriodical(
-                        periodicalOpt.get(), periodicalIssueDTO);
-                LOGGER.info("Issue was successfully create");
-            } else {
-                LOGGER.info("Periodical with id {} doesn't exist", periodicalId);
+            if (!periodicalOpt.isPresent() ||
+                    periodicalOpt.get().getStatus() == PeriodicalStatus.SUSPENDED) {
+                LOGGER.info("Periodical with id {} doesn't exist or has SUSPEND status", periodicalId);
+                return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);
             }
-            return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);
+            boolean isCreated = issueService.addIssueToPeriodical(
+                    periodicalOpt.get(), periodicalIssueDTO);
+            if (isCreated) {
+                LOGGER.info("Issue was successfully created");
+                return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);
+            } else {
+                LOGGER.info("Issue with such number already exist");
+                errors.put(Attributes.ERROR_ISSUE_EXIST, true);
+            }
         }
 
         LOGGER.info("Invalid creation parameters");
