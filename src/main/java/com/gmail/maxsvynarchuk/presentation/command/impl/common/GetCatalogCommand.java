@@ -12,7 +12,7 @@ import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.service.PeriodicalService;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
 import com.gmail.maxsvynarchuk.service.SubscriptionService;
-import com.gmail.maxsvynarchuk.util.PeriodicalStatus;
+import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +31,7 @@ public class GetCatalogCommand implements Command {
                 PeriodicalStatus.ACTIVE, skip, PaginationManager.CATALOG_RECORDS_PER_PAGE);
         request.setAttribute(Attributes.CATALOG, periodicals);
         if (!periodicals.isEmpty()) {
-            List<SubscriptionPlan> subscriptionPlans = subscriptionService.getAllSubscriptionPlans();
+            List<SubscriptionPlan> subscriptionPlans = subscriptionService.findAllSubscriptionPlans();
             request.setAttribute(Attributes.SUBSCRIPTION_PLANS, subscriptionPlans);
         }
         Util.checkErrorParameter(request, RequestParameters.ERROR_ATTRIBUTE);

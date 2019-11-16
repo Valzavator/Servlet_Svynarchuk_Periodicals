@@ -9,7 +9,7 @@ import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.service.PeriodicalService;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
-import com.gmail.maxsvynarchuk.util.PeriodicalStatus;
+import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

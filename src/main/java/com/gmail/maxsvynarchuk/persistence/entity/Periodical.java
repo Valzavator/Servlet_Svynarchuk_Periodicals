@@ -1,6 +1,6 @@
 package com.gmail.maxsvynarchuk.persistence.entity;
 
-import com.gmail.maxsvynarchuk.util.PeriodicalStatus;
+import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

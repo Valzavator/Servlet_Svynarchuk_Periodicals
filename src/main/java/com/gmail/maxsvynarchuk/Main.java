@@ -6,9 +6,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.*;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.presentation.FrontController;
 import com.gmail.maxsvynarchuk.presentation.util.Util;
-import com.gmail.maxsvynarchuk.util.PasswordManager;
-import com.gmail.maxsvynarchuk.util.PeriodicalStatus;
-import com.gmail.maxsvynarchuk.util.ResourceManager;
+import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +14,6 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.Properties;
 
 public class Main {
@@ -24,18 +21,24 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
+        String uri = "http://localhost:8080/app/catalog?error=errorIsAlreadyInCart&page=2";
+        String attribute = "error";
 
-        String url = "jdbc:mysql://localhost:3306/periodicals";
-        Properties prop = new Properties();
-        prop.put("user", "root");
-        prop.put("password", "admin");
-        prop.put("autoReconnect", "true");
-        prop.put("characterEncoding", "UTF-8");
-        prop.put("useUnicode", "true");
-        prop.put("useTimezone", "true");
-        prop.put("serverTimezone", "Europe/Kiev");
-        prop.put("useLegacyDatetimeCode", "false");
-        Connection cn = DriverManager.getConnection(url, prop);
+        System.out.println(
+                Util.removeParameterFromURI(uri, attribute)
+        );
+//
+//        String url = "jdbc:mysql://localhost:3306/periodicals";
+//        Properties prop = new Properties();
+//        prop.put("user", "root");
+//        prop.put("password", "admin");
+//        prop.put("autoReconnect", "true");
+//        prop.put("characterEncoding", "UTF-8");
+//        prop.put("useUnicode", "true");
+//        prop.put("useTimezone", "true");
+//        prop.put("serverTimezone", "Europe/Kiev");
+//        prop.put("useLegacyDatetimeCode", "false");
+//        Connection cn = DriverManager.getConnection(url, prop);
 //
 //        RoleDao dao = new RoleMySqlDao(new UtilMySqlDao<>(() -> {
 //            try {
@@ -168,24 +171,24 @@ public class Main {
 //
 //        Publisher obj = new Publisher(2L, "TEST");
 
-        PeriodicalDao dao = new PeriodicalMySqlDao(new UtilMySqlDao<>(() -> {
-            try {
-                return DriverManager.getConnection(url, prop);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new RuntimeException();
-            }
-        }, new PeriodicalMapper()));
-
-        Periodical obj = Periodical.newBuilder()
-                .setPublisher(new Publisher(1L, null))
-                .setFrequency(Frequency.newBuilder().setId(1).build())
-                .setPeriodicalType(PeriodicalType.newBuilder().setId(1).build())
-                .setStatus(PeriodicalStatus.ACTIVE)
-                .setName("setName")
-                .setPrice(new BigDecimal(12))
-                .setDescription("setDescription")
-                .build();
+//        PeriodicalDao dao = new PeriodicalMySqlDao(new UtilMySqlDao<>(() -> {
+//            try {
+//                return DriverManager.getConnection(url, prop);
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//                throw new RuntimeException();
+//            }
+//        }, new PeriodicalMapper()));
+//
+//        Periodical obj = Periodical.newBuilder()
+//                .setPublisher(new Publisher(1L, null))
+//                .setFrequency(Frequency.newBuilder().setId(1).build())
+//                .setPeriodicalType(PeriodicalType.newBuilder().setId(1).build())
+//                .setStatus(PeriodicalStatus.ACTIVE)
+//                .setName("setName")
+//                .setPrice(new BigDecimal(12))
+//                .setDescription("setDescription")
+//                .build();
 
 
 //        PeriodicalTypeDao dao = new PeriodicalTypeMySqlDao(new UtilMySqlDao<>(() -> {
@@ -221,15 +224,15 @@ public class Main {
 
 //        System.out.println(dao.findAll(1, 3) + "\n");
 //
-        System.out.println(dao.findAll() + "\n");
-        System.out.println(dao.insert(obj) + "\n");
-        System.out.println(dao.findOne(obj.getId()) + "\n");
-        obj.setDescription("NEW NAME");
-        dao.update(obj);
-        System.out.println(dao.findOne(obj.getId()) + "\n");
-        dao.delete(obj.getId());
-        System.out.println(dao.findOne(obj.getId()) + "\n");
-        System.out.println(dao.findAll());
+//        System.out.println(dao.findAll() + "\n");
+//        System.out.println(dao.insert(obj) + "\n");
+//        System.out.println(dao.findOne(obj.getId()) + "\n");
+//        obj.setDescription("NEW NAME");
+//        dao.update(obj);
+//        System.out.println(dao.findOne(obj.getId()) + "\n");
+//        dao.delete(obj.getId());
+//        System.out.println(dao.findOne(obj.getId()) + "\n");
+//        System.out.println(dao.findAll());
     }
 }
 

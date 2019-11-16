@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-         import="com.gmail.maxsvynarchuk.util.PeriodicalStatus" %>
+         import="com.gmail.maxsvynarchuk.util.type.PeriodicalStatus" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -127,24 +127,38 @@
 <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content bg-danger">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel"><fmt:message key="error.add.to.cart"/></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                <c:choose>
+                    <c:when test="${requestScope.errorIsAlreadySubscribed}">
+                        <fmt:message key="error.is.already.subscribed"/>
+                    </c:when>
+                    <c:when test="${requestScope.errorIsAlreadyInCart}">
+                        <fmt:message key="error.is.already.in.cart"/>
+                    </c:when>
+                    <c:when test="${requestScope.errorPeriodicalInvalid}">
+                        <fmt:message key="error.periodical.invalid"/>
+                    </c:when>
+                </c:choose>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    <fmt:message key="modal.ok"/>
+                </button>
             </div>
         </div>
     </div>
 </div>
-<c:if test="${requestScope.errorIsAlreadySubscribed}">
+
+<c:if test="${requestScope.errorIsAlreadySubscribed or
+ requestScope.errorIsAlreadyInCart or
+  requestScope.errorPeriodicalInvalid}">
     <script type="text/javascript" defer>
         $(document).ready(function () {
             $("#errorModal").modal("show");

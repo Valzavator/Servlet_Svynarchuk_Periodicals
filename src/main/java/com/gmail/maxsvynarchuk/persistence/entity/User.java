@@ -1,7 +1,7 @@
 package com.gmail.maxsvynarchuk.persistence.entity;
 
-import com.gmail.maxsvynarchuk.util.Gender;
-import com.gmail.maxsvynarchuk.util.RoleType;
+import com.gmail.maxsvynarchuk.util.type.Gender;
+import com.gmail.maxsvynarchuk.util.type.RoleType;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -4,7 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
-import com.gmail.maxsvynarchuk.util.RoleType;
+import com.gmail.maxsvynarchuk.util.type.RoleType;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -30,9 +30,12 @@ public class AuthorizationFilter implements Filter {
         secureAdminPaths.add(PagesPaths.ADMIN_CATALOG_PATH);
         secureAdminPaths.add(PagesPaths.CREATE_PERIODICAL_PATH);
         secureAdminPaths.add(PagesPaths.EDIT_PERIODICAL_PATH);
+        secureAdminPaths.add(PagesPaths.CREATE_ISSUE_PATH);
 
         secureUserPaths.add(PagesPaths.CART_PATH);
         secureUserPaths.add(PagesPaths.CART_ADD_ITEM_PATH);
+        secureUserPaths.add(PagesPaths.CART_REMOVE_ITEM_PATH);
+        secureUserPaths.add(PagesPaths.CART_REMOVE_ALL_ITEM_PATH);
     }
 
     @Override

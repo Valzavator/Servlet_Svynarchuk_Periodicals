@@ -1,4 +1,4 @@
-package com.gmail.maxsvynarchuk.util;
+package com.gmail.maxsvynarchuk.util.type;
 
 import com.gmail.maxsvynarchuk.persistence.entity.Role;
 import com.gmail.maxsvynarchuk.persistence.entity.User;

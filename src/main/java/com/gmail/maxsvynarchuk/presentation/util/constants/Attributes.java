@@ -7,6 +7,7 @@ import com.gmail.maxsvynarchuk.util.ResourceManager;
  */
 public final class Attributes {
     public static final String USER = ResourceManager.ATTRIBUTE.getProperty("user");
+    public static final String SHOPPING_CART = ResourceManager.ATTRIBUTE.getProperty("shopping.cart");
     public static final String PERIODICAL = ResourceManager.ATTRIBUTE.getProperty("periodical");
     public static final String ISSUES = ResourceManager.ATTRIBUTE.getProperty("issues");
 
@@ -22,6 +23,8 @@ public final class Attributes {
     public static final String ERROR_AUTHENTICATION = ResourceManager.ATTRIBUTE.getProperty("error.authentication");
     public static final String ERROR_REGISTRATION = ResourceManager.ATTRIBUTE.getProperty("error.registration");
     public static final String ERROR_IS_ALREADY_SUBSCRIBED = ResourceManager.ATTRIBUTE.getProperty("error.is.already.subscribed");
+    public static final String ERROR_PERIODICAL_INVALID = ResourceManager.ATTRIBUTE.getProperty("error.periodical.invalid");
+    public static final String ERROR_IS_ALREADY_IN_CART = ResourceManager.ATTRIBUTE.getProperty("error.is.already.in.cart");
     public static final String ERROR_PERIODICAL_NAME = ResourceManager.ATTRIBUTE.getProperty("error.periodical.name");
     public static final String ERROR_PERIODICAL_DESCRIPTION = ResourceManager.ATTRIBUTE.getProperty("error.periodical.description");
     public static final String ERROR_PERIODICAL_PRICE = ResourceManager.ATTRIBUTE.getProperty("error.periodical.price");

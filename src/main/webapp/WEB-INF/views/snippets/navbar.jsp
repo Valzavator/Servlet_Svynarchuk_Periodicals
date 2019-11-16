@@ -80,7 +80,16 @@
                         <a class="nav-link" href="<c:url value="/app/cart"/>">
                             <i class="fa fa-shopping-cart fa-lg" aria-hidden="true">&nbsp;</i>
                             <fmt:message key="cart"/>&nbsp;
-                            <span class="badge badge-light">9</span>
+                            <span class="badge badge-light">
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.shoppingCart}">
+                                        ${sessionScope.shoppingCart.items.size()}
+                                    </c:when>
+                                    <c:otherwise>
+                                        0
+                                    </c:otherwise>
+                                </c:choose>
+                            </span>
                         </a>
                     </li>
                 </c:if>

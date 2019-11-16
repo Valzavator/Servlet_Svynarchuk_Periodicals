@@ -17,6 +17,8 @@ public final class PagesPaths {
     public static final String CATALOG_PATH = ResourceManager.PATH.getProperty("path.catalog");
     public static final String CART_PATH = ResourceManager.PATH.getProperty("path.cart");
     public static final String CART_ADD_ITEM_PATH = ResourceManager.PATH.getProperty("path.cart.add.item");
+    public static final String CART_REMOVE_ITEM_PATH = ResourceManager.PATH.getProperty("path.cart.remove.item");
+    public static final String CART_REMOVE_ALL_ITEM_PATH = ResourceManager.PATH.getProperty("path.cart.remove.all.item");
 
     public static final String ADMIN_CATALOG_PATH = ResourceManager.PATH.getProperty("path.admin.catalog");
     public static final String CREATE_PERIODICAL_PATH = ResourceManager.PATH.getProperty("path.admin.catalog.periodical.create");

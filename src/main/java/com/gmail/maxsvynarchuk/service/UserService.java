@@ -6,7 +6,7 @@ import com.gmail.maxsvynarchuk.persistence.entity.Address;
 import com.gmail.maxsvynarchuk.persistence.entity.Role;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.util.PasswordManager;
-import com.gmail.maxsvynarchuk.util.RoleType;
+import com.gmail.maxsvynarchuk.util.type.RoleType;
 
 import java.util.List;
 import java.util.Objects;

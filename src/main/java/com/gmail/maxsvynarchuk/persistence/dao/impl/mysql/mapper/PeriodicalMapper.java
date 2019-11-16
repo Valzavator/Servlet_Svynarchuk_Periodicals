@@ -4,7 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.entity.Frequency;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalType;
 import com.gmail.maxsvynarchuk.persistence.entity.Publisher;
-import com.gmail.maxsvynarchuk.util.PeriodicalStatus;
+import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

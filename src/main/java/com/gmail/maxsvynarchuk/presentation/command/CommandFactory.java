@@ -7,6 +7,8 @@ import com.gmail.maxsvynarchuk.presentation.command.impl.common.GetCatalogComman
 import com.gmail.maxsvynarchuk.presentation.command.impl.common.GetPeriodicalCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.user.GetShoppingCartCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.user.PostCartAddItemCommand;
+import com.gmail.maxsvynarchuk.presentation.command.impl.user.PostCartRemoveAllItemCommand;
+import com.gmail.maxsvynarchuk.presentation.command.impl.user.PostCartRemoveItemCommand;
 import com.gmail.maxsvynarchuk.presentation.util.RequestMethod;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 
@@ -44,6 +46,10 @@ public class CommandFactory {
                 new GetShoppingCartCommand());
         commands.put(buildKey(PagesPaths.CART_ADD_ITEM_PATH, RequestMethod.POST),
                 new PostCartAddItemCommand());
+        commands.put(buildKey(PagesPaths.CART_REMOVE_ITEM_PATH, RequestMethod.POST),
+                new PostCartRemoveItemCommand());
+        commands.put(buildKey(PagesPaths.CART_REMOVE_ALL_ITEM_PATH, RequestMethod.POST),
+                new PostCartRemoveAllItemCommand());
         commands.put(buildKey(PagesPaths.ADMIN_CATALOG_PATH, RequestMethod.GET),
                 new GetAdminCatalogCommand());
         commands.put(buildKey(PagesPaths.CREATE_PERIODICAL_PATH, RequestMethod.GET),
@@ -60,6 +66,7 @@ public class CommandFactory {
                 new GetCreateIssueCommand());
         commands.put(buildKey(PagesPaths.CREATE_ISSUE_PATH, RequestMethod.POST),
                 new PostCreateIssueCommand());
+
     }
 
     public Command getCommand(String path, RequestMethod method) {

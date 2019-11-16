@@ -3,7 +3,7 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper;
 import com.gmail.maxsvynarchuk.persistence.entity.Address;
 import com.gmail.maxsvynarchuk.persistence.entity.Role;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
-import com.gmail.maxsvynarchuk.util.Gender;
+import com.gmail.maxsvynarchuk.util.type.Gender;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

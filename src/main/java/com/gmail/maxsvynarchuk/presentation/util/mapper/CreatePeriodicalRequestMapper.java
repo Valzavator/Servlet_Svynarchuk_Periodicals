@@ -5,7 +5,7 @@ import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalType;
 import com.gmail.maxsvynarchuk.persistence.entity.Publisher;
 import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
-import com.gmail.maxsvynarchuk.util.PeriodicalStatus;
+import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;

@@ -23,4 +23,8 @@ public class ServiceFactory {
     public static IssueService getIssueService() {
         return IssueService.getInstance();
     }
+
+    public static ShoppingCartService getShoppingCartService() {
+        return ShoppingCartService.getInstance();
+    }
 }

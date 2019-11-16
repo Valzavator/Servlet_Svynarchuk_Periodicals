@@ -3,7 +3,9 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
+import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
+import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.util.TimeConverter;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
@@ -96,5 +98,11 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
     @Override
     public long getCount() {
         return utilMySqlDao.getRowsCount(COUNT);
+    }
+
+    @Override
+    public boolean isUserAlreadySubscribed(User user, Periodical periodical) {
+        // TODO
+        return false;
     }
 }

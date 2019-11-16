@@ -3,8 +3,7 @@ package com.gmail.maxsvynarchuk.service;
 import com.gmail.maxsvynarchuk.persistence.dao.*;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
-import com.gmail.maxsvynarchuk.util.PeriodicalStatus;
-import jdk.net.SocketFlow;
+import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +20,6 @@ public class PeriodicalService {
     }
 
     private static class Singleton {
-
         private final static PeriodicalService INSTANCE = new PeriodicalService();
     }
 

@@ -2,7 +2,6 @@ package com.gmail.maxsvynarchuk.presentation.util.mapper;
 
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
-import com.gmail.maxsvynarchuk.util.Gender;
 
 import javax.servlet.http.HttpServletRequest;
 

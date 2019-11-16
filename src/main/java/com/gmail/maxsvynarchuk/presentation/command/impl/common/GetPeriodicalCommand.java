@@ -29,7 +29,7 @@ public class GetPeriodicalCommand implements Command {
         Long periodicalId = Long.valueOf(request.getParameter(RequestParameters.PERIODICAL_ID));
         Optional<Periodical> periodicalOpt = periodicalService.findPeriodicalById(periodicalId);
         if (periodicalOpt.isPresent()) {
-            List<SubscriptionPlan> subscriptionPlans = subscriptionService.getAllSubscriptionPlans();
+            List<SubscriptionPlan> subscriptionPlans = subscriptionService.findAllSubscriptionPlans();
             List<PeriodicalIssue> periodicalIssues = issueService.findAllIssuesByPeriodical(periodicalOpt.get());
             request.setAttribute(Attributes.SUBSCRIPTION_PLANS, subscriptionPlans);
             request.setAttribute(Attributes.PERIODICAL, periodicalOpt.get());

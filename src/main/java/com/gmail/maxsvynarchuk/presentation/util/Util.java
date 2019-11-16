@@ -3,7 +3,7 @@ package com.gmail.maxsvynarchuk.presentation.util;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
-import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
+import com.gmail.maxsvynarchuk.util.entity.ShoppingCart;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,17 +29,6 @@ public class Util {
                 request.getContextPath() + request.getServletPath() + pageToRedirect);
     }
 
-    //TODO - delete
-    /**
-     * Check if the user is logged in
-     *
-     * @param session HttpSession
-     * @return {@code true} if logged in else {@code false}
-     */
-    public static boolean isAlreadyLoggedIn(HttpSession session) {
-        return getAuthorizedUser(session) != null;
-    }
-
     /**
      * Get authorized user
      *
@@ -47,7 +36,25 @@ public class Util {
      * @return authorized user else {@code null}
      */
     public static User getAuthorizedUser(HttpSession session) {
+        Objects.requireNonNull(session);
+
         return (User) session.getAttribute(Attributes.USER);
+    }
+
+    /**
+     * Get shopping cart for user
+     *
+     * @param session HttpSession
+     * @return existing shopping cart or new one
+     */
+    public static ShoppingCart getShoppingCart(HttpSession session) {
+        ShoppingCart shoppingCart =
+                (ShoppingCart) session.getAttribute(Attributes.SHOPPING_CART);
+        if (Objects.isNull(shoppingCart)) {
+            shoppingCart = new ShoppingCart();
+            session.setAttribute(Attributes.SHOPPING_CART, shoppingCart);
+        }
+        return shoppingCart;
     }
 
     /**
@@ -63,6 +70,7 @@ public class Util {
                 URI uri = new URI(header);
                 String path = uri.getPath();
                 String query = uri.getQuery();
+
                 referer = Objects.isNull(query) ? path : path + "?" + query;
             } catch (URISyntaxException e) {
                 throw new IllegalArgumentException(e);
@@ -73,11 +81,12 @@ public class Util {
     }
 
     /**
-     * add parameter to exist URI
+     * Add parameter to exist URI
      */
     public static String addParameterToURI(String uri,
                                            String parameterName,
                                            String parameterValue) {
+        Objects.requireNonNull(uri);
         Objects.requireNonNull(parameterName);
         Objects.requireNonNull(parameterValue);
 
@@ -85,9 +94,14 @@ public class Util {
             String newParameter = parameterName + "=" + parameterValue;
             URI oldUri = new URI(uri);
             String newQuery = oldUri.getQuery();
-            newQuery = Objects.isNull(newQuery)
-                    ? newParameter
-                    : newQuery + "&" + newParameter;
+
+            if (Objects.isNull(newQuery)) {
+                newQuery = newParameter;
+            } else if (newQuery.contains(parameterName)) {
+                newQuery = newQuery.replaceFirst(parameterName + "=" + "[^&]+", newParameter);
+            } else {
+                newQuery = newQuery + "&" + newParameter;
+            }
 
             URI newUri = new URI(oldUri.getScheme(), oldUri.getAuthority(),
                     oldUri.getPath(), newQuery, oldUri.getFragment());
@@ -98,8 +112,22 @@ public class Util {
         }
     }
 
+    /**
+     * Remove parameter from exist URI
+     */
+    public static String removeParameterFromURI(String uri, String parameterName) {
+        Objects.requireNonNull(uri);
+        Objects.requireNonNull(parameterName);
+
+        return uri.replaceFirst(parameterName + "&?=((.+&)|[^&]+)", "");
+    }
+
+    /**
+     * Checking the error parameter in the request.
+     * If present, set it as a request attribute.
+     */
     public static void checkErrorParameter(HttpServletRequest request,
-                                          String requestAttribute) {
+                                           String requestAttribute) {
         String error = request.getParameter(requestAttribute);
         if (Objects.nonNull(error) && !error.isEmpty()) {
             request.setAttribute(error, true);
