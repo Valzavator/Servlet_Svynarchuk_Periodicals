@@ -5,6 +5,7 @@ import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 import com.gmail.maxsvynarchuk.util.TimeConverter;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 
 public class CreateIssueRequestMapper implements RequestEntityMapper<PeriodicalIssue> {
 
@@ -22,7 +23,7 @@ public class CreateIssueRequestMapper implements RequestEntityMapper<PeriodicalI
                 .setIssueNumber(request.getParameter(RequestParameters.ISSUE_NUMBER))
                 .setDescription(request.getParameter(RequestParameters.ISSUE_DESCRIPTION))
                 .setPublicationDate(
-                        TimeConverter.toDate(request.getParameter(RequestParameters.ISSUE_PUBLICATION_DATE)))
+                        LocalDate.parse(request.getParameter(RequestParameters.ISSUE_PUBLICATION_DATE)))
                 .setPeriodical(periodical)
                 .build();
     }

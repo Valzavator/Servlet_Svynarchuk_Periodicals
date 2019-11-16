@@ -5,10 +5,7 @@ import com.gmail.maxsvynarchuk.presentation.command.impl.admin.*;
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.*;
 import com.gmail.maxsvynarchuk.presentation.command.impl.common.GetCatalogCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.common.GetPeriodicalCommand;
-import com.gmail.maxsvynarchuk.presentation.command.impl.user.GetShoppingCartCommand;
-import com.gmail.maxsvynarchuk.presentation.command.impl.user.PostCartAddItemCommand;
-import com.gmail.maxsvynarchuk.presentation.command.impl.user.PostCartRemoveAllItemCommand;
-import com.gmail.maxsvynarchuk.presentation.command.impl.user.PostCartRemoveItemCommand;
+import com.gmail.maxsvynarchuk.presentation.command.impl.user.*;
 import com.gmail.maxsvynarchuk.presentation.util.RequestMethod;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 
@@ -50,6 +47,8 @@ public class CommandFactory {
                 new PostCartRemoveItemCommand());
         commands.put(buildKey(PagesPaths.CART_REMOVE_ALL_ITEM_PATH, RequestMethod.POST),
                 new PostCartRemoveAllItemCommand());
+        commands.put(buildKey(PagesPaths.CART_SUBSCRIPTION_PAYMENT_PATH, RequestMethod.POST),
+                new PostSubscriptionPaymentCommand());
         commands.put(buildKey(PagesPaths.ADMIN_CATALOG_PATH, RequestMethod.GET),
                 new GetAdminCatalogCommand());
         commands.put(buildKey(PagesPaths.CREATE_PERIODICAL_PATH, RequestMethod.GET),

@@ -1,7 +1,7 @@
 package com.gmail.maxsvynarchuk.persistence.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -17,7 +17,7 @@ public class PeriodicalIssue implements Serializable {
     private Long id;
     private String name;
     private String issueNumber;
-    private Date publicationDate;
+    private LocalDate publicationDate;
     private String description;
     private Periodical periodical;
 
@@ -43,7 +43,7 @@ public class PeriodicalIssue implements Serializable {
             return this;
         }
 
-        public Builder setPublicationDate(Date publicationDate) {
+        public Builder setPublicationDate(LocalDate publicationDate) {
             periodicalIssue.setPublicationDate(publicationDate);
             return this;
         }
@@ -94,11 +94,11 @@ public class PeriodicalIssue implements Serializable {
         this.issueNumber = issueNumber;
     }
 
-    public Date getPublicationDate() {
+    public LocalDate getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Date publicationDate) {
+    public void setPublicationDate(LocalDate publicationDate) {
         this.publicationDate = publicationDate;
     }
 

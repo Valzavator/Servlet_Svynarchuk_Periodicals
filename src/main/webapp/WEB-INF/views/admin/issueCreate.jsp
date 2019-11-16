@@ -91,7 +91,7 @@
                                 </div>
                                 <input type="date" id="publicationDate"
                                        name="publicationDate"
-                                       value="<fmt:formatDate type = "date" value="${requestScope.issueDTO.publicationDate}" pattern="yyyy-MM-dd"/>"
+                                       value="<c:out value="${requestScope.issueDTO.publicationDate}"/>"
                                        class="form-control form-control-lg"
                                        max="3000-12-31" min="2019-01-01" required>
                             </div>

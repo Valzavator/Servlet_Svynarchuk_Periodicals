@@ -6,6 +6,7 @@ import com.gmail.maxsvynarchuk.util.type.Gender;
 import com.gmail.maxsvynarchuk.util.TimeConverter;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 
 public class SignUpRequestMapper implements RequestEntityMapper<User> {
 
@@ -18,8 +19,8 @@ public class SignUpRequestMapper implements RequestEntityMapper<User> {
                 .setLastName(request.getParameter(RequestParameters.USER_LAST_NAME))
                 .setGender(
                         Gender.valueOf(request.getParameter(RequestParameters.USER_GENDER).toUpperCase()))
-                .setDateOfBirth(
-                        TimeConverter.toDate(request.getParameter(RequestParameters.USER_DATE_OF_BIRTH)))
+                .setDateOfBirth(LocalDate.parse(
+                        request.getParameter(RequestParameters.USER_DATE_OF_BIRTH)))
                 .build();
     }
 }

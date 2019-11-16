@@ -1,6 +1,7 @@
 package com.gmail.maxsvynarchuk.persistence.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -21,8 +22,8 @@ public class Subscription implements Serializable {
     private Payment payment;
     private Periodical periodical;
     private SubscriptionPlan subscriptionPlan;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     public static class Builder {
         private final Subscription subscription;
@@ -56,12 +57,12 @@ public class Subscription implements Serializable {
             return this;
         }
 
-        public Builder setStartDate(Date startDate) {
+        public Builder setStartDate(LocalDate startDate) {
             subscription.setStartDate(startDate);
             return this;
         }
 
-        public Builder setEndDate(Date endDate) {
+        public Builder setEndDate(LocalDate endDate) {
             subscription.setEndDate(endDate);
             return this;
         }
@@ -118,19 +119,19 @@ public class Subscription implements Serializable {
         this.subscriptionPlan = subscriptionPlan;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

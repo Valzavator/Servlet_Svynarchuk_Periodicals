@@ -17,24 +17,24 @@ public class TimeConverter {
         return new Timestamp(date.getTime());
     }
 
-    public static String formatDate(Date date) {
-        return formatDate(date, DEFAULT_DATE_PATTERN);
-    }
+//    public static String formatDate(Date date) {
+//        return formatDate(date, DEFAULT_DATE_PATTERN);
+//    }
+//
+//    public static String formatDate(Date date, String pattern) {
+//        DateFormat dateFormat = new SimpleDateFormat(pattern);
+//        return dateFormat.format(date);
+//    }
 
-    public static String formatDate(Date date, String pattern) {
-        DateFormat dateFormat = new SimpleDateFormat(pattern);
-        return dateFormat.format(date);
-    }
-
-    public static Date toDate(String dataString) {
-        return toDate(dataString, DEFAULT_DATE_PATTERN);
-    }
-
-    public static Date toDate(String dataString, String pattern) {
-        try {
-            return new SimpleDateFormat(pattern).parse(dataString);
-        } catch (ParseException e) {
-            throw new IllegalArgumentException(e);
-        }
-    }
+//    public static Date toDate(String dataString) {
+//        return toDate(dataString, DEFAULT_DATE_PATTERN);
+//    }
+//
+//    public static Date toDate(String dataString, String pattern) {
+//        try {
+//            return new SimpleDateFormat(pattern).parse(dataString);
+//        } catch (ParseException e) {
+//            throw new IllegalArgumentException(e);
+//        }
+//    }
 }

@@ -50,7 +50,7 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
 
     @Override
     public List<Periodical> findAll() {
-        return utilMySqlDao.findAll(SELECT_ALL);
+        return utilMySqlDao.findAll(SELECT_ALL + ORDER_BY_STATUS_AND_ID);
     }
 
     @Override

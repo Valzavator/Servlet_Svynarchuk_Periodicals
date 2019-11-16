@@ -152,7 +152,7 @@
                             <td class="align-middle"><c:out value="${issue.name}"/></td>
                             <td class="align-middle"><c:out value="${issue.issueNumber}"/></td>
                             <td class="align-middle">
-                                <fmt:formatDate type="date" value="${issue.publicationDate}" pattern="dd-MM-yyyy"/>
+                                <c:out value="${issue.publicationDate}"/>
                             </td>
                             <td class="align-middle">
                                 <button type="button" class="btn btn-info

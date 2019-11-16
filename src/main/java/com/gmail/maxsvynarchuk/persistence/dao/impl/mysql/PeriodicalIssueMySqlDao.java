@@ -29,6 +29,8 @@ public class PeriodicalIssueMySqlDao implements PeriodicalIssueDao {
             ResourceManager.QUERIES.getProperty("periodical.issue.where.periodical");
     private final static String WHERE_NUMBER_AND_PERIODICAL_ID =
             ResourceManager.QUERIES.getProperty("periodical.issue.where.number.and.periodical");
+    private final static String ORDER_BY_PUBLICATION_DATE =
+            ResourceManager.QUERIES.getProperty("periodical.issue.select.order");
 
     private final UtilMySqlDao<PeriodicalIssue> utilMySqlDao;
 
@@ -51,19 +53,19 @@ public class PeriodicalIssueMySqlDao implements PeriodicalIssueDao {
 
     @Override
     public List<PeriodicalIssue> findAll() {
-        return utilMySqlDao.findAll(SELECT_ALL);
+        return utilMySqlDao.findAll(SELECT_ALL + ORDER_BY_PUBLICATION_DATE);
     }
 
     @Override
     public List<PeriodicalIssue> findAll(long skip, long limit) {
-        return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
+        return utilMySqlDao.findAll(SELECT_ALL + ORDER_BY_PUBLICATION_DATE + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override
     public List<PeriodicalIssue> findByPeriodical(Periodical periodical) {
         Objects.requireNonNull(periodical);
 
-        return utilMySqlDao.findAll(SELECT_ALL + WHERE_PERIODICAL_ID, periodical.getId());
+        return utilMySqlDao.findAll(SELECT_ALL +  WHERE_PERIODICAL_ID + ORDER_BY_PUBLICATION_DATE, periodical.getId());
     }
 
     @Override
@@ -83,7 +85,7 @@ public class PeriodicalIssueMySqlDao implements PeriodicalIssueDao {
                 obj.getPeriodical().getId(),
                 obj.getName(),
                 obj.getIssueNumber(),
-                TimeConverter.formatDate(obj.getPublicationDate()),
+                obj.getPublicationDate(),
                 obj.getDescription());
         obj.setId(id);
 
@@ -99,7 +101,7 @@ public class PeriodicalIssueMySqlDao implements PeriodicalIssueDao {
                 obj.getPeriodical().getId(),
                 obj.getName(),
                 obj.getIssueNumber(),
-                TimeConverter.formatDate(obj.getPublicationDate()),
+                obj.getPublicationDate(),
                 obj.getDescription(),
                 obj.getId());
     }

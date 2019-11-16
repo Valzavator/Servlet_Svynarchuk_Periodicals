@@ -4,7 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
-import com.gmail.maxsvynarchuk.util.entity.ShoppingCart;
+import com.gmail.maxsvynarchuk.service.util.entity.ShoppingCart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

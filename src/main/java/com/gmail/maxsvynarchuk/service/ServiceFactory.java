@@ -27,4 +27,8 @@ public class ServiceFactory {
     public static ShoppingCartService getShoppingCartService() {
         return ShoppingCartService.getInstance();
     }
+
+    public static PaymentService getPaymentService() {
+        return PaymentService.getInstance();
+    }
 }

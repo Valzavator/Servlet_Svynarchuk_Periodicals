@@ -15,7 +15,7 @@
 <main role="main" class="container">
 
     <c:forEach var="periodical" items="${requestScope.catalog}">
-        <div class="card border-dark mb-5">
+        <div class="card border-dark mb-5" id="periodical-${periodical.id}">
             <div class="row no-gutters ">
                 <div class="col-md-4 d-flex align-content-center flex-wrap">
                     <img src="<c:url value="/resources/images/logo.png"/>" class="card-img" alt="logo">

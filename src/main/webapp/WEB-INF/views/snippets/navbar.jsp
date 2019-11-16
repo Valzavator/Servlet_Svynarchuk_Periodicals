@@ -92,6 +92,15 @@
                             </span>
                         </a>
                     </li>
+                    <li
+                            <c:if test="${catalogView.equals(currView)}">
+                                class="active"
+                            </c:if>
+                    >
+                        <a class="nav-link" href="<c:url value="/app/catalog"/>">
+                            <i class="fa fa-home fa-list fa-lg" aria-hidden="true">&nbsp;</i> <fmt:message key="user.subscriptions"/>
+                        </a>
+                    </li>
                 </c:if>
                 <c:if test="${sessionScope.user.isAdmin()}">
                     <li class="nav-item dropdown">

@@ -36,6 +36,7 @@ public class AuthorizationFilter implements Filter {
         secureUserPaths.add(PagesPaths.CART_ADD_ITEM_PATH);
         secureUserPaths.add(PagesPaths.CART_REMOVE_ITEM_PATH);
         secureUserPaths.add(PagesPaths.CART_REMOVE_ALL_ITEM_PATH);
+        secureUserPaths.add(PagesPaths.CART_SUBSCRIPTION_PAYMENT_PATH);
     }
 
     @Override

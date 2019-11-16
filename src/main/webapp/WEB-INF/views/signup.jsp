@@ -163,7 +163,7 @@
                                 </div>
                                 <input type="date" id="dateOfBirth"
                                        name="dateOfBirth"
-                                       value="<fmt:formatDate type = "date" value="${requestScope.userDTO.dateOfBirth}" pattern="yyyy-MM-dd"/>"
+                                       value="<c:out value="${requestScope.userDTO.dateOfBirth}"/>"
                                        class="form-control form-control-lg"
                                        max="3000-12-31" min="1900-01-01" required>
                             </div>

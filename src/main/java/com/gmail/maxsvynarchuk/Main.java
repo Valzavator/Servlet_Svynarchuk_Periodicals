@@ -14,6 +14,8 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Properties;
 
 public class Main {
@@ -21,12 +23,18 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
-        String uri = "http://localhost:8080/app/catalog?error=errorIsAlreadyInCart&page=2";
-        String attribute = "error";
-
-        System.out.println(
-                Util.removeParameterFromURI(uri, attribute)
-        );
+        Date now = new Date();
+        LocalDate ld = new java.sql.Date(now.getTime())
+                .toLocalDate().plusMonths(1);
+        System.out.println(ld);
+//        LocalDate.parse()
+//        new java.sql.Date(
+//        String uri = "http://localhost:8080/app/catalog?error=errorIsAlreadyInCart&page=2";
+//        String attribute = "error";
+//
+//        System.out.println(
+//                Util.removeParameterFromURI(uri, attribute)
+//        );
 //
 //        String url = "jdbc:mysql://localhost:3306/periodicals";
 //        Properties prop = new Properties();

@@ -2,6 +2,7 @@ package com.gmail.maxsvynarchuk.persistence.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -18,7 +19,7 @@ public class Payment implements Serializable {
 
     private Long id;
     private User user;
-    private Date paymentDate;
+    private LocalDateTime paymentDateTime;
     private BigDecimal totalPrice;
 
     public static class Builder {
@@ -38,8 +39,8 @@ public class Payment implements Serializable {
             return this;
         }
 
-        public Builder setPaymentDate(Date paymentDate) {
-            payment.setPaymentDate(paymentDate);
+        public Builder setPaymentDate(LocalDateTime paymentDateTime) {
+            payment.setPaymentDateTime(paymentDateTime);
             return this;
         }
 
@@ -76,12 +77,12 @@ public class Payment implements Serializable {
         this.user = user;
     }
 
-    public Date getPaymentDate() {
-        return paymentDate;
+    public LocalDateTime getPaymentDateTime() {
+        return paymentDateTime;
     }
 
-    public void setPaymentDate(Date paymentDate) {
-        this.paymentDate = paymentDate;
+    public void setPaymentDateTime(LocalDateTime paymentDateTime) {
+        this.paymentDateTime = paymentDateTime;
     }
 
     public BigDecimal getTotalPrice() {
@@ -110,7 +111,7 @@ public class Payment implements Serializable {
         return new StringJoiner(", ", Payment.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("user=" + user)
-                .add("paymentDate=" + paymentDate)
+                .add("paymentDate=" + paymentDateTime)
                 .add("totalPrice=" + totalPrice)
                 .toString();
     }

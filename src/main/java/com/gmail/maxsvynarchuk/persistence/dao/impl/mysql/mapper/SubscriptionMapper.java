@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.entity.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class SubscriptionMapper implements EntityMapper<Subscription> {
     private static final String ID_FIELD = "subscription_id";
@@ -46,10 +47,10 @@ public class SubscriptionMapper implements EntityMapper<Subscription> {
                 .setPayment(tempPayment)
                 .setPeriodical(tempPeriodical)
                 .setSubscriptionPlan(tempSubscriptionPlan)
-                .setStartDate(resultSet.getDate(
-                        tablePrefix + START_DATE_FIELD))
-                .setEndDate(resultSet.getDate(
-                        tablePrefix + END_DATE_FIELD))
+                .setStartDate(resultSet.getObject(
+                        tablePrefix + START_DATE_FIELD, LocalDate.class))
+                .setEndDate(resultSet.getObject(
+                        tablePrefix + END_DATE_FIELD,  LocalDate.class))
                 .build();
     }
 }

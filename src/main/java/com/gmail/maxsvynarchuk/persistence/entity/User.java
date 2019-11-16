@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.util.type.Gender;
 import com.gmail.maxsvynarchuk.util.type.RoleType;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -27,7 +28,7 @@ public class User implements Serializable {
     private String lastName;
     private String email;
     private String password;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     private Gender gender;
 
     public static class Builder {
@@ -72,7 +73,7 @@ public class User implements Serializable {
             return this;
         }
 
-        public Builder setDateOfBirth(Date dateOfBirth) {
+        public Builder setDateOfBirth(LocalDate dateOfBirth) {
             user.setDateOfBirth(dateOfBirth);
             return this;
         }
@@ -150,11 +151,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

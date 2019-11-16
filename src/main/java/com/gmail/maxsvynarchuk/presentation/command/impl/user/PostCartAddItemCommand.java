@@ -12,7 +12,7 @@ import com.gmail.maxsvynarchuk.service.PeriodicalService;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
 import com.gmail.maxsvynarchuk.service.ShoppingCartService;
 import com.gmail.maxsvynarchuk.service.SubscriptionService;
-import com.gmail.maxsvynarchuk.util.entity.ShoppingCart;
+import com.gmail.maxsvynarchuk.service.util.entity.ShoppingCart;
 import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 
 import javax.servlet.http.HttpServletRequest;

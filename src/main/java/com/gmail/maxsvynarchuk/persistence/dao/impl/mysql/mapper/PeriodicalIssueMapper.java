@@ -5,6 +5,7 @@ import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class PeriodicalIssueMapper implements EntityMapper<PeriodicalIssue> {
     private static final String ID_FIELD = "periodical_issues_id";
@@ -35,8 +36,8 @@ public class PeriodicalIssueMapper implements EntityMapper<PeriodicalIssue> {
                         tablePrefix + ISSUE_NAME_FIELD))
                 .setIssueNumber(resultSet.getString(
                         tablePrefix + ISSUE_NO_FIELD))
-                .setPublicationDate(resultSet.getDate(
-                        tablePrefix + PUBLICATION_DATE_FIELD))
+                .setPublicationDate(resultSet.getObject(
+                        tablePrefix + PUBLICATION_DATE_FIELD, LocalDate.class))
                 .setDescription(resultSet.getString(
                         tablePrefix + ISSUE_DESCRIPTION_FIELD))
                 .build();

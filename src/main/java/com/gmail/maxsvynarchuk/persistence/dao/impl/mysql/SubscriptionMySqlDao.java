@@ -6,6 +6,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
+import com.gmail.maxsvynarchuk.persistence.exception.DaoException;
 import com.gmail.maxsvynarchuk.util.TimeConverter;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
@@ -24,6 +25,8 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
             ResourceManager.QUERIES.getProperty("subscription.delete");
     private final static String COUNT =
             ResourceManager.QUERIES.getProperty("subscription.count");
+    private final static String IS_USER_ALREADY_SUBSCRIBED =
+            ResourceManager.QUERIES.getProperty("subscription.is.user.already.subscribed");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("subscription.where.id");
 
@@ -66,8 +69,8 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
                 obj.getUser().getId(),
                 obj.getPeriodical().getId(),
                 obj.getSubscriptionPlan().getId(),
-                TimeConverter.formatDate(obj.getStartDate()),
-                TimeConverter.formatDate(obj.getEndDate()));
+                obj.getStartDate(),
+                obj.getEndDate());
         obj.setId(id);
 
         return obj;
@@ -83,8 +86,8 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
                 obj.getUser().getId(),
                 obj.getPeriodical().getId(),
                 obj.getSubscriptionPlan().getId(),
-                TimeConverter.formatDate(obj.getStartDate()),
-                TimeConverter.formatDate(obj.getEndDate()),
+                obj.getStartDate(),
+                obj.getEndDate(),
                 obj.getId());
     }
 
@@ -102,7 +105,11 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
 
     @Override
     public boolean isUserAlreadySubscribed(User user, Periodical periodical) {
-        // TODO
-        return false;
+        long count = utilMySqlDao.getRowsCount(IS_USER_ALREADY_SUBSCRIBED,
+                user.getId(), periodical.getId());
+        if (count > 1) {
+            throw new DaoException("User cannot be subscribed twice to one edition!");
+        }
+        return count == 1;
     }
 }

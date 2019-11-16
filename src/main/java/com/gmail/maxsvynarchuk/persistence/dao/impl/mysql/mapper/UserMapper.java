@@ -7,6 +7,7 @@ import com.gmail.maxsvynarchuk.util.type.Gender;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class UserMapper implements EntityMapper<User> {
     private static final String ID_FIELD = "user_id";
@@ -48,8 +49,8 @@ public class UserMapper implements EntityMapper<User> {
                         tablePrefix + EMAIL_FIELD))
                 .setPassword(resultSet.getString(
                         tablePrefix + PASSWORD_FIELD))
-                .setDateOfBirth(resultSet.getDate(
-                        tablePrefix + DATE_OF_BIRTH_FIELD))
+                .setDateOfBirth(resultSet.getObject(
+                        tablePrefix + DATE_OF_BIRTH_FIELD, LocalDate.class))
                 .setGender(Gender.valueOf(
                         resultSet.getString(tablePrefix + GENDER_FIELD).toUpperCase()))
                 .build();

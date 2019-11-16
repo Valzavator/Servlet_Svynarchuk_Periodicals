@@ -6,6 +6,7 @@ import com.gmail.maxsvynarchuk.util.TimeConverter;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class PaymentMapper implements EntityMapper<Payment> {
     private static final String ID_FIELD = "payment_id";
@@ -30,9 +31,8 @@ public class PaymentMapper implements EntityMapper<Payment> {
                 .setId(resultSet.getLong(
                         tablePrefix + ID_FIELD))
                 .setUser(tempUser)
-                .setPaymentDate(TimeConverter.toDate(
-                        resultSet.getTimestamp(
-                                tablePrefix + PAYMENT_DATE_FIELD)))
+                .setPaymentDate(resultSet.getObject(
+                                tablePrefix + PAYMENT_DATE_FIELD, LocalDateTime.class))
                 .setTotalPrice(resultSet.getBigDecimal(
                         tablePrefix + TOTAL_PRICE_FIELD))
                 .build();

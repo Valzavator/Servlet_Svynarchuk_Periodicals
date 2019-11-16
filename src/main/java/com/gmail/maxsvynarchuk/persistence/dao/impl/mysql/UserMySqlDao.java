@@ -72,7 +72,7 @@ public class UserMySqlDao implements UserDao {
                 obj.getLastName(),
                 obj.getEmail(),
                 obj.getPassword(),
-                TimeConverter.formatDate(obj.getDateOfBirth()),
+                obj.getDateOfBirth(),
                 obj.getGender().toString());
 
         obj.setId(id);
@@ -91,7 +91,7 @@ public class UserMySqlDao implements UserDao {
                 obj.getLastName(),
                 obj.getEmail(),
                 obj.getPassword(),
-                TimeConverter.formatDate(obj.getDateOfBirth()),
+                obj.getDateOfBirth(),
                 obj.getGender().toString(),
                 obj.getId());
     }
