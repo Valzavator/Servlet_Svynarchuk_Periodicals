@@ -8,8 +8,16 @@ import com.gmail.maxsvynarchuk.util.ResourceManager;
 public final class Attributes {
     public static final String USER = ResourceManager.ATTRIBUTE.getProperty("user");
     public static final String SHOPPING_CART = ResourceManager.ATTRIBUTE.getProperty("shopping.cart");
+
+    public static final String CATALOG = ResourceManager.ATTRIBUTE.getProperty("catalog");
     public static final String PERIODICAL = ResourceManager.ATTRIBUTE.getProperty("periodical");
     public static final String ISSUES = ResourceManager.ATTRIBUTE.getProperty("issues");
+    public static final String SUBSCRIPTIONS = ResourceManager.ATTRIBUTE.getProperty("subscriptions");
+
+    public static final String SUBSCRIPTION_PLANS = ResourceManager.ATTRIBUTE.getProperty("subscription.plans");
+    public static final String PERIODICAL_TYPES = ResourceManager.ATTRIBUTE.getProperty("periodical.types");
+    public static final String FREQUENCIES = ResourceManager.ATTRIBUTE.getProperty("frequencies");
+    public static final String PUBLISHERS = ResourceManager.ATTRIBUTE.getProperty("publishers");
 
     public static final String USER_DTO = ResourceManager.ATTRIBUTE.getProperty("user.dto");
     public static final String PERIODICAL_DTO = ResourceManager.ATTRIBUTE.getProperty("periodical.dto");
@@ -32,12 +40,6 @@ public final class Attributes {
     public static final String ERROR_ISSUE_NUMBER = ResourceManager.ATTRIBUTE.getProperty("error.issue.number");
     public static final String ERROR_ISSUE_DESCRIPTION = ResourceManager.ATTRIBUTE.getProperty("error.issue.description");
     public static final String ERROR_ISSUE_EXIST = ResourceManager.ATTRIBUTE.getProperty("error.issue.exist");
-
-    public static final String CATALOG = ResourceManager.ATTRIBUTE.getProperty("catalog");
-    public static final String SUBSCRIPTION_PLANS = ResourceManager.ATTRIBUTE.getProperty("subscription.plans");
-    public static final String PERIODICAL_TYPES = ResourceManager.ATTRIBUTE.getProperty("periodical.types");
-    public static final String FREQUENCIES = ResourceManager.ATTRIBUTE.getProperty("frequencies");
-    public static final String PUBLISHERS = ResourceManager.ATTRIBUTE.getProperty("publishers");
 
     public static final String PAGINATION_PAGE = ResourceManager.ATTRIBUTE.getProperty("pagination.page");
     public static final String PAGINATION_NUMBER_OF_PAGES = ResourceManager.ATTRIBUTE.getProperty("pagination.number.pages");

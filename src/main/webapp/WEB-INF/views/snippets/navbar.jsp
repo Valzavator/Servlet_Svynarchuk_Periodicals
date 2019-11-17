@@ -13,6 +13,7 @@
 <c:set var="signUpView" scope="page" value="${Views.SIGN_UP_VIEW}"/>
 <c:set var="catalogView" scope="page" value="${Views.CATALOG_VIEW}"/>
 <c:set var="cartView" scope="page" value="${Views.CART_VIEW}"/>
+<c:set var="subscriptionsView" scope="page" value="${Views.SUBSCRIPTIONS_VIEW}"/>
 <c:set var="adminCatalogView" scope="page" value="${Views.ADMIN_CATALOG_VIEW}"/>
 <c:set var="adminCreatePeriodicalView" scope="page" value="${Views.CREATE_PERIODICAL_VIEW}"/>
 <c:set var="currView" scope="page">
@@ -94,13 +95,13 @@
                         </a>
                     </li>
                     <li
-                            <c:if test="${catalogView.equals(currView)}">
+                            <c:if test="${subscriptionsView.equals(currView)}">
                                 class="active"
                             </c:if>
                     >
-                        <a class="nav-link" href="<c:url value="/app/catalog"/>">
-                            <i class="fa fa-home fa-list fa-lg" aria-hidden="true">&nbsp;</i> <fmt:message
-                                key="user.subscriptions"/>
+                        <a class="nav-link" href="<c:url value="/app/subscriptions"/>">
+                            <i class="fa fa-home fa-list fa-lg" aria-hidden="true">&nbsp;</i>
+                            <fmt:message key="user.subscriptions"/>
                         </a>
                     </li>
                 </c:if>

@@ -26,10 +26,10 @@ public class AuthorizationFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        //TODO add all secure paths
         secureAdminPaths.add(PagesPaths.ADMIN_CATALOG_PATH);
         secureAdminPaths.add(PagesPaths.CREATE_PERIODICAL_PATH);
         secureAdminPaths.add(PagesPaths.EDIT_PERIODICAL_PATH);
+        secureAdminPaths.add(PagesPaths.CHANGE_STATUS_PERIODICAL_PATH);
         secureAdminPaths.add(PagesPaths.CREATE_ISSUE_PATH);
 
         secureUserPaths.add(PagesPaths.CART_PATH);
@@ -37,6 +37,7 @@ public class AuthorizationFilter implements Filter {
         secureUserPaths.add(PagesPaths.CART_REMOVE_ITEM_PATH);
         secureUserPaths.add(PagesPaths.CART_REMOVE_ALL_ITEM_PATH);
         secureUserPaths.add(PagesPaths.CART_SUBSCRIPTION_PAYMENT_PATH);
+        secureUserPaths.add(PagesPaths.SUBSCRIPTIONS_PATH);
     }
 
     @Override

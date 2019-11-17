@@ -3,7 +3,6 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
 
 public class MapperFactory {
-    private static final EntityMapper<Address> ADDRESS_MAPPER = new AddressMapper();
     private static final EntityMapper<Frequency> FREQUENCY_MAPPER = new FrequencyMapper();
     private static final EntityMapper<Payment> PAYMENT_MAPPER = new PaymentMapper();
     private static final EntityMapper<PeriodicalIssue> PERIODICAL_ISSUE_MAPPER = new PeriodicalIssueMapper();
@@ -14,10 +13,6 @@ public class MapperFactory {
     private static final EntityMapper<Subscription> SUBSCRIPTION_MAPPER = new SubscriptionMapper();
     private static final EntityMapper<SubscriptionPlan> SUBSCRIPTION_PLAN_MAPPER = new SubscriptionPlanMapper();
     private static final EntityMapper<User> USER_MAPPER = new UserMapper();
-
-    public static EntityMapper<Address> getAddressMapper() {
-        return ADDRESS_MAPPER;
-    }
 
     public static EntityMapper<Frequency> getFrequencyMapper() {
         return FREQUENCY_MAPPER;

@@ -6,6 +6,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.persistence.transaction.Transaction;
+import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,7 +18,6 @@ public class SubscriptionService {
     private final PaymentService paymentService = ServiceFactory.getPaymentService();
     private final SubscriptionDao subscriptionDao = DaoFactory.getInstance().getSubscriptionDao();
     private final SubscriptionPlanDao subscriptionPlanDao = DaoFactory.getInstance().getSubscriptionPlanDao();
-    private final PeriodicalDao periodicalDao = DaoFactory.getInstance().getPeriodicalDao();
 
     private SubscriptionService() {
     }
@@ -28,6 +28,16 @@ public class SubscriptionService {
 
     public static SubscriptionService getInstance() {
         return SubscriptionService.Singleton.INSTANCE;
+    }
+
+    public List<Subscription> findAllActiveSubscriptionsByUser(User user, long skip, long limit) {
+        Objects.requireNonNull(user);
+
+        return subscriptionDao.findAllActiveSubscriptionsByUser(user, skip, limit);
+    }
+
+    public long getActiveSubscriptionsCountByUser(User user) {
+        return subscriptionDao.getCountActiveByUser(user);
     }
 
     public void processSubscriptions(User user, BigDecimal totalPrice, List<Subscription> subscriptions) {

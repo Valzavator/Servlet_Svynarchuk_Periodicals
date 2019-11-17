@@ -2,7 +2,6 @@ package com.gmail.maxsvynarchuk.service;
 
 import com.gmail.maxsvynarchuk.persistence.dao.UserDao;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
-import com.gmail.maxsvynarchuk.persistence.entity.Address;
 import com.gmail.maxsvynarchuk.persistence.entity.Role;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.util.PasswordManager;
@@ -22,7 +21,6 @@ import java.util.Optional;
 public class UserService {
     private final UserDao userDao = DaoFactory.getInstance().getUserDao();
     private final Role defaultRole = RoleType.USER.getValue();
-    private final Address emptyAddress = Address.newBuilder().build();
 
     private UserService() {
     }
@@ -58,9 +56,6 @@ public class UserService {
 
         if (userToRegister.getRole() == null) {
             userToRegister.setRole(defaultRole);
-        }
-        if (userToRegister.getAddress() == null) {
-            userToRegister.setAddress(emptyAddress);
         }
         String hash = PasswordManager.hashPassword(
                 userToRegister.getPassword());

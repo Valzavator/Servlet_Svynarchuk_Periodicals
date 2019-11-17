@@ -67,7 +67,6 @@ public class UserMySqlDao implements UserDao {
         long id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
                 obj.getRole().getId(),
-                obj.getAddress().getId(),
                 obj.getFirstName(),
                 obj.getLastName(),
                 obj.getEmail(),
@@ -86,7 +85,6 @@ public class UserMySqlDao implements UserDao {
         utilMySqlDao.executeUpdate(
                 UPDATE + WHERE_ID,
                 obj.getRole().getId(),
-                obj.getAddress().getId(),
                 obj.getFirstName(),
                 obj.getLastName(),
                 obj.getEmail(),

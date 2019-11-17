@@ -52,6 +52,8 @@ public class CommandFactory {
                 new PostCartRemoveAllItemCommand());
         commands.put(buildKey(PagesPaths.CART_SUBSCRIPTION_PAYMENT_PATH, RequestMethod.POST),
                 new PostSubscriptionPaymentCommand());
+        commands.put(buildKey(PagesPaths.SUBSCRIPTIONS_PATH, RequestMethod.GET),
+                new GetSubscriptionsCommand());
         commands.put(buildKey(PagesPaths.ADMIN_CATALOG_PATH, RequestMethod.GET),
                 new GetAdminCatalogCommand());
         commands.put(buildKey(PagesPaths.CREATE_PERIODICAL_PATH, RequestMethod.GET),

@@ -6,7 +6,6 @@ import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.*;
 public class MySqlDaoFactory extends DaoFactory {
     private UserDao userDao;
     private RoleDao roleDao;
-    private AddressDao addressDao;
     private PeriodicalDao periodicalDao;
     private PeriodicalTypeDao periodicalTypeDao;
     private FrequencyDao frequencyDao;
@@ -19,7 +18,6 @@ public class MySqlDaoFactory extends DaoFactory {
     public MySqlDaoFactory() {
         this.userDao = new UserMySqlDao();
         this.roleDao = new RoleMySqlDao();
-        this.addressDao = new AddressMySqlDao();
         this.periodicalDao = new PeriodicalMySqlDao();
         this.periodicalTypeDao = new PeriodicalTypeMySqlDao();
         this.frequencyDao = new FrequencyMySqlDao();
@@ -38,11 +36,6 @@ public class MySqlDaoFactory extends DaoFactory {
     @Override
     public RoleDao getRoleDao() {
         return roleDao;
-    }
-
-    @Override
-    public AddressDao getAddressDao() {
-        return addressDao;
     }
 
     @Override

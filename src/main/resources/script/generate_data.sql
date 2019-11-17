@@ -23,7 +23,3 @@ VALUES (1, 4, 1, 'Batman', 3,
         'Formerly known as The Manchester Guardian, this newspaper was founded in 1821 by a group of non-conformist businessmen headed by John Edward Taylor. The much-quoted article “comment is free but facts are sacred” is still used to explain the values of the present-day newspaper.'),
        (2, 1, 3, 'The Wall Street Journal', 0.99,
         'In 1882, with 2 associates, newspaperman Charles Henry Dow founded Dow Jones and Company, a news agency for the financial world. The Journal took its modern shape and prominence in the 1940s, a time of industrial expansion for the United States and its financial institutions in New York. The Wall Street Journal is a special paper for people in the business and economic communities, yet it goes far beyond that designation in its treatment of the news.');
-
-INSERT INTO payments(user_id, total_price)
-VALUES (2, 100),
-       (3, 200);

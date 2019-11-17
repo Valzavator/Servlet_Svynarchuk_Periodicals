@@ -12,18 +12,15 @@ import java.util.StringJoiner;
 /**
  * Class that represents user of system;
  * Each user must have one and only one role.
- * Each user may have at most one address.
  *
  * @author Maksym Svynarchuk
  * @see Role
- * @see Address
  */
 public class User implements Serializable {
     private static final long serialVersionUID = -1864654776101421526L;
 
     private Long id;
     private Role role;
-    private Address address;
     private String firstName;
     private String lastName;
     private String email;
@@ -45,11 +42,6 @@ public class User implements Serializable {
 
         public Builder setRole(Role role) {
             user.setRole(role);
-            return this;
-        }
-
-        public Builder setAddress(Address address) {
-            user.setAddress(address);
             return this;
         }
 
@@ -109,14 +101,6 @@ public class User implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public String getFirstName() {
@@ -189,7 +173,6 @@ public class User implements Serializable {
         return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("role=" + role)
-                .add("address=" + address)
                 .add("firstName='" + firstName + "'")
                 .add("lastName='" + lastName + "'")
                 .add("email='" + email + "'")

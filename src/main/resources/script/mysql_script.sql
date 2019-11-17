@@ -12,8 +12,6 @@ DROP TABLE IF EXISTS users;
 
 DROP TABLE IF EXISTS roles;
 
-DROP TABLE IF EXISTS addresses;
-
 DROP TABLE IF EXISTS periodical_issues;
 
 DROP TABLE IF EXISTS periodicals;
@@ -35,26 +33,12 @@ CREATE TABLE roles
 );
 
 /*==============================================================*/
-/* Table: addresses                                             */
-/*==============================================================*/
-CREATE TABLE addresses
-(
-    address_id     BIGINT       NOT NULL AUTO_INCREMENT,
-    country        VARCHAR(255) NOT NULL,
-    city           VARCHAR(255) NOT NULL,
-    post_index     VARCHAR(255) NOT NULL,
-    detail_address VARCHAR(255) NOT NULL,
-    PRIMARY KEY (address_id)
-);
-
-/*==============================================================*/
 /* Table: users                                                 */
 /*==============================================================*/
 CREATE TABLE users
 (
     user_id       BIGINT                  NOT NULL AUTO_INCREMENT,
     role_id       INT                     NOT NULL,
-    address_id    BIGINT,
     first_name    VARCHAR(255)            NOT NULL,
     last_name     VARCHAR(255)            NOT NULL,
     email         VARCHAR(255)            NOT NULL UNIQUE,
@@ -64,10 +48,6 @@ CREATE TABLE users
     PRIMARY KEY (user_id),
     CONSTRAINT fk_user_role
         FOREIGN KEY (role_id) REFERENCES roles (role_id)
-            ON UPDATE RESTRICT
-            ON DELETE RESTRICT,
-    CONSTRAINT fk_user_address
-        FOREIGN KEY (address_id) REFERENCES addresses (address_id)
             ON UPDATE RESTRICT
             ON DELETE RESTRICT
 );

@@ -46,8 +46,6 @@ public abstract class DaoFactory {
 
     public abstract RoleDao getRoleDao();
 
-    public abstract AddressDao getAddressDao();
-
     public abstract PeriodicalDao getPeriodicalDao();
 
     public abstract PeriodicalTypeDao getPeriodicalTypeDao();

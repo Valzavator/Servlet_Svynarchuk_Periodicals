@@ -13,7 +13,13 @@
 <body class="d-flex flex-column min-vh-100">
 <jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>
 <main role="main" class="container">
-
+    <c:if test="${empty requestScope.catalog}">
+        <div class="d-flex justify-content-center align-items-center mb-5">
+            <h1 class="display-4 text-info">
+                <span class="badge badge-info"><fmt:message key="catalog.empty"/></span>
+            </h1>
+        </div>
+    </c:if>
     <c:forEach var="periodical" items="${requestScope.catalog}">
         <div class="card border-dark mb-5" id="periodical-${periodical.id}">
             <div class="row no-gutters ">

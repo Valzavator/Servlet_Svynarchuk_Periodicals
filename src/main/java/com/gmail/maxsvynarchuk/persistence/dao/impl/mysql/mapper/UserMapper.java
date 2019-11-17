@@ -1,6 +1,5 @@
 package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper;
 
-import com.gmail.maxsvynarchuk.persistence.entity.Address;
 import com.gmail.maxsvynarchuk.persistence.entity.Role;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.util.type.Gender;
@@ -19,28 +18,24 @@ public class UserMapper implements EntityMapper<User> {
     private static final String GENDER_FIELD = "gender";
 
     private final EntityMapper<Role> roleMapper;
-    private final EntityMapper<Address> addressMapper;
 
     public UserMapper() {
-        this(new RoleMapper(), new AddressMapper());
+        this(new RoleMapper());
     }
 
-    public UserMapper(EntityMapper<Role> roleMapper, EntityMapper<Address> addressMapper) {
+    public UserMapper(EntityMapper<Role> roleMapper) {
         this.roleMapper = roleMapper;
-        this.addressMapper = addressMapper;
     }
 
     @Override
     public User mapToObject(ResultSet resultSet, String tablePrefix)
             throws SQLException {
         Role tempRole = roleMapper.mapToObject(resultSet);
-        Address tempAddress = addressMapper.mapToObject(resultSet);
 
         return User.newBuilder()
                 .setId(resultSet.getLong(
                         tablePrefix + ID_FIELD))
                 .setRole(tempRole)
-                .setAddress(tempAddress)
                 .setFirstName(resultSet.getString(
                         tablePrefix + FIRST_NAME_FIELD))
                 .setLastName(resultSet.getString(

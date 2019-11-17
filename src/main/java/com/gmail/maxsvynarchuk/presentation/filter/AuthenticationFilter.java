@@ -25,8 +25,6 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        //TODO add all free paths
-
         freePaths.add(PagesPaths.HOME_PATH);
         freePaths.add(PagesPaths.SIGN_IN_PATH);
         freePaths.add(PagesPaths.SIGN_UP_PATH);
@@ -50,9 +48,7 @@ public class AuthenticationFilter implements Filter {
 
         if (isLoggedIn) {
             if (isSignUpRequest || isSignInRequest) {
-                // TODO - test referer or change on HOME_PATH
-                String referer = Util.getReferer(req);
-                Util.redirectTo(req, resp, referer);
+                Util.redirectTo(req, resp, PagesPaths.HOME_PATH);
             } else {
                 chain.doFilter(req, resp);
             }

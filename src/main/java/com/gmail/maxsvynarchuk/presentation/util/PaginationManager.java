@@ -25,7 +25,7 @@ public class PaginationManager {
         } catch (NumberFormatException ex) {
              page = FIRST_PAGE;
         }
-        if (page > numberOfPages) {
+        if (numberOfPages > 0 && page > numberOfPages) {
             page = numberOfPages;
         }
         long skip = (page - 1) * recordsPerPage;

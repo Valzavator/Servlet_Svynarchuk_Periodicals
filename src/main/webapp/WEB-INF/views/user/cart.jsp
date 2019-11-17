@@ -52,7 +52,6 @@
                         <th scope="col" class="align-middle">
                             <form class="table-form" method="post" action="<c:url value="/app/cart/remove-all"/>">
                                 <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-times-circle-o fa-lg" aria-hidden="true">&nbsp;</i>
                                     <fmt:message key="cart.remove.all"/>
                                 </button>
                             </form>
