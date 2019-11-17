@@ -8,6 +8,7 @@
 <fmt:setBundle basename="i18n.lang"/>
 
 <c:set var="homeView" scope="page" value="${Views.HOME_VIEW}"/>
+<c:set var="profileView" scope="page" value="${Views.PROFILE_VIEW}"/>
 <c:set var="signInView" scope="page" value="${Views.SIGN_IN_VIEW}"/>
 <c:set var="signUpView" scope="page" value="${Views.SIGN_UP_VIEW}"/>
 <c:set var="catalogView" scope="page" value="${Views.CATALOG_VIEW}"/>
@@ -98,7 +99,8 @@
                             </c:if>
                     >
                         <a class="nav-link" href="<c:url value="/app/catalog"/>">
-                            <i class="fa fa-home fa-list fa-lg" aria-hidden="true">&nbsp;</i> <fmt:message key="user.subscriptions"/>
+                            <i class="fa fa-home fa-list fa-lg" aria-hidden="true">&nbsp;</i> <fmt:message
+                                key="user.subscriptions"/>
                         </a>
                     </li>
                 </c:if>
@@ -136,7 +138,12 @@
                         <c:out value="${sessionScope.user.firstName}"/>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdownMenuLink">
-                        <a class="dropdown-item" href="#"><fmt:message key="profile"/></a>
+                        <a class="dropdown-item
+                            <c:if test="${profileView.equals(currView)}">
+                                    active
+                            </c:if>"
+                           href="<c:url value="/app/profile"/>"><fmt:message key="profile"/>
+                        </a>
                         <a class="dropdown-item" href="<c:url value="/app/signout"/>"><fmt:message key="signout"/></a>
                     </div>
                 </li>

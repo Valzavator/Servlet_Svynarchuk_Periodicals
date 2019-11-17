@@ -25,37 +25,61 @@
                 </div>
                 <div class="card-body bg-primary">
                     <div class="card-text text-center">
-                        <fmt:message key="periodical.description"/>&nbsp;
+                        <strong><fmt:message key="periodical.description"/></strong>
                     </div>
                     <p class="card-text"><c:out value="${periodical.description}"/></p>
                 </div>
 
                 <ul class="bg-primary text-white list-group list-group-flush">
                     <li class="list-group-item bg-primary">
-                        <fmt:message key="periodical.status"/>:
-                        <c:if test="${periodical.status eq PeriodicalStatus.ACTIVE}">
-                            <span class="badge badge-success">
-                                <fmt:message key="periodical.status.active"/>
-                            </span>
-                        </c:if>
-                        <c:if test="${periodical.status eq PeriodicalStatus.SUSPENDED}">
-                            <span class="badge badge-warning">
-                                <fmt:message key="periodical.status.suspended"/>
-                            </span>
-                        </c:if>
+                        <dl class="row">
+                            <dt class="col-sm-3"><fmt:message key="periodical.status"/>:</dt>
+                            <dd class="col-sm-9">
+                            <c:if test="${periodical.status eq PeriodicalStatus.ACTIVE}">
+                                <span class="badge badge-success">
+                                    <fmt:message key="periodical.status.active"/>
+                                </span>
+                            </c:if>
+                            <c:if test="${periodical.status eq PeriodicalStatus.SUSPENDED}">
+                                <span class="badge badge-warning">
+                                    <fmt:message key="periodical.status.suspended"/>
+                                </span>
+                            </c:if>
+                            </dd>
+                        </dl>
                     </li>
                     <li class="list-group-item bg-primary">
-                        <fmt:message key="periodical.type"/>: <c:out value="${periodical.periodicalType.name}"/>
+                        <dl class="row">
+                            <dt class="col-sm-3"><fmt:message key="periodical.type"/>:</dt>
+                            <dd class="col-sm-9">
+                                <c:out value="${periodical.periodicalType.name}"/>
+                            </dd>
+                        </dl>
                     </li>
                     <li class="list-group-item bg-primary">
-                        <fmt:message key="periodical.frequency"/>:
-                        <c:out value="${periodical.frequency.name}"/> - <c:out value="${periodical.frequency.meaning}"/>
+                        <dl class="row">
+                            <dt class="col-sm-3"><fmt:message key="periodical.frequency"/>:</dt>
+                            <dd class="col-sm-9">
+                                <c:out value="${periodical.frequency.name}"/> - <c:out value="${periodical.frequency.meaning}"/>
+                            </dd>
+                        </dl>
                     </li>
                     <li class="list-group-item bg-primary">
-                        <fmt:message key="periodical.publisher"/>: <c:out value="${periodical.publisher.name}"/>
+                        <dl class="row">
+                            <dt class="col-sm-3"><fmt:message key="periodical.publisher"/>:</dt>
+                            <dd class="col-sm-9">
+                                <c:out value="${periodical.publisher.name}"/>
+                            </dd>
+                        </dl>
                     </li>
                     <li class="list-group-item bg-primary">
-                        <fmt:message key="periodical.price"/>: <c:out value="${periodical.price} $"/></li>
+                        <dl class="row">
+                            <dt class="col-sm-3"><fmt:message key="periodical.price"/>:</dt>
+                            <dd class="col-sm-9">
+                                <c:out value="${periodical.price} $"/>
+                            </dd>
+                        </dl>
+                    </li>
                 </ul>
                 <c:if test="${!sessionScope.user.isAdmin() and periodical.status ne PeriodicalStatus.SUSPENDED}">
                     <div class="card-footer d-flex justify-content-sm-center justify-content-lg-end ">
