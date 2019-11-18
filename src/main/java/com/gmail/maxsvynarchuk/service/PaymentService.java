@@ -35,6 +35,10 @@ public class PaymentService {
         return Singleton.INSTANCE;
     }
 
+    public List<Payment> findAllPayments(long skip, long limit) {
+        return paymentDao.findAll(skip, limit);
+    }
+
     public Payment createPayment(User user, BigDecimal totalPrice) {
         Objects.requireNonNull(user);
         Objects.requireNonNull(totalPrice);
@@ -47,4 +51,9 @@ public class PaymentService {
 
         return paymentDao.insert(payment);
     }
+
+    public long getPaymentsCount() {
+        return paymentDao.getCount();
+    }
+
 }

@@ -70,6 +70,8 @@ public class CommandFactory {
                 new GetCreateIssueCommand());
         commands.put(buildKey(PagesPaths.CREATE_ISSUE_PATH, RequestMethod.POST),
                 new PostCreateIssueCommand());
+        commands.put(buildKey(PagesPaths.PAYMENTS_PATH, RequestMethod.GET),
+                new GetPaymentsCommand());
 
     }
 

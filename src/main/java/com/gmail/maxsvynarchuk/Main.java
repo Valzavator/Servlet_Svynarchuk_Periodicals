@@ -15,6 +15,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Properties;
 
@@ -23,10 +25,10 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
-        Date now = new Date();
-        LocalDate ld = new java.sql.Date(now.getTime())
-                .toLocalDate().plusMonths(1);
-        System.out.println(ld);
+//        Date now = new Date();
+//        LocalDate ld = new java.sql.Date(now.getTime())
+//                .toLocalDate().plusMonths(1);
+        System.out.println(LocalDateTime.now());
 //        LocalDate.parse()
 //        new java.sql.Date(
 //        String uri = "http://localhost:8080/app/catalog?error=errorIsAlreadyInCart&page=2";

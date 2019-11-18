@@ -23,6 +23,8 @@ public class PaymentMySqlDao implements PaymentDao {
             ResourceManager.QUERIES.getProperty("payment.count");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("payment.where.id");
+    private final static String ORDER_BY_DATE =
+            ResourceManager.QUERIES.getProperty("payment.select.order");
 
     private final UtilMySqlDao<Payment> utilMySqlDao;
 
@@ -45,12 +47,12 @@ public class PaymentMySqlDao implements PaymentDao {
 
     @Override
     public List<Payment> findAll() {
-        return utilMySqlDao.findAll(SELECT_ALL);
+        return utilMySqlDao.findAll(SELECT_ALL + ORDER_BY_DATE);
     }
 
     @Override
     public List<Payment> findAll(long skip, long limit) {
-        return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
+        return utilMySqlDao.findAll(SELECT_ALL + ORDER_BY_DATE + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override

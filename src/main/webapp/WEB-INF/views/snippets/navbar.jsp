@@ -16,6 +16,7 @@
 <c:set var="subscriptionsView" scope="page" value="${Views.SUBSCRIPTIONS_VIEW}"/>
 <c:set var="adminCatalogView" scope="page" value="${Views.ADMIN_CATALOG_VIEW}"/>
 <c:set var="adminCreatePeriodicalView" scope="page" value="${Views.CREATE_PERIODICAL_VIEW}"/>
+<c:set var="adminPaymentsView" scope="page" value="${Views.PAYMENTS_VIEW}"/>
 <c:set var="currView" scope="page">
     <myLib:viewUri/>
 </c:set>
@@ -130,6 +131,16 @@
                                 <fmt:message key="admin.management.create.periodical"/>
                             </a>
                         </div>
+                    </li>
+                    <li
+                            <c:if test="${adminPaymentsView.equals(currView)}">
+                                class="active"
+                            </c:if>
+                    >
+                        <a class="nav-link" href="<c:url value="/app/admin/payments"/>">
+                            <i class="fa fa-money fa-lg" aria-hidden="true">&nbsp;</i>
+                            <fmt:message key="admin.payments"/>
+                        </a>
                     </li>
                 </c:if>
                 <li class="nav-item dropdown">

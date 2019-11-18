@@ -13,6 +13,7 @@ public final class Attributes {
     public static final String PERIODICAL = ResourceManager.ATTRIBUTE.getProperty("periodical");
     public static final String ISSUES = ResourceManager.ATTRIBUTE.getProperty("issues");
     public static final String SUBSCRIPTIONS = ResourceManager.ATTRIBUTE.getProperty("subscriptions");
+    public static final String PAYMENTS = ResourceManager.ATTRIBUTE.getProperty("payments");
 
     public static final String SUBSCRIPTION_PLANS = ResourceManager.ATTRIBUTE.getProperty("subscription.plans");
     public static final String PERIODICAL_TYPES = ResourceManager.ATTRIBUTE.getProperty("periodical.types");

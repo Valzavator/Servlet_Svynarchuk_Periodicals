@@ -29,6 +29,7 @@ public final class PagesPaths {
     public static final String EDIT_PERIODICAL_PATH = ResourceManager.PATH.getProperty("path.admin.catalog.periodical.edit");
     public static final String CHANGE_STATUS_PERIODICAL_PATH = ResourceManager.PATH.getProperty("path.admin.catalog.change.status");
     public static final String CREATE_ISSUE_PATH = ResourceManager.PATH.getProperty("path.admin.issue.create");
+    public static final String PAYMENTS_PATH = ResourceManager.PATH.getProperty("path.admin.payments");
 
     private PagesPaths() {
     }

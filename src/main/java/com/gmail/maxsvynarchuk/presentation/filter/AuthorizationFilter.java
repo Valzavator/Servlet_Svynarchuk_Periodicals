@@ -25,7 +25,7 @@ public class AuthorizationFilter implements Filter {
     private static final Set<String> secureUserPaths = new HashSet<>();
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         secureAdminPaths.add(PagesPaths.ADMIN_CATALOG_PATH);
         secureAdminPaths.add(PagesPaths.CREATE_PERIODICAL_PATH);
         secureAdminPaths.add(PagesPaths.EDIT_PERIODICAL_PATH);
