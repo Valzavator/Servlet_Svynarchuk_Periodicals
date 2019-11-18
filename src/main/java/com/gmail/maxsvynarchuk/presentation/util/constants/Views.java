@@ -24,6 +24,7 @@ public final class Views {
     public static final String EDIT_PERIODICAL_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.edit.periodical");
     public static final String CREATE_ISSUE_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.create.issue");
     public static final String PAYMENTS_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.payments");
+    public static final String USER_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.admin.user");
 
     public static final String ERROR_403_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.error.403");
     public static final String ERROR_404_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.error.404");

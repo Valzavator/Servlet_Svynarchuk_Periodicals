@@ -26,11 +26,14 @@ public class AuthorizationFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
+        // TODO check
         secureAdminPaths.add(PagesPaths.ADMIN_CATALOG_PATH);
         secureAdminPaths.add(PagesPaths.CREATE_PERIODICAL_PATH);
         secureAdminPaths.add(PagesPaths.EDIT_PERIODICAL_PATH);
         secureAdminPaths.add(PagesPaths.CHANGE_STATUS_PERIODICAL_PATH);
         secureAdminPaths.add(PagesPaths.CREATE_ISSUE_PATH);
+        secureAdminPaths.add(PagesPaths.PAYMENTS_PATH);
+        secureAdminPaths.add(PagesPaths.USER_PATH);
 
         secureUserPaths.add(PagesPaths.CART_PATH);
         secureUserPaths.add(PagesPaths.CART_ADD_ITEM_PATH);

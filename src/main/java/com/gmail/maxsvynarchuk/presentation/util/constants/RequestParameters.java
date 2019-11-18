@@ -26,6 +26,8 @@ public final class RequestParameters {
     public static final String PERIODICAL_ID = ResourceManager.PARAMETER.getProperty("periodical.id");
     public static final String SUBSCRIPTION_PLAN_ID = ResourceManager.PARAMETER.getProperty("subscription.plan.id");
     public static final String CART_ITEM_ID = ResourceManager.PARAMETER.getProperty("cart.item.id");
+    public static final String PAYMENT_ID = ResourceManager.PARAMETER.getProperty("payment.id");
+    public static final String USER_ID = ResourceManager.PARAMETER.getProperty("user.id");
 
     public static final String PAGINATION_PAGE = ResourceManager.PARAMETER.getProperty("pagination.page");
 

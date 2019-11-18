@@ -72,6 +72,8 @@ public class CommandFactory {
                 new PostCreateIssueCommand());
         commands.put(buildKey(PagesPaths.PAYMENTS_PATH, RequestMethod.GET),
                 new GetPaymentsCommand());
+        commands.put(buildKey(PagesPaths.USER_PATH, RequestMethod.GET),
+                new GetUserProfileCommand());
 
     }
 

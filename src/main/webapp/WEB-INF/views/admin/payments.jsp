@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-         import="com.gmail.maxsvynarchuk.util.type.PeriodicalStatus" %>
+         import="java.sql.Timestamp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -16,7 +16,7 @@
     <div class="d-flex justify-content-center align-items-center">
         <h1 class="display-3">
             <strong>
-                <fmt:message key="active.subscriptions"/>
+                <fmt:message key="payments"/>
             </strong>
         </h1>
     </div>
@@ -27,7 +27,7 @@
         <c:when test="${empty requestScope.payments}">
             <div class="d-flex justify-content-center align-items-center mb-5">
                 <h1 class="display-4 text-info">
-                    <span class="badge badge-info"><fmt:message key="subscriptions.empty"/></span>
+                    <span class="badge badge-info"><fmt:message key="payments.empty"/></span>
                 </h1>
             </div>
         </c:when>
@@ -48,15 +48,17 @@
                         <tr>
                             <th scope="row" class="align-middle">${counter.count}</th>
                             <td class="align-middle overflow-text">
-                                <c:out value="${payment.user.firstName}"/> <c:out value="${payment.user.lastName}"/>
+                                <a href="<c:url value="/app/admin/user?userId=${payment.user.id}"/>">
+                                    <i class="fa fa-user fa-lg" aria-hidden="true">&nbsp;</i>
+                                    <c:out value="${payment.user.firstName}"/> <c:out value="${payment.user.lastName}"/>
+                                </a>
                             </td>
                             <td class="align-middle">
-                                <fmt:parseDate value="${payment.paymentDateTime}" pattern="yyyy-MM-dd"
-                                               var="parsedDate" type="date"/>
-                                <fmt:formatDate value="${parsedDate}" type="date" pattern="yyyy-MM-dd"/>
+                                <fmt:formatDate value="${Timestamp.valueOf(payment.paymentDateTime)}" type="date"
+                                                pattern="yyyy-MM-dd/HH:mm"/>
                             </td>
                             <td class="align-middle">
-                                <c:out value="${payment.totalPrice}"/>
+                                <c:out value="${payment.totalPrice}"/> $
                             </td>
                             <td class="align-middle">
                                 <a href="<c:url value="/app/admin/payments?paymentId=${payment.id}"/>">

@@ -8,7 +8,6 @@ public class PeriodicalPriceValidator extends AbstractValidator<BigDecimal> {
     private final static BigDecimal MIN_VALUE = new BigDecimal(0);
     private final static BigDecimal MAX_VALUE = new BigDecimal(100000000L);
 
-    //TODO valid 10 numbers
     @Override
     public boolean isValid(BigDecimal price) {
         resetErrorStatus();

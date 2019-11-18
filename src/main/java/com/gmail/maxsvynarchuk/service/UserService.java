@@ -47,10 +47,6 @@ public class UserService {
         return userDao.findOneByEmail(email);
     }
 
-    public List<User> findAllUsers() {
-        return userDao.findAll();
-    }
-
     public boolean registerUser(User userToRegister) {
         Objects.requireNonNull(userToRegister);
 
