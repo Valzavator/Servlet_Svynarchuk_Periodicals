@@ -24,7 +24,7 @@ public class AuthenticationFilter implements Filter {
     private static final Set<String> freePaths = new HashSet<>();
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         freePaths.add(PagesPaths.HOME_PATH);
         freePaths.add(PagesPaths.SIGN_IN_PATH);
         freePaths.add(PagesPaths.SIGN_UP_PATH);

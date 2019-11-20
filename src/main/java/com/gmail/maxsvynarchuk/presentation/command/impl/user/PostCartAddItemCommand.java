@@ -14,18 +14,23 @@ import com.gmail.maxsvynarchuk.service.ShoppingCartService;
 import com.gmail.maxsvynarchuk.service.SubscriptionService;
 import com.gmail.maxsvynarchuk.service.entity.ShoppingCart;
 import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 public class PostCartAddItemCommand implements Command {
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(PostCartAddItemCommand.class);
     private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
     private final SubscriptionService subscriptionService = ServiceFactory.getSubscriptionService();
     private final ShoppingCartService shoppingCartService = ServiceFactory.getShoppingCartService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
+        LOGGER.debug("Attempt to add item to shopping cart");
         String referer = Util.getReferer(request);
         referer = Util.removeParameterFromURI(referer, RequestParameters.ERROR_ATTRIBUTE);
 
@@ -45,6 +50,7 @@ public class PostCartAddItemCommand implements Command {
             referer = Util.addParameterToURI(referer,
                     RequestParameters.ERROR_ATTRIBUTE,
                     Attributes.ERROR_PERIODICAL_INVALID);
+            LOGGER.debug("Invalid periodical with id {} for subscription", periodicalId);
             return CommandResult.redirect(referer);
         }
 
@@ -55,6 +61,7 @@ public class PostCartAddItemCommand implements Command {
             referer = Util.addParameterToURI(referer,
                     RequestParameters.ERROR_ATTRIBUTE,
                     Attributes.ERROR_IS_ALREADY_SUBSCRIBED);
+            LOGGER.debug("User is already subscribed to periodical with id {}", periodicalId);
             return CommandResult.redirect(referer);
         }
 
@@ -65,6 +72,9 @@ public class PostCartAddItemCommand implements Command {
             referer = Util.addParameterToURI(referer,
                     RequestParameters.ERROR_ATTRIBUTE,
                     Attributes.ERROR_IS_ALREADY_IN_CART);
+            LOGGER.debug("Item already exists in cart");
+        } else {
+            LOGGER.debug("Item successfully added to cart");
         }
 
         return CommandResult.redirect(referer);

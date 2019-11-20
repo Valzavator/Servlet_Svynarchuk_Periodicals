@@ -4,6 +4,8 @@ import com.gmail.maxsvynarchuk.persistence.dao.*;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Objects;
@@ -16,6 +18,8 @@ import java.util.Optional;
  * @author Maksym Svynarchuk
  */
 public class PeriodicalService {
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(PeriodicalService.class);
     private final PeriodicalDao periodicalDao =
             DaoFactory.getInstance().getPeriodicalDao();
     private final PeriodicalTypeDao periodicalTypeDao =
@@ -43,13 +47,14 @@ public class PeriodicalService {
     }
 
     public void updatePeriodical(Periodical periodical) {
+        LOGGER.debug("Attempt to update periodical");
         Objects.requireNonNull(periodical);
 
         periodicalDao.update(periodical);
     }
 
     public void changeStatus(Periodical periodical, PeriodicalStatus newStatus) {
-        Objects.requireNonNull(periodical);
+        LOGGER.debug("Attempt to change status of periodical");
         Objects.requireNonNull(newStatus);
 
         if (periodical.getStatus() != newStatus) {
@@ -59,46 +64,57 @@ public class PeriodicalService {
     }
 
     public Optional<Periodical> findPeriodicalById(Long id) {
+        LOGGER.debug("Attempt to find periodical by id");
         return periodicalDao.findOne(id);
     }
 
     public List<Periodical> findAllPeriodicals(long skip, long limit) {
+        LOGGER.debug("Attempt to find all periodicals");
         return periodicalDao.findAll(skip, limit);
     }
 
     public List<Periodical> findAllPeriodicalsByStatus(PeriodicalStatus status, long skip, long limit) {
+        LOGGER.debug("Attempt to find all periodicals by status");
         return periodicalDao.findByStatus(status, skip, limit);
     }
 
     public long getPeriodicalsCountByStatus(PeriodicalStatus status) {
+        LOGGER.debug("Attempt to get count of periodicals by status");
         return periodicalDao.getCountByStatus(status);
     }
 
     public long getPeriodicalsCount() {
+        LOGGER.debug("Attempt to get count of periodicals");
         return periodicalDao.getCount();
     }
 
     public Optional<PeriodicalType> findPeriodicalTypeById(Integer id) {
+        LOGGER.debug("Attempt to find periodical type by id");
         return periodicalTypeDao.findOne(id);
     }
 
     public List<PeriodicalType> findAllPeriodicalTypes() {
+        LOGGER.debug("Attempt to find all periodical types");
         return periodicalTypeDao.findAll();
     }
 
     public Optional<Frequency> findFrequencyById(Integer id) {
+        LOGGER.debug("Attempt to find frequency by id");
         return frequencyDao.findOne(id);
     }
 
     public List<Frequency> findAllFrequencies() {
+        LOGGER.debug("Attempt to find all frequencie");
         return frequencyDao.findAll();
     }
 
     public Optional<Publisher> findPublisherById(Long id) {
+        LOGGER.debug("Attempt to find publisher by id");
         return publisherDao.findOne(id);
     }
 
     public List<Publisher> findAllPublishers() {
+        LOGGER.debug("Attempt to find all publishers");
         return publisherDao.findAll();
     }
 }

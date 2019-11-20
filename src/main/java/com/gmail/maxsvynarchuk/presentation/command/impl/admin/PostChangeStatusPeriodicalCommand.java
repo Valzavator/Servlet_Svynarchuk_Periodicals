@@ -36,7 +36,8 @@ public class PostChangeStatusPeriodicalCommand implements Command {
             periodicalService.changeStatus(periodicalOpt.get(), newPeriodicalStatus);
             LOGGER.info("Status of the periodical was successfully changed");
         } else {
-            LOGGER.info("Changing status of the periodical failed");
+            LOGGER.debug("Periodical with id {} doesn't exist. " +
+                    "Changing status of the periodical failed", periodicalId);
         }
 
         return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);

@@ -25,13 +25,13 @@ public class PostCreatePeriodicalCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        LOGGER.info("Start of new periodical creation");
+        LOGGER.debug("Start of new periodical creation");
         Periodical periodicalDTO;
         try {
             periodicalDTO = RequestMapperFactory.getCreatePeriodicalMapper()
                     .mapToObject(request);
         } catch (NumberFormatException e) {
-            LOGGER.info("Invalid parameters of request", e);
+            LOGGER.debug("Invalid parameters of request", e);
             throw e;
         }
 
@@ -40,18 +40,18 @@ public class PostCreatePeriodicalCommand implements Command {
 
         if (errors.isEmpty()) {
             periodicalService.createPeriodical(periodicalDTO);
-            LOGGER.info("Periodical was successfully create");
+            LOGGER.debug("Periodical was successfully create");
             return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);
         }
 
-        LOGGER.info("Invalid creation parameters");
+        LOGGER.debug("Invalid creation parameters");
         request.setAttribute(Attributes.ERRORS, errors);
         request.setAttribute(Attributes.PERIODICAL_DTO, periodicalDTO);
         request.setAttribute(Attributes.PERIODICAL_TYPES, periodicalService.findAllPeriodicalTypes());
         request.setAttribute(Attributes.FREQUENCIES, periodicalService.findAllFrequencies());
         request.setAttribute(Attributes.PUBLISHERS, periodicalService.findAllPublishers());
 
-        LOGGER.info("Periodical creation fail");
+        LOGGER.debug("Periodical creation fail");
         return CommandResult.forward(Views.CREATE_PERIODICAL_VIEW);
     }
 }

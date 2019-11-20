@@ -10,9 +10,9 @@ import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
@@ -23,28 +23,28 @@ public class PostSignUpCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        LOGGER.info("Start of new user registration");
+        LOGGER.debug("Start of new user registration");
         User userDTO = RequestMapperFactory.getSignUpMapper()
                 .mapToObject(request);
 
         Map<String, Boolean> errors = ValidatorManager
                 .validateSignUpParameters(userDTO);
 
-        if(errors.isEmpty()) {
+        if (errors.isEmpty()) {
             boolean isRegistered = userService.registerUser(userDTO);
             if (isRegistered) {
-                LOGGER.info("User was successfully register");
+                LOGGER.debug("User was successfully register");
                 return CommandResult.redirect(PagesPaths.SIGN_IN_PATH);
             } else {
-                LOGGER.info("Such user already registered");
+                LOGGER.debug("Such user already registered");
                 errors.put(Attributes.ERROR_REGISTRATION, true);
             }
         } else {
-            LOGGER.info("Invalid registration parameters");
+            LOGGER.debug("Invalid registration parameters");
         }
         request.setAttribute(Attributes.ERRORS, errors);
         request.setAttribute(Attributes.USER_DTO, userDTO);
-        LOGGER.info("User registration fail");
+        LOGGER.debug("User registration fail");
         return CommandResult.forward(Views.SIGN_UP_VIEW);
     }
 }

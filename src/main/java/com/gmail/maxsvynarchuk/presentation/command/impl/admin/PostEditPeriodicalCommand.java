@@ -25,14 +25,14 @@ public class PostEditPeriodicalCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        LOGGER.info("Start editing of periodical");
+        LOGGER.debug("Start editing of periodical");
 
         Periodical periodicalDTO;
         try {
             periodicalDTO = RequestMapperFactory.getEditPeriodicalMapper()
                     .mapToObject(request);
         } catch (NumberFormatException e) {
-            LOGGER.info("Invalid parameters of request", e);
+            LOGGER.debug("Invalid parameters of request", e);
             throw e;
         }
 
@@ -41,18 +41,18 @@ public class PostEditPeriodicalCommand implements Command {
 
         if (errors.isEmpty()) {
             periodicalService.updatePeriodical(periodicalDTO);
-            LOGGER.info("Periodical was successfully edit");
+            LOGGER.debug("Periodical was successfully edit");
             return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);
         }
 
-        LOGGER.info("Invalid creation parameters");
+        LOGGER.debug("Invalid creation parameters");
         request.setAttribute(Attributes.PERIODICAL_DTO, periodicalDTO);
         request.setAttribute(Attributes.ERRORS, errors);
         request.setAttribute(Attributes.PERIODICAL_TYPES, periodicalService.findAllPeriodicalTypes());
         request.setAttribute(Attributes.FREQUENCIES, periodicalService.findAllFrequencies());
         request.setAttribute(Attributes.PUBLISHERS, periodicalService.findAllPublishers());
 
-        LOGGER.info("Periodical editing failed");
+        LOGGER.debug("Periodical editing failed");
         return CommandResult.forward(Views.EDIT_PERIODICAL_VIEW);
     }
 }

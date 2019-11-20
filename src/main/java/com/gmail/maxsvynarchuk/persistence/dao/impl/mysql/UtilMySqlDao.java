@@ -22,12 +22,6 @@ import java.util.Optional;
 public class UtilMySqlDao<T> {
     private static final Logger LOGGER = LoggerFactory.getLogger(UtilMySqlDao.class);
 
-    private static final String ERROR_EXECUTE_QUERY = "Failed to execute query";
-    private static final String ERROR_COUNT_QUERY = "Can't retrieve count of objects";
-    private static final String ERROR_NULL_PK = "Primary key type is null";
-    private static final String ERROR_UNSUPPORTED_PK = "Unsupported key type";
-    private static final String ERROR_GENERATE_KEY = "Can't retrieve generated key";
-
     static final String LIMIT_ONE = ResourceManager.QUERIES.getProperty("limit.one");
     static final String LIMIT = ResourceManager.QUERIES.getProperty("limit");
 
@@ -79,8 +73,8 @@ public class UtilMySqlDao<T> {
 
             return mapper.mapToObjectList(resultSet);
         } catch (SQLException e) {
-            LOGGER.error(ERROR_EXECUTE_QUERY, e);
-            throw new DaoException(ERROR_EXECUTE_QUERY, e);
+            LOGGER.error("Failed to execute query", e);
+            throw new DaoException(e);
         }
     }
 
@@ -97,8 +91,8 @@ public class UtilMySqlDao<T> {
             setParamsToStatement(statement, params);
             statement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error(ERROR_EXECUTE_QUERY, e);
-            throw new DaoException(ERROR_EXECUTE_QUERY, e);
+            LOGGER.error("Failed to execute query", e);
+            throw new DaoException(e);
         }
     }
 
@@ -125,8 +119,8 @@ public class UtilMySqlDao<T> {
 
             return getGeneratedPrimaryKey(statement, pkType);
         } catch (SQLException e) {
-            LOGGER.error(ERROR_EXECUTE_QUERY, e);
-            throw new DaoException(ERROR_EXECUTE_QUERY, e);
+            LOGGER.error("Failed to execute query", e);
+            throw new DaoException(e);
         }
     }
 
@@ -151,12 +145,11 @@ public class UtilMySqlDao<T> {
             if (rs.next()) {
                 return rs.getLong(1);
             } else {
-                LOGGER.error(ERROR_COUNT_QUERY);
-                throw new DaoException(ERROR_COUNT_QUERY);
+                throw new SQLException("Can't retrieve count of objects");
             }
         } catch (SQLException e) {
-            LOGGER.error(ERROR_EXECUTE_QUERY, e);
-            throw new DaoException(ERROR_EXECUTE_QUERY, e);
+            LOGGER.error("Failed to execute query", e);
+            throw new DaoException(e);
         }
     }
 
@@ -193,8 +186,7 @@ public class UtilMySqlDao<T> {
     private <PK> PK getGeneratedPrimaryKey(PreparedStatement statement, Class<PK> pkType)
             throws SQLException {
         if (Objects.isNull(pkType)) {
-            LOGGER.error(ERROR_NULL_PK);
-            throw new DaoException(ERROR_NULL_PK);
+            throw new SQLException("Primary key type is null");
         }
 
         ResultSet rs = statement.getGeneratedKeys();
@@ -206,12 +198,10 @@ public class UtilMySqlDao<T> {
                 Long key = rs.getLong(1);
                 return pkType.cast(key);
             } else {
-                LOGGER.error(ERROR_UNSUPPORTED_PK);
-                throw new DaoException(ERROR_UNSUPPORTED_PK);
+                throw new SQLException("Unsupported key type");
             }
         } else {
-            LOGGER.error(ERROR_GENERATE_KEY);
-            throw new DaoException(ERROR_GENERATE_KEY);
+            throw new SQLException("Can't retrieve generated key");
         }
     }
 

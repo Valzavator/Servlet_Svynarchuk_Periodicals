@@ -5,6 +5,8 @@ import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.persistence.transaction.Transaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,6 +21,8 @@ import java.util.Optional;
  * @author Maksym Svynarchuk
  */
 public class SubscriptionService {
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(SubscriptionService.class);
     private final SubscriptionDao subscriptionDao =
             DaoFactory.getInstance().getSubscriptionDao();
     private final SubscriptionPlanDao subscriptionPlanDao =
@@ -41,29 +45,34 @@ public class SubscriptionService {
     public List<Subscription> findAllActiveSubscriptionsByUser(User user,
                                                                long skip,
                                                                long limit) {
+        LOGGER.debug("Attempt to find all active subscriptions by user");
         Objects.requireNonNull(user);
 
         return subscriptionDao.findActiveByUser(user, skip, limit);
     }
 
     public List<Subscription> findAllSubscriptionsByPayment(Payment payment) {
+        LOGGER.debug("Attempt to find all subscriptions by payment");
         Objects.requireNonNull(payment);
 
         List<Subscription> subscriptions = subscriptionDao.findByPayment(payment);
         if (subscriptions.size() > 0) {
             return subscriptions;
         } else {
+            LOGGER.error("Payment cannot exist without subscription: {}", payment);
             throw new ServiceException("Payment cannot exist without subscription!");
         }
     }
 
     public long getActiveSubscriptionsCountByUser(User user) {
+        LOGGER.debug("Attempt to get active subscriptions count by user");
         return subscriptionDao.getCountActiveByUser(user);
     }
 
     public void processSubscriptions(User user,
                                      BigDecimal totalPrice,
                                      List<Subscription> subscriptions) {
+        LOGGER.debug("Attempt to process subscriptions");
         Objects.requireNonNull(user);
         Objects.requireNonNull(totalPrice);
         Objects.requireNonNull(subscriptions);
@@ -84,6 +93,7 @@ public class SubscriptionService {
     }
 
     public boolean isAlreadySubscribed(User user, Periodical periodical) {
+        LOGGER.debug("Attempt to check that user is already subscribed");
         Objects.requireNonNull(user);
         Objects.requireNonNull(periodical);
 
@@ -91,11 +101,12 @@ public class SubscriptionService {
     }
 
     public List<SubscriptionPlan> findAllSubscriptionPlans() {
+        LOGGER.debug("Attempt to find all subscription plans");
         return subscriptionPlanDao.findAll();
     }
 
     public Optional<SubscriptionPlan> findSubscriptionPlanById(Integer id) {
+        LOGGER.debug("Attempt to find subscription plan by id");
         return subscriptionPlanDao.findOne(id);
     }
-
 }

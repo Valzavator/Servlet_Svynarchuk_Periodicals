@@ -7,6 +7,8 @@ import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.service.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +16,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class GetPaymentOverviewCommand implements Command {
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(GetPaymentOverviewCommand.class);
     private final PaymentService paymentService =
             ServiceFactory.getPaymentService();
     private final SubscriptionService subscriptionService =
@@ -21,6 +25,7 @@ public class GetPaymentOverviewCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
+        LOGGER.debug("Attempt to get a payment overview page");
         Long paymentId = Long.valueOf(
                 request.getParameter(RequestParameters.PAYMENT_ID));
         Optional<Payment> paymentOpt =
@@ -31,8 +36,10 @@ public class GetPaymentOverviewCommand implements Command {
                     subscriptionService.findAllSubscriptionsByPayment(payment);
             request.setAttribute(Attributes.PAYMENT_DTO, payment);
             request.setAttribute(Attributes.SUBSCRIPTIONS, subscription);
+            LOGGER.debug("Attempt to get a payment overview page is successful");
             return CommandResult.forward(Views.PAYMENT_OVERVIEW_VIEW);
         } else {
+            LOGGER.debug("Payment with id {} doesn't exist", paymentId);
             return CommandResult.forward(Views.ERROR_404_VIEW);
         }
     }

@@ -42,9 +42,9 @@ public class PostCreateIssueCommand implements Command {
             periodicalOpt = periodicalService.findPeriodicalById(periodicalId);
             periodicalIssueDTO = RequestMapperFactory.getCreateIssueMapper()
                     .mapToObject(request);
-        } catch (NumberFormatException e) {
-            LOGGER.info("Invalid parameters of request", e);
-            throw e;
+        } catch (NumberFormatException exc) {
+            LOGGER.info("Invalid parameters of request", exc);
+            throw exc;
         }
 
         Map<String, Boolean> errors = ValidatorManager
@@ -53,7 +53,7 @@ public class PostCreateIssueCommand implements Command {
         if (errors.isEmpty()) {
             if (!periodicalOpt.isPresent() ||
                     periodicalOpt.get().getStatus() == PeriodicalStatus.SUSPENDED) {
-                LOGGER.info("Periodical with id {} doesn't exist or has SUSPEND status", periodicalId);
+                LOGGER.info("Periodical with id {} doesn't exist or has suspend status", periodicalId);
                 return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);
             }
             boolean isCreated = issueService.addIssueToPeriodical(

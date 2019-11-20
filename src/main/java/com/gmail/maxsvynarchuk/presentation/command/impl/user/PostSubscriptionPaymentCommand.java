@@ -10,6 +10,8 @@ import com.gmail.maxsvynarchuk.service.ServiceFactory;
 import com.gmail.maxsvynarchuk.service.ShoppingCartService;
 import com.gmail.maxsvynarchuk.service.SubscriptionService;
 import com.gmail.maxsvynarchuk.service.entity.ShoppingCart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,22 +19,27 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class PostSubscriptionPaymentCommand implements Command {
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(PostSubscriptionPaymentCommand.class);
     private final SubscriptionService subscriptionService = ServiceFactory.getSubscriptionService();
     private final ShoppingCartService shoppingCartService = ServiceFactory.getShoppingCartService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
+        LOGGER.debug("Attempt to process new subscriptions");
         User user = Util.getAuthorizedUser(request.getSession());
         ShoppingCart shoppingCart = Util.getShoppingCart(request.getSession());
         List<Subscription> subscriptions = shoppingCart.getItems();
         BigDecimal totalPrice = shoppingCart.getTotalPrice();
 
         if (shoppingCart.size() == 0 || shoppingCart.isHasSuspendedPeriodical()) {
+            LOGGER.debug("Some new subscriptions in shopping cart are invalid");
             return CommandResult.redirect(PagesPaths.CART_PATH);
         }
 
         subscriptionService.processSubscriptions(user, totalPrice, subscriptions);
         shoppingCartService.removeAllItemFromCart(shoppingCart);
+        LOGGER.debug("New subscriptions processed successfully");
         return CommandResult.redirect(PagesPaths.CART_PATH);
     }
 }

@@ -53,7 +53,7 @@ public interface Transaction {
             transactionHelper.commit();
             transactionHelper.returnDefaultConnectionState();
 
-            LOGGER.info("Transaction end");
+            LOGGER.debug("Transaction end");
             return transactionHelper.isTransactionDoneWithoutRollback();
         }
     }

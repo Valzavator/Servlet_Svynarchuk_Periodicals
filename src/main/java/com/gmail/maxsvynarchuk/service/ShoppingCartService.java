@@ -5,6 +5,8 @@ import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.service.entity.ShoppingCart;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
@@ -16,6 +18,8 @@ import java.util.Objects;
  * @see ShoppingCart
  */
 public class ShoppingCartService {
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(ShoppingCartService.class);
     private ShoppingCartService() {
     }
 
@@ -31,8 +35,8 @@ public class ShoppingCartService {
                                  ShoppingCart shoppingCart,
                                  Periodical periodical,
                                  SubscriptionPlan subscriptionPlan) {
+        LOGGER.debug("Attempt to add item to cart");
         Objects.requireNonNull(user);
-        Objects.requireNonNull(shoppingCart);
         Objects.requireNonNull(periodical);
         Objects.requireNonNull(subscriptionPlan);
 
@@ -49,14 +53,12 @@ public class ShoppingCartService {
      * @param cartItemId id of item that needed to be removed from cart
      */
     public void removeItemFromCart(ShoppingCart shoppingCart, Integer cartItemId) {
-        Objects.requireNonNull(shoppingCart);
-
+        LOGGER.debug("Attempt to remove item from cart");
         shoppingCart.removeItem(cartItemId);
     }
 
     public void removeAllItemFromCart(ShoppingCart shoppingCart) {
-        Objects.requireNonNull(shoppingCart);
-
+        LOGGER.debug("Attempt to remove all item from cart");
         shoppingCart.removeAll();
     }
 }

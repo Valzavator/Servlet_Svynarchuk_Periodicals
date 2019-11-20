@@ -3,6 +3,8 @@ package com.gmail.maxsvynarchuk.service;
 import com.gmail.maxsvynarchuk.persistence.dao.*;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +16,8 @@ import java.util.Objects;
  * @author Maksym Svynarchuk
  */
 public class IssueService {
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(IssueService.class);
     private final PeriodicalIssueDao periodicalIssueDao =
             DaoFactory.getInstance().getPeriodicalIssueDao();
 
@@ -30,8 +34,8 @@ public class IssueService {
     }
 
     public boolean addIssueToPeriodical(Periodical periodical, PeriodicalIssue periodicalIssue) {
+        LOGGER.debug("Attempt to add issue to periodical");
         Objects.requireNonNull(periodical);
-        Objects.requireNonNull(periodicalIssue);
 
         boolean issueIsPresent = periodicalIssueDao.existByNumberAndPeriodical(
                 periodicalIssue.getIssueNumber(),
@@ -45,6 +49,7 @@ public class IssueService {
     }
 
     public List<PeriodicalIssue> findAllIssuesByPeriodical(Periodical periodical) {
+        LOGGER.debug("Attempt to find all issues by periodical");
         Objects.requireNonNull(periodical);
 
         return periodicalIssueDao.findByPeriodical(periodical);
