@@ -12,7 +12,7 @@ import com.gmail.maxsvynarchuk.service.PeriodicalService;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
 import com.gmail.maxsvynarchuk.service.ShoppingCartService;
 import com.gmail.maxsvynarchuk.service.SubscriptionService;
-import com.gmail.maxsvynarchuk.service.util.entity.ShoppingCart;
+import com.gmail.maxsvynarchuk.service.entity.ShoppingCart;
 import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,20 +30,21 @@ public class PostCartAddItemCommand implements Command {
         referer = Util.removeParameterFromURI(referer, RequestParameters.ERROR_ATTRIBUTE);
 
         User user = Util.getAuthorizedUser(request.getSession());
-        Long periodicalId =
-                Long.valueOf(request.getParameter(RequestParameters.PERIODICAL_ID));
-        Integer subscriptionPlanId =
-                Integer.valueOf(request.getParameter(RequestParameters.SUBSCRIPTION_PLAN_ID));
+        Long periodicalId = Long.valueOf(
+                request.getParameter(RequestParameters.PERIODICAL_ID));
+        Integer subscriptionPlanId = Integer.valueOf(
+                request.getParameter(RequestParameters.SUBSCRIPTION_PLAN_ID));
         Optional<Periodical> periodicalOpt =
                 periodicalService.findPeriodicalById(periodicalId);
         SubscriptionPlan subscriptionPlan =
                 subscriptionService.findSubscriptionPlanById(subscriptionPlanId)
-                .orElseThrow(IllegalArgumentException::new);
+                        .orElseThrow(IllegalArgumentException::new);
 
         if (!periodicalOpt.isPresent() ||
                 periodicalOpt.get().getStatus() == PeriodicalStatus.SUSPENDED) {
             referer = Util.addParameterToURI(referer,
-                    RequestParameters.ERROR_ATTRIBUTE, Attributes.ERROR_PERIODICAL_INVALID);
+                    RequestParameters.ERROR_ATTRIBUTE,
+                    Attributes.ERROR_PERIODICAL_INVALID);
             return CommandResult.redirect(referer);
         }
 
@@ -52,7 +53,8 @@ public class PostCartAddItemCommand implements Command {
                 subscriptionService.isAlreadySubscribed(user, periodical);
         if (isAlreadySubscribed) {
             referer = Util.addParameterToURI(referer,
-                    RequestParameters.ERROR_ATTRIBUTE, Attributes.ERROR_IS_ALREADY_SUBSCRIBED);
+                    RequestParameters.ERROR_ATTRIBUTE,
+                    Attributes.ERROR_IS_ALREADY_SUBSCRIBED);
             return CommandResult.redirect(referer);
         }
 
@@ -61,7 +63,8 @@ public class PostCartAddItemCommand implements Command {
                 shoppingCart, periodical, subscriptionPlan);
         if (!isAddedToCart) {
             referer = Util.addParameterToURI(referer,
-                    RequestParameters.ERROR_ATTRIBUTE, Attributes.ERROR_IS_ALREADY_IN_CART);
+                    RequestParameters.ERROR_ATTRIBUTE,
+                    Attributes.ERROR_IS_ALREADY_IN_CART);
         }
 
         return CommandResult.redirect(referer);

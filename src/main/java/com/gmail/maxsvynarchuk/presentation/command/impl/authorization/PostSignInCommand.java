@@ -32,7 +32,8 @@ public class PostSignInCommand implements Command {
 
         if (errors.isEmpty()) {
             LOGGER.info("Try to sign in");
-            Optional<User> userOpt = userService.signIn(userDTO.getEmail(), userDTO.getPassword());
+            Optional<User> userOpt =
+                    userService.signIn(userDTO.getEmail(), userDTO.getPassword());
             if (userOpt.isPresent()) {
                 User user = userOpt.get();
                 user.setPassword(null);

@@ -1,12 +1,10 @@
 package com.gmail.maxsvynarchuk.service;
 
-import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalDao;
 import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionDao;
 import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.persistence.transaction.Transaction;
-import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,15 +12,25 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Intermediate layer between command layer and dao layer.
+ * Service responsible for processing subscription-related operations
+ *
+ * @author Maksym Svynarchuk
+ */
 public class SubscriptionService {
-    private final PaymentService paymentService = ServiceFactory.getPaymentService();
-    private final SubscriptionDao subscriptionDao = DaoFactory.getInstance().getSubscriptionDao();
-    private final SubscriptionPlanDao subscriptionPlanDao = DaoFactory.getInstance().getSubscriptionPlanDao();
+    private final SubscriptionDao subscriptionDao =
+            DaoFactory.getInstance().getSubscriptionDao();
+    private final SubscriptionPlanDao subscriptionPlanDao =
+            DaoFactory.getInstance().getSubscriptionPlanDao();
+    private final PaymentService paymentService =
+            ServiceFactory.getPaymentService();
 
     private SubscriptionService() {
     }
 
     private static class Singleton {
+
         private final static SubscriptionService INSTANCE = new SubscriptionService();
     }
 
@@ -30,17 +38,32 @@ public class SubscriptionService {
         return SubscriptionService.Singleton.INSTANCE;
     }
 
-    public List<Subscription> findAllActiveSubscriptionsByUser(User user, long skip, long limit) {
+    public List<Subscription> findAllActiveSubscriptionsByUser(User user,
+                                                               long skip,
+                                                               long limit) {
         Objects.requireNonNull(user);
 
-        return subscriptionDao.findAllActiveSubscriptionsByUser(user, skip, limit);
+        return subscriptionDao.findActiveByUser(user, skip, limit);
+    }
+
+    public List<Subscription> findAllSubscriptionsByPayment(Payment payment) {
+        Objects.requireNonNull(payment);
+
+        List<Subscription> subscriptions = subscriptionDao.findByPayment(payment);
+        if (subscriptions.size() > 0) {
+            return subscriptions;
+        } else {
+            throw new ServiceException("Payment cannot exist without subscription!");
+        }
     }
 
     public long getActiveSubscriptionsCountByUser(User user) {
         return subscriptionDao.getCountActiveByUser(user);
     }
 
-    public void processSubscriptions(User user, BigDecimal totalPrice, List<Subscription> subscriptions) {
+    public void processSubscriptions(User user,
+                                     BigDecimal totalPrice,
+                                     List<Subscription> subscriptions) {
         Objects.requireNonNull(user);
         Objects.requireNonNull(totalPrice);
         Objects.requireNonNull(subscriptions);

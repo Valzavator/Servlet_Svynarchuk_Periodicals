@@ -9,12 +9,21 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Intermediate layer between command layer and dao layer.
+ * Service responsible for processing periodical-related operations
+ *
+ * @author Maksym Svynarchuk
+ */
 public class PeriodicalService {
-    private final PeriodicalDao periodicalDao = DaoFactory.getInstance().getPeriodicalDao();
-    private final PeriodicalIssueDao periodicalIssueDao = DaoFactory.getInstance().getPeriodicalIssueDao();
-    private final PeriodicalTypeDao periodicalTypeDao = DaoFactory.getInstance().getPeriodicalTypeDao();
-    private final FrequencyDao frequencyDao = DaoFactory.getInstance().getFrequencyDao();
-    private final PublisherDao publisherDao = DaoFactory.getInstance().getPublisherDao();
+    private final PeriodicalDao periodicalDao =
+            DaoFactory.getInstance().getPeriodicalDao();
+    private final PeriodicalTypeDao periodicalTypeDao =
+            DaoFactory.getInstance().getPeriodicalTypeDao();
+    private final FrequencyDao frequencyDao =
+            DaoFactory.getInstance().getFrequencyDao();
+    private final PublisherDao publisherDao =
+            DaoFactory.getInstance().getPublisherDao();
 
     private PeriodicalService() {
     }
@@ -58,7 +67,7 @@ public class PeriodicalService {
     }
 
     public List<Periodical> findAllPeriodicalsByStatus(PeriodicalStatus status, long skip, long limit) {
-        return periodicalDao.findAllPeriodicalsByStatus(status, skip, limit);
+        return periodicalDao.findByStatus(status, skip, limit);
     }
 
     public long getPeriodicalsCountByStatus(PeriodicalStatus status) {

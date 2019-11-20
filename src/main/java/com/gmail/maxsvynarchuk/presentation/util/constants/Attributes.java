@@ -23,6 +23,7 @@ public final class Attributes {
     public static final String USER_DTO = ResourceManager.ATTRIBUTE.getProperty("user.dto");
     public static final String PERIODICAL_DTO = ResourceManager.ATTRIBUTE.getProperty("periodical.dto");
     public static final String ISSUE_DTO = ResourceManager.ATTRIBUTE.getProperty("issue.dto");
+    public static final String PAYMENT_DTO = ResourceManager.ATTRIBUTE.getProperty("payment.dto");
 
     public static final String ERRORS = ResourceManager.ATTRIBUTE.getProperty("errors");
     public static final String ERROR_EMAIL = ResourceManager.ATTRIBUTE.getProperty("error.email");

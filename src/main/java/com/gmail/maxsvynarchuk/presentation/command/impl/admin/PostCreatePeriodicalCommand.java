@@ -18,8 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 public class PostCreatePeriodicalCommand implements Command {
-    private static Logger LOGGER = LoggerFactory.getLogger(PostCreatePeriodicalCommand.class);
-    private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
+    private static Logger LOGGER =
+            LoggerFactory.getLogger(PostCreatePeriodicalCommand.class);
+    private final PeriodicalService periodicalService =
+            ServiceFactory.getPeriodicalService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {

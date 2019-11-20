@@ -61,7 +61,7 @@
                                 <c:out value="${payment.totalPrice}"/> $
                             </td>
                             <td class="align-middle">
-                                <a href="<c:url value="/app/admin/payments?paymentId=${payment.id}"/>">
+                                <a href="<c:url value="/app/admin/payment?paymentId=${payment.id}"/>">
                                     <i class="fa fa-eye fa-lg" aria-hidden="true">&nbsp;</i>
                                     <fmt:message key="payment.see"/>
                                 </a>

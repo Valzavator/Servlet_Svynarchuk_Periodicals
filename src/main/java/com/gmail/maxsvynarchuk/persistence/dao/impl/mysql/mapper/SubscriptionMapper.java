@@ -34,7 +34,8 @@ public class SubscriptionMapper implements EntityMapper<Subscription> {
     }
 
     @Override
-    public Subscription mapToObject(ResultSet resultSet, String tablePrefix) throws SQLException {
+    public Subscription mapToObject(ResultSet resultSet, String tablePrefix)
+            throws SQLException {
         User tempUser = userMapper.mapToObject(resultSet);
         Payment tempPayment = paymentMapper.mapToObject(resultSet);
         Periodical tempPeriodical = periodicalMapper.mapToObject(resultSet);
@@ -50,7 +51,7 @@ public class SubscriptionMapper implements EntityMapper<Subscription> {
                 .setStartDate(resultSet.getObject(
                         tablePrefix + START_DATE_FIELD, LocalDate.class))
                 .setEndDate(resultSet.getObject(
-                        tablePrefix + END_DATE_FIELD,  LocalDate.class))
+                        tablePrefix + END_DATE_FIELD, LocalDate.class))
                 .build();
     }
 }

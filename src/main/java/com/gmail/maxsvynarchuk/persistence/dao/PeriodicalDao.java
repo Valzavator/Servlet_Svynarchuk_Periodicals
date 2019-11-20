@@ -14,7 +14,7 @@ public interface PeriodicalDao extends GenericDao<Periodical, Long> {
      * @param limit  limit
      * @return list of retrieved periodicals
      */
-    List<Periodical> findAllPeriodicalsByStatus(PeriodicalStatus status, long skip, long limit);
+    List<Periodical> findByStatus(PeriodicalStatus status, long skip, long limit);
 
     /**
      * Retrieves count of objects from database.

@@ -3,12 +3,12 @@ package com.gmail.maxsvynarchuk.presentation.util.mapper;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 import com.gmail.maxsvynarchuk.util.type.Gender;
-import com.gmail.maxsvynarchuk.util.TimeConverter;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 
-public class SignUpRequestMapper implements RequestEntityMapper<User> {
+public class SignUpRequestMapper
+        implements RequestEntityMapper<User> {
 
     @Override
     public User mapToObject(HttpServletRequest request) {
@@ -18,7 +18,8 @@ public class SignUpRequestMapper implements RequestEntityMapper<User> {
                 .setFirstName(request.getParameter(RequestParameters.USER_FIRST_NAME))
                 .setLastName(request.getParameter(RequestParameters.USER_LAST_NAME))
                 .setGender(
-                        Gender.valueOf(request.getParameter(RequestParameters.USER_GENDER).toUpperCase()))
+                        Gender.valueOf(request.getParameter(
+                                RequestParameters.USER_GENDER).toUpperCase()))
                 .setDateOfBirth(LocalDate.parse(
                         request.getParameter(RequestParameters.USER_DATE_OF_BIRTH)))
                 .build();

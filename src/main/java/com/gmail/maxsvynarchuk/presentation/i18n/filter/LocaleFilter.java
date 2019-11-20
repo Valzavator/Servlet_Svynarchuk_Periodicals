@@ -20,18 +20,16 @@ public class LocaleFilter implements Filter {
                          FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
+
         if (req.getParameter(LANG) != null) {
             replaceUserLocale(req);
-            String referer = Util.getReferer(req);
-            Util.redirectTo(req, res, referer);
-            return;
         }
+
         if (req.getSession().getAttribute(LOCALE) == null) {
             setUserLocale(req);
         }
 
-        chain.doFilter(req, res);
+        chain.doFilter(request, response);
     }
 
     private void replaceUserLocale(HttpServletRequest request) {

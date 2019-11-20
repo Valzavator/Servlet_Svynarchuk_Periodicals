@@ -2,6 +2,9 @@ package com.gmail.maxsvynarchuk.presentation.util.constants;
 
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
+/**
+ * Constants which relates to parameters in HttpServletRequest
+ */
 public final class RequestParameters {
     public static final String USER_FIRST_NAME = ResourceManager.PARAMETER.getProperty("user.first.name");
     public static final String USER_LAST_NAME = ResourceManager.PARAMETER.getProperty("user.last.name");

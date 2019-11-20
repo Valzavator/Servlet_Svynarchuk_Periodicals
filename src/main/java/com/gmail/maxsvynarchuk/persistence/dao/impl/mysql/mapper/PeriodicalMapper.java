@@ -35,7 +35,8 @@ public class PeriodicalMapper implements EntityMapper<Periodical> {
     }
 
     @Override
-    public Periodical mapToObject(ResultSet resultSet, String tablePrefix) throws SQLException {
+    public Periodical mapToObject(ResultSet resultSet, String tablePrefix)
+            throws SQLException {
         Publisher tempPublisher = publisherMapper.mapToObject(resultSet);
         Frequency tempFrequency = frequencyMapper.mapToObject(resultSet);
         PeriodicalType tempPeriodicalType = periodicalTypeMapper.mapToObject(resultSet);

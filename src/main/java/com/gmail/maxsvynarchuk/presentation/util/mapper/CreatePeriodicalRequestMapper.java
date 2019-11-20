@@ -10,7 +10,8 @@ import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 
-public class CreatePeriodicalRequestMapper implements RequestEntityMapper<Periodical> {
+public class CreatePeriodicalRequestMapper
+        implements RequestEntityMapper<Periodical> {
 
     @Override
     public Periodical mapToObject(HttpServletRequest request) {

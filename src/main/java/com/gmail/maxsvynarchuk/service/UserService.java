@@ -7,14 +7,12 @@ import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.util.PasswordManager;
 import com.gmail.maxsvynarchuk.util.type.RoleType;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 /**
  * Intermediate layer between command layer and dao layer.
- * Implements operations of finding, creating, deleting entities.
- * Uses dao layer.
+ * Service responsible for processing user-related operations
  *
  * @author Maksym Svynarchuk
  */

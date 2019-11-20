@@ -1,5 +1,6 @@
 package com.gmail.maxsvynarchuk.persistence.connection;
 
+import com.gmail.maxsvynarchuk.persistence.transaction.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +18,7 @@ import java.util.Objects;
  *
  * @author Maksym Svynarchuk
  * @see ConnectionProxy
- * @see com.gmail.maxsvynarchuk.persistence.transaction.Transaction
+ * @see Transaction
  */
 public class DataSourceProxy implements DataSource {
     private final static Logger LOGGER = LoggerFactory.getLogger(DataSourceProxy.class);

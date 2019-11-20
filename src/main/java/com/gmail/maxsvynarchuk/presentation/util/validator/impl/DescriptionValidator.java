@@ -6,7 +6,8 @@ public class DescriptionValidator extends RegexValidator {
     /**
      * Regex used to perform validation of data.
      */
-    private static final String DESCRIPTION_REGEX = "^[\\p{L}\\p{Digit}\\p{Punct}\\p{javaWhitespace}]+$";
+    private static final String DESCRIPTION_REGEX =
+            "^[\\p{L}\\p{Digit}\\p{Punct}\\p{javaWhitespace}]+$";
 
     public DescriptionValidator() {
         super(DESCRIPTION_REGEX, MAX_LENGTH);

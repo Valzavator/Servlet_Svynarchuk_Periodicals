@@ -1,34 +1,26 @@
 package com.gmail.maxsvynarchuk;
 
-import com.gmail.maxsvynarchuk.persistence.dao.*;
-import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.*;
-import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.*;
-import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.presentation.FrontController;
-import com.gmail.maxsvynarchuk.presentation.util.Util;
-import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Properties;
 
+//TODO - delete
 public class Main {
-    private static final Logger LOGGER = LoggerFactory.getLogger(FrontController.class);
 
     public static void main(String[] args) throws SQLException {
 
 //        Date now = new Date();
+//
 //        LocalDate ld = new java.sql.Date(now.getTime())
 //                .toLocalDate().plusMonths(1);
-        System.out.println(LocalDateTime.now());
+
+        LocalDate ld1= LocalDate.now();
+        LocalDate ld2= LocalDate.now();
+        System.out.println(null + "=" + null);
 //        LocalDate.parse()
 //        new java.sql.Date(
 //        String uri = "http://localhost:8080/app/catalog?error=errorIsAlreadyInCart&page=2";

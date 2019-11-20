@@ -16,12 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 public class GetCreateIssueCommand implements Command {
-    private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
+    private final PeriodicalService periodicalService =
+            ServiceFactory.getPeriodicalService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        Long periodicalId = Long.valueOf(request.getParameter(RequestParameters.PERIODICAL_ID));
-        Optional<Periodical> periodicalOpt = periodicalService.findPeriodicalById(periodicalId);
+        Long periodicalId = Long.valueOf(
+                request.getParameter(RequestParameters.PERIODICAL_ID));
+        Optional<Periodical> periodicalOpt =
+                periodicalService.findPeriodicalById(periodicalId);
         if (periodicalOpt.isPresent()) {
             Periodical periodicalDTO = periodicalOpt.get();
             if (periodicalDTO.getStatus() == PeriodicalStatus.SUSPENDED) {

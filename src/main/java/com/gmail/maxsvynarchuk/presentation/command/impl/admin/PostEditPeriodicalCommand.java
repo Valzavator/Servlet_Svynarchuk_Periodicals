@@ -1,15 +1,10 @@
 package com.gmail.maxsvynarchuk.presentation.command.impl.admin;
 
-import com.gmail.maxsvynarchuk.persistence.entity.Frequency;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
-import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalType;
-import com.gmail.maxsvynarchuk.persistence.entity.Publisher;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
-import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignInCommand;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
-import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.presentation.util.mapper.RequestMapperFactory;
 import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManager;
@@ -20,13 +15,13 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.math.BigDecimal;
 import java.util.Map;
-import java.util.Optional;
 
 public class PostEditPeriodicalCommand implements Command {
-    private static Logger LOGGER = LoggerFactory.getLogger(PostEditPeriodicalCommand.class);
-    private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
+    private static Logger LOGGER =
+            LoggerFactory.getLogger(PostEditPeriodicalCommand.class);
+    private final PeriodicalService periodicalService =
+            ServiceFactory.getPeriodicalService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {

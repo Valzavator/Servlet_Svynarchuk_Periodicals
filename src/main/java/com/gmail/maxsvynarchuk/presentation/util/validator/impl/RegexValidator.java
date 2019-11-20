@@ -1,9 +1,11 @@
 package com.gmail.maxsvynarchuk.presentation.util.validator.impl;
 
+import com.gmail.maxsvynarchuk.presentation.util.validator.Validator;
+
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class RegexValidator extends AbstractValidator<String> {
+public class RegexValidator implements Validator<String> {
     private int maxLength;
     private Pattern pattern;
 
@@ -14,19 +16,8 @@ public class RegexValidator extends AbstractValidator<String> {
 
     @Override
     public boolean isValid(String str) {
-        resetErrorStatus();
-
-        if (Objects.isNull(str) || str.length() > maxLength) {
-            setErrorStatus(true);
-            return false;
-        }
-
-        boolean isMatches = pattern.matcher(str).matches();
-
-        if (!isMatches) {
-            setErrorStatus(true);
-        }
-
-        return isMatches;
+        return Objects.nonNull(str)
+                && str.length() <= maxLength
+                && pattern.matcher(str).matches();
     }
 }

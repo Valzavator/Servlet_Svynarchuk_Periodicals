@@ -18,7 +18,8 @@ public class GetUserProfileCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        Long userId = Long.valueOf(request.getParameter(RequestParameters.USER_ID));
+        Long userId = Long.valueOf(
+                request.getParameter(RequestParameters.USER_ID));
         Optional<User> userOpt = userService.findById(userId);
 
         if (userOpt.isPresent()) {

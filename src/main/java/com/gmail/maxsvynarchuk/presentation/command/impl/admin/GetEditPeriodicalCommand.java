@@ -16,22 +16,29 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 public class GetEditPeriodicalCommand implements Command {
-    private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
+    private final PeriodicalService periodicalService =
+            ServiceFactory.getPeriodicalService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        Long periodicalId = Long.valueOf(request.getParameter(RequestParameters.PERIODICAL_ID));
-        Optional<Periodical> periodicalOpt = periodicalService.findPeriodicalById(periodicalId);
+        Long periodicalId = Long.valueOf(
+                request.getParameter(RequestParameters.PERIODICAL_ID));
+        Optional<Periodical> periodicalOpt =
+                periodicalService.findPeriodicalById(periodicalId);
 
         if (periodicalOpt.isPresent()) {
             Periodical periodicalDTO = periodicalOpt.get();
             if (periodicalDTO.getStatus() == PeriodicalStatus.SUSPENDED) {
                 return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);
             }
-            request.setAttribute(Attributes.PERIODICAL_DTO, periodicalDTO);
-            request.setAttribute(Attributes.PERIODICAL_TYPES, periodicalService.findAllPeriodicalTypes());
-            request.setAttribute(Attributes.FREQUENCIES, periodicalService.findAllFrequencies());
-            request.setAttribute(Attributes.PUBLISHERS, periodicalService.findAllPublishers());
+            request.setAttribute(Attributes.PERIODICAL_DTO,
+                    periodicalDTO);
+            request.setAttribute(Attributes.PERIODICAL_TYPES,
+                    periodicalService.findAllPeriodicalTypes());
+            request.setAttribute(Attributes.FREQUENCIES,
+                    periodicalService.findAllFrequencies());
+            request.setAttribute(Attributes.PUBLISHERS,
+                    periodicalService.findAllPublishers());
             return CommandResult.forward(Views.EDIT_PERIODICAL_VIEW);
         } else {
             return CommandResult.forward(Views.ERROR_404_VIEW);

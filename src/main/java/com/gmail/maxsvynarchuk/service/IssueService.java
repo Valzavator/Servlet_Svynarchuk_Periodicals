@@ -7,8 +7,15 @@ import com.gmail.maxsvynarchuk.persistence.entity.*;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Intermediate layer between command layer and dao layer.
+ * Service responsible for processing issue-related operations
+ *
+ * @author Maksym Svynarchuk
+ */
 public class IssueService {
-    private final PeriodicalIssueDao periodicalIssueDao = DaoFactory.getInstance().getPeriodicalIssueDao();
+    private final PeriodicalIssueDao periodicalIssueDao =
+            DaoFactory.getInstance().getPeriodicalIssueDao();
 
     private IssueService() {
     }

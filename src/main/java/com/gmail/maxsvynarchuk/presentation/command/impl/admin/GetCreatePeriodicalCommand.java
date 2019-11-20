@@ -11,13 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class GetCreatePeriodicalCommand implements Command {
-    private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
+    private final PeriodicalService periodicalService =
+            ServiceFactory.getPeriodicalService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute(Attributes.PERIODICAL_TYPES, periodicalService.findAllPeriodicalTypes());
-        request.setAttribute(Attributes.FREQUENCIES, periodicalService.findAllFrequencies());
-        request.setAttribute(Attributes.PUBLISHERS, periodicalService.findAllPublishers());
+        request.setAttribute(Attributes.PERIODICAL_TYPES,
+                periodicalService.findAllPeriodicalTypes());
+        request.setAttribute(Attributes.FREQUENCIES,
+                periodicalService.findAllFrequencies());
+        request.setAttribute(Attributes.PUBLISHERS,
+                periodicalService.findAllPublishers());
 
         return CommandResult.forward(Views.CREATE_PERIODICAL_VIEW);
     }

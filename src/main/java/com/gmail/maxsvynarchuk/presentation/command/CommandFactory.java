@@ -13,6 +13,12 @@ import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class that is responsible for holding application endpoints and commands that
+ * correspond to them
+ *
+ * @author Maksym Svynarchuk
+ */
 public class CommandFactory {
     private final static String DELIMITER = ":";
 
@@ -71,7 +77,9 @@ public class CommandFactory {
         commands.put(buildKey(PagesPaths.CREATE_ISSUE_PATH, RequestMethod.POST),
                 new PostCreateIssueCommand());
         commands.put(buildKey(PagesPaths.PAYMENTS_PATH, RequestMethod.GET),
-                new GetPaymentsCommand());
+                new GetAllPaymentsCommand());
+        commands.put(buildKey(PagesPaths.PAYMENT_OVERVIEW_PATH, RequestMethod.GET),
+                new GetPaymentOverviewCommand());
         commands.put(buildKey(PagesPaths.USER_PATH, RequestMethod.GET),
                 new GetUserProfileCommand());
 

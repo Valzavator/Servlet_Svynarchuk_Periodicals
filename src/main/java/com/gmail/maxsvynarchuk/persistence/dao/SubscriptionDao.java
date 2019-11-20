@@ -1,5 +1,6 @@
 package com.gmail.maxsvynarchuk.persistence.dao;
 
+import com.gmail.maxsvynarchuk.persistence.entity.Payment;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
@@ -26,7 +27,15 @@ public interface SubscriptionDao extends GenericDao<Subscription, Long> {
      * @param limit limit
      * @return list of retrieved subscriptions
      */
-    List<Subscription> findAllActiveSubscriptionsByUser(User user, long skip, long limit);
+    List<Subscription> findActiveByUser(User user, long skip, long limit);
+
+    /**
+     * Retrieves all subscriptions associated with certain payment.
+     *
+     * @param payment  payment
+     * @return list of retrieved subscriptions
+     */
+    List<Subscription> findByPayment(Payment payment);
 
     /**
      * Retrieves count of objects from database.

@@ -7,7 +7,6 @@ import javax.servlet.ServletContextListener;
 
 /**
  * Initializes some components before app starts:
- *
  */
 public class ContextListener implements ServletContextListener {
     private static final String SUPPORTED_LOCALES = "supportedLocales";

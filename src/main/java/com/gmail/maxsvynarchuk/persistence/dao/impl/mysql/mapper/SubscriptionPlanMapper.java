@@ -13,7 +13,8 @@ public class SubscriptionPlanMapper implements EntityMapper<SubscriptionPlan> {
     private static final String PLAN_DESCRIPTION_FIELD = "plan_description";
 
     @Override
-    public SubscriptionPlan mapToObject(ResultSet resultSet, String tablePrefix) throws SQLException {
+    public SubscriptionPlan mapToObject(ResultSet resultSet, String tablePrefix)
+            throws SQLException {
         return SubscriptionPlan.newBuilder()
                 .setId(resultSet.getInt(
                         tablePrefix + ID_FIELD))

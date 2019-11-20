@@ -9,9 +9,4 @@ public interface Validator<T> {
      * {@code false} if input is not valid
      */
     boolean isValid(T obj);
-
-    /**
-     * Set error state to initial value.
-     */
-    void resetErrorStatus();
 }

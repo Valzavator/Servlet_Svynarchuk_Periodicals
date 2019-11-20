@@ -3,7 +3,7 @@ package com.gmail.maxsvynarchuk.presentation.util;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
-import com.gmail.maxsvynarchuk.service.util.entity.ShoppingCart;
+import com.gmail.maxsvynarchuk.service.entity.ShoppingCart;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,8 +36,6 @@ public class Util {
      * @return authorized user else {@code null}
      */
     public static User getAuthorizedUser(HttpSession session) {
-        Objects.requireNonNull(session);
-
         return (User) session.getAttribute(Attributes.USER);
     }
 
@@ -61,8 +59,6 @@ public class Util {
      * @return referer path without servlet path at the beginning
      */
     public static String getReferer(HttpServletRequest request) {
-        Objects.requireNonNull(request);
-
         String referer = PagesPaths.HOME_PATH;
         String header = request.getHeader("referer");
         if (header != null && !header.isEmpty()) {
@@ -86,7 +82,6 @@ public class Util {
     public static String addParameterToURI(String uri,
                                            String parameterName,
                                            String parameterValue) {
-        Objects.requireNonNull(uri);
         Objects.requireNonNull(parameterName);
         Objects.requireNonNull(parameterValue);
 

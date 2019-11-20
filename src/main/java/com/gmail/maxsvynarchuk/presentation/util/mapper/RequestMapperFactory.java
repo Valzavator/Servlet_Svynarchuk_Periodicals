@@ -5,11 +5,16 @@ import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 
 public class RequestMapperFactory {
-    private static final RequestEntityMapper<User> SIGN_IN_MAPPER = new SignInRequestMapper();
-    private static final RequestEntityMapper<User> SIGN_UP_MAPPER = new SignUpRequestMapper();
-    private static final RequestEntityMapper<Periodical> CREATE_PERIODICAL_MAPPER = new CreatePeriodicalRequestMapper();
-    private static final RequestEntityMapper<Periodical> EDIT_PERIODICAL_MAPPER = new EditPeriodicalRequestMapper();
-    private static final RequestEntityMapper<PeriodicalIssue> CREATE_ISSUE_MAPPER = new CreateIssueRequestMapper();
+    private static final RequestEntityMapper<User> SIGN_IN_MAPPER =
+            new SignInRequestMapper();
+    private static final RequestEntityMapper<User> SIGN_UP_MAPPER =
+            new SignUpRequestMapper();
+    private static final RequestEntityMapper<Periodical> CREATE_PERIODICAL_MAPPER =
+            new CreatePeriodicalRequestMapper();
+    private static final RequestEntityMapper<Periodical> EDIT_PERIODICAL_MAPPER =
+            new EditPeriodicalRequestMapper();
+    private static final RequestEntityMapper<PeriodicalIssue> CREATE_ISSUE_MAPPER =
+            new CreateIssueRequestMapper();
 
     public static RequestEntityMapper<User> getSignInMapper() {
         return SIGN_IN_MAPPER;

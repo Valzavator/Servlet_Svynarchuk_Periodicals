@@ -40,6 +40,7 @@ class TransactionHelper implements AutoCloseable {
             oldTransactionIsolation = connection.getTransactionIsolation();
             if (oldTransactionIsolation != transactionIsolationLevel)
                 connection.setTransactionIsolation(transactionIsolationLevel);
+
             LOGGER.debug("Changed connection autoCommit state to false");
         } catch (SQLException prepareException) {
             throw new TransactionException(prepareException);
@@ -68,6 +69,7 @@ class TransactionHelper implements AutoCloseable {
             connection.setAutoCommit(autoCommitState);
             if (connection.getTransactionIsolation() != oldTransactionIsolation)
                 connection.setTransactionIsolation(oldTransactionIsolation);
+
             LOGGER.debug("Changed connection state to default");
         } catch (SQLException afterCommitException) {
             throw new TransactionException(afterCommitException);

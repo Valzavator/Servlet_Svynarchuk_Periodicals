@@ -1,11 +1,9 @@
 package com.gmail.maxsvynarchuk.service;
 
 /**
- * Intermediate layer between command layer and dao layer.
- * Implements operations of finding, creating, deleting entities.
- * Uses dao layer.
+ * Factory that returns Service entities
  *
- * @author Maksym Svynarchuk
+ * @author Maksym Svynarhcuk
  */
 public class ServiceFactory {
     public static UserService getUserService() {

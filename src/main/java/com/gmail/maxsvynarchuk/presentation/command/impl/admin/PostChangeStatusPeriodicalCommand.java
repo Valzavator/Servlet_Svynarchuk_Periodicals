@@ -16,17 +16,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 public class PostChangeStatusPeriodicalCommand implements Command {
-    private static Logger LOGGER = LoggerFactory.getLogger(PostChangeStatusPeriodicalCommand.class);
-    private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
+    private static Logger LOGGER =
+            LoggerFactory.getLogger(PostChangeStatusPeriodicalCommand.class);
+    private final PeriodicalService periodicalService =
+            ServiceFactory.getPeriodicalService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.info("Start the process of changing status of the periodical");
 
-        Long periodicalId = Long.valueOf(request.getParameter(RequestParameters.PERIODICAL_ID));
+        Long periodicalId = Long.valueOf(
+                request.getParameter(RequestParameters.PERIODICAL_ID));
         PeriodicalStatus newPeriodicalStatus = PeriodicalStatus.valueOf(
                 request.getParameter(RequestParameters.PERIODICAL_STATUS).toUpperCase());
-        Optional<Periodical> periodicalOpt = periodicalService.findPeriodicalById(periodicalId);
+        Optional<Periodical> periodicalOpt =
+                periodicalService.findPeriodicalById(periodicalId);
 
         if (periodicalOpt.isPresent()) {
             periodicalService.changeStatus(periodicalOpt.get(), newPeriodicalStatus);

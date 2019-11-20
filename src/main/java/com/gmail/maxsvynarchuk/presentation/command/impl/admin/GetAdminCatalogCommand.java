@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class GetAdminCatalogCommand implements Command {
-    private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
+    private final PeriodicalService periodicalService =
+            ServiceFactory.getPeriodicalService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {

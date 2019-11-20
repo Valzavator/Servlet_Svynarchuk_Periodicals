@@ -1,17 +1,17 @@
 package com.gmail.maxsvynarchuk.presentation.command;
 
+import com.gmail.maxsvynarchuk.presentation.FrontController;
 import com.gmail.maxsvynarchuk.presentation.util.RedirectType;
 
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
- * <p>
  * Class that carries information about Command executing result
  * so {@code FrontController} could know where and how redirect further
  *
  * @author Maksym Svynarchuk
- * @see com.gmail.maxsvynarchuk.presentation.FrontController
+ * @see FrontController
  * @see Command
  */
 public class CommandResult {
@@ -28,11 +28,11 @@ public class CommandResult {
     }
 
     public static CommandResult redirect(String pagePath) {
-        return new CommandResult(RedirectType.REDIRECT, Objects.requireNonNull(pagePath));
+        return CommandResult.of(RedirectType.REDIRECT, Objects.requireNonNull(pagePath));
     }
 
     public static CommandResult forward(String pagePath) {
-        return new CommandResult(RedirectType.FORWARD, Objects.requireNonNull(pagePath));
+        return CommandResult.of(RedirectType.FORWARD, Objects.requireNonNull(pagePath));
     }
 
     public RedirectType getRedirectType() {

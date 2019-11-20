@@ -25,7 +25,8 @@ public class PooledConnection implements ConnectionFactory {
     static {
         try {
             Context initContext = new InitialContext();
-            DataSource ds = (DataSource) initContext.lookup("java:/comp/env/jdbc/periodicals");
+            DataSource ds = (DataSource) initContext.lookup(
+                    "java:/comp/env/jdbc/periodicals");
             DATA_SOURCE = new DataSourceProxy(ds);
         } catch (NamingException e) {
             LOGGER.error("Exception initialize DataSource", e);

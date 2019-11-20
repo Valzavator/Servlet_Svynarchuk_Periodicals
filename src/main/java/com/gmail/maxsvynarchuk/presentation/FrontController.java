@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +18,14 @@ import java.io.IOException;
 /**
  * Provide a centralized request handling mechanism to
  * handle all types of requests coming to the application.
+ * <p>
+ * Application main servlet responsible for:
+ * 1. Obtaining commands from incoming request
+ * 2. Executing commands
+ * 3. Redirecting request further by parameters obtained from CommandResult object
  *
  * @author Maksym Svynarchuk
+ * @see CommandResult
  */
 public class FrontController extends HttpServlet {
     private static final Logger LOGGER = LoggerFactory.getLogger(FrontController.class);
@@ -49,26 +54,22 @@ public class FrontController extends HttpServlet {
         processRequest(request, response, RequestMethod.POST);
     }
 
+    /**
+     * Main dispatching method for all types of methods
+     */
     private void processRequest(HttpServletRequest request,
                                 HttpServletResponse response,
                                 RequestMethod method)
             throws ServletException, IOException {
-        //TODO delete try-catch
-        try {
-            Command command = commandFactory.getCommand(
-                    getPath(request), method);
-
-            CommandResult commandResult = command.execute(request, response);
-            LOGGER.debug("Path of response: {}", commandResult.getPagePath());
-            if (commandResult.getRedirectType() == RedirectType.REDIRECT) {
-                Util.redirectTo(request, response, commandResult.getPagePath());
-            } else {
-                request.getRequestDispatcher(commandResult.getPagePath())
-                        .forward(request, response);
-            }
-        } catch (Throwable e) {
-            e.printStackTrace();
-            throw e;
+        Command command = commandFactory.getCommand(
+                getPath(request), method);
+        CommandResult commandResult = command.execute(request, response);
+        LOGGER.debug("Path of response: {}", commandResult.getPagePath());
+        if (commandResult.getRedirectType() == RedirectType.REDIRECT) {
+            Util.redirectTo(request, response, commandResult.getPagePath());
+        } else {
+            request.getRequestDispatcher(commandResult.getPagePath())
+                    .forward(request, response);
         }
     }
 

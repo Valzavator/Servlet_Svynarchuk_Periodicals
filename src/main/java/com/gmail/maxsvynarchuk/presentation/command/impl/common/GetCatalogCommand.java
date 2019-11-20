@@ -19,19 +19,25 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class GetCatalogCommand implements Command {
-    private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
-    private final SubscriptionService subscriptionService = ServiceFactory.getSubscriptionService();
+    private final PeriodicalService periodicalService =
+            ServiceFactory.getPeriodicalService();
+    private final SubscriptionService subscriptionService =
+            ServiceFactory.getSubscriptionService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        long rowsCount = periodicalService.getPeriodicalsCountByStatus(PeriodicalStatus.ACTIVE);
+        long rowsCount =
+                periodicalService.getPeriodicalsCountByStatus(PeriodicalStatus.ACTIVE);
         long skip = PaginationManager.manage(
                 request, rowsCount, PaginationManager.CATALOG_RECORDS_PER_PAGE);
-        List<Periodical> periodicals = periodicalService.findAllPeriodicalsByStatus(
-                PeriodicalStatus.ACTIVE, skip, PaginationManager.CATALOG_RECORDS_PER_PAGE);
+        List<Periodical> periodicals =
+                periodicalService.findAllPeriodicalsByStatus(PeriodicalStatus.ACTIVE,
+                        skip,
+                        PaginationManager.CATALOG_RECORDS_PER_PAGE);
         request.setAttribute(Attributes.CATALOG, periodicals);
         if (!periodicals.isEmpty()) {
-            List<SubscriptionPlan> subscriptionPlans = subscriptionService.findAllSubscriptionPlans();
+            List<SubscriptionPlan> subscriptionPlans =
+                    subscriptionService.findAllSubscriptionPlans();
             request.setAttribute(Attributes.SUBSCRIPTION_PLANS, subscriptionPlans);
         }
         Util.checkErrorParameter(request, RequestParameters.ERROR_ATTRIBUTE);

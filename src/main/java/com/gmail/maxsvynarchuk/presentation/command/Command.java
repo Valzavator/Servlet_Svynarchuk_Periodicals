@@ -1,5 +1,7 @@
 package com.gmail.maxsvynarchuk.presentation.command;
 
+import com.gmail.maxsvynarchuk.presentation.FrontController;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
  * Specialize interface for command in front controller pattern.
  *
  * @author Masksym Svynarhcuk
- * @see com.gmail.maxsvynarchuk.presentation.FrontController
+ * @see FrontController
  */
 public interface Command {
     /**
@@ -16,7 +18,7 @@ public interface Command {
      * @param request  HttpServletRequest to be processed
      * @param response HttpServletRequest
      * @return object of {@code CommandResult} class which contains path to appropriate jsp page
-     * @see com.gmail.maxsvynarchuk.presentation.command.CommandResult
+     * @see CommandResult
      */
     CommandResult execute(HttpServletRequest request, HttpServletResponse response);
 }

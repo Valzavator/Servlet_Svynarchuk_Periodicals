@@ -223,17 +223,6 @@ VALUES ('Daily', 'Once per business day'),
        ('Biweekly, Fortnightly', 'Every two weeks'),
        ('Semi-monthly', 'Twice per month'),
        ('Monthly', 'Every month');
-#        ('Semi-quarterly', 'Twice per quarter'),
-#        ('Bimonthly', 'Every 2 months'),
-#        ('Quarterly', 'Every quarter'),
-#        ('Triannually', 'Thrice per year'),
-#        ('Semiannually, Biannually', 'Twice per year'),
-#        ('Annually', 'Once per year'),
-#        ('Biennially', 'Once per 2 years'),
-#        ('Triennially', 'Once per 3 years'),
-#        ('Quadriennially', 'Once per 4 years'),
-#        ('Quinquennially', 'Once per 5 years');
-
 
 INSERT INTO publishers(publisher_name)
 VALUES ('Pearson'),

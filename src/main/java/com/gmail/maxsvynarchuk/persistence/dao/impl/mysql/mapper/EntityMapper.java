@@ -32,8 +32,8 @@ public interface EntityMapper<T> {
      * @param tablePrefix prefix of the table in result set
      * @return list of converted objects
      * @throws SQLException if the columns is not valid;
-     * if a database access error occurs or this method is
-     * called on a closed result set
+     *                      if a database access error occurs or this method is
+     *                      called on a closed result set
      */
     default List<T> mapToObjectList(ResultSet resultSet, String tablePrefix)
             throws SQLException {

@@ -13,8 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class GetPaymentsCommand implements Command {
-    private final PaymentService paymentService = ServiceFactory.getPaymentService();
+public class GetAllPaymentsCommand implements Command {
+    private final PaymentService paymentService =
+            ServiceFactory.getPaymentService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {

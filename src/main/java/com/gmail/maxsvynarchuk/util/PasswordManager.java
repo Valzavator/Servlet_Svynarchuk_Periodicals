@@ -8,7 +8,7 @@ public class PasswordManager {
     }
 
     public static boolean checkSecurePassword(String passwordToCheck,
-                                       String passwordHash) {
+                                              String passwordHash) {
         String checkPassHash = hashPassword(passwordToCheck);
         return passwordHash.equals(checkPassHash);
     }

@@ -5,7 +5,6 @@ import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
-import com.gmail.maxsvynarchuk.util.TimeConverter;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;

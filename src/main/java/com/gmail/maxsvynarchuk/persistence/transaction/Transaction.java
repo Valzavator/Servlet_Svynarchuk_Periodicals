@@ -1,5 +1,7 @@
 package com.gmail.maxsvynarchuk.persistence.transaction;
 
+import com.gmail.maxsvynarchuk.persistence.connection.ConnectionProxy;
+import com.gmail.maxsvynarchuk.persistence.connection.DataSourceProxy;
 import com.gmail.maxsvynarchuk.persistence.exception.PersistenceException;
 import com.gmail.maxsvynarchuk.persistence.exception.TransactionException;
 import org.slf4j.Logger;
@@ -15,8 +17,8 @@ import java.sql.SQLException;
  * which are inside connection package.
  *
  * @author Maksym Svynarchuk
- * @see com.gmail.maxsvynarchuk.persistence.connection.DataSourceProxy
- * @see com.gmail.maxsvynarchuk.persistence.connection.ConnectionProxy
+ * @see DataSourceProxy
+ * @see ConnectionProxy
  */
 @FunctionalInterface
 public interface Transaction {

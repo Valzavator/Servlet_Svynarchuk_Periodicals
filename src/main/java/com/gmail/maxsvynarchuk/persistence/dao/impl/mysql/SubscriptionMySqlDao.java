@@ -3,13 +3,12 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
+import com.gmail.maxsvynarchuk.persistence.entity.Payment;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.persistence.exception.DaoException;
-import com.gmail.maxsvynarchuk.util.TimeConverter;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
-import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 
 import java.util.List;
 import java.util.Objects;
@@ -30,6 +29,8 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
             ResourceManager.QUERIES.getProperty("subscription.is.user.already.subscribed");
     private final static String WHERE_ID =
             ResourceManager.QUERIES.getProperty("subscription.where.id");
+    private final static String WHERE_PAYMENT_ID =
+            ResourceManager.QUERIES.getProperty("subscription.where.payment");
     private final static String WHERE_ACTIVE_AND_USER_ID =
             ResourceManager.QUERIES.getProperty("subscription.where.active.and.user");
     private final static String ORDER_BY_END_DATE =
@@ -65,10 +66,16 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
     }
 
     @Override
-    public List<Subscription> findAllActiveSubscriptionsByUser(User user, long skip, long limit) {
+    public List<Subscription> findActiveByUser(User user, long skip, long limit) {
         return utilMySqlDao.findAll(
                 SELECT_ALL + WHERE_ACTIVE_AND_USER_ID + ORDER_BY_END_DATE + UtilMySqlDao.LIMIT,
                 user.getId(), skip, limit);
+    }
+
+    @Override
+    public List<Subscription> findByPayment(Payment payment) {
+        return utilMySqlDao.findAll(SELECT_ALL + WHERE_PAYMENT_ID,
+                payment.getId());
     }
 
     @Override

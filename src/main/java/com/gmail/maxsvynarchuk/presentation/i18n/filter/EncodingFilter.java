@@ -3,7 +3,6 @@ package com.gmail.maxsvynarchuk.presentation.i18n.filter;
 
 import javax.servlet.*;
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * The filter allows to set request and response encoding.
@@ -20,7 +19,7 @@ public class EncodingFilter implements Filter {
     private String encoding;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         encoding = filterConfig.getInitParameter(ENCODING_PARAM_NAME);
         if (encoding == null) {
             encoding = DEFAULT_ENCODING;

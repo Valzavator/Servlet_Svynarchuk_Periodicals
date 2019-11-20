@@ -1,14 +1,10 @@
 package com.gmail.maxsvynarchuk.service;
 
 import com.gmail.maxsvynarchuk.persistence.dao.PaymentDao;
-import com.gmail.maxsvynarchuk.persistence.dao.UserDao;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
-import com.gmail.maxsvynarchuk.util.PasswordManager;
-import com.gmail.maxsvynarchuk.util.type.RoleType;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -16,13 +12,13 @@ import java.util.Optional;
 
 /**
  * Intermediate layer between command layer and dao layer.
- * Implements operations of finding, creating, deleting entities.
- * Uses dao layer.
+ * Service responsible for processing payment-related operations
  *
  * @author Maksym Svynarchuk
  */
 public class PaymentService {
-    private final PaymentDao paymentDao = DaoFactory.getInstance().getPaymentDao();
+    private final PaymentDao paymentDao =
+            DaoFactory.getInstance().getPaymentDao();
 
     private PaymentService() {
     }
@@ -33,6 +29,10 @@ public class PaymentService {
 
     public static PaymentService getInstance() {
         return Singleton.INSTANCE;
+    }
+
+    public Optional<Payment> findPaymentById(Long id) {
+        return paymentDao.findOne(id);
     }
 
     public List<Payment> findAllPayments(long skip, long limit) {

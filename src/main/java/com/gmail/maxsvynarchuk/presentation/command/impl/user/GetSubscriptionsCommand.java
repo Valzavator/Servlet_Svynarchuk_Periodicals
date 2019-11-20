@@ -25,8 +25,10 @@ public class GetSubscriptionsCommand implements Command {
         User user = Util.getAuthorizedUser(request.getSession());
         long rowsCount = subscriptionService.getActiveSubscriptionsCountByUser(user);
         long skip = PaginationManager.manage(request, rowsCount);
-        List<Subscription> subscriptions = subscriptionService.findAllActiveSubscriptionsByUser(user,
-                skip, PaginationManager.DEFAULT_RECORDS_PER_PAGE);
+        List<Subscription> subscriptions =
+                subscriptionService.findAllActiveSubscriptionsByUser(user,
+                        skip,
+                        PaginationManager.DEFAULT_RECORDS_PER_PAGE);
         request.setAttribute(Attributes.SUBSCRIPTIONS, subscriptions);
         return CommandResult.forward(Views.SUBSCRIPTIONS_VIEW);
     }

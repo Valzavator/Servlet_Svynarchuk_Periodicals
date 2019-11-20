@@ -1,4 +1,4 @@
-package com.gmail.maxsvynarchuk.service.util.entity;
+package com.gmail.maxsvynarchuk.service.entity;
 
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
@@ -17,7 +17,8 @@ import java.util.Optional;
  * Represents virtual shopping cart for storing items
  */
 public class ShoppingCart {
-    private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
+    private final PeriodicalService periodicalService =
+            ServiceFactory.getPeriodicalService();
     private final List<Subscription> items = new ArrayList<>();
 
     public boolean addItem(Subscription subscription) {
@@ -44,7 +45,8 @@ public class ShoppingCart {
     public BigDecimal getTotalPrice() {
         BigDecimal totalValue = new BigDecimal(0);
         for (Subscription subscription : items) {
-            BigDecimal monthAmount = new BigDecimal(subscription.getSubscriptionPlan().getMonthsAmount());
+            BigDecimal monthAmount =
+                    new BigDecimal(subscription.getSubscriptionPlan().getMonthsAmount());
             BigDecimal rate = subscription.getSubscriptionPlan().getRate();
             BigDecimal price = subscription.getPeriodical().getPrice();
             totalValue = totalValue.add(
@@ -64,16 +66,12 @@ public class ShoppingCart {
     }
 
     public boolean isHasSuspendedPeriodical() {
-        for (Subscription subscription: items) {
-            if (subscription.getPeriodical().getStatus() == PeriodicalStatus.SUSPENDED) {
-                return true;
-            }
-        }
-        return false;
+        return items.stream().anyMatch(
+                item -> item.getPeriodical().getStatus() == PeriodicalStatus.SUSPENDED);
     }
 
     private void updateDateFromDatabase() {
-        for (Subscription subscription: items) {
+        for (Subscription subscription : items) {
             Optional<Periodical> periodicalOpt =
                     periodicalService.findPeriodicalById(subscription.getPeriodical().getId());
             if (periodicalOpt.isPresent()) {

@@ -25,7 +25,8 @@ public class PeriodicalIssueMapper implements EntityMapper<PeriodicalIssue> {
     }
 
     @Override
-    public PeriodicalIssue mapToObject(ResultSet resultSet, String tablePrefix) throws SQLException {
+    public PeriodicalIssue mapToObject(ResultSet resultSet, String tablePrefix)
+            throws SQLException {
         Periodical tempPeriodical = periodicalMapper.mapToObject(resultSet);
 
         return PeriodicalIssue.newBuilder()

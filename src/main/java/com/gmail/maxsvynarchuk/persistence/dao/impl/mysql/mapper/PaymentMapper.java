@@ -2,7 +2,6 @@ package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper;
 
 import com.gmail.maxsvynarchuk.persistence.entity.Payment;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
-import com.gmail.maxsvynarchuk.util.TimeConverter;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +23,8 @@ public class PaymentMapper implements EntityMapper<Payment> {
     }
 
     @Override
-    public Payment mapToObject(ResultSet resultSet, String tablePrefix) throws SQLException {
+    public Payment mapToObject(ResultSet resultSet, String tablePrefix)
+            throws SQLException {
         User tempUser = userMapper.mapToObject(resultSet);
 
         return Payment.newBuilder()

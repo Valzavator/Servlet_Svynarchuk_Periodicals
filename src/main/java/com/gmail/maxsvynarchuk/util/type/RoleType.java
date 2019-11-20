@@ -6,8 +6,8 @@ import com.gmail.maxsvynarchuk.persistence.entity.User;
 import java.util.Objects;
 
 public enum RoleType {
-    ADMIN(new Role(1,"admin")),
-    USER(new Role(2,"user"));
+    ADMIN(new Role(1, "admin")),
+    USER(new Role(2, "user"));
 
     private final Role role;
 

@@ -8,11 +8,12 @@ import com.gmail.maxsvynarchuk.util.ResourceManager;
 public final class PagesPaths {
     public static final String SITE_PREFIX = ResourceManager.PATH.getProperty("site.prefix");
 
-    public static final String HOME_PATH = ResourceManager.PATH.getProperty("path.home");
     public static final String SIGN_IN_PATH = ResourceManager.PATH.getProperty("path.signin");
     public static final String SIGN_UP_PATH = ResourceManager.PATH.getProperty("path.signup");
-    public static final String CATALOG_PATH = ResourceManager.PATH.getProperty("path.catalog");
+
+    public static final String HOME_PATH = ResourceManager.PATH.getProperty("path.home");
     public static final String PERIODICAL_PATH = ResourceManager.PATH.getProperty("path.periodical");
+    public static final String CATALOG_PATH = ResourceManager.PATH.getProperty("path.catalog");
 
     public static final String PROFILE_PATH = ResourceManager.PATH.getProperty("path.profile");
     public static final String SIGN_OUT_PATH = ResourceManager.PATH.getProperty("path.signout");
@@ -30,6 +31,7 @@ public final class PagesPaths {
     public static final String CHANGE_STATUS_PERIODICAL_PATH = ResourceManager.PATH.getProperty("path.admin.catalog.change.status");
     public static final String CREATE_ISSUE_PATH = ResourceManager.PATH.getProperty("path.admin.issue.create");
     public static final String PAYMENTS_PATH = ResourceManager.PATH.getProperty("path.admin.payments");
+    public static final String PAYMENT_OVERVIEW_PATH = ResourceManager.PATH.getProperty("path.admin.payment");
     public static final String USER_PATH = ResourceManager.PATH.getProperty("path.admin.user");
 
     private PagesPaths() {

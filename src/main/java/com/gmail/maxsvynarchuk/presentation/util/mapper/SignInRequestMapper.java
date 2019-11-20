@@ -5,7 +5,8 @@ import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class SignInRequestMapper implements RequestEntityMapper<User> {
+public class SignInRequestMapper
+        implements RequestEntityMapper<User> {
 
     @Override
     public User mapToObject(HttpServletRequest request) {

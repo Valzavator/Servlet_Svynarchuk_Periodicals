@@ -4,8 +4,12 @@ import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Objects;
 
+/**
+ * Class that is needed to carry information for views that do objects pagination
+ *
+ * @author Maksym Svynarchuk
+ */
 public class PaginationManager {
     public static final int DEFAULT_RECORDS_PER_PAGE = 10;
     public static final int CATALOG_RECORDS_PER_PAGE = 5;
@@ -23,7 +27,7 @@ public class PaginationManager {
         try {
             page = Integer.parseInt(pageStr);
         } catch (NumberFormatException ex) {
-             page = FIRST_PAGE;
+            page = FIRST_PAGE;
         }
         if (numberOfPages > 0 && page > numberOfPages) {
             page = numberOfPages;

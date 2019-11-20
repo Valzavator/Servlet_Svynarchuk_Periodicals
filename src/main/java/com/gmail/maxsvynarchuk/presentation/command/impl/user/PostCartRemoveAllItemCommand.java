@@ -6,7 +6,7 @@ import com.gmail.maxsvynarchuk.presentation.util.Util;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
 import com.gmail.maxsvynarchuk.service.ShoppingCartService;
-import com.gmail.maxsvynarchuk.service.util.entity.ShoppingCart;
+import com.gmail.maxsvynarchuk.service.entity.ShoppingCart;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

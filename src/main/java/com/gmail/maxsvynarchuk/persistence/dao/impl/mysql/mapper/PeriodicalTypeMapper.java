@@ -11,7 +11,8 @@ public class PeriodicalTypeMapper implements EntityMapper<PeriodicalType> {
     private static final String TYPE_DESCRIPTION_FIELD = "type_description";
 
     @Override
-    public PeriodicalType mapToObject(ResultSet resultSet, String tablePrefix) throws SQLException {
+    public PeriodicalType mapToObject(ResultSet resultSet, String tablePrefix)
+            throws SQLException {
         return PeriodicalType.newBuilder()
                 .setId(resultSet.getInt(
                         tablePrefix + ID_FIELD))

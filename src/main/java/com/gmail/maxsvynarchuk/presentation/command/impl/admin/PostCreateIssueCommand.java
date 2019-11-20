@@ -23,9 +23,12 @@ import java.util.Map;
 import java.util.Optional;
 
 public class PostCreateIssueCommand implements Command {
-    private static Logger LOGGER = LoggerFactory.getLogger(PostCreateIssueCommand.class);
-    private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
-    private final IssueService issueService = ServiceFactory.getIssueService();
+    private static Logger LOGGER =
+            LoggerFactory.getLogger(PostCreateIssueCommand.class);
+    private final PeriodicalService periodicalService =
+            ServiceFactory.getPeriodicalService();
+    private final IssueService issueService =
+            ServiceFactory.getIssueService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {

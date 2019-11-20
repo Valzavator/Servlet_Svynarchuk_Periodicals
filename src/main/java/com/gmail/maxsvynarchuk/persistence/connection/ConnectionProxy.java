@@ -1,5 +1,6 @@
 package com.gmail.maxsvynarchuk.persistence.connection;
 
+import com.gmail.maxsvynarchuk.persistence.transaction.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +16,7 @@ import java.util.concurrent.Executor;
  *
  * @author Maksym Svynarchuk
  * @see DataSourceProxy
- * @see com.gmail.maxsvynarchuk.persistence.transaction.Transaction
+ * @see Transaction
  */
 public class ConnectionProxy implements Connection {
     private final static Logger LOGGER = LoggerFactory.getLogger(ConnectionProxy.class);

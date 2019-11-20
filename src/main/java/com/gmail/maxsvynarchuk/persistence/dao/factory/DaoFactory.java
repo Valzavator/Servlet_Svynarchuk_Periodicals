@@ -6,8 +6,6 @@ import com.gmail.maxsvynarchuk.util.ResourceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ResourceBundle;
-
 /**
  * Factory that creates DAO entities
  *
@@ -31,7 +29,8 @@ public abstract class DaoFactory {
                 if (instance == null) {
                     try {
                         String className = ResourceManager.DATABASE.getProperty(DB_CLASS);
-                        instance = (DaoFactory) Class.forName(className).getDeclaredConstructor().newInstance();
+                        instance = (DaoFactory) Class.forName(className)
+                                .getDeclaredConstructor().newInstance();
                     } catch (Exception e) {
                         LOGGER.error("Failed to initialize DaoFactory", e);
                         throw new DaoException(e);

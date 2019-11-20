@@ -59,7 +59,7 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
     }
 
     @Override
-    public List<Periodical> findAllPeriodicalsByStatus(PeriodicalStatus status, long skip, long limit) {
+    public List<Periodical> findByStatus(PeriodicalStatus status, long skip, long limit) {
         return utilMySqlDao.findAll(SELECT_ALL + WHERE_STATUS + ORDER_BY_STATUS_AND_ID + UtilMySqlDao.LIMIT,
                 status.toString(), skip, limit);
     }

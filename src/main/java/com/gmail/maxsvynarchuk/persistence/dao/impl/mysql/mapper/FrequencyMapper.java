@@ -11,7 +11,8 @@ public class FrequencyMapper implements EntityMapper<Frequency> {
     private static final String MEANING_FIELD = "meaning";
 
     @Override
-    public Frequency mapToObject(ResultSet resultSet, String tablePrefix) throws SQLException {
+    public Frequency mapToObject(ResultSet resultSet, String tablePrefix)
+            throws SQLException {
         return Frequency.newBuilder()
                 .setId(resultSet.getInt(
                         tablePrefix + ID_FIELD))
