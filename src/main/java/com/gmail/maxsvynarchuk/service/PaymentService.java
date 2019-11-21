@@ -3,13 +3,12 @@ package com.gmail.maxsvynarchuk.service;
 import com.gmail.maxsvynarchuk.persistence.dao.PaymentDao;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -47,15 +46,11 @@ public class PaymentService {
 
     public Payment createPayment(User user, BigDecimal totalPrice) {
         LOGGER.debug("Attempt to create payment");
-        Objects.requireNonNull(user);
-        Objects.requireNonNull(totalPrice);
-
         Payment payment = Payment.newBuilder()
                 .setUser(user)
                 .setTotalPrice(totalPrice)
                 .setPaymentDate(LocalDateTime.now())
                 .build();
-
         return paymentDao.insert(payment);
     }
 

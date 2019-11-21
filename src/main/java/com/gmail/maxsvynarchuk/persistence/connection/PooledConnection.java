@@ -16,7 +16,7 @@ import java.sql.SQLException;
  *
  * @author Maksym Svynarchuk
  */
-public class PooledConnection implements ConnectionFactory {
+public class PooledConnection {
     private static final Logger LOGGER = LoggerFactory.getLogger(PooledConnection.class);
 
     private static final PooledConnection INSTANCE = new PooledConnection();

@@ -6,10 +6,9 @@ import com.gmail.maxsvynarchuk.persistence.entity.Role;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.util.PasswordManager;
 import com.gmail.maxsvynarchuk.util.type.RoleType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -54,8 +53,6 @@ public class UserService {
 
     public boolean registerUser(User userToRegister) {
         LOGGER.debug("Attempt to register new user");
-        Objects.requireNonNull(userToRegister);
-
         if (userToRegister.getRole() == null) {
             userToRegister.setRole(defaultRole);
         }

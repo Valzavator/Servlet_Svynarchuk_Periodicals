@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
+import com.gmail.maxsvynarchuk.persistence.exception.DaoException;
 import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
@@ -55,18 +56,26 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
 
     @Override
     public List<Periodical> findAll(long skip, long limit) {
+        if (skip < 0 || limit < 0) {
+            throw new DaoException("Skip or limit params cannot be negative");
+        }
         return utilMySqlDao.findAll(SELECT_ALL + ORDER_BY_STATUS_AND_ID + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override
     public List<Periodical> findByStatus(PeriodicalStatus status, long skip, long limit) {
+        if (skip < 0 || limit < 0) {
+            throw new DaoException("Skip or limit params cannot be negative");
+        }
         return utilMySqlDao.findAll(SELECT_ALL + WHERE_STATUS + ORDER_BY_STATUS_AND_ID + UtilMySqlDao.LIMIT,
                 status.toString(), skip, limit);
     }
 
     @Override
     public Periodical insert(Periodical obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to insert nullable periodical");
+        }
 
         Long id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
@@ -83,7 +92,9 @@ public class PeriodicalMySqlDao implements PeriodicalDao {
 
     @Override
     public void update(Periodical obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to update nullable periodical");
+        }
 
         utilMySqlDao.executeUpdate(
                 UPDATE + WHERE_ID,

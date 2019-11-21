@@ -6,13 +6,12 @@ import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.persistence.transaction.Transaction;
 import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -49,15 +48,11 @@ public class SubscriptionService {
                                                                long skip,
                                                                long limit) {
         LOGGER.debug("Attempt to find all active subscriptions by user");
-        Objects.requireNonNull(user);
-
         return subscriptionDao.findActiveByUser(user, skip, limit);
     }
 
     public List<Subscription> findAllSubscriptionsByPayment(Payment payment) {
         LOGGER.debug("Attempt to find all subscriptions by payment");
-        Objects.requireNonNull(payment);
-
         List<Subscription> subscriptions = subscriptionDao.findByPayment(payment);
         if (subscriptions.size() > 0) {
             return subscriptions;
@@ -76,10 +71,6 @@ public class SubscriptionService {
                                      List<Subscription> subscriptions,
                                      BigDecimal totalPrice) {
         LOGGER.debug("Attempt to process subscriptions");
-        Objects.requireNonNull(user);
-        Objects.requireNonNull(totalPrice);
-        Objects.requireNonNull(subscriptions);
-
         if (subscriptions.size() != 0) {
             Transaction.doTransaction(() -> {
                 Payment payment = paymentService.createPayment(user, totalPrice);
@@ -108,9 +99,6 @@ public class SubscriptionService {
 
     public boolean isAlreadySubscribed(User user, Periodical periodical) {
         LOGGER.debug("Attempt to check that user is already subscribed");
-        Objects.requireNonNull(user);
-        Objects.requireNonNull(periodical);
-
         return subscriptionDao.isUserAlreadySubscribed(user, periodical);
     }
 

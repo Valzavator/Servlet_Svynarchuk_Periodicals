@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan;
+import com.gmail.maxsvynarchuk.persistence.exception.DaoException;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
@@ -49,12 +50,17 @@ public class SubscriptionPlanMySqlDao implements SubscriptionPlanDao {
     }
 
     public List<SubscriptionPlan> findAll(long skip, long limit) {
+        if (skip < 0 || limit < 0) {
+            throw new DaoException("Skip or limit params cannot be negative");
+        }
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override
     public SubscriptionPlan insert(SubscriptionPlan obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to insert nullable subscription plan");
+        }
 
         Integer id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
@@ -70,7 +76,9 @@ public class SubscriptionPlanMySqlDao implements SubscriptionPlanDao {
 
     @Override
     public void update(SubscriptionPlan obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to update nullable subscription plan");
+        }
 
         utilMySqlDao.executeUpdate(
                 UPDATE + WHERE_ID,

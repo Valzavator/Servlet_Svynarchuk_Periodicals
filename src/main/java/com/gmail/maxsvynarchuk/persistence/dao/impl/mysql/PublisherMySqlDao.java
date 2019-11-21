@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.PublisherDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.Publisher;
+import com.gmail.maxsvynarchuk.persistence.exception.DaoException;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
@@ -49,12 +50,17 @@ public class PublisherMySqlDao implements PublisherDao {
     }
 
     public List<Publisher> findAll(long skip, long limit) {
+        if (skip < 0 || limit < 0) {
+            throw new DaoException("Skip or limit params cannot be negative");
+        }
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override
     public Publisher insert(Publisher obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to insert nullable publisher");
+        }
 
         Long id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
@@ -66,7 +72,9 @@ public class PublisherMySqlDao implements PublisherDao {
 
     @Override
     public void update(Publisher obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to update nullable publisher");
+        }
 
         utilMySqlDao.executeUpdate(
                 UPDATE + WHERE_ID,

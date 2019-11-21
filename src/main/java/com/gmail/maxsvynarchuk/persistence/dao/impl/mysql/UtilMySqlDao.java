@@ -1,6 +1,5 @@
 package com.gmail.maxsvynarchuk.persistence.dao.impl.mysql;
 
-import com.gmail.maxsvynarchuk.persistence.connection.ConnectionFactory;
 import com.gmail.maxsvynarchuk.persistence.connection.PooledConnection;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.exception.DaoException;
@@ -26,21 +25,11 @@ public class UtilMySqlDao<T> {
     static final String LIMIT = ResourceManager.QUERIES.getProperty("limit");
 
     /**
-     * Connection pool
-     */
-    private ConnectionFactory pool;
-
-    /**
      * Converts data from ResultSet to domain object
      */
     private EntityMapper<T> mapper;
 
     public UtilMySqlDao(EntityMapper<T> mapper) {
-        this(PooledConnection.getInstance(), mapper);
-    }
-
-    public UtilMySqlDao(ConnectionFactory pool, EntityMapper<T> mapper) {
-        this.pool = pool;
         this.mapper = mapper;
     }
 
@@ -64,7 +53,7 @@ public class UtilMySqlDao<T> {
      * @return list of retrieved objects
      */
     public List<T> findAll(String query, Object... params) {
-        try (Connection connection = pool.getConnection();
+        try (Connection connection = PooledConnection.getInstance().getConnection();
              PreparedStatement statement = connection
                      .prepareStatement(query)) {
 
@@ -86,7 +75,7 @@ public class UtilMySqlDao<T> {
      * @param params parameters to substitute wildcards in query
      */
     public void executeUpdate(String query, Object... params) {
-        try (Connection connection = pool.getConnection();
+        try (Connection connection = PooledConnection.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             setParamsToStatement(statement, params);
             statement.executeUpdate();
@@ -110,7 +99,7 @@ public class UtilMySqlDao<T> {
     public <PK> PK executeInsertWithGeneratedPrimaryKey(String query,
                                                         Class<PK> pkType,
                                                         Object... params) {
-        try (Connection connection = pool.getConnection();
+        try (Connection connection = PooledConnection.getInstance().getConnection();
              PreparedStatement statement = connection
                      .prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -136,7 +125,7 @@ public class UtilMySqlDao<T> {
      * @return count of rows for query
      */
     public long getRowsCount(String query, Object... params) {
-        try (Connection connection = pool.getConnection();
+        try (Connection connection = PooledConnection.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
             setParamsToStatement(statement, params);
@@ -162,7 +151,9 @@ public class UtilMySqlDao<T> {
      */
     private void setParamsToStatement(PreparedStatement statement, Object... params)
             throws SQLException {
-        Objects.requireNonNull(params);
+        if (Objects.isNull(params)) {
+            throw new SQLException("Params cannot be null");
+        }
 
         for (int i = 0; i < params.length; i++) {
             if (params[i] != null) {

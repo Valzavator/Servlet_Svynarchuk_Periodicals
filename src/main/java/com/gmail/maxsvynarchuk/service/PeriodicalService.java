@@ -4,11 +4,10 @@ import com.gmail.maxsvynarchuk.persistence.dao.*;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -41,22 +40,16 @@ public class PeriodicalService {
     }
 
     public Periodical createPeriodical(Periodical periodical) {
-        Objects.requireNonNull(periodical);
-
         return periodicalDao.insert(periodical);
     }
 
     public void updatePeriodical(Periodical periodical) {
         LOGGER.debug("Attempt to update periodical");
-        Objects.requireNonNull(periodical);
-
         periodicalDao.update(periodical);
     }
 
     public void changeStatus(Periodical periodical, PeriodicalStatus newStatus) {
         LOGGER.debug("Attempt to change status of periodical");
-        Objects.requireNonNull(newStatus);
-
         if (periodical.getStatus() != newStatus) {
             periodical.setStatus(newStatus);
             updatePeriodical(periodical);

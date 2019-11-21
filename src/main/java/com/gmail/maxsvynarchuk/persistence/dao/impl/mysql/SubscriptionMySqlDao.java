@@ -62,11 +62,17 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
 
     @Override
     public List<Subscription> findAll(long skip, long limit) {
+        if (skip < 0 || limit < 0) {
+            throw new DaoException("Skip or limit params cannot be negative");
+        }
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override
     public List<Subscription> findActiveByUser(User user, long skip, long limit) {
+        if (skip < 0 || limit < 0) {
+            throw new DaoException("Skip or limit params cannot be negative");
+        }
         return utilMySqlDao.findAll(
                 SELECT_ALL + WHERE_ACTIVE_AND_USER_ID + ORDER_BY_END_DATE + UtilMySqlDao.LIMIT,
                 user.getId(), skip, limit);
@@ -80,7 +86,9 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
 
     @Override
     public Subscription insert(Subscription obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to insert nullable subscription");
+        }
 
         Long id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
@@ -97,7 +105,9 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
 
     @Override
     public void update(Subscription obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to update nullable subscription");
+        }
 
         utilMySqlDao.executeUpdate(
                 UPDATE + WHERE_ID,

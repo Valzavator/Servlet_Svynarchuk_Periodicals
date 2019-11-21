@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.PaymentDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.Payment;
+import com.gmail.maxsvynarchuk.persistence.exception.DaoException;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
@@ -52,12 +53,17 @@ public class PaymentMySqlDao implements PaymentDao {
 
     @Override
     public List<Payment> findAll(long skip, long limit) {
+        if (skip < 0 || limit < 0) {
+            throw new DaoException("Skip or limit params cannot be negative");
+        }
         return utilMySqlDao.findAll(SELECT_ALL + ORDER_BY_DATE + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override
     public Payment insert(Payment obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to insert nullable payment");
+        }
 
         Long id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
@@ -70,7 +76,9 @@ public class PaymentMySqlDao implements PaymentDao {
 
     @Override
     public void update(Payment obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to update nullable payment");
+        }
 
         utilMySqlDao.executeUpdate(
                 UPDATE + WHERE_ID,

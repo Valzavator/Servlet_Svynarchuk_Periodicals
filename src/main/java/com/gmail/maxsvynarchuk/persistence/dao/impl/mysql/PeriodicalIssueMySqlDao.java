@@ -5,6 +5,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
+import com.gmail.maxsvynarchuk.persistence.exception.DaoException;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
@@ -57,19 +58,26 @@ public class PeriodicalIssueMySqlDao implements PeriodicalIssueDao {
 
     @Override
     public List<PeriodicalIssue> findAll(long skip, long limit) {
+        if (skip < 0 || limit < 0) {
+            throw new DaoException("Skip or limit params cannot be negative");
+        }
         return utilMySqlDao.findAll(SELECT_ALL + ORDER_BY_PUBLICATION_DATE + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override
     public List<PeriodicalIssue> findByPeriodical(Periodical periodical) {
-        Objects.requireNonNull(periodical);
+        if (Objects.isNull(periodical)) {
+            throw new DaoException("Attempt to find issues by nullable periodical");
+        }
 
         return utilMySqlDao.findAll(SELECT_ALL +  WHERE_PERIODICAL_ID + ORDER_BY_PUBLICATION_DATE, periodical.getId());
     }
 
     @Override
     public Optional<PeriodicalIssue> findOneByNumberAndPeriodical(String issueNumber, Periodical periodical) {
-        Objects.requireNonNull(periodical);
+        if (Objects.isNull(periodical)) {
+            throw new DaoException("Attempt to find issue by nullable periodical");
+        }
 
         return utilMySqlDao.findOne(SELECT_ALL + WHERE_NUMBER_AND_PERIODICAL_ID,
                 issueNumber, periodical.getId());
@@ -77,7 +85,9 @@ public class PeriodicalIssueMySqlDao implements PeriodicalIssueDao {
 
     @Override
     public PeriodicalIssue insert(PeriodicalIssue obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to insert nullable issue");
+        }
 
         Long id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
@@ -93,7 +103,9 @@ public class PeriodicalIssueMySqlDao implements PeriodicalIssueDao {
 
     @Override
     public void update(PeriodicalIssue obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to update nullable issue");
+        }
 
         utilMySqlDao.executeUpdate(
                 UPDATE + WHERE_ID,

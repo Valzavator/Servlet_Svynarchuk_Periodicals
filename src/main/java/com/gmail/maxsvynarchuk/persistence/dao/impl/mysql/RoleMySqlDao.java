@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.RoleDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.Role;
+import com.gmail.maxsvynarchuk.persistence.exception.DaoException;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
@@ -49,12 +50,17 @@ public class RoleMySqlDao implements RoleDao {
     }
 
     public List<Role> findAll(long skip, long limit) {
+        if (skip < 0 || limit < 0) {
+            throw new DaoException("Skip or limit params cannot be negative");
+        }
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override
     public Role insert(Role obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to insert nullable role");
+        }
 
         Integer id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
@@ -67,7 +73,9 @@ public class RoleMySqlDao implements RoleDao {
 
     @Override
     public void update(Role obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to update nullable role");
+        }
 
         utilMySqlDao.executeUpdate(
                 UPDATE + WHERE_ID,

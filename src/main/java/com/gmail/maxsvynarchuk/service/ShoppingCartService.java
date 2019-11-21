@@ -5,11 +5,9 @@ import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.service.entity.ShoppingCart;
-import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -40,16 +38,11 @@ public class ShoppingCartService {
                                  Periodical periodical,
                                  SubscriptionPlan subscriptionPlan) {
         LOGGER.debug("Attempt to add item to cart");
-        Objects.requireNonNull(user);
-        Objects.requireNonNull(periodical);
-        Objects.requireNonNull(subscriptionPlan);
-
         Subscription subscription = Subscription.newBuilder()
                 .setUser(user)
                 .setPeriodical(periodical)
                 .setSubscriptionPlan(subscriptionPlan)
                 .build();
-
         return shoppingCart.addItem(subscription);
     }
 

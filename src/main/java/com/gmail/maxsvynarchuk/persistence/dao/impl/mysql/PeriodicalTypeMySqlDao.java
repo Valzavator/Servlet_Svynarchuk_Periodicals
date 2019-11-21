@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalTypeDao;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.EntityMapper;
 import com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.mapper.MapperFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalType;
+import com.gmail.maxsvynarchuk.persistence.exception.DaoException;
 import com.gmail.maxsvynarchuk.util.ResourceManager;
 
 import java.util.List;
@@ -49,12 +50,17 @@ public class PeriodicalTypeMySqlDao implements PeriodicalTypeDao {
     }
 
     public List<PeriodicalType> findAll(long skip, long limit) {
+        if (skip < 0 || limit < 0) {
+            throw new DaoException("Skip or limit params cannot be negative");
+        }
         return utilMySqlDao.findAll(SELECT_ALL + UtilMySqlDao.LIMIT, skip, limit);
     }
 
     @Override
     public PeriodicalType insert(PeriodicalType obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to insert nullable periodical type");
+        }
 
         Integer id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
@@ -68,7 +74,9 @@ public class PeriodicalTypeMySqlDao implements PeriodicalTypeDao {
 
     @Override
     public void update(PeriodicalType obj) {
-        Objects.requireNonNull(obj);
+        if (Objects.isNull(obj)) {
+            throw new DaoException("Attempt to update nullable periodical type");
+        }
 
         utilMySqlDao.executeUpdate(
                 UPDATE + WHERE_ID,
