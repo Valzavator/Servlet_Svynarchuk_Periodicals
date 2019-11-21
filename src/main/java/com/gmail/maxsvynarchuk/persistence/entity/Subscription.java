@@ -140,24 +140,12 @@ public class Subscription implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Subscription that = (Subscription) o;
-        return Objects.equals(getId(), that.getId()) &&
-                Objects.equals(getUser(), that.getUser()) &&
-                Objects.equals(getPayment(), that.getPayment()) &&
-                Objects.equals(getPeriodical(), that.getPeriodical()) &&
-                Objects.equals(getSubscriptionPlan(), that.getSubscriptionPlan()) &&
-                Objects.equals(getStartDate(), that.getStartDate()) &&
-                Objects.equals(getEndDate(), that.getEndDate());
+        return Objects.equals(getId(), that.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(),
-                getUser(),
-                getPayment(),
-                getPeriodical(),
-                getSubscriptionPlan(),
-                getStartDate(),
-                getEndDate());
+        return Objects.hash(getId());
     }
 
     @Override

@@ -13,6 +13,10 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
+        LoggerFactory.getLogger(Main.class).debug("!!!!!");
+
+        System.out.println(-16 >>> 1);
+        System.out.println(-16 >> 1);
 //        Date now = new Date();
 //
 //        LocalDate ld = new java.sql.Date(now.getTime())

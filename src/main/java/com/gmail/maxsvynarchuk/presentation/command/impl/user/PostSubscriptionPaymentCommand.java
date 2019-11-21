@@ -6,6 +6,7 @@ import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
 import com.gmail.maxsvynarchuk.presentation.util.Util;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
+import com.gmail.maxsvynarchuk.service.ServiceException;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
 import com.gmail.maxsvynarchuk.service.ShoppingCartService;
 import com.gmail.maxsvynarchuk.service.SubscriptionService;
@@ -27,17 +28,20 @@ public class PostSubscriptionPaymentCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Attempt to process new subscriptions");
-        User user = Util.getAuthorizedUser(request.getSession());
         ShoppingCart shoppingCart = Util.getShoppingCart(request.getSession());
+        shoppingCartService.updateShoppingCartItemsFromDatabase(shoppingCart);
+
+        User user = Util.getAuthorizedUser(request.getSession());
         List<Subscription> subscriptions = shoppingCart.getItems();
         BigDecimal totalPrice = shoppingCart.getTotalPrice();
 
-        if (shoppingCart.size() == 0 || shoppingCart.isHasSuspendedPeriodical()) {
-            LOGGER.debug("Some new subscriptions in shopping cart are invalid");
+        try {
+            subscriptionService.processSubscriptions(user, subscriptions, totalPrice);
+        } catch (ServiceException exception) {
+            LOGGER.error(exception.getMessage());
             return CommandResult.redirect(PagesPaths.CART_PATH);
         }
 
-        subscriptionService.processSubscriptions(user, totalPrice, subscriptions);
         shoppingCartService.removeAllItemFromCart(shoppingCart);
         LOGGER.debug("New subscriptions processed successfully");
         return CommandResult.redirect(PagesPaths.CART_PATH);

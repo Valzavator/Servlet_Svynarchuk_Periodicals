@@ -35,17 +35,11 @@ public class PostCreateIssueCommand implements Command {
         LOGGER.info("Start of new issue creation");
         PeriodicalIssue periodicalIssueDTO;
         Optional<Periodical> periodicalOpt;
-        Long periodicalId;
-        try {
-            periodicalId = Long.valueOf(
-                    request.getParameter(RequestParameters.PERIODICAL_ID));
-            periodicalOpt = periodicalService.findPeriodicalById(periodicalId);
-            periodicalIssueDTO = RequestMapperFactory.getCreateIssueMapper()
-                    .mapToObject(request);
-        } catch (NumberFormatException exc) {
-            LOGGER.info("Invalid parameters of request", exc);
-            throw exc;
-        }
+        Long periodicalId = Long.valueOf(
+                request.getParameter(RequestParameters.PERIODICAL_ID));
+        periodicalOpt = periodicalService.findPeriodicalById(periodicalId);
+        periodicalIssueDTO = RequestMapperFactory.getCreateIssueMapper()
+                .mapToObject(request);
 
         Map<String, Boolean> errors = ValidatorManager
                 .validateIssueParameters(periodicalIssueDTO);

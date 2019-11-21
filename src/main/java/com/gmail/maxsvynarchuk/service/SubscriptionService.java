@@ -5,6 +5,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.persistence.transaction.Transaction;
+import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +30,8 @@ public class SubscriptionService {
             DaoFactory.getInstance().getSubscriptionPlanDao();
     private final PaymentService paymentService =
             ServiceFactory.getPaymentService();
+    private final PeriodicalService periodicalService =
+            ServiceFactory.getPeriodicalService();
 
     private SubscriptionService() {
     }
@@ -70,26 +73,37 @@ public class SubscriptionService {
     }
 
     public void processSubscriptions(User user,
-                                     BigDecimal totalPrice,
-                                     List<Subscription> subscriptions) {
+                                     List<Subscription> subscriptions,
+                                     BigDecimal totalPrice) {
         LOGGER.debug("Attempt to process subscriptions");
         Objects.requireNonNull(user);
         Objects.requireNonNull(totalPrice);
         Objects.requireNonNull(subscriptions);
 
-        Transaction.doTransaction(() -> {
-            Payment payment = paymentService.createPayment(user, totalPrice);
-            for (Subscription subscription : subscriptions) {
-                subscription.setPayment(payment);
-                LocalDate startDate = payment.getPaymentDateTime().toLocalDate();
-                LocalDate endDate = startDate.plusMonths(
-                        subscription.getSubscriptionPlan().getMonthsAmount()
-                );
-                subscription.setStartDate(startDate);
-                subscription.setEndDate(endDate);
-                subscriptionDao.insert(subscription);
-            }
-        });
+        if (subscriptions.size() != 0) {
+            Transaction.doTransaction(() -> {
+                Payment payment = paymentService.createPayment(user, totalPrice);
+
+                for (Subscription subscription : subscriptions) {
+                    Periodical periodical =
+                            periodicalService.findPeriodicalById(subscription.getPeriodical().getId())
+                                    .orElseThrow(() -> new ServiceException(
+                                            "Subscription cannot refer to a non-existent periodical"));
+                    if (periodical.getStatus() == PeriodicalStatus.SUSPENDED) {
+                        throw new ServiceException("Can't subscribe to periodical with SUSPEND status");
+                    }
+
+                    subscription.setPayment(payment);
+                    LocalDate startDate = payment.getPaymentDateTime().toLocalDate();
+                    LocalDate endDate = startDate.plusMonths(
+                            subscription.getSubscriptionPlan().getMonthsAmount()
+                    );
+                    subscription.setStartDate(startDate);
+                    subscription.setEndDate(endDate);
+                    subscriptionDao.insert(subscription);
+                }
+            });
+        }
     }
 
     public boolean isAlreadySubscribed(User user, Periodical periodical) {

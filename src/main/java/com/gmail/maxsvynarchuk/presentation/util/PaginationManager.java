@@ -3,6 +3,7 @@ package com.gmail.maxsvynarchuk.presentation.util;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 
+import javax.print.attribute.standard.Fidelity;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -27,6 +28,9 @@ public class PaginationManager {
         try {
             page = Integer.parseInt(pageStr);
         } catch (NumberFormatException ex) {
+            page = FIRST_PAGE;
+        }
+        if (page <= 0) {
             page = FIRST_PAGE;
         }
         if (numberOfPages > 0 && page > numberOfPages) {

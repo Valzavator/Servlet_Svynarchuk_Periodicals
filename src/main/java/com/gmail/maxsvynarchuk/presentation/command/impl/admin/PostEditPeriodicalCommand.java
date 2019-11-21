@@ -26,15 +26,8 @@ public class PostEditPeriodicalCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Start editing of periodical");
-
-        Periodical periodicalDTO;
-        try {
-            periodicalDTO = RequestMapperFactory.getEditPeriodicalMapper()
-                    .mapToObject(request);
-        } catch (NumberFormatException e) {
-            LOGGER.debug("Invalid parameters of request", e);
-            throw e;
-        }
+        Periodical periodicalDTO = RequestMapperFactory.getEditPeriodicalMapper()
+                .mapToObject(request);
 
         Map<String, Boolean> errors = ValidatorManager
                 .validatePeriodicalParameters(periodicalDTO);

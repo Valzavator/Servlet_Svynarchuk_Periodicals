@@ -3,6 +3,7 @@ package com.gmail.maxsvynarchuk.presentation.util;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
+import com.gmail.maxsvynarchuk.service.ServiceFactory;
 import com.gmail.maxsvynarchuk.service.entity.ShoppingCart;
 
 import javax.servlet.http.HttpServletRequest;
@@ -114,7 +115,7 @@ public class Util {
         Objects.requireNonNull(uri);
         Objects.requireNonNull(parameterName);
 
-        return uri.replaceFirst(parameterName + "&?=((.+&)|[^&]+)", "");
+        return uri.replaceFirst("\\??&?" + parameterName + "=((.+&)|[^&]+)", "");
     }
 
     /**

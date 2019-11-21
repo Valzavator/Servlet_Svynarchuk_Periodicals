@@ -16,7 +16,7 @@ public enum RoleType {
     }
 
     public Role getValue() {
-        return role;
+        return new Role(role.getId(), role.getName());
     }
 
     public int getId() {

@@ -26,14 +26,8 @@ public class PostCreatePeriodicalCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Start of new periodical creation");
-        Periodical periodicalDTO;
-        try {
-            periodicalDTO = RequestMapperFactory.getCreatePeriodicalMapper()
-                    .mapToObject(request);
-        } catch (NumberFormatException e) {
-            LOGGER.debug("Invalid parameters of request", e);
-            throw e;
-        }
+        Periodical periodicalDTO = RequestMapperFactory.getCreatePeriodicalMapper()
+                .mapToObject(request);
 
         Map<String, Boolean> errors = ValidatorManager
                 .validatePeriodicalParameters(periodicalDTO);

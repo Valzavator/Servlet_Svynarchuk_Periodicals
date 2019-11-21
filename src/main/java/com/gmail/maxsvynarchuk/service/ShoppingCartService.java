@@ -5,10 +5,12 @@ import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.service.entity.ShoppingCart;
+import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Service responsible for processing some actions
@@ -20,6 +22,8 @@ import java.util.Objects;
 public class ShoppingCartService {
     private static final Logger LOGGER =
             LoggerFactory.getLogger(ShoppingCartService.class);
+    private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
+
     private ShoppingCartService() {
     }
 
@@ -49,9 +53,6 @@ public class ShoppingCartService {
         return shoppingCart.addItem(subscription);
     }
 
-    /**
-     * @param cartItemId id of item that needed to be removed from cart
-     */
     public void removeItemFromCart(ShoppingCart shoppingCart, Integer cartItemId) {
         LOGGER.debug("Attempt to remove item from cart");
         shoppingCart.removeItem(cartItemId);
@@ -60,5 +61,19 @@ public class ShoppingCartService {
     public void removeAllItemFromCart(ShoppingCart shoppingCart) {
         LOGGER.debug("Attempt to remove all item from cart");
         shoppingCart.removeAll();
+    }
+
+    public void updateShoppingCartItemsFromDatabase(ShoppingCart shoppingCart) {
+        for (Subscription subscription : shoppingCart.getItems()) {
+            Optional<Periodical> periodicalOpt =
+                    periodicalService.findPeriodicalById(subscription.getPeriodical().getId());
+            if (periodicalOpt.isPresent()) {
+                subscription.setPeriodical(periodicalOpt.get());
+                shoppingCart.updateItem(subscription);
+            } else {
+                LOGGER.error("A subscription cannot refer to a non-existent periodical");
+                throw new ServiceException("A subscription cannot refer to a non-existent periodical");
+            }
+        }
     }
 }
