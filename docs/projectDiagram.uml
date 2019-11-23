@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.gmail.maxsvynarchuk.presentation.util.mapper.EditPeriodicalRequestMapper</OriginalElement>
+  <nodes>
+    <node x="2434.25" y="924.0">com.gmail.maxsvynarchuk.presentation.util.mapper.SignUpRequestMapper</node>
+    <node x="3795.063436563437" y="172.0">javax.servlet.jsp.tagext.SimpleTagSupport</node>
+    <node x="0.0" y="222.0">com.gmail.maxsvynarchuk.util.ResourceManager</node>
+    <node x="7045.25" y="838.0">com.gmail.maxsvynarchuk.presentation.util.PaginationManager</node>
+    <node x="6197.25" y="838.0">com.gmail.maxsvynarchuk.service.SubscriptionService</node>
+    <node x="2251.0" y="126.0">com.gmail.maxsvynarchuk.persistence.entity.Role</node>
+    <node x="994.0" y="1091.0">com.gmail.maxsvynarchuk.presentation.command.CommandResult</node>
+    <node x="0.0" y="1010.0">com.gmail.maxsvynarchuk.presentation.util.validator.impl.IssueNumberValidator</node>
+    <node x="5833.063436563437" y="116.0">com.gmail.maxsvynarchuk.persistence.dao.SubscriptionDao</node>
+    <node x="1231.5000000000002" y="394.0">com.gmail.maxsvynarchuk.persistence.exception.PersistenceException</node>
+    <node x="4460.75" y="838.0">javax.servlet.Filter</node>
+    <node x="2536.0" y="1091.0">com.gmail.maxsvynarchuk.presentation.util.constants.Views</node>
+    <node x="1682.0" y="1091.0">com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.UtilMySqlDao</node>
+    <node x="2976.25" y="924.0">com.gmail.maxsvynarchuk.presentation.util.mapper.CreatePeriodicalRequestMapper</node>
+    <node x="4061.0634365634373" y="202.0">com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.RoleMySqlDao</node>
+    <node x="3413.0" y="222.0">javax.servlet.http.HttpServlet</node>
+    <node x="3408.063436563437" y="0.0">javax.servlet.Servlet</node>
+    <node x="0.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.user.GetSubscriptionsCommand</node>
+    <node x="6375.063436563438" y="116.0">com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao</node>
+    <node x="5364.25" y="838.0">com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory</node>
+    <node x="1004.0" y="1010.0">com.gmail.maxsvynarchuk.presentation.util.validator.impl.UserNameValidator</node>
+    <node x="1417.0000000000002" y="222.0">java.lang.Exception</node>
+    <node x="4044.25" y="924.0">com.gmail.maxsvynarchuk.presentation.filter.AuthorizationFilter</node>
+    <node x="2332.0" y="0.0">java.io.Serializable</node>
+    <node x="2153.25" y="838.0">java.util.EventListener</node>
+    <node x="3398.0" y="126.0">javax.servlet.GenericServlet</node>
+    <node x="3845.063436563437" y="0.0">javax.servlet.jsp.tagext.JspTag</node>
+    <node x="1350.0" y="838.0">javax.sql.CommonDataSource</node>
+    <node x="874.0000000000002" y="222.0">com.gmail.maxsvynarchuk.util.type.PeriodicalStatus</node>
+    <node x="748.0" y="1091.0">com.gmail.maxsvynarchuk.service.ServiceFactory</node>
+    <node x="6114.063436563437" y="116.0">com.gmail.maxsvynarchuk.persistence.dao.PeriodicalDao</node>
+    <node x="1417.0000000000002" y="126.0">java.lang.Throwable</node>
+    <node x="4766.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostCreateIssueCommand</node>
+    <node x="6181.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.user.PostCartRemoveAllItemCommand</node>
+    <node x="5203.063436563437" y="0.0">com.gmail.maxsvynarchuk.persistence.dao.GenericDao</node>
+    <node x="3923.0" y="561.0">com.gmail.maxsvynarchuk.presentation.command.Command</node>
+    <node x="1832.25" y="924.0">com.gmail.maxsvynarchuk.persistence.transaction.TransactionHelper</node>
+    <node x="2010.0000000000002" y="126.0">com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan</node>
+    <node x="4475.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetAllPaymentsCommand</node>
+    <node x="2669.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.user.PostCartRemoveItemCommand</node>
+    <node x="3026.25" y="838.0">com.gmail.maxsvynarchuk.presentation.util.mapper.RequestEntityMapper</node>
+    <node x="4538.063436563437" y="116.0">com.gmail.maxsvynarchuk.persistence.dao.PeriodicalTypeDao</node>
+    <node x="1456.0" y="1091.0">com.gmail.maxsvynarchuk.service.IssueService</node>
+    <node x="4839.063436563437" y="116.0">com.gmail.maxsvynarchuk.persistence.dao.PublisherDao</node>
+    <node x="6763.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.user.GetShoppingCartCommand</node>
+    <node x="0.0" y="1091.0">com.gmail.maxsvynarchuk.util.PasswordManager</node>
+    <node x="502.0" y="1091.0">com.gmail.maxsvynarchuk.presentation.command.CommandFactory</node>
+    <node x="1908.0" y="1091.0">com.gmail.maxsvynarchuk.service.UserService</node>
+    <node x="6493.25" y="838.0">com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters</node>
+    <node x="1382.0000000000002" y="308.0">java.lang.RuntimeException</node>
+    <node x="753.0" y="924.0">com.gmail.maxsvynarchuk.presentation.util.validator.impl.PeriodicalPriceValidator</node>
+    <node x="3698.25" y="924.0">com.gmail.maxsvynarchuk.presentation.util.mapper.CreateIssueRequestMapper</node>
+    <node x="1789.0000000000002" y="126.0">com.gmail.maxsvynarchuk.persistence.entity.PeriodicalType</node>
+    <node x="5602.063436563437" y="116.0">com.gmail.maxsvynarchuk.persistence.dao.PaymentDao</node>
+    <node x="3347.25" y="924.0">com.gmail.maxsvynarchuk.presentation.util.mapper.EditPeriodicalRequestMapper</node>
+    <node x="6089.063436563437" y="202.0">com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.PeriodicalMySqlDao</node>
+    <node x="4086.0634365634373" y="116.0">com.gmail.maxsvynarchuk.persistence.dao.RoleDao</node>
+    <node x="652.75" y="0.0">java.lang.Comparable</node>
+    <node x="4315.25" y="924.0">com.gmail.maxsvynarchuk.presentation.i18n.filter.EncodingFilter</node>
+    <node x="5595.25" y="838.0">com.gmail.maxsvynarchuk.presentation.util.mapper.RequestMapperFactory</node>
+    <node x="5288.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetAdminCatalogCommand</node>
+    <node x="3830.063436563437" y="86.0">javax.servlet.jsp.tagext.SimpleTag</node>
+    <node x="2705.25" y="924.0">com.gmail.maxsvynarchuk.presentation.util.mapper.SignInRequestMapper</node>
+    <node x="1214.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.common.GetPeriodicalCommand</node>
+    <node x="5808.063436563437" y="202.0">com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.SubscriptionMySqlDao</node>
+    <node x="1651.25" y="924.0">java.sql.Connection</node>
+    <node x="7587.25" y="838.0">com.gmail.maxsvynarchuk.persistence.connection.PooledConnection</node>
+    <node x="1804.5" y="838.0">java.lang.AutoCloseable</node>
+    <node x="2692.0" y="1091.0">com.gmail.maxsvynarchuk.presentation.util.Util</node>
+    <node x="1276.0000000000002" y="222.0">com.gmail.maxsvynarchuk.util.type.Gender</node>
+    <node x="6350.063436563438" y="202.0">com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.SubscriptionPlanMySqlDao</node>
+    <node x="562.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostEditPeriodicalCommand</node>
+    <node x="1786.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetCreatePeriodicalCommand</node>
+    <node x="5577.063436563437" y="202.0">com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.PaymentMySqlDao</node>
+    <node x="708.0" y="126.0">java.lang.Enum</node>
+    <node x="4737.25" y="924.0">com.gmail.maxsvynarchuk.presentation.filter.AuthenticationFilter</node>
+    <node x="2108.25" y="924.0">javax.servlet.ServletContextListener</node>
+    <node x="5291.063436563437" y="116.0">com.gmail.maxsvynarchuk.persistence.dao.PeriodicalIssueDao</node>
+    <node x="3393.0" y="308.0">com.gmail.maxsvynarchuk.presentation.FrontController</node>
+    <node x="5266.063436563437" y="202.0">com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.PeriodicalIssueMySqlDao</node>
+    <node x="5067.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.DefaultCommand</node>
+    <node x="3559.063436563437" y="0.0">javax.servlet.ServletConfig</node>
+    <node x="1593.25" y="838.0">java.sql.Wrapper</node>
+    <node x="1395.25" y="1010.0">com.gmail.maxsvynarchuk.persistence.connection.DataSourceProxy</node>
+    <node x="5830.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostCreatePeriodicalCommand</node>
+    <node x="2330.0" y="1091.0">com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths</node>
+    <node x="1495.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetUserProfileCommand</node>
+    <node x="783.0" y="1010.0">com.gmail.maxsvynarchuk.presentation.util.validator.impl.EmailValidator</node>
+    <node x="281.0" y="1010.0">com.gmail.maxsvynarchuk.presentation.util.validator.impl.TitleValidator</node>
+    <node x="5589.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.authorization.GetSignUpCommand</node>
+    <node x="1512.5000000000002" y="394.0">com.gmail.maxsvynarchuk.service.ServiceException</node>
+    <node x="828.0" y="838.0">com.gmail.maxsvynarchuk.presentation.util.validator.Validator</node>
+    <node x="2124.0" y="1091.0">com.gmail.maxsvynarchuk.presentation.util.constants.Attributes</node>
+    <node x="1626.25" y="1010.0">com.gmail.maxsvynarchuk.persistence.connection.ConnectionProxy</node>
+    <node x="1588.0000000000002" y="126.0">com.gmail.maxsvynarchuk.persistence.entity.Subscription</node>
+    <node x="663.0" y="222.0">com.gmail.maxsvynarchuk.presentation.util.RequestMethod</node>
+    <node x="5083.25" y="924.0">com.gmail.maxsvynarchuk.persistence.transaction.Transaction</node>
+    <node x="1115.0000000000002" y="222.0">com.gmail.maxsvynarchuk.util.type.RoleType</node>
+    <node x="5339.25" y="924.0">com.gmail.maxsvynarchuk.persistence.dao.factory.MySqlDaoFactory</node>
+    <node x="5065.063436563437" y="202.0">com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.UserMySqlDao</node>
+    <node x="5090.063436563437" y="116.0">com.gmail.maxsvynarchuk.persistence.dao.UserDao</node>
+    <node x="4513.063436563437" y="202.0">com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.PeriodicalTypeMySqlDao</node>
+    <node x="1000.5000000000002" y="480.0">com.gmail.maxsvynarchuk.persistence.exception.ConnectionException</node>
+    <node x="4536.25" y="924.0">com.gmail.maxsvynarchuk.presentation.i18n.filter.LocaleFilter</node>
+    <node x="2674.0" y="126.0">com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue</node>
+    <node x="2493.0" y="126.0">com.gmail.maxsvynarchuk.persistence.entity.Periodical</node>
+    <node x="311.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.common.GetProfileCommand</node>
+    <node x="7321.25" y="838.0">com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManager</node>
+    <node x="3411.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignInCommand</node>
+    <node x="1230.0" y="1091.0">com.gmail.maxsvynarchuk.service.entity.ShoppingCart</node>
+    <node x="3662.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.HomeCommand</node>
+    <node x="462.0" y="222.0">com.gmail.maxsvynarchuk.presentation.util.RedirectType</node>
+    <node x="5043.25" y="838.0">java.lang.FunctionalInterface</node>
+    <node x="231.0" y="222.0">com.gmail.maxsvynarchuk.presentation.i18n.SupportedLocale</node>
+    <node x="1271.5000000000002" y="480.0">com.gmail.maxsvynarchuk.persistence.exception.DaoException</node>
+    <node x="6542.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.authorization.SignOutCommand</node>
+    <node x="2143.25" y="1010.0">com.gmail.maxsvynarchuk.presentation.listener.ContextListener</node>
+    <node x="1074.0" y="924.0">com.gmail.maxsvynarchuk.presentation.util.validator.impl.PasswordValidator</node>
+    <node x="1420.25" y="924.0">javax.sql.DataSource</node>
+    <node x="3076.0" y="126.0">com.gmail.maxsvynarchuk.persistence.entity.Payment</node>
+    <node x="7064.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.common.GetCatalogCommand</node>
+    <node x="502.0" y="1010.0">com.gmail.maxsvynarchuk.presentation.util.validator.impl.DescriptionValidator</node>
+    <node x="532.0" y="924.0">com.gmail.maxsvynarchuk.presentation.util.validator.impl.RegexValidator</node>
+    <node x="4144.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetPaymentOverviewCommand</node>
+    <node x="2372.0" y="126.0">com.gmail.maxsvynarchuk.persistence.entity.User</node>
+    <node x="2905.0" y="126.0">com.gmail.maxsvynarchuk.persistence.entity.Frequency</node>
+    <node x="4814.063436563437" y="202.0">com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.PublisherMySqlDao</node>
+    <node x="256.0" y="1091.0">com.gmail.maxsvynarchuk.service.PaymentService</node>
+    <node x="4262.063436563438" y="202.0">com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.FrequencyMySqlDao</node>
+    <node x="7315.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.user.PostSubscriptionPaymentCommand</node>
+    <node x="4287.063436563437" y="116.0">com.gmail.maxsvynarchuk.persistence.dao.FrequencyDao</node>
+    <node x="7696.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignUpCommand</node>
+    <node x="2127.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.authorization.GetSignInCommand</node>
+    <node x="3227.0" y="126.0">com.gmail.maxsvynarchuk.persistence.entity.Publisher</node>
+    <node x="1472.5000000000002" y="480.0">com.gmail.maxsvynarchuk.persistence.exception.TransactionException</node>
+    <node x="2368.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.user.PostCartAddItemCommand</node>
+    <node x="5901.25" y="838.0">com.gmail.maxsvynarchuk.service.ShoppingCartService</node>
+    <node x="6769.25" y="838.0">com.gmail.maxsvynarchuk.service.PeriodicalService</node>
+    <node x="893.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetEditPeriodicalCommand</node>
+    <node x="3853.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetCreateIssueCommand</node>
+    <node x="3795.063436563437" y="258.0">com.gmail.maxsvynarchuk.presentation.tag.RequestedViewTag</node>
+    <node x="3000.0" y="757.0">com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostChangeStatusPeriodicalCommand</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.gmail.maxsvynarchuk.persistence.exception.DaoException" target="com.gmail.maxsvynarchuk.persistence.exception.PersistenceException">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.exception.PersistenceException" target="java.lang.RuntimeException">
+      <point x="0.0" y="-18.0" />
+      <point x="1362.0000000000002" y="369.0" />
+      <point x="1437.2500000000002" y="369.0" />
+      <point x="-55.25" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.user.PostCartAddItemCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="2508.5" y="697.0" />
+      <point x="3964.240740740741" y="697.0" />
+      <point x="-24.259259259259125" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostEditPeriodicalCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="717.5" y="637.0" />
+      <point x="3935.1296296296296" y="637.0" />
+      <point x="-53.37037037037044" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.mapper.CreatePeriodicalRequestMapper" target="com.gmail.maxsvynarchuk.presentation.util.mapper.RequestEntityMapper">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.PeriodicalIssueDao" target="com.gmail.maxsvynarchuk.persistence.dao.GenericDao">
+      <point x="0.0" y="-18.0" />
+      <point x="5411.563436563437" y="96.0" />
+      <point x="5291.613436563437" y="96.0" />
+      <point x="8.050000000000182" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.PeriodicalIssueMySqlDao" target="com.gmail.maxsvynarchuk.persistence.dao.PeriodicalIssueDao">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="javax.servlet.ServletContextListener" target="java.util.EventListener">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.factory.MySqlDaoFactory" target="com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetAllPaymentsCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="4610.5" y="727.0" />
+      <point x="3998.203703703704" y="727.0" />
+      <point x="9.703703703703923" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.common.GetPeriodicalCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="1344.5" y="657.0" />
+      <point x="3944.8333333333335" y="657.0" />
+      <point x="-43.666666666666515" y="18.0" />
+    </edge>
+    <edge source="javax.servlet.GenericServlet" target="javax.servlet.ServletConfig">
+      <point x="67.0" y="-18.0" />
+      <point x="3565.5" y="106.0" />
+      <point x="3654.563436563437" y="106.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.filter.AuthorizationFilter" target="javax.servlet.Filter">
+      <point x="0.0" y="-18.0" />
+      <point x="4169.75" y="894.0" />
+      <point x="4475.875" y="894.0" />
+      <point x="-45.375" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.RequestMethod" target="java.lang.Enum">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.validator.impl.PasswordValidator" target="com.gmail.maxsvynarchuk.presentation.util.validator.Validator">
+      <point x="0.0" y="-18.0" />
+      <point x="1189.5" y="899.0" />
+      <point x="953.8333333333334" y="899.0" />
+      <point x="50.33333333333337" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.transaction.Transaction" target="java.lang.FunctionalInterface">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="java.sql.Connection" target="java.lang.AutoCloseable">
+      <point x="40.25" y="-18.0" />
+      <point x="1772.0" y="899.0" />
+      <point x="1852.25" y="899.0" />
+      <point x="-47.75" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.RoleDao" target="com.gmail.maxsvynarchuk.persistence.dao.GenericDao">
+      <point x="0.0" y="-18.0" />
+      <point x="4151.563436563438" y="56.0" />
+      <point x="5211.113436563437" y="56.0" />
+      <point x="-72.44999999999982" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.RoleMySqlDao" target="com.gmail.maxsvynarchuk.persistence.dao.RoleDao">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.user.GetShoppingCartCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="6903.5" y="647.0" />
+      <point x="4037.0185185185187" y="647.0" />
+      <point x="48.518518518518704" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.util.type.RoleType" target="java.lang.Enum">
+      <point x="0.0" y="-18.0" />
+      <point x="1185.5000000000002" y="192.0" />
+      <point x="787.3571428571429" y="192.0" />
+      <point x="28.85714285714289" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetUserProfileCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="1630.5" y="667.0" />
+      <point x="3949.685185185185" y="667.0" />
+      <point x="-38.81481481481478" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.entity.Role" target="java.io.Serializable">
+      <point x="0.0" y="-18.0" />
+      <point x="2301.5" y="106.0" />
+      <point x="2408.576923076923" y="106.0" />
+      <point x="-13.923076923077133" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.connection.DataSourceProxy" target="javax.sql.DataSource">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="java.sql.Connection" target="java.sql.Wrapper">
+      <point x="-40.25" y="-18.0" />
+      <point x="32.75" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan" target="java.io.Serializable">
+      <point x="0.0" y="-18.0" />
+      <point x="2120.5" y="96.0" />
+      <point x="2394.653846153846" y="96.0" />
+      <point x="-27.84615384615381" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.SubscriptionPlanMySqlDao" target="com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.entity.User" target="java.io.Serializable">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.util.type.Gender" target="java.lang.Enum">
+      <point x="0.0" y="-18.0" />
+      <point x="1336.5000000000002" y="182.0" />
+      <point x="801.7857142857142" y="182.0" />
+      <point x="43.28571428571422" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.mapper.SignUpRequestMapper" target="com.gmail.maxsvynarchuk.presentation.util.mapper.RequestEntityMapper">
+      <point x="0.0" y="-18.0" />
+      <point x="2559.75" y="894.0" />
+      <point x="3051.35" y="894.0" />
+      <point x="-100.40000000000009" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.PaymentMySqlDao" target="com.gmail.maxsvynarchuk.persistence.dao.PaymentDao">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.authorization.GetSignInCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="2237.5" y="687.0" />
+      <point x="3959.3888888888887" y="687.0" />
+      <point x="-29.111111111111313" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.UserDao" target="com.gmail.maxsvynarchuk.persistence.dao.GenericDao">
+      <point x="0.0" y="-18.0" />
+      <point x="5155.563436563437" y="96.0" />
+      <point x="5275.513436563437" y="96.0" />
+      <point x="-8.050000000000182" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostChangeStatusPeriodicalCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="3195.5" y="717.0" />
+      <point x="3973.9444444444443" y="717.0" />
+      <point x="-14.555555555555657" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.user.PostCartRemoveItemCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="2824.5" y="707.0" />
+      <point x="3969.0925925925926" y="707.0" />
+      <point x="-19.40740740740739" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.i18n.SupportedLocale" target="java.lang.Enum">
+      <point x="0.0" y="-18.0" />
+      <point x="336.5" y="192.0" />
+      <point x="729.6428571428571" y="192.0" />
+      <point x="-28.85714285714289" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao" target="com.gmail.maxsvynarchuk.persistence.dao.GenericDao">
+      <point x="0.0" y="-18.0" />
+      <point x="6500.563436563438" y="56.0" />
+      <point x="5356.013436563437" y="56.0" />
+      <point x="72.44999999999982" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.i18n.filter.EncodingFilter" target="javax.servlet.Filter">
+      <point x="0.0" y="-18.0" />
+      <point x="4415.75" y="904.0" />
+      <point x="4506.125" y="904.0" />
+      <point x="-15.125" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.FrequencyDao" target="com.gmail.maxsvynarchuk.persistence.dao.GenericDao">
+      <point x="0.0" y="-18.0" />
+      <point x="4377.563436563437" y="66.0" />
+      <point x="5227.2134365634365" y="66.0" />
+      <point x="-56.350000000000364" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.entity.Subscription" target="java.io.Serializable">
+      <point x="0.0" y="-18.0" />
+      <point x="1678.5000000000002" y="76.0" />
+      <point x="2366.8076923076924" y="76.0" />
+      <point x="-55.69230769230762" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.entity.PeriodicalType" target="java.io.Serializable">
+      <point x="0.0" y="-18.0" />
+      <point x="1889.5000000000002" y="86.0" />
+      <point x="2380.730769230769" y="86.0" />
+      <point x="-41.769230769230944" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.DefaultCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="5167.5" y="707.0" />
+      <point x="4007.9074074074074" y="707.0" />
+      <point x="19.40740740740739" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignUpCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="7811.5" y="617.0" />
+      <point x="4051.574074074074" y="617.0" />
+      <point x="63.074074074073906" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.i18n.filter.LocaleFilter" target="javax.servlet.Filter">
+      <point x="0.0" y="-18.0" />
+      <point x="4626.75" y="904.0" />
+      <point x="4536.375" y="904.0" />
+      <point x="15.125" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.transaction.TransactionHelper" target="java.lang.AutoCloseable">
+      <point x="0.0" y="-18.0" />
+      <point x="47.75" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.util.type.PeriodicalStatus" target="java.lang.Enum">
+      <point x="0.0" y="-18.0" />
+      <point x="984.5000000000002" y="202.0" />
+      <point x="772.9285714285716" y="202.0" />
+      <point x="14.428571428571445" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.filter.AuthenticationFilter" target="javax.servlet.Filter">
+      <point x="0.0" y="-18.0" />
+      <point x="4867.75" y="894.0" />
+      <point x="4566.625" y="894.0" />
+      <point x="45.375" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostCreatePeriodicalCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="5995.5" y="677.0" />
+      <point x="4022.462962962963" y="677.0" />
+      <point x="33.96296296296305" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.FrequencyMySqlDao" target="com.gmail.maxsvynarchuk.persistence.dao.FrequencyDao">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.PeriodicalTypeMySqlDao" target="com.gmail.maxsvynarchuk.persistence.dao.PeriodicalTypeDao">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.entity.Periodical" target="java.io.Serializable">
+      <point x="0.0" y="-18.0" />
+      <point x="2573.5" y="106.0" />
+      <point x="2436.423076923077" y="106.0" />
+      <point x="13.923076923077133" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.common.GetProfileCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="426.5" y="627.0" />
+      <point x="3930.277777777778" y="627.0" />
+      <point x="-58.22222222222217" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetCreatePeriodicalCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="1946.5" y="677.0" />
+      <point x="3954.537037037037" y="677.0" />
+      <point x="-33.96296296296305" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.validator.impl.UserNameValidator" target="com.gmail.maxsvynarchuk.presentation.util.validator.impl.RegexValidator">
+      <point x="0.0" y="-18.0" />
+      <point x="1119.5" y="980.0" />
+      <point x="712.9" y="980.0" />
+      <point x="80.39999999999998" y="18.0" />
+    </edge>
+    <edge source="java.lang.Throwable" target="java.io.Serializable">
+      <point x="0.0" y="-18.0" />
+      <point x="1492.5000000000002" y="66.0" />
+      <point x="2352.8846153846152" y="66.0" />
+      <point x="-69.61538461538476" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.HomeCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="3747.5" y="737.0" />
+      <point x="3983.6481481481483" y="737.0" />
+      <point x="-4.851851851851734" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.PublisherDao" target="com.gmail.maxsvynarchuk.persistence.dao.GenericDao">
+      <point x="0.0" y="-18.0" />
+      <point x="4929.563436563437" y="86.0" />
+      <point x="5259.413436563437" y="86.0" />
+      <point x="-24.149999999999636" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.PublisherMySqlDao" target="com.gmail.maxsvynarchuk.persistence.dao.PublisherDao">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetPaymentOverviewCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="4299.5" y="737.0" />
+      <point x="3993.3518518518517" y="737.0" />
+      <point x="4.851851851851734" y="18.0" />
+    </edge>
+    <edge source="java.lang.RuntimeException" target="java.lang.Exception">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.validator.impl.IssueNumberValidator" target="com.gmail.maxsvynarchuk.presentation.util.validator.impl.RegexValidator">
+      <point x="0.0" y="-18.0" />
+      <point x="130.5" y="980.0" />
+      <point x="552.1" y="980.0" />
+      <point x="-80.39999999999998" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.listener.ContextListener" target="javax.servlet.ServletContextListener">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.user.PostCartRemoveAllItemCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="6351.5" y="667.0" />
+      <point x="4027.314814814815" y="667.0" />
+      <point x="38.81481481481478" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.tag.RequestedViewTag" target="javax.servlet.jsp.tagext.SimpleTagSupport">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.PeriodicalDao" target="com.gmail.maxsvynarchuk.persistence.dao.GenericDao">
+      <point x="0.0" y="-18.0" />
+      <point x="6209.563436563437" y="66.0" />
+      <point x="5339.913436563437" y="66.0" />
+      <point x="56.350000000000364" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.PaymentDao" target="com.gmail.maxsvynarchuk.persistence.dao.GenericDao">
+      <point x="0.0" y="-18.0" />
+      <point x="5682.563436563437" y="86.0" />
+      <point x="5307.7134365634365" y="86.0" />
+      <point x="24.149999999999636" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.validator.impl.TitleValidator" target="com.gmail.maxsvynarchuk.presentation.util.validator.impl.RegexValidator">
+      <point x="0.0" y="-18.0" />
+      <point x="381.5" y="990.0" />
+      <point x="592.3" y="990.0" />
+      <point x="-40.200000000000045" y="18.0" />
+    </edge>
+    <edge source="javax.sql.DataSource" target="java.sql.Wrapper">
+      <point x="40.25" y="-18.0" />
+      <point x="1541.0" y="899.0" />
+      <point x="1626.0" y="899.0" />
+      <point x="-32.75" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.service.ServiceException" target="java.lang.RuntimeException">
+      <point x="0.0" y="-18.0" />
+      <point x="1623.0000000000002" y="369.0" />
+      <point x="1547.7500000000002" y="369.0" />
+      <point x="55.25" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.FrontController" target="javax.servlet.http.HttpServlet">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.SubscriptionMySqlDao" target="com.gmail.maxsvynarchuk.persistence.dao.SubscriptionDao">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.lang.Comparable">
+      <point x="-25.25" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue" target="java.io.Serializable">
+      <point x="0.0" y="-18.0" />
+      <point x="2779.5" y="96.0" />
+      <point x="2450.3461538461543" y="96.0" />
+      <point x="27.84615384615381" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.mapper.EditPeriodicalRequestMapper" target="com.gmail.maxsvynarchuk.presentation.util.mapper.RequestEntityMapper">
+      <point x="0.0" y="-18.0" />
+      <point x="3512.75" y="904.0" />
+      <point x="3201.95" y="904.0" />
+      <point x="50.19999999999982" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.exception.TransactionException" target="com.gmail.maxsvynarchuk.persistence.exception.PersistenceException">
+      <point x="0.0" y="-18.0" />
+      <point x="1603.0000000000002" y="455.0" />
+      <point x="1449.0000000000002" y="455.0" />
+      <point x="87.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.SubscriptionDao" target="com.gmail.maxsvynarchuk.persistence.dao.GenericDao">
+      <point x="0.0" y="-18.0" />
+      <point x="5938.563436563437" y="76.0" />
+      <point x="5323.813436563437" y="76.0" />
+      <point x="40.25" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.mapper.SignInRequestMapper" target="com.gmail.maxsvynarchuk.presentation.util.mapper.RequestEntityMapper">
+      <point x="0.0" y="-18.0" />
+      <point x="2830.75" y="904.0" />
+      <point x="3101.55" y="904.0" />
+      <point x="-50.19999999999982" y="18.0" />
+    </edge>
+    <edge source="javax.servlet.jsp.tagext.SimpleTag" target="javax.servlet.jsp.tagext.JspTag">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.validator.impl.RegexValidator" target="com.gmail.maxsvynarchuk.presentation.util.validator.Validator">
+      <point x="0.0" y="-18.0" />
+      <point x="632.5" y="899.0" />
+      <point x="853.1666666666666" y="899.0" />
+      <point x="-50.33333333333337" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetEditPeriodicalCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="1043.5" y="647.0" />
+      <point x="3939.9814814814813" y="647.0" />
+      <point x="-48.518518518518704" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.connection.ConnectionProxy" target="java.sql.Connection">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.common.GetCatalogCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="7179.5" y="637.0" />
+      <point x="4041.8703703703704" y="637.0" />
+      <point x="53.37037037037044" y="18.0" />
+    </edge>
+    <edge source="javax.servlet.jsp.tagext.SimpleTagSupport" target="javax.servlet.jsp.tagext.SimpleTag">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.PeriodicalTypeDao" target="com.gmail.maxsvynarchuk.persistence.dao.GenericDao">
+      <point x="0.0" y="-18.0" />
+      <point x="4653.563436563437" y="76.0" />
+      <point x="5243.313436563437" y="76.0" />
+      <point x="-40.25" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.PeriodicalMySqlDao" target="com.gmail.maxsvynarchuk.persistence.dao.PeriodicalDao">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostCreateIssueCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="4906.5" y="717.0" />
+      <point x="4003.0555555555557" y="717.0" />
+      <point x="14.555555555555657" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.validator.impl.EmailValidator" target="com.gmail.maxsvynarchuk.presentation.util.validator.impl.RegexValidator">
+      <point x="0.0" y="-18.0" />
+      <point x="883.5" y="990.0" />
+      <point x="672.7" y="990.0" />
+      <point x="40.200000000000045" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignInCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="3526.5" y="727.0" />
+      <point x="3978.7962962962965" y="727.0" />
+      <point x="-9.703703703703468" y="18.0" />
+    </edge>
+    <edge source="java.lang.Exception" target="java.lang.Throwable">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.dao.impl.mysql.UserMySqlDao" target="com.gmail.maxsvynarchuk.persistence.dao.UserDao">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.io.Serializable">
+      <point x="25.25" y="-18.0" />
+      <point x="783.75" y="56.0" />
+      <point x="2338.9615384615386" y="56.0" />
+      <point x="-83.53846153846143" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.entity.Frequency" target="java.io.Serializable">
+      <point x="0.0" y="-18.0" />
+      <point x="2980.5" y="86.0" />
+      <point x="2464.2692307692314" y="86.0" />
+      <point x="41.769230769230944" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.authorization.GetSignUpCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="5699.5" y="687.0" />
+      <point x="4017.6111111111113" y="687.0" />
+      <point x="29.111111111111313" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetAdminCatalogCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="5428.5" y="697.0" />
+      <point x="4012.759259259259" y="697.0" />
+      <point x="24.259259259259125" y="18.0" />
+    </edge>
+    <edge source="javax.servlet.GenericServlet" target="javax.servlet.Servlet">
+      <point x="0.0" y="-18.0" />
+      <point x="3498.5" y="106.0" />
+      <point x="3473.563436563437" y="106.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.validator.impl.PeriodicalPriceValidator" target="com.gmail.maxsvynarchuk.presentation.util.validator.Validator">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.entity.Payment" target="java.io.Serializable">
+      <point x="0.0" y="-18.0" />
+      <point x="3141.5" y="76.0" />
+      <point x="2478.1923076923076" y="76.0" />
+      <point x="55.69230769230762" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.validator.impl.DescriptionValidator" target="com.gmail.maxsvynarchuk.presentation.util.validator.impl.RegexValidator">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.mapper.CreateIssueRequestMapper" target="com.gmail.maxsvynarchuk.presentation.util.mapper.RequestEntityMapper">
+      <point x="0.0" y="-18.0" />
+      <point x="3848.75" y="894.0" />
+      <point x="3252.15" y="894.0" />
+      <point x="100.40000000000009" y="18.0" />
+    </edge>
+    <edge source="javax.sql.DataSource" target="javax.sql.CommonDataSource">
+      <point x="-40.25" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.entity.Publisher" target="java.io.Serializable">
+      <point x="0.0" y="-18.0" />
+      <point x="3302.5" y="66.0" />
+      <point x="2492.1153846153848" y="66.0" />
+      <point x="69.61538461538476" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.user.GetSubscriptionsCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="145.5" y="617.0" />
+      <point x="3925.425925925926" y="617.0" />
+      <point x="-63.074074074073906" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.user.PostSubscriptionPaymentCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="7495.5" y="627.0" />
+      <point x="4046.7222222222226" y="627.0" />
+      <point x="58.222222222222626" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.util.ResourceManager" target="java.lang.Enum">
+      <point x="0.0" y="-18.0" />
+      <point x="105.5" y="182.0" />
+      <point x="715.2142857142858" y="182.0" />
+      <point x="-43.285714285714334" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.util.RedirectType" target="java.lang.Enum">
+      <point x="0.0" y="-18.0" />
+      <point x="552.5" y="202.0" />
+      <point x="744.0714285714284" y="202.0" />
+      <point x="-14.428571428571445" y="18.0" />
+    </edge>
+    <edge source="javax.servlet.GenericServlet" target="java.io.Serializable">
+      <point x="-67.0" y="-18.0" />
+      <point x="3431.5" y="56.0" />
+      <point x="2506.038461538462" y="56.0" />
+      <point x="83.53846153846143" y="18.0" />
+    </edge>
+    <edge source="javax.servlet.http.HttpServlet" target="javax.servlet.GenericServlet">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.authorization.SignOutCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="6642.5" y="657.0" />
+      <point x="4032.1666666666665" y="657.0" />
+      <point x="43.666666666666515" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.persistence.exception.ConnectionException" target="com.gmail.maxsvynarchuk.persistence.exception.PersistenceException">
+      <point x="0.0" y="-18.0" />
+      <point x="1126.0000000000002" y="455.0" />
+      <point x="1275.0000000000002" y="455.0" />
+      <point x="-87.0" y="18.0" />
+    </edge>
+    <edge source="com.gmail.maxsvynarchuk.presentation.command.impl.admin.GetCreateIssueCommand" target="com.gmail.maxsvynarchuk.presentation.command.Command">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="18.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.19051214294702404" x="3963.5" y="563.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
