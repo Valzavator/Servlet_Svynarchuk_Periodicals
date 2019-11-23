@@ -1,6 +1,6 @@
 # Periodicals
 
-### Project description:
+### ОПИСАНИЕ ПРОЕКТА:
 
 **19. Система Периодические издания.**
 
@@ -38,7 +38,7 @@
 
 
 ## Инструкции по установке
-1. [Скачать](https://github.com/KovalDS/Project4/archive/master.zip) или клонировать проект с репозитория используя команду:
+1. [Скачать](https://github.com/Valzavator/Servlet_Svynarchuk_Periodicals/archive/master.zip) или клонировать проект с репозитория используя команду:
 > `git clone https://github.com/Valzavator/Servlet_Svynarchuk_Periodicals.git`
 2. Установить на локальную машину:
 - [Java SE 8 или новее](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
