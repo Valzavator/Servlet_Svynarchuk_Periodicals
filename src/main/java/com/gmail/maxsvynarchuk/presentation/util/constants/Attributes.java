@@ -12,7 +12,7 @@ public final class Attributes {
     public static final String CATALOG = ResourceManager.ATTRIBUTE.getProperty("catalog");
     public static final String PERIODICAL = ResourceManager.ATTRIBUTE.getProperty("periodical");
     public static final String ISSUES = ResourceManager.ATTRIBUTE.getProperty("issues");
-    public static final String SUBSCRIPTIONS = ResourceManager.ATTRIBUTE.getProperty("subscriptions.active");
+    public static final String SUBSCRIPTIONS = ResourceManager.ATTRIBUTE.getProperty("subscriptions");
     public static final String ACTIVE_SUBSCRIPTIONS = ResourceManager.ATTRIBUTE.getProperty("subscriptions.active");
     public static final String EXPIRED_SUBSCRIPTIONS = ResourceManager.ATTRIBUTE.getProperty("subscriptions.expired");
     public static final String PAYMENTS = ResourceManager.ATTRIBUTE.getProperty("payments");

@@ -85,9 +85,9 @@
 
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend5">
-                                    <i class="fa fa-calendar fa-lg" aria-hidden="true"></i>
-                                </span>
+                                    <span class="input-group-text" id="inputGroupPrepend5">
+                                        <i class="fa fa-calendar fa-lg" aria-hidden="true"></i>
+                                    </span>
                                 </div>
                                 <input type="date" id="publicationDate"
                                        name="publicationDate"

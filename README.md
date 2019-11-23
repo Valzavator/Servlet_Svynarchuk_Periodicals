@@ -55,6 +55,45 @@
 4. В корневой папке проекта выполнить `mvn tomcat7:deploy` (или `mvn tomcat7:redeploy`, если Tomcat уже имеет war-файл в исходной директории);
 7. В браузере перейти по ссылке [`http://localhost:8080/app`](http://localhost:8080/app) - страница приветствия приложения.
 
-> Как вариант, можно создать war-файл проекта с помощью команды `mvn package`, перетащить его в папку Tomcat'a - `$CATALINA_HOME/bin/`. Переименовать в `ROOT.war` с заменой существуещего. И перезапустить сервер.
+> Как вариант, можно создать war-файл проекта с помощью команды `mvn clean install`, перетащить его в папку Tomcat'a - `$CATALINA_HOME/bin/`. Переименовать в `ROOT.war` с заменой существуещего. И перезапустить сервер.
 
-> Для пропуска тестов во время сборки приложения можно использовать флаг -DskipTests
+> Для пропуска тестов во время сборки приложения можно использовать флаг `-DskipTests`
+
+> Данные для входа в систему с ролью админа: 
+> * email: **admin@gmail.com**
+> * password: **admin**
+## Результаты
+
+### ER-модель базы данных
+
+![modules.png](/docs/images/er-model-color.png)
+
+### Интерфейс пользователя
+
+![mainPage.PNG](/docs/images/mainPage.PNG)
+
+![signUp.PNG](/docs/images/signUp.PNG)
+
+![signIn.PNG](/docs/images/signIn.PNG)
+
+![catalog.PNG](/docs/images/catalog.PNG)
+
+![periodical.PNG](/docs/images/periodical.PNG)
+
+![cart.PNG](/docs/images/cart.PNG)
+
+![subscriptions.PNG](/docs/images/subscriptions.PNG)
+
+![failed.PNG](/docs/images/failed.PNG)
+
+![profile.PNG](/docs/images/profile.PNG)
+
+![adminCatalog.PNG](/docs/images/adminCatalog.PNG)
+
+![addPeriodical.PNG](/docs/images/addPeriodical.PNG)
+
+![addIssue.PNG](/docs/images/addIssue.PNG)
+
+![payments.PNG](/docs/images/payments.PNG)
+
+![paymentOverview.PNG](/docs/images/paymentOverview.PNG)
