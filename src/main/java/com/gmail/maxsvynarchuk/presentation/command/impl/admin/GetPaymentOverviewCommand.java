@@ -26,8 +26,14 @@ public class GetPaymentOverviewCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Attempt to get a payment overview page");
-        Long paymentId = Long.valueOf(
-                request.getParameter(RequestParameters.PAYMENT_ID));
+        Long paymentId;
+        try {
+            paymentId = Long.valueOf(
+                    request.getParameter(RequestParameters.PAYMENT_ID));
+        } catch (NumberFormatException e) {
+            LOGGER.debug("Invalid payment id", e);
+            return CommandResult.forward(Views.ERROR_404_VIEW);
+        }
         Optional<Payment> paymentOpt =
                 paymentService.findPaymentById(paymentId);
         if (paymentOpt.isPresent()) {

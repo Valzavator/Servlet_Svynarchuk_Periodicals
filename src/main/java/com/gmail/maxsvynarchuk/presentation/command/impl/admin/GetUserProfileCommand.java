@@ -23,8 +23,14 @@ public class GetUserProfileCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Attempt to get a user profile page");
-        Long userId = Long.valueOf(
-                request.getParameter(RequestParameters.USER_ID));
+        Long userId;
+        try {
+            userId = Long.valueOf(
+                    request.getParameter(RequestParameters.USER_ID));
+        } catch (NumberFormatException e) {
+            LOGGER.debug("Invalid payment id", e);
+            return CommandResult.forward(Views.ERROR_404_VIEW);
+        }
         Optional<User> userOpt = userService.findUserById(userId);
 
         if (userOpt.isPresent()) {

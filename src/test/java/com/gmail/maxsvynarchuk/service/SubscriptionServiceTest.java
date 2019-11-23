@@ -13,8 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -55,7 +54,7 @@ class SubscriptionServiceTest {
     }
 
     @Test
-    void findAllSubscriptionsByPaymentTest() {
+    void findAllSubscriptionsByPaymentWithExistingSubscriptionsTest() {
         Payment payment = Payment.newBuilder()
                 .setId(1L)
                 .build();
@@ -71,6 +70,19 @@ class SubscriptionServiceTest {
                 subscriptionService.findAllSubscriptionsByPayment(payment);
 
         assertEquals(3, actual.size());
+        verify(subscriptionDao, times(1)).findByPayment(payment);
+    }
+
+    @Test
+    void findAllSubscriptionsByPaymentWithNoyExistingSubscriptionsTest() {
+        Payment payment = Payment.newBuilder()
+                .setId(1L)
+                .build();
+        when(subscriptionDao.findByPayment(payment))
+                .thenReturn(Collections.emptyList());
+
+        assertThrows(ServiceException.class, () ->
+                subscriptionService.findAllSubscriptionsByPayment(payment));
         verify(subscriptionDao, times(1)).findByPayment(payment);
     }
 

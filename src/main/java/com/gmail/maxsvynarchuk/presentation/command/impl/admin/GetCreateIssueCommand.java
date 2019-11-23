@@ -26,8 +26,14 @@ public class GetCreateIssueCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Attempt to get page for create issue");
-        Long periodicalId = Long.valueOf(
-                request.getParameter(RequestParameters.PERIODICAL_ID));
+        Long periodicalId;
+        try {
+            periodicalId = Long.valueOf(
+                    request.getParameter(RequestParameters.PERIODICAL_ID));
+        } catch (NumberFormatException e) {
+            LOGGER.debug("Invalid periodical id");
+            return CommandResult.forward(Views.ERROR_404_VIEW);
+        }
         Optional<Periodical> periodicalOpt =
                 periodicalService.findPeriodicalById(periodicalId);
         if (periodicalOpt.isPresent()) {
