@@ -1,5 +1,6 @@
 package com.gmail.maxsvynarchuk.service.entity;
 
+import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.provider.EntityProvider;
 import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
@@ -15,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ShoppingCartTest {
-
     private ShoppingCart shoppingCart;
 
     @BeforeEach
@@ -24,8 +24,13 @@ public class ShoppingCartTest {
     }
 
     @Test
-    void addItemWithActivePeriodicalTest() {
-        Subscription subscription = EntityProvider.getSubscriptionWithActivePeriodical();
+    void addItemTest() {
+        Periodical periodical = Periodical.newBuilder()
+                .setId(1L)
+                .build();
+        Subscription subscription = Subscription.newBuilder()
+                .setPeriodical(periodical)
+                .build();
 
         assertEquals(0, shoppingCart.size());
         assertTrue(shoppingCart.addItem(subscription));
@@ -36,17 +41,29 @@ public class ShoppingCartTest {
 
     @Test
     void removeItemTest() {
-        Subscription subscription = EntityProvider.getSubscriptionWithActivePeriodical();
+        long id = 1L;
+        Periodical periodical = Periodical.newBuilder()
+                .setId(id)
+                .build();
+        Subscription subscription = Subscription.newBuilder()
+                .setPeriodical(periodical)
+                .build();
 
         assertTrue(shoppingCart.addItem(subscription));
         assertEquals(1, shoppingCart.size());
-        shoppingCart.removeItem(5);
+        shoppingCart.removeItem(id);
         assertEquals(0, shoppingCart.size());
     }
 
     @Test
     void removeItemInvalidIdTest() {
-        Subscription subscription = EntityProvider.getSubscriptionWithActivePeriodical();
+        long id = 1L;
+        Periodical periodical = Periodical.newBuilder()
+                .setId(id)
+                .build();
+        Subscription subscription = Subscription.newBuilder()
+                .setPeriodical(periodical)
+                .build();
 
         assertTrue(shoppingCart.addItem(subscription));
         assertEquals(1, shoppingCart.size());
@@ -58,8 +75,40 @@ public class ShoppingCartTest {
 
     @Test
     void getTotalPriceTest() {
-        List<Subscription> subscriptions =
-                EntityProvider.getSubscriptionsWithActivePeriodicals();
+        Periodical periodical1 = Periodical.newBuilder()
+                .setId(1L)
+                .setPrice(new BigDecimal("1"))
+                .build();
+        Periodical periodical2 = Periodical.newBuilder()
+                .setId(2L)
+                .setPrice(new BigDecimal("2"))
+                .build();
+        Periodical periodical3 = Periodical.newBuilder()
+                .setId(3L)
+                .setPrice(new BigDecimal("3"))
+                .build();
+        Periodical periodical4 = Periodical.newBuilder()
+                .setId(4L)
+                .setPrice(new BigDecimal("4"))
+                .build();
+        List<Subscription> subscriptions = new ArrayList<Subscription>() {{
+            add(Subscription.newBuilder()
+                    .setPeriodical(periodical1)
+                    .setSubscriptionPlan(EntityProvider.getOneMonthSubscriptionPlan())
+                    .build());
+            add(Subscription.newBuilder()
+                    .setPeriodical(periodical2)
+                    .setSubscriptionPlan(EntityProvider.getThreeMonthSubscriptionPlan())
+                    .build());
+            add(Subscription.newBuilder()
+                    .setPeriodical(periodical3)
+                    .setSubscriptionPlan(EntityProvider.getSixMonthSubscriptionPlan())
+                    .build());
+            add(Subscription.newBuilder()
+                    .setPeriodical(periodical4)
+                    .setSubscriptionPlan(EntityProvider.getTwelveMonthSubscriptionPlan())
+                    .build());
+        }};
 
         BigDecimal expectedTotalPrice = new BigDecimal("1");
         shoppingCart.addItem(subscriptions.get(0));
@@ -84,75 +133,113 @@ public class ShoppingCartTest {
 
     @Test
     void isHasSuspendedPeriodicalTest() {
-        List<Subscription> activeSubscriptions =
-                EntityProvider.getSubscriptionsWithActivePeriodicals();
-        Subscription suspendedSubscription =
-                EntityProvider.getSubscriptionWithSuspendedPeriodical();
+        Periodical activePeriodical = Periodical.newBuilder()
+                .setId(1L)
+                .setStatus(PeriodicalStatus.ACTIVE)
+                .build();
+        Periodical suspendedPeriodical = Periodical.newBuilder()
+                .setId(2L)
+                .setStatus(PeriodicalStatus.SUSPENDED)
+                .build();
+        Subscription subscriptionWithActive = Subscription.newBuilder()
+                .setPeriodical(activePeriodical)
+                .setSubscriptionPlan(EntityProvider.getOneMonthSubscriptionPlan())
+                .build();
+        Subscription subscriptionWithSuspended = Subscription.newBuilder()
+                .setPeriodical(suspendedPeriodical)
+                .setSubscriptionPlan(EntityProvider.getOneMonthSubscriptionPlan())
+                .build();
 
-        shoppingCart.addItem(activeSubscriptions.get(0));
-        shoppingCart.addItem(activeSubscriptions.get(1));
-        shoppingCart.addItem(activeSubscriptions.get(2));
-        shoppingCart.addItem(activeSubscriptions.get(3));
+        shoppingCart.addItem(subscriptionWithActive);
         assertFalse(shoppingCart.isHasSuspendedPeriodical());
 
-        shoppingCart.addItem(suspendedSubscription);
+        shoppingCart.addItem(subscriptionWithSuspended);
         assertTrue(shoppingCart.isHasSuspendedPeriodical());
     }
 
     @Test
     void getItemsTest() {
-        List<Subscription> activeSubscriptions =
-                EntityProvider.getSubscriptionsWithActivePeriodicals();
+        Periodical periodical1 = Periodical.newBuilder()
+                .setId(1L)
+                .build();
+        Periodical periodical2 = Periodical.newBuilder()
+                .setId(2L)
+                .build();
+        List<Subscription> expected = new ArrayList<Subscription>() {{
+            add(Subscription.newBuilder()
+                    .setPeriodical(periodical1)
+                    .build());
+            add(Subscription.newBuilder()
+                    .setPeriodical(periodical2)
+                    .build());
+        }};
 
-        shoppingCart.addItem(activeSubscriptions.get(0));
-        shoppingCart.addItem(activeSubscriptions.get(1));
-        shoppingCart.addItem(activeSubscriptions.get(2));
-        shoppingCart.addItem(activeSubscriptions.get(3));
+        shoppingCart.addItem(expected.get(0));
+        shoppingCart.addItem(expected.get(1));
 
         List<Subscription> actual = shoppingCart.getItems();
 
-        assertNotSame(activeSubscriptions, actual);
-        assertEquals(activeSubscriptions, actual);
+        assertNotSame(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     void updateItemWithSameItemTest() {
-        Subscription subscription =
-                EntityProvider.getSubscriptionWithActivePeriodical();
-        Subscription updatedSubscription =
-                EntityProvider.getSubscriptionWithActivePeriodical();
-        updatedSubscription.getPeriodical().setStatus(PeriodicalStatus.SUSPENDED);
+        Periodical periodical = Periodical.newBuilder()
+                .setId(1L)
+                .setStatus(PeriodicalStatus.ACTIVE)
+                .build();
+        Periodical samePeriodicalWithUpdatedStatus = Periodical.newBuilder()
+                .setId(1L)
+                .setStatus(PeriodicalStatus.SUSPENDED)
+                .build();
+        Subscription subscriptionWithActive = Subscription.newBuilder()
+                .setPeriodical(periodical)
+                .build();
+        Subscription sameSubscriptionWithSuspended = Subscription.newBuilder()
+                .setPeriodical(samePeriodicalWithUpdatedStatus)
+                .build();
 
-        shoppingCart.addItem(subscription);
-        shoppingCart.updateItem(updatedSubscription);
+        shoppingCart.addItem(subscriptionWithActive);
+        shoppingCart.updateItem(sameSubscriptionWithSuspended);
 
         List<Subscription> expected = new ArrayList<Subscription>() {{
-            add(updatedSubscription);
+            add(sameSubscriptionWithSuspended);
         }};
         List<Subscription> actual = shoppingCart.getItems();
 
-        assertNotSame(subscription, updatedSubscription);
+        assertNotSame(subscriptionWithActive, sameSubscriptionWithSuspended);
         assertNotSame(expected, actual);
         assertEquals(expected, actual);
     }
 
     @Test
     void updateItemWithAnotherItemTest() {
-        Subscription subscription =
-                EntityProvider.getSubscriptionWithActivePeriodical();
-        Subscription updatedSubscription =
-                EntityProvider.getSubscriptionWithSuspendedPeriodical();
+        Periodical periodical = Periodical.newBuilder()
+                .setId(1L)
+                .setStatus(PeriodicalStatus.ACTIVE)
+                .build();
+        Periodical anotherPeriodicalWithUpdatedStatus = Periodical.newBuilder()
+                .setId(2L)
+                .setStatus(PeriodicalStatus.SUSPENDED)
+                .build();
+        Subscription subscriptionWithActive = Subscription.newBuilder()
+                .setPeriodical(periodical)
+                .build();
+        Subscription anotherSubscriptionWithSuspended = Subscription.newBuilder()
+                .setPeriodical(anotherPeriodicalWithUpdatedStatus)
+                .build();
 
-        shoppingCart.addItem(subscription);
-        shoppingCart.updateItem(updatedSubscription);
+        shoppingCart.addItem(subscriptionWithActive);
+        shoppingCart.updateItem(anotherSubscriptionWithSuspended);
 
         List<Subscription> expected = new ArrayList<Subscription>() {{
-            add(updatedSubscription);
+            add(subscriptionWithActive);
         }};
         List<Subscription> actual = shoppingCart.getItems();
 
-        assertNotSame(subscription, updatedSubscription);
+        assertNotSame(subscriptionWithActive, anotherSubscriptionWithSuspended);
         assertNotSame(expected, actual);
-        assertNotEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

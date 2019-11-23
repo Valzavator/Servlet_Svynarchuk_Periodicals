@@ -33,6 +33,8 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
             ResourceManager.QUERIES.getProperty("subscription.where.payment");
     private final static String WHERE_ACTIVE_AND_USER_ID =
             ResourceManager.QUERIES.getProperty("subscription.where.active.and.user");
+    private final static String WHERE_EXPIRED_AND_USER_ID =
+            ResourceManager.QUERIES.getProperty("subscription.where.expired.and.user");
     private final static String ORDER_BY_END_DATE =
             ResourceManager.QUERIES.getProperty("subscription.select.order");
 
@@ -69,11 +71,15 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
     }
 
     @Override
-    public List<Subscription> findActiveByUser(User user, long skip, long limit) {
+    public List<Subscription> findByUserAndStatus(User user, boolean isExpired, long skip, long limit) {
         if (skip < 0 || limit < 0) {
             throw new DaoException("Skip or limit params cannot be negative");
         }
-        return utilMySqlDao.findAll(
+        return isExpired
+                ? utilMySqlDao.findAll(
+                SELECT_ALL + WHERE_EXPIRED_AND_USER_ID + ORDER_BY_END_DATE + UtilMySqlDao.LIMIT,
+                user.getId(), skip, limit)
+                : utilMySqlDao.findAll(
                 SELECT_ALL + WHERE_ACTIVE_AND_USER_ID + ORDER_BY_END_DATE + UtilMySqlDao.LIMIT,
                 user.getId(), skip, limit);
     }
@@ -133,8 +139,10 @@ public class SubscriptionMySqlDao implements SubscriptionDao {
     }
 
     @Override
-    public long getCountActiveByUser(User user) {
-        return utilMySqlDao.getRowsCount(COUNT + WHERE_ACTIVE_AND_USER_ID, user.getId());
+    public long getCountByUserAndStatus(User user, boolean isExpired) {
+        return isExpired
+                ? utilMySqlDao.getRowsCount(COUNT + WHERE_EXPIRED_AND_USER_ID, user.getId())
+                : utilMySqlDao.getRowsCount(COUNT + WHERE_ACTIVE_AND_USER_ID, user.getId());
     }
 
     @Override

@@ -56,8 +56,10 @@ public class ShoppingCart {
     }
 
     public void updateItem(Subscription updatedSubscription) {
-        removeItem(getCartItemId(updatedSubscription));
-        items.add(updatedSubscription);
+        if (isInCart(updatedSubscription)) {
+            removeItem(getCartItemId(updatedSubscription));
+            items.add(updatedSubscription);
+        }
     }
 
     private boolean isInCart(Subscription subscriptionToCheck) {

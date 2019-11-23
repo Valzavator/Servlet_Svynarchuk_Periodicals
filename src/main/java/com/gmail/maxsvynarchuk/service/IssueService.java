@@ -17,7 +17,8 @@ import java.util.List;
 public class IssueService {
     private static final Logger LOGGER =
             LoggerFactory.getLogger(IssueService.class);
-    private PeriodicalIssueDao periodicalIssueDao = DaoFactory.getInstance().getPeriodicalIssueDao();
+    private PeriodicalIssueDao periodicalIssueDao =
+            DaoFactory.getInstance().getPeriodicalIssueDao();
 
     private IssueService() {
     }

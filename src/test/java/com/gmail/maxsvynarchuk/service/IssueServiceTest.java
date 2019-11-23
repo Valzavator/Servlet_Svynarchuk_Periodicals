@@ -3,8 +3,6 @@ package com.gmail.maxsvynarchuk.service;
 import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalIssueDao;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
-import com.gmail.maxsvynarchuk.provider.EntityProvider;
-import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,34 +17,39 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class IssueServiceTest {
-
     @InjectMocks
     private IssueService issueService = IssueService.getInstance();
     @Mock
     private PeriodicalIssueDao periodicalIssueDao;
 
     @Test
-    void addIssueWithUniqueIssueNumberToPeriodical() {
-        Periodical periodical = EntityProvider.getPeriodical(1L,
-                PeriodicalStatus.ACTIVE, "3");
-        PeriodicalIssue periodicalIssue =
-                EntityProvider.getPeriodicalIssue(1L, periodical);
-
-        when(periodicalIssueDao.existByNumberAndPeriodical(periodicalIssue.getIssueNumber(),
-                periodical))
+    void addIssueWithUniqueIssueNumberToPeriodicalTest() {
+        Periodical periodical = Periodical.newBuilder()
+                .setId(1L)
+                .build();
+        PeriodicalIssue periodicalIssue = PeriodicalIssue.newBuilder()
+                .setId(1L)
+                .setIssueNumber("1")
+                .setPeriodical(periodical)
+                .build();
+        when(periodicalIssueDao.existByNumberAndPeriodical(
+                periodicalIssue.getIssueNumber(), periodical))
                 .thenReturn(false);
 
         assertTrue(issueService.addIssueToPeriodical(periodical, periodicalIssue));
-        verify(periodicalIssueDao).insert(periodicalIssue);
+        verify(periodicalIssueDao, times(1)).insert(periodicalIssue);
     }
 
     @Test
-    void addIssueWithNotUniqueIssueNumberToPeriodical() {
-        Periodical periodical = EntityProvider.getPeriodical(1L,
-                PeriodicalStatus.ACTIVE, "3");
-        PeriodicalIssue periodicalIssue =
-                EntityProvider.getPeriodicalIssue(1L, periodical);
-
+    void addIssueWithNotUniqueIssueNumberToPeriodicalTest() {
+        Periodical periodical = Periodical.newBuilder()
+                .setId(1L)
+                .build();
+        PeriodicalIssue periodicalIssue = PeriodicalIssue.newBuilder()
+                .setId(1L)
+                .setIssueNumber("1")
+                .setPeriodical(periodical)
+                .build();
         when(periodicalIssueDao.existByNumberAndPeriodical(periodicalIssue.getIssueNumber(),
                 periodical))
                 .thenReturn(true);
@@ -56,16 +59,27 @@ class IssueServiceTest {
     }
 
     @Test
-    void findAllIssuesByPeriodical() {
-        Periodical periodical = EntityProvider.getPeriodical(1L,
-                PeriodicalStatus.ACTIVE, "3");
-        List<PeriodicalIssue> expected = new ArrayList<>();
-        expected.add(EntityProvider.getPeriodicalIssue(1L, periodical));
-        expected.add(EntityProvider.getPeriodicalIssue(2L, periodical));
-
+    void findAllIssuesByPeriodicalTest() {
+        Periodical periodical = Periodical.newBuilder()
+                .setId(1L)
+                .build();
+        List<PeriodicalIssue> expected = new ArrayList<PeriodicalIssue>() {{
+            add(PeriodicalIssue.newBuilder()
+                    .setId(1L)
+                    .setIssueNumber("1")
+                    .setPeriodical(periodical)
+                    .build());
+            add(PeriodicalIssue.newBuilder()
+                    .setId(2L)
+                    .setIssueNumber("2")
+                    .setPeriodical(periodical)
+                    .build());
+        }};
         when(periodicalIssueDao.findByPeriodical(periodical)).thenReturn(expected);
 
         List<PeriodicalIssue> actual = issueService.findAllIssuesByPeriodical(periodical);
-        assertEquals(expected, actual);
+
+        assertEquals(2, actual.size());
+        verify(periodicalIssueDao, times(1)).findByPeriodical(periodical);
     }
 }

@@ -19,7 +19,7 @@ import java.util.Optional;
 
 public class PostSignInCommand implements Command {
     private static Logger LOGGER = LoggerFactory.getLogger(PostSignInCommand.class);
-    private final UserService userService = ServiceFactory.getUserService();
+    private UserService userService = ServiceFactory.getUserService();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {

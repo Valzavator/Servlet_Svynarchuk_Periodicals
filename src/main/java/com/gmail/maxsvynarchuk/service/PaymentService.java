@@ -20,7 +20,7 @@ import java.util.Optional;
 public class PaymentService {
     private static final Logger LOGGER =
             LoggerFactory.getLogger(PaymentService.class);
-    private final PaymentDao paymentDao =
+    private PaymentDao paymentDao =
             DaoFactory.getInstance().getPaymentDao();
 
     private PaymentService() {

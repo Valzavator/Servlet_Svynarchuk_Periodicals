@@ -26,14 +26,14 @@ public class GetCatalogCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
+        PaginationManager paginationManager = new PaginationManager(5);
         long rowsCount =
                 periodicalService.getPeriodicalsCountByStatus(PeriodicalStatus.ACTIVE);
-        long skip = PaginationManager.manage(
-                request, rowsCount, PaginationManager.CATALOG_RECORDS_PER_PAGE);
+        long skip = paginationManager.manage(request, rowsCount);
         List<Periodical> periodicals =
                 periodicalService.findAllPeriodicalsByStatus(PeriodicalStatus.ACTIVE,
                         skip,
-                        PaginationManager.CATALOG_RECORDS_PER_PAGE);
+                        paginationManager.getRecordsPerPage());
         request.setAttribute(Attributes.CATALOG, periodicals);
         if (!periodicals.isEmpty()) {
             List<SubscriptionPlan> subscriptionPlans =

@@ -22,17 +22,18 @@ public interface SubscriptionDao extends GenericDao<Subscription, Long> {
     /**
      * Retrieves all active subscriptions associated with certain user.
      *
-     * @param user  user of system
-     * @param skip  skip
-     * @param limit limit
+     * @param user      user of system
+     * @param isExpired this expired or active subscription
+     * @param skip      skip
+     * @param limit     limit
      * @return list of retrieved subscriptions
      */
-    List<Subscription> findActiveByUser(User user, long skip, long limit);
+    List<Subscription> findByUserAndStatus(User user, boolean isExpired, long skip, long limit);
 
     /**
      * Retrieves all subscriptions associated with certain payment.
      *
-     * @param payment  payment
+     * @param payment payment
      * @return list of retrieved subscriptions
      */
     List<Subscription> findByPayment(Payment payment);
@@ -41,7 +42,8 @@ public interface SubscriptionDao extends GenericDao<Subscription, Long> {
      * Retrieves count of objects from database.
      *
      * @param user user of system
+     * @param isExpired this expired or active subscription
      * @return count of active subscriptions associated with certain user.
      */
-    long getCountActiveByUser(User user);
+    long getCountByUserAndStatus(User user, boolean isExpired);
 }

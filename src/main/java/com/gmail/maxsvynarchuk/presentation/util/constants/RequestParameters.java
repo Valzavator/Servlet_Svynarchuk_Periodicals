@@ -33,6 +33,9 @@ public final class RequestParameters {
     public static final String USER_ID = ResourceManager.PARAMETER.getProperty("user.id");
 
     public static final String PAGINATION_PAGE = ResourceManager.PARAMETER.getProperty("pagination.page");
+    public static final String PAGINATION_PILL = ResourceManager.PARAMETER.getProperty("pagination.pill");
+    public static final String PAGINATION_ACTIVE_SUBSCRIPTIONS_PAGE = ResourceManager.PARAMETER.getProperty("pagination.active.subscriptions.page");
+    public static final String PAGINATION_EXPIRED_SUBSCRIPTIONS_PAGE = ResourceManager.PARAMETER.getProperty("pagination.expired.subscriptions.page");
 
     public static final String ERROR_ATTRIBUTE = ResourceManager.PARAMETER.getProperty("error.attribute");
 

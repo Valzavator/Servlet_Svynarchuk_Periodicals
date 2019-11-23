@@ -19,13 +19,13 @@ import java.util.Optional;
 public class PeriodicalService {
     private static final Logger LOGGER =
             LoggerFactory.getLogger(PeriodicalService.class);
-    private final PeriodicalDao periodicalDao =
+    private PeriodicalDao periodicalDao =
             DaoFactory.getInstance().getPeriodicalDao();
-    private final PeriodicalTypeDao periodicalTypeDao =
+    private PeriodicalTypeDao periodicalTypeDao =
             DaoFactory.getInstance().getPeriodicalTypeDao();
-    private final FrequencyDao frequencyDao =
+    private FrequencyDao frequencyDao =
             DaoFactory.getInstance().getFrequencyDao();
-    private final PublisherDao publisherDao =
+    private PublisherDao publisherDao =
             DaoFactory.getInstance().getPublisherDao();
 
     private PeriodicalService() {
@@ -81,29 +81,14 @@ public class PeriodicalService {
         return periodicalDao.getCount();
     }
 
-    public Optional<PeriodicalType> findPeriodicalTypeById(Integer id) {
-        LOGGER.debug("Attempt to find periodical type by id");
-        return periodicalTypeDao.findOne(id);
-    }
-
     public List<PeriodicalType> findAllPeriodicalTypes() {
         LOGGER.debug("Attempt to find all periodical types");
         return periodicalTypeDao.findAll();
     }
 
-    public Optional<Frequency> findFrequencyById(Integer id) {
-        LOGGER.debug("Attempt to find frequency by id");
-        return frequencyDao.findOne(id);
-    }
-
     public List<Frequency> findAllFrequencies() {
         LOGGER.debug("Attempt to find all frequencie");
         return frequencyDao.findAll();
-    }
-
-    public Optional<Publisher> findPublisherById(Long id) {
-        LOGGER.debug("Attempt to find publisher by id");
-        return publisherDao.findOne(id);
     }
 
     public List<Publisher> findAllPublishers() {

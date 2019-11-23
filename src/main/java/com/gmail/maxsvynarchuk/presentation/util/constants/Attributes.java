@@ -12,7 +12,9 @@ public final class Attributes {
     public static final String CATALOG = ResourceManager.ATTRIBUTE.getProperty("catalog");
     public static final String PERIODICAL = ResourceManager.ATTRIBUTE.getProperty("periodical");
     public static final String ISSUES = ResourceManager.ATTRIBUTE.getProperty("issues");
-    public static final String SUBSCRIPTIONS = ResourceManager.ATTRIBUTE.getProperty("subscriptions");
+    public static final String SUBSCRIPTIONS = ResourceManager.ATTRIBUTE.getProperty("subscriptions.active");
+    public static final String ACTIVE_SUBSCRIPTIONS = ResourceManager.ATTRIBUTE.getProperty("subscriptions.active");
+    public static final String EXPIRED_SUBSCRIPTIONS = ResourceManager.ATTRIBUTE.getProperty("subscriptions.expired");
     public static final String PAYMENTS = ResourceManager.ATTRIBUTE.getProperty("payments");
 
     public static final String SUBSCRIPTION_PLANS = ResourceManager.ATTRIBUTE.getProperty("subscription.plans");
@@ -45,6 +47,10 @@ public final class Attributes {
 
     public static final String PAGINATION_PAGE = ResourceManager.ATTRIBUTE.getProperty("pagination.page");
     public static final String PAGINATION_NUMBER_OF_PAGES = ResourceManager.ATTRIBUTE.getProperty("pagination.number.pages");
+    public static final String PAGINATION_ACTIVE_SUBSCRIPTIONS_PAGE = ResourceManager.ATTRIBUTE.getProperty("pagination.active.subscriptions.page");
+    public static final String PAGINATION_EXPIRED_SUBSCRIPTIONS_PAGE = ResourceManager.ATTRIBUTE.getProperty("pagination.expired.subscriptions.page");
+    public static final String PAGINATION_ACTIVE_SUBSCRIPTIONS_NUMBER_OF_PAGES = ResourceManager.ATTRIBUTE.getProperty("pagination.number.active.subscriptions.page");
+    public static final String PAGINATION_EXPIRED_SUBSCRIPTIONS_NUMBER_OF_PAGES = ResourceManager.ATTRIBUTE.getProperty("pagination.number.expired.subscriptions.page");
 
     private Attributes() {
     }

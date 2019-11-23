@@ -66,8 +66,8 @@ public class PostCartAddItemCommand implements Command {
         }
 
         ShoppingCart shoppingCart = Util.getShoppingCart(request.getSession());
-        boolean isAddedToCart = shoppingCartService.addItemToCart(user,
-                shoppingCart, periodical, subscriptionPlan);
+        boolean isAddedToCart = shoppingCartService.addItemToCart(shoppingCart, user,
+                periodical, subscriptionPlan);
         if (!isAddedToCart) {
             referer = Util.addParameterToURI(referer,
                     RequestParameters.ERROR_ATTRIBUTE,

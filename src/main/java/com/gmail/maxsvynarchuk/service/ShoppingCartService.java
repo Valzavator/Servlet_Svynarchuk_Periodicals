@@ -20,7 +20,7 @@ import java.util.Optional;
 public class ShoppingCartService {
     private static final Logger LOGGER =
             LoggerFactory.getLogger(ShoppingCartService.class);
-    private final PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
+    private PeriodicalService periodicalService = ServiceFactory.getPeriodicalService();
 
     private ShoppingCartService() {
     }
@@ -33,8 +33,8 @@ public class ShoppingCartService {
         return ShoppingCartService.Singleton.INSTANCE;
     }
 
-    public boolean addItemToCart(User user,
-                                 ShoppingCart shoppingCart,
+    public boolean addItemToCart(ShoppingCart shoppingCart,
+                                 User user,
                                  Periodical periodical,
                                  SubscriptionPlan subscriptionPlan) {
         LOGGER.debug("Attempt to add item to cart");
@@ -46,7 +46,7 @@ public class ShoppingCartService {
         return shoppingCart.addItem(subscription);
     }
 
-    public void removeItemFromCart(ShoppingCart shoppingCart, Integer cartItemId) {
+    public void removeItemFromCart(ShoppingCart shoppingCart, Long cartItemId) {
         LOGGER.debug("Attempt to remove item from cart");
         shoppingCart.removeItem(cartItemId);
     }

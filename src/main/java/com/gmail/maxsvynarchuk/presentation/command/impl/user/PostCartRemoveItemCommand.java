@@ -17,8 +17,8 @@ public class PostCartRemoveItemCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        Integer cartItemId =
-                Integer.valueOf(request.getParameter(RequestParameters.CART_ITEM_ID));
+        Long cartItemId =
+                Long.valueOf(request.getParameter(RequestParameters.CART_ITEM_ID));
 
         ShoppingCart shoppingCart = Util.getShoppingCart(request.getSession());
         shoppingCartService.removeItemFromCart(shoppingCart, cartItemId);

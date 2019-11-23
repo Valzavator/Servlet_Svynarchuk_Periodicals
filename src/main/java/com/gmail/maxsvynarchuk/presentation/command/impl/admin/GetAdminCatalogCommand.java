@@ -19,10 +19,11 @@ public class GetAdminCatalogCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
+        PaginationManager paginationManager = new PaginationManager();
         long rowsCount = periodicalService.getPeriodicalsCount();
-        long skip = PaginationManager.manage(request, rowsCount);
+        long skip = paginationManager.manage(request, rowsCount);
         List<Periodical> periodicals = periodicalService.findAllPeriodicals(
-                skip, PaginationManager.DEFAULT_RECORDS_PER_PAGE);
+                skip, paginationManager.getRecordsPerPage());
         request.setAttribute(Attributes.CATALOG, periodicals);
         return CommandResult.forward(Views.ADMIN_CATALOG_VIEW);
     }

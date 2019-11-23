@@ -9,6 +9,8 @@ import com.gmail.maxsvynarchuk.util.type.RoleType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -20,8 +22,8 @@ import java.util.Optional;
 public class UserService {
     private static final Logger LOGGER =
             LoggerFactory.getLogger(UserService.class);
-    private final UserDao userDao = DaoFactory.getInstance().getUserDao();
     private final Role defaultRole = RoleType.USER.getValue();
+    private UserDao userDao = DaoFactory.getInstance().getUserDao();
 
     private UserService() {
     }
@@ -36,7 +38,10 @@ public class UserService {
 
     public Optional<User> signIn(String email, String password) {
         LOGGER.debug("Attempt to sign in");
-        Optional<User> user = findUserByEmail(email);
+        if (Objects.isNull(email) || Objects.isNull(password)) {
+            return Optional.empty();
+        }
+        Optional<User> user = userDao.findOneByEmail(email);
         return user.filter(u -> PasswordManager.checkSecurePassword(
                 password, u.getPassword()));
     }
@@ -46,22 +51,20 @@ public class UserService {
         return userDao.findOne(id);
     }
 
-    public Optional<User> findUserByEmail(String email) {
-        LOGGER.debug("Attempt to find user by email");
-        return userDao.findOneByEmail(email);
-    }
-
     public boolean registerUser(User userToRegister) {
         LOGGER.debug("Attempt to register new user");
+        if (Objects.isNull(userToRegister.getEmail()) ||
+                Objects.isNull(userToRegister.getPassword())) {
+            return false;
+        }
         if (userToRegister.getRole() == null) {
             userToRegister.setRole(defaultRole);
         }
-        String hash = PasswordManager.hashPassword(
-                userToRegister.getPassword());
-        userToRegister.setPassword(hash);
-
         boolean userIsPresent = userDao.existByEmail(userToRegister.getEmail());
         if (!userIsPresent) {
+            String hash = PasswordManager.hashPassword(
+                    userToRegister.getPassword());
+            userToRegister.setPassword(hash);
             userDao.insert(userToRegister);
             return true;
         }

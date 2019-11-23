@@ -9,6 +9,7 @@ import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -23,13 +24,13 @@ import java.util.Optional;
 public class SubscriptionService {
     private static final Logger LOGGER =
             LoggerFactory.getLogger(SubscriptionService.class);
-    private final SubscriptionDao subscriptionDao =
+    private SubscriptionDao subscriptionDao =
             DaoFactory.getInstance().getSubscriptionDao();
-    private final SubscriptionPlanDao subscriptionPlanDao =
+    private SubscriptionPlanDao subscriptionPlanDao =
             DaoFactory.getInstance().getSubscriptionPlanDao();
-    private final PaymentService paymentService =
+    private PaymentService paymentService =
             ServiceFactory.getPaymentService();
-    private final PeriodicalService periodicalService =
+    private PeriodicalService periodicalService =
             ServiceFactory.getPeriodicalService();
 
     private SubscriptionService() {
@@ -44,11 +45,12 @@ public class SubscriptionService {
         return SubscriptionService.Singleton.INSTANCE;
     }
 
-    public List<Subscription> findAllActiveSubscriptionsByUser(User user,
-                                                               long skip,
-                                                               long limit) {
-        LOGGER.debug("Attempt to find all active subscriptions by user");
-        return subscriptionDao.findActiveByUser(user, skip, limit);
+    public List<Subscription> findAllSubscriptionsByUserAndStatus(User user,
+                                                                  boolean isExpired,
+                                                                  long skip,
+                                                                  long limit) {
+        LOGGER.debug("Attempt to find all subscriptions by user and status");
+        return subscriptionDao.findByUserAndStatus(user, isExpired, skip, limit);
     }
 
     public List<Subscription> findAllSubscriptionsByPayment(Payment payment) {
@@ -62,9 +64,9 @@ public class SubscriptionService {
         }
     }
 
-    public long getActiveSubscriptionsCountByUser(User user) {
+    public long getSubscriptionsCountByUserAndStatus(User user, boolean isExpired) {
         LOGGER.debug("Attempt to get active subscriptions count by user");
-        return subscriptionDao.getCountActiveByUser(user);
+        return subscriptionDao.getCountByUserAndStatus(user, isExpired);
     }
 
     public void processSubscriptions(User user,

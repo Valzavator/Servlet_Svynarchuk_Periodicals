@@ -19,10 +19,11 @@ public class GetAllPaymentsCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
+        PaginationManager paginationManager = new PaginationManager();
         long rowsCount = paymentService.getPaymentsCount();
-        long skip = PaginationManager.manage(request, rowsCount);
+        long skip = paginationManager.manage(request, rowsCount);
         List<Payment> subscriptions = paymentService.findAllPayments(
-                skip, PaginationManager.DEFAULT_RECORDS_PER_PAGE);
+                skip, paginationManager.getRecordsPerPage());
         request.setAttribute(Attributes.PAYMENTS, subscriptions);
         return CommandResult.forward(Views.PAYMENTS_VIEW);
     }
