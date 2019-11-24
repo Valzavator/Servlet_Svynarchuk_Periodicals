@@ -26,6 +26,7 @@
     </Appenders>
     <Loggers>
         <Root level="ERROR">
+            <AppenderRef ref="SERVER_LOGS_FILE"/>
             <AppenderRef ref="STDOUT"/>
         </Root>
         <Logger name="com.gmail.maxsvynarchuk" level="DEBUG" additivity="false">

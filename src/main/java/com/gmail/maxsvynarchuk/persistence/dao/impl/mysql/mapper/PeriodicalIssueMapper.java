@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class PeriodicalIssueMapper implements EntityMapper<PeriodicalIssue> {
-    private static final String ID_FIELD = "periodical_issues_id";
+    private static final String ID_FIELD = "periodical_issue_id";
     private static final String ISSUE_NAME_FIELD = "issues_name";
     private static final String ISSUE_NO_FIELD = "issue_no";
     private static final String PUBLICATION_DATE_FIELD = "publication_date";

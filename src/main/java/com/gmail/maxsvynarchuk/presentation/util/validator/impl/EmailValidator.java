@@ -7,7 +7,7 @@ public class EmailValidator extends RegexValidator {
      * Regex used to perform validation of data.
      */
     private static final String EMAIL_REGEX =
-            "^(.+\\@.+\\..+)$";
+            "^(.+@.+\\..+)$";
 
     public EmailValidator() {
         super(EMAIL_REGEX, MAX_LENGTH);

@@ -44,7 +44,7 @@ CREATE TABLE users
     email         VARCHAR(255)            NOT NULL UNIQUE,
     password      VARCHAR(255)            NOT NULL,
     date_of_birth DATE                    NOT NULL,
-    gender        ENUM ('male', 'female') NOT NULL,
+    gender        ENUM ('MALE', 'FEMALE') NOT NULL,
     PRIMARY KEY (user_id),
     CONSTRAINT fk_user_role
         FOREIGN KEY (role_id) REFERENCES roles (role_id)
@@ -127,7 +127,7 @@ CREATE TABLE periodicals
     periodical_name        VARCHAR(255)                                  NOT NULL,
     periodical_price       DECIMAL(10, 2)                                NOT NULL,
     periodical_description VARCHAR(1000)                                 NOT NULL,
-    periodical_status      ENUM ('active', 'suspended') DEFAULT 'active' NOT NULL,
+    periodical_status      ENUM ('ACTIVE', 'SUSPENDED') DEFAULT 'ACTIVE' NOT NULL,
     PRIMARY KEY (periodical_id),
     CONSTRAINT fk_periodical_type
         FOREIGN KEY (periodical_type_id) REFERENCES periodical_types (periodical_type_id)

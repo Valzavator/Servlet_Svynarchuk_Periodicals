@@ -1,5 +1,6 @@
 package com.gmail.maxsvynarchuk.persistence.dao;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,7 @@ import java.util.Optional;
  * @param <T>  represents type of domain object
  * @param <ID> represents type of identifier
  */
-public interface GenericDao<T, ID> {
+public interface GenericDao<T, ID extends Serializable> {
     /**
      * Retrieves object from database identified by id.
      *
