@@ -87,7 +87,7 @@ public class PeriodicalService {
     }
 
     public List<Frequency> findAllFrequencies() {
-        LOGGER.debug("Attempt to find all frequencie");
+        LOGGER.debug("Attempt to find all frequencies");
         return frequencyDao.findAll();
     }
 

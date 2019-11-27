@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class GetCatalogCommand implements Command {
+    private final static long RECORDS_PER_PAGE = 5;
     private final PeriodicalService periodicalService =
             ServiceFactory.getPeriodicalService();
     private final SubscriptionService subscriptionService =
@@ -26,7 +27,7 @@ public class GetCatalogCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        PaginationManager paginationManager = new PaginationManager(5);
+        PaginationManager paginationManager = new PaginationManager(RECORDS_PER_PAGE);
         long rowsCount =
                 periodicalService.getPeriodicalsCountByStatus(PeriodicalStatus.ACTIVE);
         long skip = paginationManager.manage(request, rowsCount);

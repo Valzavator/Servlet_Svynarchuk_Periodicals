@@ -6,7 +6,7 @@ import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
 import com.gmail.maxsvynarchuk.presentation.util.Util;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
-import com.gmail.maxsvynarchuk.service.ServiceException;
+import com.gmail.maxsvynarchuk.service.exception.ServiceException;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
 import com.gmail.maxsvynarchuk.service.ShoppingCartService;
 import com.gmail.maxsvynarchuk.service.SubscriptionService;

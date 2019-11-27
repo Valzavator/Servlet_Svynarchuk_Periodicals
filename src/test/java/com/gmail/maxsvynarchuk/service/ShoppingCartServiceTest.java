@@ -6,6 +6,7 @@ import com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.provider.EntityProvider;
 import com.gmail.maxsvynarchuk.service.entity.ShoppingCart;
+import com.gmail.maxsvynarchuk.service.exception.ServiceException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

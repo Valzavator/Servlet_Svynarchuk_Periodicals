@@ -1,4 +1,4 @@
-package com.gmail.maxsvynarchuk.service;
+package com.gmail.maxsvynarchuk.service.exception;
 
 /**
  * Artificial exception that should be thrown out of the Service layer

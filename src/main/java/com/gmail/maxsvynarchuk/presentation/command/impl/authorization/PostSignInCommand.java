@@ -52,7 +52,7 @@ public class PostSignInCommand implements Command {
             LOGGER.debug("Invalid authentication parameters");
         }
         request.setAttribute(Attributes.ERRORS, errors);
-        request.setAttribute(Attributes.USER, userDTO);
+        request.setAttribute(Attributes.USER_DTO, userDTO);
         LOGGER.debug("User fail sign in");
         return CommandResult.forward(Views.SIGN_IN_VIEW);
     }

@@ -59,8 +59,8 @@ public class Util {
     /**
      * @return referer path without servlet path at the beginning
      */
-    public static String getReferer(HttpServletRequest request) {
-        String referer = PagesPaths.HOME_PATH;
+    public static String getReferer(HttpServletRequest request, String defaultPath) {
+        String referer = defaultPath;
         String header = request.getHeader("referer");
         if (header != null && !header.isEmpty()) {
             try {
@@ -75,6 +75,10 @@ public class Util {
         }
         return referer.replaceFirst(request.getContextPath(), "")
                 .replaceFirst(request.getServletPath(), "");
+    }
+
+    public static String getReferer(HttpServletRequest request) {
+        return getReferer(request, PagesPaths.HOME_PATH);
     }
 
     /**

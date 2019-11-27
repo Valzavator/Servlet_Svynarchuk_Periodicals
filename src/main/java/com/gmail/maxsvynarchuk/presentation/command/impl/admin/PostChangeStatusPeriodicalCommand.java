@@ -3,6 +3,7 @@ package com.gmail.maxsvynarchuk.presentation.command.impl.admin;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
+import com.gmail.maxsvynarchuk.presentation.util.Util;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 import com.gmail.maxsvynarchuk.service.PeriodicalService;
@@ -24,7 +25,7 @@ public class PostChangeStatusPeriodicalCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.info("Start the process of changing status of the periodical");
-
+        String referer = Util.getReferer(request, PagesPaths.ADMIN_CATALOG_PATH);
         Long periodicalId = Long.valueOf(
                 request.getParameter(RequestParameters.PERIODICAL_ID));
         PeriodicalStatus newPeriodicalStatus = PeriodicalStatus.valueOf(
@@ -39,7 +40,6 @@ public class PostChangeStatusPeriodicalCommand implements Command {
             LOGGER.debug("Periodical with id {} doesn't exist. " +
                     "Changing status of the periodical failed", periodicalId);
         }
-
-        return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);
+        return CommandResult.redirect(referer);
     }
 }

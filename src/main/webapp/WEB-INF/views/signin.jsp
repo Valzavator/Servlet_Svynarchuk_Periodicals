@@ -31,7 +31,7 @@
                             </div>
                             <input type="email" id="email"
                                    name="email"
-                                   value="<c:out value="${requestScope.user.email}"/>"
+                                   value="<c:out value="${requestScope.userDTO.email}"/>"
                                    class="form-control form-control-lg
                                    <c:if test="${errors.errorEmail}">
                                             is-invalid

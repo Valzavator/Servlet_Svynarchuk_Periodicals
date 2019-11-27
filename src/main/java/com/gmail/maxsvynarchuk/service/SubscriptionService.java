@@ -5,6 +5,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao;
 import com.gmail.maxsvynarchuk.persistence.dao.factory.DaoFactory;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.persistence.transaction.Transaction;
+import com.gmail.maxsvynarchuk.service.exception.ServiceException;
 import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 
 import org.slf4j.Logger;

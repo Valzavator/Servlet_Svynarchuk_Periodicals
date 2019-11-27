@@ -4,6 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionDao;
 import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.provider.EntityProvider;
+import com.gmail.maxsvynarchuk.service.exception.ServiceException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
