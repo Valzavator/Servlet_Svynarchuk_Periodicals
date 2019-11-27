@@ -68,6 +68,7 @@ public class PaymentMySqlDao implements PaymentDao {
         Long id = utilMySqlDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
                 obj.getUser().getId(),
+                obj.getPaymentDateTime(),
                 obj.getTotalPrice());
         obj.setId(id);
 
@@ -83,6 +84,7 @@ public class PaymentMySqlDao implements PaymentDao {
         utilMySqlDao.executeUpdate(
                 UPDATE + WHERE_ID,
                 obj.getUser().getId(),
+                obj.getPaymentDateTime(),
                 obj.getTotalPrice(),
                 obj.getId());
     }

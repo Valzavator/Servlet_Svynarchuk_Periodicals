@@ -75,14 +75,13 @@ public class AuthorizationFilter implements Filter {
     }
 
     private void doFilter(boolean isAuthorized,
-                          ServletRequest request,
-                          ServletResponse response,
+                          HttpServletRequest request,
+                          HttpServletResponse response,
                           FilterChain chain) throws IOException, ServletException {
         if (isAuthorized) {
             chain.doFilter(request, response);
         } else {
-            request.getRequestDispatcher(Views.ERROR_403_VIEW)
-                    .forward(request, response);
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
         }
     }
 }

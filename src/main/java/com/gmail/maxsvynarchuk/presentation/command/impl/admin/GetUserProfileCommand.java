@@ -3,6 +3,7 @@ package com.gmail.maxsvynarchuk.presentation.command.impl.admin;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
+import com.gmail.maxsvynarchuk.presentation.exception.NotFoundException;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
@@ -23,23 +24,16 @@ public class GetUserProfileCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Attempt to get a user profile page");
-        Long userId;
-        try {
-            userId = Long.valueOf(
-                    request.getParameter(RequestParameters.USER_ID));
-        } catch (NumberFormatException e) {
-            LOGGER.debug("Invalid payment id", e);
-            return CommandResult.forward(Views.ERROR_404_VIEW);
-        }
+        Long userId = Long.valueOf(
+                request.getParameter(RequestParameters.USER_ID));
         Optional<User> userOpt = userService.findUserById(userId);
-
         if (userOpt.isPresent()) {
             request.setAttribute(Attributes.USER_DTO, userOpt.get());
             LOGGER.debug("Attempt to get a user profile page is successful");
             return CommandResult.forward(Views.USER_VIEW);
         } else {
             LOGGER.debug("User with id {} doesn't exist", userId);
-            return CommandResult.forward(Views.ERROR_404_VIEW);
+            throw new NotFoundException();
         }
     }
 }

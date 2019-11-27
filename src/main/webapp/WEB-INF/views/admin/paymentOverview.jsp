@@ -21,7 +21,7 @@
                     <dl class="row">
                         <dt class="col-sm-3"><fmt:message key="payments.user"/>:</dt>
                         <dd class="col-sm-9">
-                            <a href="<c:url value="/app/admin/user?userId=${payment.user.id}"/>">
+                            <a href="<c:url value="/app/admin/user?userId=${paymentDTO.user.id}"/>">
                                 <i class="fa fa-user fa-lg" aria-hidden="true">&nbsp;</i>
                                 <c:out value="${requestScope.paymentDTO.user.firstName}"/>
                                 <c:out value="${requestScope.paymentDTO.user.lastName}"/>

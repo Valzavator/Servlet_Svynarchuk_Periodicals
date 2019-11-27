@@ -5,6 +5,7 @@ import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
 import com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
+import com.gmail.maxsvynarchuk.presentation.exception.NotFoundException;
 import com.gmail.maxsvynarchuk.presentation.util.Util;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
@@ -31,14 +32,8 @@ public class GetPeriodicalCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Attempt to get page for overview periodical");
-        Long periodicalId;
-        try {
-            periodicalId = Long.valueOf(
-                    request.getParameter(RequestParameters.PERIODICAL_ID));
-        } catch (NumberFormatException e) {
-            LOGGER.debug("Invalid periodical id");
-            return CommandResult.forward(Views.ERROR_404_VIEW);
-        }
+        Long periodicalId = Long.valueOf(
+                request.getParameter(RequestParameters.PERIODICAL_ID));
         Optional<Periodical> periodicalOpt =
                 periodicalService.findPeriodicalById(periodicalId);
         if (periodicalOpt.isPresent()) {
@@ -54,7 +49,7 @@ public class GetPeriodicalCommand implements Command {
             return CommandResult.forward(Views.PERIODICAL_VIEW);
         } else {
             LOGGER.debug("Periodical with id {} doesn't exist", periodicalId);
-            return CommandResult.forward(Views.ERROR_404_VIEW);
+            throw new NotFoundException();
         }
     }
 }

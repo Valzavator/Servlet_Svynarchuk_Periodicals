@@ -3,6 +3,7 @@ package com.gmail.maxsvynarchuk.presentation.command.impl.admin;
 import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
+import com.gmail.maxsvynarchuk.presentation.exception.NotFoundException;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
@@ -26,14 +27,8 @@ public class GetPaymentOverviewCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Attempt to get a payment overview page");
-        Long paymentId;
-        try {
-            paymentId = Long.valueOf(
-                    request.getParameter(RequestParameters.PAYMENT_ID));
-        } catch (NumberFormatException e) {
-            LOGGER.debug("Invalid payment id", e);
-            return CommandResult.forward(Views.ERROR_404_VIEW);
-        }
+        Long paymentId = Long.valueOf(
+                request.getParameter(RequestParameters.PAYMENT_ID));
         Optional<Payment> paymentOpt =
                 paymentService.findPaymentById(paymentId);
         if (paymentOpt.isPresent()) {
@@ -46,7 +41,7 @@ public class GetPaymentOverviewCommand implements Command {
             return CommandResult.forward(Views.PAYMENT_OVERVIEW_VIEW);
         } else {
             LOGGER.debug("Payment with id {} doesn't exist", paymentId);
-            return CommandResult.forward(Views.ERROR_404_VIEW);
+            throw new NotFoundException();
         }
     }
 }

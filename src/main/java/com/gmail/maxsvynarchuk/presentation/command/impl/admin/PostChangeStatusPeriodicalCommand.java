@@ -32,7 +32,6 @@ public class PostChangeStatusPeriodicalCommand implements Command {
                 request.getParameter(RequestParameters.PERIODICAL_STATUS).toUpperCase());
         Optional<Periodical> periodicalOpt =
                 periodicalService.findPeriodicalById(periodicalId);
-
         if (periodicalOpt.isPresent()) {
             periodicalService.changeStatus(periodicalOpt.get(), newPeriodicalStatus);
             LOGGER.info("Status of the periodical was successfully changed");
