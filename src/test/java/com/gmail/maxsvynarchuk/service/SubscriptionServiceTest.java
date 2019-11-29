@@ -75,7 +75,7 @@ class SubscriptionServiceTest {
     }
 
     @Test
-    void findAllSubscriptionsByPaymentWithNoyExistingSubscriptionsTest() {
+    void findAllSubscriptionsByPaymentWithNotExistingSubscriptionsTest() {
         Payment payment = Payment.newBuilder()
                 .setId(1L)
                 .build();

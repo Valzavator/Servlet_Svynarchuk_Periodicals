@@ -22,9 +22,9 @@ public class GetAllPaymentsCommand implements Command {
         PaginationManager paginationManager = new PaginationManager();
         long rowsCount = paymentService.getPaymentsCount();
         long skip = paginationManager.manage(request, rowsCount);
-        List<Payment> subscriptions = paymentService.findAllPayments(
+        List<Payment> payments = paymentService.findAllPayments(
                 skip, paginationManager.getRecordsPerPage());
-        request.setAttribute(Attributes.PAYMENTS, subscriptions);
+        request.setAttribute(Attributes.PAYMENTS, payments);
         return CommandResult.forward(Views.PAYMENTS_VIEW);
     }
 }

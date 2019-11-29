@@ -31,9 +31,8 @@ public class GetUserProfileCommand implements Command {
             request.setAttribute(Attributes.USER_DTO, userOpt.get());
             LOGGER.debug("Attempt to get a user profile page is successful");
             return CommandResult.forward(Views.USER_VIEW);
-        } else {
-            LOGGER.debug("User with id {} doesn't exist", userId);
-            throw new NotFoundException();
         }
+        LOGGER.debug("User with id {} doesn't exist", userId);
+        throw new NotFoundException();
     }
 }

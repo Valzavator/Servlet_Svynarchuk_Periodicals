@@ -100,7 +100,7 @@ class PostSignInCommandTest {
         verify(userService, times(1)).signIn(email, password);
         verify(session, never()).setAttribute(anyString(), any(User.class));
         verify(request, times(1)).setAttribute(Attributes.ERRORS, errors);
-        verify(request, times(1)).setAttribute(Attributes.USER, invalidUser);
+        verify(request, times(1)).setAttribute(Attributes.USER_DTO, invalidUser);
     }
 
     @Test
@@ -121,7 +121,7 @@ class PostSignInCommandTest {
         verify(userService, never()).signIn(email, password);
         verify(session, never()).setAttribute(anyString(), any(User.class));
         verify(request, times(1)).setAttribute(Attributes.ERRORS, errors);
-        verify(request, times(1)).setAttribute(Attributes.USER, invalidUser);
+        verify(request, times(1)).setAttribute(Attributes.USER_DTO, invalidUser);
     }
 
     @Test
@@ -142,6 +142,6 @@ class PostSignInCommandTest {
         verify(userService, never()).signIn(email, password);
         verify(session, never()).setAttribute(anyString(), any(User.class));
         verify(request, times(1)).setAttribute(Attributes.ERRORS, errors);
-        verify(request, times(1)).setAttribute(Attributes.USER, invalidUser);
+        verify(request, times(1)).setAttribute(Attributes.USER_DTO, invalidUser);
     }
 }

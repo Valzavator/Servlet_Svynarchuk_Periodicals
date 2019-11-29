@@ -24,7 +24,7 @@ public class PostChangeStatusPeriodicalCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
-        LOGGER.info("Start the process of changing status of the periodical");
+        LOGGER.debug("Start the process of changing status of the periodical");
         String referer = Util.getReferer(request, PagesPaths.ADMIN_CATALOG_PATH);
         Long periodicalId = Long.valueOf(
                 request.getParameter(RequestParameters.PERIODICAL_ID));
@@ -34,7 +34,7 @@ public class PostChangeStatusPeriodicalCommand implements Command {
                 periodicalService.findPeriodicalById(periodicalId);
         if (periodicalOpt.isPresent()) {
             periodicalService.changeStatus(periodicalOpt.get(), newPeriodicalStatus);
-            LOGGER.info("Status of the periodical was successfully changed");
+            LOGGER.debug("Status of the periodical was successfully changed");
         } else {
             LOGGER.debug("Periodical with id {} doesn't exist. " +
                     "Changing status of the periodical failed", periodicalId);

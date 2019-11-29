@@ -42,13 +42,22 @@ public class UserService {
             return Optional.empty();
         }
         Optional<User> user = userDao.findOneByEmail(email);
-        return user.filter(u -> PasswordManager.checkSecurePassword(
-                password, u.getPassword()));
+        return user
+                .filter(u -> PasswordManager.checkSecurePassword(
+                        password, u.getPassword()))
+                .map(u -> {
+                    u.setPassword(null);
+                    return u;
+                });
     }
 
     public Optional<User> findUserById(Long id) {
         LOGGER.debug("Attempt to find user by id");
-        return userDao.findOne(id);
+        return userDao.findOne(id)
+                .map(user -> {
+                    user.setPassword(null);
+                    return user;
+                });
     }
 
     public boolean registerUser(User userToRegister) {

@@ -36,7 +36,6 @@ public class PostSignInCommand implements Command {
                     userService.signIn(userDTO.getEmail(), userDTO.getPassword());
             if (userOpt.isPresent()) {
                 User user = userOpt.get();
-                user.setPassword(null);
                 request.getSession().setAttribute(Attributes.USER, user);
                 LOGGER.debug("User successfully signed in");
                 if (user.isAdmin()) {

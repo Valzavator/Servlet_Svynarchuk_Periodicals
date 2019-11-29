@@ -39,9 +39,8 @@ public class GetPaymentOverviewCommand implements Command {
             request.setAttribute(Attributes.SUBSCRIPTIONS, subscription);
             LOGGER.debug("Attempt to get a payment overview page is successful");
             return CommandResult.forward(Views.PAYMENT_OVERVIEW_VIEW);
-        } else {
-            LOGGER.debug("Payment with id {} doesn't exist", paymentId);
-            throw new NotFoundException();
         }
+        LOGGER.debug("Payment with id {} doesn't exist", paymentId);
+        throw new NotFoundException();
     }
 }

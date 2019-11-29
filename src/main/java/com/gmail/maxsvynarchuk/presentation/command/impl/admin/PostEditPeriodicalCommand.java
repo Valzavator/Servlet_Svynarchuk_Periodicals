@@ -38,7 +38,7 @@ public class PostEditPeriodicalCommand implements Command {
             return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);
         }
 
-        LOGGER.debug("Invalid creation parameters");
+        LOGGER.debug("Invalid editing parameters");
         request.setAttribute(Attributes.PERIODICAL_DTO, periodicalDTO);
         request.setAttribute(Attributes.ERRORS, errors);
         request.setAttribute(Attributes.PERIODICAL_TYPES, periodicalService.findAllPeriodicalTypes());

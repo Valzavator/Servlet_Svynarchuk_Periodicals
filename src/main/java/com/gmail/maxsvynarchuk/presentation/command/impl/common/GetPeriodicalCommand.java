@@ -47,9 +47,8 @@ public class GetPeriodicalCommand implements Command {
             Util.checkErrorParameter(request, RequestParameters.ERROR_ATTRIBUTE);
             LOGGER.debug("Attempt to get page for overview periodical is successful");
             return CommandResult.forward(Views.PERIODICAL_VIEW);
-        } else {
-            LOGGER.debug("Periodical with id {} doesn't exist", periodicalId);
-            throw new NotFoundException();
         }
+        LOGGER.debug("Periodical with id {} doesn't exist", periodicalId);
+        throw new NotFoundException();
     }
 }

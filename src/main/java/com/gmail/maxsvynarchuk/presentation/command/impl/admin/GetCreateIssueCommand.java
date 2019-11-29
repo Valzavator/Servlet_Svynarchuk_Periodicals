@@ -3,6 +3,7 @@ package com.gmail.maxsvynarchuk.presentation.command.impl.admin;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
+import com.gmail.maxsvynarchuk.presentation.exception.BadRequestException;
 import com.gmail.maxsvynarchuk.presentation.exception.NotFoundException;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
@@ -35,14 +36,13 @@ public class GetCreateIssueCommand implements Command {
             Periodical periodicalDTO = periodicalOpt.get();
             if (periodicalDTO.getStatus() == PeriodicalStatus.SUSPENDED) {
                 LOGGER.debug("Can't create issue for suspended periodical");
-                return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);
+                throw new BadRequestException();
             }
             request.setAttribute(Attributes.PERIODICAL_DTO, periodicalDTO);
             LOGGER.debug("Attempt to get page for create issue is successful");
             return CommandResult.forward(Views.CREATE_ISSUE_VIEW);
-        } else {
-            LOGGER.debug("Periodical with id {} doesn't exist", periodicalId);
-            throw new NotFoundException();
         }
+        LOGGER.debug("Periodical with id {} doesn't exist", periodicalId);
+        throw new NotFoundException();
     }
 }
