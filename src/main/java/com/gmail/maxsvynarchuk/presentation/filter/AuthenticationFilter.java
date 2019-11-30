@@ -30,6 +30,7 @@ public class AuthenticationFilter implements Filter {
         freePaths.add(PagesPaths.SIGN_UP_PATH);
         freePaths.add(PagesPaths.PERIODICAL_PATH);
         freePaths.add(PagesPaths.CATALOG_PATH);
+        freePaths.add(PagesPaths.ERROR_PATH);
     }
 
     @Override

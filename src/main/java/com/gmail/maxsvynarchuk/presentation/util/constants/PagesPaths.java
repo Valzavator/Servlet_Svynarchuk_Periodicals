@@ -34,6 +34,8 @@ public final class PagesPaths {
     public static final String PAYMENT_OVERVIEW_PATH = ResourceManager.PATH.getProperty("path.admin.payment");
     public static final String USER_PATH = ResourceManager.PATH.getProperty("path.admin.user");
 
+    public static final String ERROR_PATH = ResourceManager.PATH.getProperty("path.error");
+
     private PagesPaths() {
     }
 }

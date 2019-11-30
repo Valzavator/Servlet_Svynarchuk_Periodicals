@@ -78,6 +78,6 @@
     </error-page>
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>
-        <location>/WEB-INF/views/errors/errorPage.jsp</location>
+        <location>/app/error</location>
     </error-page>
 </web-app>

@@ -1,6 +1,8 @@
 package com.gmail.maxsvynarchuk.presentation.command;
 
-import com.gmail.maxsvynarchuk.presentation.command.impl.*;
+import com.gmail.maxsvynarchuk.presentation.command.impl.DefaultCommand;
+import com.gmail.maxsvynarchuk.presentation.command.impl.ErrorHandlerCommand;
+import com.gmail.maxsvynarchuk.presentation.command.impl.HomeCommand;
 import com.gmail.maxsvynarchuk.presentation.command.impl.admin.*;
 import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.*;
 import com.gmail.maxsvynarchuk.presentation.command.impl.common.GetCatalogCommand;
@@ -82,6 +84,8 @@ public class CommandFactory {
                 new GetPaymentOverviewCommand());
         commands.put(buildKey(PagesPaths.USER_PATH, RequestMethod.GET),
                 new GetUserProfileCommand());
+        commands.put(buildKey(PagesPaths.ERROR_PATH, RequestMethod.GET),
+                new ErrorHandlerCommand());
 
     }
 

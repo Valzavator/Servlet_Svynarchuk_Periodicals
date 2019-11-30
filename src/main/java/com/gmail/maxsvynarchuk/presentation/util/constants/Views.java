@@ -30,6 +30,7 @@ public final class Views {
     public static final String ERROR_400_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.error.400");
     public static final String ERROR_403_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.error.403");
     public static final String ERROR_404_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.error.404");
+    public static final String ERROR_GLOBAL_VIEW = FOLDER + ResourceManager.VIEW.getProperty("view.error.global");
 
     private Views() {
     }
