@@ -3,6 +3,7 @@ package com.gmail.maxsvynarchuk.presentation.command.impl.admin;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
+import com.gmail.maxsvynarchuk.presentation.exception.BadRequestException;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
@@ -10,12 +11,14 @@ import com.gmail.maxsvynarchuk.presentation.util.mapper.RequestMapperFactory;
 import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManager;
 import com.gmail.maxsvynarchuk.service.PeriodicalService;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
+import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
+import java.util.Optional;
 
 public class PostEditPeriodicalCommand implements Command {
     private static Logger LOGGER =
@@ -33,6 +36,14 @@ public class PostEditPeriodicalCommand implements Command {
                 .validatePeriodicalParameters(periodicalDTO);
 
         if (errors.isEmpty()) {
+            Optional<Periodical> periodicalOpt =
+                    periodicalService.findPeriodicalById(periodicalDTO.getId());
+            if (!periodicalOpt.isPresent() ||
+                    periodicalOpt.get().getStatus() == PeriodicalStatus.SUSPENDED) {
+                LOGGER.debug("Periodical with id {} doesn't exist or has suspend status",
+                        periodicalDTO.getId());
+                throw new BadRequestException();
+            }
             periodicalService.updatePeriodical(periodicalDTO);
             LOGGER.debug("Periodical was successfully edit");
             return CommandResult.redirect(PagesPaths.ADMIN_CATALOG_PATH);

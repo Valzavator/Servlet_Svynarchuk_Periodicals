@@ -9,10 +9,10 @@
 <head>
     <jsp:include page="/WEB-INF/views/snippets/head.jsp"/>
 </head>
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column min-vh-100">
 <jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>
-<main role="main" class="container h-100">
-    <div class="row h-100 justify-content-md-center align-items-center">
+<main role="main" class="container min-vh-100">
+    <div class="row min-vh-100 justify-content-md-center align-items-center">
         <div class="card w-75 mx-auto">
             <div class="card-header h2 text-center">
                 <fmt:message key="admin.management.create.add.issue"/>

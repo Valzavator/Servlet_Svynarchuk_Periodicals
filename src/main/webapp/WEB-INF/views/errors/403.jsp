@@ -17,13 +17,13 @@
         <div class=" text-center">
             <h1 class="status-error"><fmt:message key="error.403.status"/></h1>
             <p class="text-muted-error"><fmt:message key="error.403.message"/></p>
-            <a class="btn btn-lg btn-primary mt-5" href="<c:url value="/app/"/>" role="button">
+            <a class="btn btn-lg btn-primary" href="<c:url value="/app/"/>" role="button">
                 <fmt:message key="error.backbtn"/>
             </a>
         </div>
     </div>
 </main>
-<img class="gif" src="<c:url value="/resources/images/403.gif"/>" alt="403.gif"/>
+<%--<img class="gif" src="<c:url value="/resources/images/403.gif"/>" alt="403.gif"/>--%>
 <jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
 </body>
 </html>

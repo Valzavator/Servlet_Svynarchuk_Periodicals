@@ -61,6 +61,10 @@
     </listener>
 
     <error-page>
+        <exception-type>com.gmail.maxsvynarchuk.presentation.exception.BadRequestException</exception-type>
+        <location>/WEB-INF/views/errors/400.jsp</location>
+    </error-page>
+    <error-page>
         <exception-type>java.lang.NumberFormatException</exception-type>
         <location>/WEB-INF/views/errors/400.jsp</location>
     </error-page>

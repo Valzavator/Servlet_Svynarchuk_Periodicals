@@ -1,6 +1,6 @@
 <%--@elvariable id="periodical" type="com.gmail.maxsvynarchuk.persistence.entity.Periodical"--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-         import="com.gmail.maxsvynarchuk.util.type.PeriodicalStatus, com.gmail.maxsvynarchuk.util.type.Gender" %>
+         import="com.gmail.maxsvynarchuk.util.type.Gender" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -80,7 +80,6 @@
         </div>
     </div>
 
-    <jsp:include page="/WEB-INF/views/snippets/pagination.jsp"/>
 </main>
 
 <jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
