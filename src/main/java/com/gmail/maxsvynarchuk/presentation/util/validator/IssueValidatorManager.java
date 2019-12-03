@@ -20,7 +20,7 @@ public class IssueValidatorManager extends ValidatorManager {
     @Override
     protected void validateObject(Map<String, Boolean> errors, Serializable object) {
         if (!(object instanceof PeriodicalIssue)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("The object is not a type of PeriodicalIssue");
         }
         PeriodicalIssue issue = (PeriodicalIssue) object;
         validateField(new TitleValidator(),
