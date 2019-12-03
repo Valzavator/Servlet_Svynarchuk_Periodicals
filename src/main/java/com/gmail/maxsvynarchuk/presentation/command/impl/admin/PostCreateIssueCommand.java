@@ -10,7 +10,7 @@ import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 import com.gmail.maxsvynarchuk.presentation.util.constants.RequestParameters;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.presentation.util.mapper.RequestMapperFactory;
-import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManager;
+import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManagerFactory;
 import com.gmail.maxsvynarchuk.service.IssueService;
 import com.gmail.maxsvynarchuk.service.PeriodicalService;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
@@ -40,8 +40,8 @@ public class PostCreateIssueCommand implements Command {
         PeriodicalIssue periodicalIssueDTO = RequestMapperFactory.getCreateIssueMapper()
                 .mapToObject(request);
 
-        Map<String, Boolean> errors = ValidatorManager
-                .validateIssueParameters(periodicalIssueDTO);
+        Map<String, Boolean> errors = ValidatorManagerFactory.getIssueValidator()
+                .validate(periodicalIssueDTO);
 
         if (errors.isEmpty()) {
             if (!periodicalOpt.isPresent() ||

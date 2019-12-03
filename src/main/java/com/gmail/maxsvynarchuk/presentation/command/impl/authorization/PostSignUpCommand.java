@@ -1,15 +1,15 @@
 package com.gmail.maxsvynarchuk.presentation.command.impl.authorization;
 
 import com.gmail.maxsvynarchuk.persistence.entity.User;
-import com.gmail.maxsvynarchuk.presentation.util.mapper.RequestMapperFactory;
-import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
-import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManager;
-import com.gmail.maxsvynarchuk.service.ServiceFactory;
-import com.gmail.maxsvynarchuk.service.UserService;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
+import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
+import com.gmail.maxsvynarchuk.presentation.util.mapper.RequestMapperFactory;
+import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManagerFactory;
+import com.gmail.maxsvynarchuk.service.ServiceFactory;
+import com.gmail.maxsvynarchuk.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,8 +27,8 @@ public class PostSignUpCommand implements Command {
         User userDTO = RequestMapperFactory.getSignUpMapper()
                 .mapToObject(request);
 
-        Map<String, Boolean> errors = ValidatorManager
-                .validateSignUpParameters(userDTO);
+        Map<String, Boolean> errors = ValidatorManagerFactory.getSignUpValidator()
+                .validate(userDTO);
 
         if (errors.isEmpty()) {
             boolean isRegistered = userService.registerUser(userDTO);

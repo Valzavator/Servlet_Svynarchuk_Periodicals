@@ -8,7 +8,7 @@ import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.presentation.util.mapper.RequestMapperFactory;
-import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManager;
+import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManagerFactory;
 import com.gmail.maxsvynarchuk.service.PeriodicalService;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
 import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
@@ -32,8 +32,8 @@ public class PostEditPeriodicalCommand implements Command {
         Periodical periodicalDTO = RequestMapperFactory.getEditPeriodicalMapper()
                 .mapToObject(request);
 
-        Map<String, Boolean> errors = ValidatorManager
-                .validatePeriodicalParameters(periodicalDTO);
+        Map<String, Boolean> errors = ValidatorManagerFactory.getPeriodicalValidator()
+                .validate(periodicalDTO);
 
         if (errors.isEmpty()) {
             Optional<Periodical> periodicalOpt =

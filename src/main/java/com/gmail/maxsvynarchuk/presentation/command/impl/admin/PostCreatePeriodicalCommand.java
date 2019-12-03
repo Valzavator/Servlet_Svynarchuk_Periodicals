@@ -1,13 +1,13 @@
 package com.gmail.maxsvynarchuk.presentation.command.impl.admin;
 
-import com.gmail.maxsvynarchuk.persistence.entity.*;
+import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.presentation.command.Command;
 import com.gmail.maxsvynarchuk.presentation.command.CommandResult;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.presentation.util.mapper.RequestMapperFactory;
-import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManager;
+import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManagerFactory;
 import com.gmail.maxsvynarchuk.service.PeriodicalService;
 import com.gmail.maxsvynarchuk.service.ServiceFactory;
 import org.slf4j.Logger;
@@ -29,8 +29,8 @@ public class PostCreatePeriodicalCommand implements Command {
         Periodical periodicalDTO = RequestMapperFactory.getCreatePeriodicalMapper()
                 .mapToObject(request);
 
-        Map<String, Boolean> errors = ValidatorManager
-                .validatePeriodicalParameters(periodicalDTO);
+        Map<String, Boolean> errors = ValidatorManagerFactory.getPeriodicalValidator()
+                .validate(periodicalDTO);
 
         if (errors.isEmpty()) {
             periodicalService.createPeriodical(periodicalDTO);
